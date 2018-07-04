@@ -1,0 +1,12 @@
+<configuration>
+    <input>
+        <net-file value="cityNetwork.net.xml"/>
+        <route-files value="cityNetwork.rou.xml"/>
+		<additional-files value="cityNetworkAdditional.add.xml"/>
+		<gui-settings-file value="cityNetwork.settings.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="3600"/>
+    </time>
+</configuration>
