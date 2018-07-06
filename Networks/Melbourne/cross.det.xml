@@ -1,0 +1,13 @@
+<detectors>
+
+<entryExitDetector id="e3_1" freq="80" file="e3_1.xml">
+   <detEntry lane="--15893#7_0" pos="110"/>
+   <detEntry lane="--15893#7_1" pos="110"/>
+   <detEntry lane="--15893#7_2" pos="110"/>
+   
+   <detExit lane="--15893#6_0" pos="5"/>
+   <detExit lane="--15893#6_1" pos="5"/>
+   <detExit lane="--15893#6_2" pos="5"/>
+</entryExitDetector>
+
+</detectors>
