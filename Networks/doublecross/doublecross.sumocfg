@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <input>
+        <net-file value="doublecross.net.xml"/>
+        <route-files value="doublecrossRandomDemand.rou.xml"/>
+		<additional-files value="doublecrossAdditional.add.xml"/>
+        <gui-settings-file value="doublecross.settings.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="7200"/>
+    </time>
+</configuration>
