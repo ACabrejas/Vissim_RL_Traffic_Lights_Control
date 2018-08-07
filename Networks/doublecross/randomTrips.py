@@ -30,8 +30,6 @@ import subprocess
 from collections import defaultdict
 import math
 import optparse
-import sumolib
-import route2trips
 
 SUMO_HOME = os.environ.get('SUMO_HOME',
                            os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))

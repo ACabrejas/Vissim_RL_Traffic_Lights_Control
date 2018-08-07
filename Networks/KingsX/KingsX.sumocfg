@@ -1,12 +1,29 @@
-<configuration>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
     <input>
-        <net-file value="KingsX.net.xml"/>
-        <route-files value="KingsX.rou.xml"/>
-		<additional-files value="KingsX.add.xml"/>
-		<gui-settings-file value="KingsX.settings.xml"/>
+        <net-file value="kingsx.net.xml"/>
+        <route-files value="kingsx.passenger.trips.xml"/>
+        <additional-files value="kingsx.poly.xml"/>
     </input>
-    <time>
-        <begin value="0"/>
-        <end value="36000"/>
-    </time>
+
+    <processing>
+        <ignore-route-errors value="true"/>
+    </processing>
+
+    <routing>
+        <device.rerouting.adaptation-steps value="180"/>
+    </routing>
+
+    <report>
+        <verbose value="true"/>
+        <duration-log.statistics value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <gui_only>
+        <gui-settings-file value="kingsx.view.xml"/>
+    </gui_only>
+
 </configuration>
