@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Tue  7 Aug 11:22:10 2018 by SUMO gui Version 0.32.0
+<!-- generated on Tue  7 Aug 16:50:25 2018 by SUMO gui Version 0.32.0
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
     <input>
-        <net-file value="/Users/acabrejasegea/sumo-0.32/Data/Networks/doublecross/doublecross.net.xml"/>
-        <route-files value="/Users/acabrejasegea/sumo-0.32/Data/Networks/doublecross/doublecrossRandomDemand.rou.xml"/>
-        <additional-files value="/Users/acabrejasegea/sumo-0.32/Data/Networks/doublecross/doublecrossAdditional.add.xml"/>
+        <net-file value="/Users/acabrejasegea/sumo-0.32/Data/Networks/cross_straight_random/cross_straight_random.net.xml"/>
+        <route-files value="/Users/acabrejasegea/sumo-0.32/Data/Networks/cross_straight_random/cross_straight_random.trips.xml"/>
+        <additional-files value="/Users/acabrejasegea/sumo-0.32/Data/Networks/cross_straight_random/cross_straight_random.add.xml"/>
     </input>
 
     <output>
@@ -17,24 +17,19 @@
 
     <time>
         <begin value="0"/>
-        <end value="7200"/>
     </time>
 
-    <traci_server>
-        <remote-port value="59761"/>
-    </traci_server>
+    <report>
+        <verbose value="true"/>
+        <no-step-log value="true"/>
+    </report>
 
-    <gui_only>
-        <gui-settings-file value="/Users/acabrejasegea/sumo-0.32/Data/Networks/doublecross/doublecross.settings.xml"/>
-    </gui_only>
+    <traci_server>
+        <remote-port value="63315"/>
+    </traci_server>
 
 </configuration>
 -->
 
 <tripinfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tripinfo_file.xsd">
-    <tripinfo id="11" depart="22.00" departLane="A7_0" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="119.00" arrivalLane="-A9_0" arrivalPos="745.25" arrivalSpeed="13.27" duration="97.00" routeLength="1237.10" waitSteps="0" timeLoss="6.99" rerouteNo="0" devices="tripinfo_11" vType="DEFAULT_VEHTYPE" speedFactor="1.00" vaporized=""/>
-    <tripinfo id="28" depart="56.00" departLane="A7_0" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="134.00" arrivalLane="-A8_0" arrivalPos="491.95" arrivalSpeed="13.76" duration="78.00" routeLength="994.90" waitSteps="0" timeLoss="6.19" rerouteNo="0" devices="tripinfo_28" vType="DEFAULT_VEHTYPE" speedFactor="1.00" vaporized=""/>
-    <tripinfo id="4" depart="8.00" departLane="A1_0" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="157.00" arrivalLane="-A6_0" arrivalPos="391.95" arrivalSpeed="12.97" duration="149.00" routeLength="1387.39" waitSteps="36" timeLoss="48.75" rerouteNo="0" devices="tripinfo_4" vType="DEFAULT_VEHTYPE" speedFactor="1.00" vaporized=""/>
-    <tripinfo id="50" depart="100.00" departLane="A1_0" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="178.00" arrivalLane="-A2_0" arrivalPos="490.50" arrivalSpeed="13.62" duration="78.00" routeLength="990.44" waitSteps="0" timeLoss="6.63" rerouteNo="0" devices="tripinfo_50" vType="DEFAULT_VEHTYPE" speedFactor="1.00" vaporized=""/>
-    <tripinfo id="68" depart="136.00" departLane="A1_0" departPos="5.10" departSpeed="0.00" departDelay="0.00" arrival="214.00" arrivalLane="-A3_0" arrivalPos="491.95" arrivalSpeed="12.97" duration="78.00" routeLength="994.90" waitSteps="0" timeLoss="6.20" rerouteNo="0" devices="tripinfo_68" vType="DEFAULT_VEHTYPE" speedFactor="1.00" vaporized=""/>
 </tripinfos>
