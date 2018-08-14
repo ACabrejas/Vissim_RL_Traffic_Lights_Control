@@ -1,6 +1,6 @@
 <additionals>
-    <e2Detector id="e2Detector_-gneE1_0_2" lane="-gneE1_0" pos="100.00" length="400.00" freq="100.00" file="e2Detector_-gneE1_0_2.txt" cont="0" timeThreshold="1.00" speedThreshold="1.39" jamThreshold="10.00" friendlyPos="1"/>
-    <e2Detector id="e2Detector_-gneE3_0_1" lane="-gneE3_0" pos="100.00" length="400.00" freq="100.00" file="e2Detector_-gneE3_0_1.txt" cont="0" timeThreshold="1.00" speedThreshold="1.39" jamThreshold="10.00" friendlyPos="1"/>
-    <e2Detector id="e2Detector_gneE0_0_0" lane="gneE0_0" pos="100.00" length="400.00" freq="100.00" file="e2Detector_gneE0_0_0.txt" cont="0" timeThreshold="1.00" speedThreshold="1.39" jamThreshold="10.00" friendlyPos="1"/>
-    <e2Detector id="e2Detector_gneE2_0_3" lane="gneE2_0" pos="100.00" length="400.00" freq="100.00" file="e2Detector_gneE2_0_3.txt" cont="0" timeThreshold="1.00" speedThreshold="1.39" jamThreshold="10.00" friendlyPos="1"/>
+    <e2Detector id="East" lane="-gneE1_0" pos="0.00" length="998.00" freq="100.00" cont="0" timeThreshold="1.00" speedThreshold="1.39" jamThreshold="10.00" friendlyPos="1"/>
+    <e2Detector id="North" lane="gneE2_0" pos="0.00" length="998.00" freq="100.00" cont="0" timeThreshold="1.00" speedThreshold="1.39" jamThreshold="10.00" friendlyPos="1"/>
+    <e2Detector id="South" lane="-gneE3_0" pos="0.00" length="998.00" freq="100.00" cont="0" timeThreshold="1.00" speedThreshold="1.39" jamThreshold="10.00" friendlyPos="1"/>
+    <e2Detector id="West" lane="gneE0_0" pos="0.00" length="998.00" freq="100.00" cont="0" timeThreshold="1.00" speedThreshold="1.39" jamThreshold="10.00" friendlyPos="1"/>
 </additionals>

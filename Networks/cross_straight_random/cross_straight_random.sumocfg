@@ -4,8 +4,10 @@
 
     <input>
         <net-file value="cross_straight_random.net.xml"/>
-        <route-files value="cross_straight_random.trips.xml"/>
+        <route-files value="cross_straight_random.rou.xml"/>
+        <!--
         <additional-files value="cross_straight_random.add.xml"/>
+    -->
     </input>
 
     <time>

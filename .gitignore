@@ -244,3 +244,9 @@ TSWLatexianTemp*
 
 # standalone packages
 *.sta
+Networks/cross_straight_random/cross_straight_random.rou.xml
+Networks/cross_straight_random/cross_straight_random.trips_20k.xml
+Networks/cross_straight_random/cross_straight_random_20000.trips.xml
+Networks/cross_straight_random/cross_straight_random.trips.xml
+Networks/cross_straight_random/cross_straight_random.trips.xml
+Networks/cross_straight_random/cross_straight_random.trips.xml
