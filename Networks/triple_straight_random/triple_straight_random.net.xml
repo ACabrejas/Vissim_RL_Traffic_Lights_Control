@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Mon 20 Aug 18:39:19 2018 by Netedit Version 0.32.0
+<!-- generated on Tue 21 Aug 12:54:29 2018 by Netedit Version 0.32.0
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
@@ -27,7 +27,7 @@
 
 <net version="0.27" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
 
-    <location netOffset="0.00,0.00" convBoundary="-200.00,-100.00,400.10,100.00" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
+    <location netOffset="0.00,0.00" convBoundary="-200.00,-200.00,400.10,200.00" origBoundary="-10000000000.00,-10000000000.00,10000000000.00,10000000000.00" projParameter="!"/>
 
     <edge id=":Centre1_0" function="internal">
         <lane id=":Centre1_0_0" index="0" speed="13.89" length="9.50" shape="-1.65,4.75 -1.65,-4.75"/>
@@ -94,22 +94,22 @@
         <lane id="iE_0" index="0" speed="13.89" length="193.75" shape="398.50,1.65 204.75,1.65"/>
     </edge>
     <edge id="iN1" from="North1" to="Centre1" priority="1">
-        <lane id="iN1_0" index="0" speed="13.89" length="95.25" shape="-1.65,100.00 -1.65,4.75"/>
+        <lane id="iN1_0" index="0" speed="13.89" length="195.25" shape="-1.65,200.00 -1.65,4.75"/>
     </edge>
     <edge id="iN2" from="North2" to="Centre2" priority="1">
-        <lane id="iN2_0" index="0" speed="13.89" length="95.25" shape="98.35,100.00 98.35,4.75"/>
+        <lane id="iN2_0" index="0" speed="13.89" length="195.25" shape="98.35,200.00 98.35,4.75"/>
     </edge>
     <edge id="iN3" from="North3" to="Centre3" priority="1">
-        <lane id="iN3_0" index="0" speed="13.89" length="95.25" shape="198.35,100.00 198.35,4.75"/>
+        <lane id="iN3_0" index="0" speed="13.89" length="195.25" shape="198.35,200.00 198.35,4.75"/>
     </edge>
     <edge id="iS1" from="South1" to="Centre1" priority="1">
-        <lane id="iS1_0" index="0" speed="13.89" length="95.25" shape="1.65,-100.00 1.65,-4.75"/>
+        <lane id="iS1_0" index="0" speed="13.89" length="195.25" shape="1.65,-200.00 1.65,-4.75"/>
     </edge>
     <edge id="iS2" from="South2" to="Centre2" priority="1">
-        <lane id="iS2_0" index="0" speed="13.89" length="95.25" shape="101.65,-100.00 101.65,-4.75"/>
+        <lane id="iS2_0" index="0" speed="13.89" length="195.25" shape="101.65,-200.00 101.65,-4.75"/>
     </edge>
     <edge id="iS3" from="South3" to="Centre3" priority="1">
-        <lane id="iS3_0" index="0" speed="13.89" length="95.25" shape="201.65,-100.00 201.65,-4.75"/>
+        <lane id="iS3_0" index="0" speed="13.89" length="195.25" shape="201.65,-200.00 201.65,-4.75"/>
     </edge>
     <edge id="iW" from="West" to="Centre1" priority="1">
         <lane id="iW_0" index="0" speed="13.89" length="195.25" shape="-200.00,-1.65 -4.75,-1.65"/>
@@ -124,61 +124,223 @@
         <lane id="oE_0" index="0" speed="13.89" length="193.75" shape="204.75,-1.65 398.50,-1.65"/>
     </edge>
     <edge id="oN1" from="Centre1" to="North1" priority="1">
-        <lane id="oN1_0" index="0" speed="13.89" length="95.25" shape="1.65,4.75 1.65,100.00"/>
+        <lane id="oN1_0" index="0" speed="13.89" length="195.25" shape="1.65,4.75 1.65,200.00"/>
     </edge>
     <edge id="oN2" from="Centre2" to="North2" priority="1">
-        <lane id="oN2_0" index="0" speed="13.89" length="95.25" shape="101.65,4.75 101.65,100.00"/>
+        <lane id="oN2_0" index="0" speed="13.89" length="195.25" shape="101.65,4.75 101.65,200.00"/>
     </edge>
     <edge id="oN3" from="Centre3" to="North3" priority="1">
-        <lane id="oN3_0" index="0" speed="13.89" length="95.25" shape="201.65,4.75 201.65,100.00"/>
+        <lane id="oN3_0" index="0" speed="13.89" length="195.25" shape="201.65,4.75 201.65,200.00"/>
     </edge>
     <edge id="oS1" from="Centre1" to="South1" priority="1">
-        <lane id="oS1_0" index="0" speed="13.89" length="95.25" shape="-1.65,-4.75 -1.65,-100.00"/>
+        <lane id="oS1_0" index="0" speed="13.89" length="195.25" shape="-1.65,-4.75 -1.65,-200.00"/>
     </edge>
     <edge id="oS2" from="Centre2" to="South2" priority="1">
-        <lane id="oS2_0" index="0" speed="13.89" length="95.25" shape="98.35,-4.75 98.35,-100.00"/>
+        <lane id="oS2_0" index="0" speed="13.89" length="195.25" shape="98.35,-4.75 98.35,-200.00"/>
     </edge>
     <edge id="oS3" from="Centre3" to="South3" priority="1">
-        <lane id="oS3_0" index="0" speed="13.89" length="95.25" shape="198.35,-4.75 198.35,-100.00"/>
+        <lane id="oS3_0" index="0" speed="13.89" length="195.25" shape="198.35,-4.75 198.35,-200.00"/>
     </edge>
     <edge id="oW" from="Centre1" to="West" priority="1">
         <lane id="oW_0" index="0" speed="13.89" length="195.25" shape="-4.75,1.65 -200.00,1.65"/>
     </edge>
 
-    <tlLogic id="gneJ1" type="static" programID="0" offset="0">
+    <tlLogic id="Centre1" type="static" programID="0" offset="0">
+        <phase duration="7" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="77" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre1" type="static" programID="1" offset="0">
+        <phase duration="14" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="70" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre1" type="static" programID="10" offset="0">
+        <phase duration="77" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="7" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre1" type="static" programID="2" offset="0">
+        <phase duration="21" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="63" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre1" type="static" programID="3" offset="0">
+        <phase duration="28" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="56" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre1" type="static" programID="4" offset="0">
+        <phase duration="35" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="49" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre1" type="static" programID="5" offset="0">
         <phase duration="42" state="GrGr"/>
         <phase duration="3" state="yryr"/>
         <phase duration="42" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="1" offset="0">
+    <tlLogic id="Centre1" type="static" programID="6" offset="0">
+        <phase duration="49" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="35" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre1" type="static" programID="7" offset="0">
+        <phase duration="56" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="28" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre1" type="static" programID="8" offset="0">
+        <phase duration="63" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="21" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre1" type="static" programID="9" offset="0">
+        <phase duration="70" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="14" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="0" offset="0">
+        <phase duration="7" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="77" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="1" offset="0">
+        <phase duration="14" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="70" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="10" offset="0">
+        <phase duration="77" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="7" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="2" offset="0">
+        <phase duration="21" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="63" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="3" offset="0">
+        <phase duration="28" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="56" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="4" offset="0">
+        <phase duration="35" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="49" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="5" offset="0">
         <phase duration="42" state="GrGr"/>
         <phase duration="3" state="yryr"/>
         <phase duration="42" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-    <tlLogic id="gneJ2" type="static" programID="0" offset="0">
+    <tlLogic id="Centre2" type="static" programID="6" offset="0">
+        <phase duration="49" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="35" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="7" offset="0">
+        <phase duration="56" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="28" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="8" offset="0">
+        <phase duration="63" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="21" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre2" type="static" programID="9" offset="0">
+        <phase duration="70" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="14" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre3" type="static" programID="0" offset="0">
+        <phase duration="7" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="77" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre3" type="static" programID="1" offset="0">
+        <phase duration="14" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="70" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre3" type="static" programID="10" offset="0">
+        <phase duration="77" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="7" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre3" type="static" programID="2" offset="0">
+        <phase duration="21" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="63" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre3" type="static" programID="3" offset="0">
+        <phase duration="28" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="56" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre3" type="static" programID="4" offset="0">
+        <phase duration="35" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="49" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre3" type="static" programID="5" offset="0">
         <phase duration="42" state="GrGr"/>
         <phase duration="3" state="yryr"/>
         <phase duration="42" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-    <tlLogic id="gneJ2" type="static" programID="1" offset="0">
-        <phase duration="42" state="GrGr"/>
+    <tlLogic id="Centre3" type="static" programID="6" offset="0">
+        <phase duration="49" state="GrGr"/>
         <phase duration="3" state="yryr"/>
-        <phase duration="42" state="rGrG"/>
+        <phase duration="35" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-    <tlLogic id="gneJ3" type="static" programID="0" offset="0">
-        <phase duration="42" state="GrGr"/>
+    <tlLogic id="Centre3" type="static" programID="7" offset="0">
+        <phase duration="56" state="GrGr"/>
         <phase duration="3" state="yryr"/>
-        <phase duration="42" state="rGrG"/>
+        <phase duration="28" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-    <tlLogic id="gneJ3" type="static" programID="1" offset="0">
-        <phase duration="42" state="GrGr"/>
+    <tlLogic id="Centre3" type="static" programID="8" offset="0">
+        <phase duration="63" state="GrGr"/>
         <phase duration="3" state="yryr"/>
-        <phase duration="42" state="rGrG"/>
+        <phase duration="21" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="Centre3" type="static" programID="9" offset="0">
+        <phase duration="70" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="14" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
 
@@ -205,12 +367,12 @@
         <request index="1" response="100" foes="100" cont="0"/>
         <request index="2" response="000" foes="010" cont="0"/>
     </junction>
-    <junction id="North1" type="dead_end" x="0.00" y="100.00" incLanes="oN1_0" intLanes="" shape="-0.05,100.00 3.25,100.00 0.05,100.00"/>
-    <junction id="North2" type="dead_end" x="100.00" y="100.00" incLanes="oN2_0" intLanes="" shape="99.95,100.00 103.25,100.00 100.05,100.00"/>
-    <junction id="North3" type="dead_end" x="200.00" y="100.00" incLanes="oN3_0" intLanes="" shape="199.95,100.00 203.25,100.00 200.05,100.00"/>
-    <junction id="South1" type="dead_end" x="0.00" y="-100.00" incLanes="oS1_0" intLanes="" shape="0.05,-100.00 -3.25,-100.00 -0.05,-100.00"/>
-    <junction id="South2" type="dead_end" x="100.00" y="-100.00" incLanes="oS2_0" intLanes="" shape="100.05,-100.00 96.75,-100.00 99.95,-100.00"/>
-    <junction id="South3" type="dead_end" x="200.00" y="-100.00" incLanes="oS3_0" intLanes="" shape="200.05,-100.00 196.75,-100.00 199.95,-100.00"/>
+    <junction id="North1" type="dead_end" x="0.00" y="200.00" incLanes="oN1_0" intLanes="" shape="-0.05,200.00 3.25,200.00 0.05,200.00"/>
+    <junction id="North2" type="dead_end" x="100.00" y="200.00" incLanes="oN2_0" intLanes="" shape="99.95,200.00 103.25,200.00 100.05,200.00"/>
+    <junction id="North3" type="dead_end" x="200.00" y="200.00" incLanes="oN3_0" intLanes="" shape="199.95,200.00 203.25,200.00 200.05,200.00"/>
+    <junction id="South1" type="dead_end" x="0.00" y="-200.00" incLanes="oS1_0" intLanes="" shape="0.05,-200.00 -3.25,-200.00 -0.05,-200.00"/>
+    <junction id="South2" type="dead_end" x="100.00" y="-200.00" incLanes="oS2_0" intLanes="" shape="100.05,-200.00 96.75,-200.00 99.95,-200.00"/>
+    <junction id="South3" type="dead_end" x="200.00" y="-200.00" incLanes="oS3_0" intLanes="" shape="200.05,-200.00 196.75,-200.00 199.95,-200.00"/>
     <junction id="West" type="dead_end" x="-200.00" y="0.00" incLanes="oW_0" intLanes="" shape="-200.00,-0.05 -200.00,3.25 -200.00,0.05"/>
     <junction id="gneJ5" type="priority" x="400.00" y="0.00" incLanes="gneE4_0" intLanes=":gneJ5_0_0" shape="400.09,0.01 402.35,-2.25 400.09,0.01">
         <request index="0" response="0" foes="0" cont="0"/>
@@ -219,18 +381,18 @@
     <connection from="-gneE4" to="iE" fromLane="0" toLane="0" via=":East_0_0" dir="L" state="M"/>
     <connection from="-gneE4" to="gneE4" fromLane="0" toLane="0" via=":East_1_0" dir="s" state="m"/>
     <connection from="gneE4" to="-gneE4" fromLane="0" toLane="0" via=":gneJ5_0_0" dir="s" state="M"/>
-    <connection from="iCE" to="oCW" fromLane="0" toLane="0" via=":Centre2_1_0" tl="gneJ2" linkIndex="1" dir="s" state="o"/>
-    <connection from="iCW" to="oCE" fromLane="0" toLane="0" via=":Centre2_3_0" tl="gneJ2" linkIndex="3" dir="s" state="o"/>
-    <connection from="iE" to="iCE" fromLane="0" toLane="0" via=":Centre3_1_0" tl="gneJ3" linkIndex="1" dir="s" state="o"/>
-    <connection from="iN1" to="oS1" fromLane="0" toLane="0" via=":Centre1_0_0" tl="gneJ1" linkIndex="0" dir="s" state="o"/>
-    <connection from="iN2" to="oS2" fromLane="0" toLane="0" via=":Centre2_0_0" tl="gneJ2" linkIndex="0" dir="s" state="o"/>
-    <connection from="iN3" to="oS3" fromLane="0" toLane="0" via=":Centre3_0_0" tl="gneJ3" linkIndex="0" dir="s" state="o"/>
-    <connection from="iS1" to="oN1" fromLane="0" toLane="0" via=":Centre1_2_0" tl="gneJ1" linkIndex="2" dir="s" state="o"/>
-    <connection from="iS2" to="oN2" fromLane="0" toLane="0" via=":Centre2_2_0" tl="gneJ2" linkIndex="2" dir="s" state="o"/>
-    <connection from="iS3" to="oN3" fromLane="0" toLane="0" via=":Centre3_2_0" tl="gneJ3" linkIndex="2" dir="s" state="o"/>
-    <connection from="iW" to="iCW" fromLane="0" toLane="0" via=":Centre1_3_0" tl="gneJ1" linkIndex="3" dir="s" state="o"/>
-    <connection from="oCE" to="oE" fromLane="0" toLane="0" via=":Centre3_3_0" tl="gneJ3" linkIndex="3" dir="s" state="o"/>
-    <connection from="oCW" to="oW" fromLane="0" toLane="0" via=":Centre1_1_0" tl="gneJ1" linkIndex="1" dir="s" state="o"/>
+    <connection from="iCE" to="oCW" fromLane="0" toLane="0" via=":Centre2_1_0" tl="Centre2" linkIndex="1" dir="s" state="o"/>
+    <connection from="iCW" to="oCE" fromLane="0" toLane="0" via=":Centre2_3_0" tl="Centre2" linkIndex="3" dir="s" state="o"/>
+    <connection from="iE" to="iCE" fromLane="0" toLane="0" via=":Centre3_1_0" tl="Centre3" linkIndex="1" dir="s" state="o"/>
+    <connection from="iN1" to="oS1" fromLane="0" toLane="0" via=":Centre1_0_0" tl="Centre1" linkIndex="0" dir="s" state="o"/>
+    <connection from="iN2" to="oS2" fromLane="0" toLane="0" via=":Centre2_0_0" tl="Centre2" linkIndex="0" dir="s" state="o"/>
+    <connection from="iN3" to="oS3" fromLane="0" toLane="0" via=":Centre3_0_0" tl="Centre3" linkIndex="0" dir="s" state="o"/>
+    <connection from="iS1" to="oN1" fromLane="0" toLane="0" via=":Centre1_2_0" tl="Centre1" linkIndex="2" dir="s" state="o"/>
+    <connection from="iS2" to="oN2" fromLane="0" toLane="0" via=":Centre2_2_0" tl="Centre2" linkIndex="2" dir="s" state="o"/>
+    <connection from="iS3" to="oN3" fromLane="0" toLane="0" via=":Centre3_2_0" tl="Centre3" linkIndex="2" dir="s" state="o"/>
+    <connection from="iW" to="iCW" fromLane="0" toLane="0" via=":Centre1_3_0" tl="Centre1" linkIndex="3" dir="s" state="o"/>
+    <connection from="oCE" to="oE" fromLane="0" toLane="0" via=":Centre3_3_0" tl="Centre3" linkIndex="3" dir="s" state="o"/>
+    <connection from="oCW" to="oW" fromLane="0" toLane="0" via=":Centre1_1_0" tl="Centre1" linkIndex="1" dir="s" state="o"/>
     <connection from="oE" to="gneE4" fromLane="0" toLane="0" via=":East_2_0" dir="l" state="M"/>
 
     <connection from=":Centre1_0" to="oS1" fromLane="0" toLane="0" dir="s" state="M"/>

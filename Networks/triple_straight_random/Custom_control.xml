@@ -1,0 +1,67 @@
+    <tlLogic id="gneJ1" type="static" programID="0" offset="0">
+        <phase duration="7" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="77" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="1" offset="0">
+        <phase duration="14" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="70" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="2" offset="0">
+        <phase duration="21" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="63" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="3" offset="0">
+        <phase duration="28" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="56" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="4" offset="0">
+        <phase duration="35" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="49" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="5" offset="0">
+        <phase duration="42" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="42" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="6" offset="0">
+        <phase duration="49" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="35" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="7" offset="0">
+        <phase duration="56" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="28" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="8" offset="0">
+        <phase duration="63" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="21" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="9" offset="0">
+        <phase duration="70" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="14" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    <tlLogic id="gneJ1" type="static" programID="10" offset="0">
+        <phase duration="77" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="7" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
+    
