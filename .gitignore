@@ -5,6 +5,9 @@ DQN_Test/
 tests_tools/
 tools/
 
+## OUTPUT FILES FOR MAY AND LOUISE
+*.json
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
