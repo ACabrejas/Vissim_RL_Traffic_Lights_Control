@@ -74,66 +74,41 @@
         <phase duration="3" state="ryry"/>
     </tlLogic>
     <tlLogic id="gneJ1" type="static" programID="1" offset="0">
-        <phase duration="14" state="GrGr"/>
-        <phase duration="3" state="yryr"/>
-        <phase duration="70" state="rGrG"/>
-        <phase duration="3" state="ryry"/>
-    </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="10" offset="0">
-        <phase duration="77" state="GrGr"/>
-        <phase duration="3" state="yryr"/>
-        <phase duration="7" state="rGrG"/>
-        <phase duration="3" state="ryry"/>
-    </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="2" offset="0">
         <phase duration="21" state="GrGr"/>
         <phase duration="3" state="yryr"/>
         <phase duration="63" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="3" offset="0">
-        <phase duration="28" state="GrGr"/>
-        <phase duration="3" state="yryr"/>
-        <phase duration="56" state="rGrG"/>
-        <phase duration="3" state="ryry"/>
-    </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="4" offset="0">
+    <tlLogic id="gneJ1" type="static" programID="2" offset="0">
         <phase duration="35" state="GrGr"/>
         <phase duration="3" state="yryr"/>
         <phase duration="49" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="5" offset="0">
-        <phase duration="42" state="GrGr"/>
-        <phase duration="3" state="yryr"/>
-        <phase duration="42" state="rGrG"/>
-        <phase duration="3" state="ryry"/>
-    </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="6" offset="0">
+    <tlLogic id="gneJ1" type="static" programID="3" offset="0">
         <phase duration="49" state="GrGr"/>
         <phase duration="3" state="yryr"/>
         <phase duration="35" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="7" offset="0">
-        <phase duration="56" state="GrGr"/>
-        <phase duration="3" state="yryr"/>
-        <phase duration="28" state="rGrG"/>
-        <phase duration="3" state="ryry"/>
-    </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="8" offset="0">
+    <tlLogic id="gneJ1" type="static" programID="4" offset="0">
         <phase duration="63" state="GrGr"/>
         <phase duration="3" state="yryr"/>
         <phase duration="21" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-    <tlLogic id="gneJ1" type="static" programID="9" offset="0">
-        <phase duration="70" state="GrGr"/>
+    <tlLogic id="gneJ1" type="static" programID="5" offset="0">
+        <phase duration="77" state="GrGr"/>
         <phase duration="3" state="yryr"/>
-        <phase duration="14" state="rGrG"/>
+        <phase duration="7" state="rGrG"/>
         <phase duration="3" state="ryry"/>
     </tlLogic>
-
+    <tlLogic id="gneJ1" type="static" programID="99" offset="0">
+        <phase duration="42" state="GrGr"/>
+        <phase duration="3" state="yryr"/>
+        <phase duration="42" state="rGrG"/>
+        <phase duration="3" state="ryry"/>
+    </tlLogic>
     <junction id="gneJ0" type="dead_end" x="-1000.00" y="0.00" incLanes="oW_0" intLanes="" shape="-1000.00,-0.05 -1000.00,3.25 -1000.00,0.05"/>
     <junction id="gneJ1" type="traffic_light" x="0.00" y="0.00" incLanes="iN_0 iE_0 iS_0 iW_0" intLanes=":gneJ1_0_0 :gneJ1_1_0 :gneJ1_2_0 :gneJ1_3_0" shape="-3.25,4.75 3.25,4.75 4.75,3.25 4.75,-3.25 3.25,-4.75 -3.25,-4.75 -4.75,-3.25 -4.75,3.25">
         <request index="0" response="0000" foes="1010" cont="0"/>
