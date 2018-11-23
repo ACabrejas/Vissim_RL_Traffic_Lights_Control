@@ -5,8 +5,15 @@ DQN_Test/
 tests_tools/
 tools/
 
+## VISSIM ERROR FILES
+*.err
+
 ## OUTPUT FILES FOR MAY AND LOUISE
 *.json
+
+## TRIP FILES
+*tripinfo.xml
+*.rou.xml
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
