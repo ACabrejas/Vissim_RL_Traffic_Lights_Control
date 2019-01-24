@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="602" vissimVersion="11.00 - 02 [73921]">
+<network version="602" vissimVersion="11.00 - 03 [74735]">
 	<anmDefaults colorDistr="1" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="" panmRoutesFilename="" pedestrianVehicleType="510" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -2003,7 +2003,7 @@
 		<queueCounter link="7" name="North" no="4" pos="254.79815377517255"/>
 	</queueCounters>
 	<signalControllers>
-		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="Signal" no="1" offset="0" progFile="#exe#vissig_controller.dll" progNo="3" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Straight1.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="3" offset="0" progFile="#exe#vissig_controller.dll" progNo="3" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Straight1.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="South" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West" no="2" redAmber="1" type="NORMAL"/>
@@ -2011,10 +2011,10 @@
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="East" no="4" redAmber="1" type="NORMAL"/>
 			</sgs>
 			<sigTmsTabConfig>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 1" title="" varNo="1" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 2" title="" varNo="2" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 3" title="" varNo="3" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 4" title="" varNo="4" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 1" title="" varNo="1" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 2" title="" varNo="2" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 3" title="" varNo="3" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 4" title="" varNo="4" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
 				<intObjectRef key="1"/>
@@ -2022,12 +2022,12 @@
 		</signalController>
 	</signalControllers>
 	<signalHeads>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="1" orSG="1 2" pos="254.55808299421335" sg="1 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 1" localNo="0" name="" no="2" orSG="1 1" pos="259.25672674985384" sg="1 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 1" localNo="0" name="" no="3" orSG="1 4" pos="255.81475162095245" sg="1 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="4" orSG="1 3" pos="254.24821607791634" sg="1 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="1" orSG="3 2" pos="254.55808299421335" sg="3 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 1" localNo="0" name="" no="2" orSG="3 1" pos="259.25672674985384" sg="3 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 1" localNo="0" name="" no="3" orSG="3 4" pos="255.81475162095245" sg="3 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="4" orSG="3 3" pos="254.24821607791634" sg="3 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="720000" simRes="10" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="36000" simRes="10" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
@@ -2140,7 +2140,7 @@
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="300"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
@@ -2150,7 +2150,7 @@
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="300"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>
@@ -2194,20 +2194,20 @@
 	</vehicleRoutingDecisionsStatic>
 	<vehicleTravelTimeMeasurements>
 		<vehicleTravelTimeMeasurement name="" no="1">
-			<end link="6" pos="257.39200161232884"/>
-			<start link="1" pos="1.1070943610547559"/>
+			<end link="6" pos="250"/>
+			<start link="1" pos="0.5"/>
 		</vehicleTravelTimeMeasurement>
 		<vehicleTravelTimeMeasurement name="" no="2">
-			<end link="8" pos="255.7842022927278"/>
-			<start link="3" pos="2.0451654756566313"/>
+			<end link="8" pos="250"/>
+			<start link="3" pos="0.5"/>
 		</vehicleTravelTimeMeasurement>
 		<vehicleTravelTimeMeasurement name="" no="3">
-			<end link="2" pos="254.94511876124596"/>
-			<start link="5" pos="0.81422770489041341"/>
+			<end link="2" pos="250"/>
+			<start link="5" pos="0.5"/>
 		</vehicleTravelTimeMeasurement>
 		<vehicleTravelTimeMeasurement name="" no="4">
-			<end link="4" pos="260.23215444995748"/>
-			<start link="7" pos="1.0687095228868466"/>
+			<end link="4" pos="250"/>
+			<start link="7" pos="0.5"/>
 		</vehicleTravelTimeMeasurement>
 	</vehicleTravelTimeMeasurements>
 	<vehicleTypes>

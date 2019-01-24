@@ -1,0 +1,139 @@
+from collections import deque
+import numpy as np
+import random
+
+import tensorflow as tf
+from keras import backend as K
+from keras.models import load_model
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import Adam
+
+######################################################################################
+## Deep Q Learning Agent (Use DoubleDQN flag to swap to DDQN)
+######################################################################################
+
+class DQNAgent:
+    def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, Vissim, DoubleDQN):
+        self.signal_id = ID
+        self.signal_controller = npa.signal_controllers[self.signal_id]
+        self.state_size = state_size
+        self.action_size = action_size
+        self.memory = deque(maxlen=memory_size)
+        self.gamma = gamma                    # discount rate
+        self.epsilon = epsilon_start          # starting exploration rate
+        self.epsilon_min = epsilon_end        # final exploration rate
+        self.epsilon_decay = epsilon_decay    # decay of exploration rate
+        self.learning_rate = alpha            # learning rate
+        self.model = self._build_model()
+        self.DoubleDQN = DoubleDQN
+        if DoubleDQN:
+            self.target_model = self._build_model()
+            self.target_model.set_weights(self.model.get_weights())
+            print("Deploying instance of Double Deep Q Learning Agent(s)")
+        else:
+            print("Deploying instance of Standard Deep Q Learning Agent(s)")
+
+
+        self.state = np.reshape([0,0,0,0], [1,state_size])
+        self.newstate = np.reshape([0,0,0,0], [1,state_size])
+        self.action = 0
+        self.reward = 0
+        
+        self.episode_reward = []
+        
+    def update_IDS(self, ID, npa):
+        self.signal_id = ID
+        self.signal_controller = npa.signal_controllers[self.signal_id]
+    
+    # DNN definition
+    def _build_model(self):
+        # Neural Net for Deep-Q learning Model
+        model = Sequential()
+        model.add(Dense(24, input_dim=self.state_size, activation='relu'))
+        model.add(Dense(48, activation='relu'))
+        model.add(Dense(self.action_size, activation='linear'))
+        model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+        return model
+    
+    # Obtain the state based on different state definitions
+    def get_state(self, state_type, state_size, Vissim):
+        if state_type == 'Queues':
+            #Obtain Queue Values (average value over the last period)
+            West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
+            South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
+            East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
+            North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
+            state = [West_Queue, South_Queue, East_Queue, North_Queue]
+            state = np.reshape(state, [1,state_size])
+            return(state)
+        elif state_type == 'Delay':
+            # Obtain Delay Values (average delay in lane * nr cars in queue)
+            West_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(1).AttValue('VehDelay(Current,Last,All)') 
+            West_Stopped  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QStops(Current,Last)')
+            South_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(2).AttValue('VehDelay(Current,Last,All)') 
+            South_Stopped = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QStops(Current,Last)')
+            East_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(3).AttValue('VehDelay(Current,Last,All)') 
+            East_Stopped  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QStops(Current,Last)')
+            North_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(4).AttValue('VehDelay(Current,Last,All)') 
+            North_Stopped = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QStops(Current,Last)')
+            
+            pre_state = [West_Delay, South_Delay, East_Delay, North_Delay, West_Stopped, South_Stopped, East_Stopped, North_Stopped]
+            pre_state = [0 if state is None else state for state in pre_state]
+            
+            state = [pre_state[0]*pre_state[4], pre_state[1]*pre_state[5], pre_state[2]*pre_state[6], pre_state[3]*pre_state[7]]
+            state = np.reshape(state, [1,state_size])
+            return(state)
+        elif state_type == 'MaxFlow':
+            pass
+        elif state_type == 'FuelConsumption':
+            pass
+        elif state_type == 'NOx':
+            pass
+        elif state_type == "COM":
+            pass
+    
+    # Add memory on the right, if over memory limit, pop leftmost item
+    def remember(self, state, action, reward, next_state):
+        self.memory.append((state, action, reward, next_state))
+        return(self.memory)
+    
+    # Choosing actions
+    def act(self, state):
+        if np.random.rand() <= self.epsilon:
+            action = random.randrange(self.action_size) 
+            self.signal_controller.SetAttValue('ProgNo', int(action+1))
+            #print('Chosen Random Action {}'.format(action+1))
+            return action
+        else:
+            act_values = self.model.predict(state)
+            action = np.argmax(act_values[0]) 
+            self.signal_controller.SetAttValue('ProgNo', int(action+1))
+            #print('Chosen Not-Random Action {}'.format(action+1))
+            return action  # returns action
+    
+    def get_reward(self):
+        #reward = -np.absolute((self.newstate[0][0]-self.newstate[0][2])-(self.newstate[0][1]-self.newstate[0][3])) - 
+        #reward = -np.sum(Agents[0].newstate[0])
+        reward = -np.sum([0 if state is None else state for state in self.newstate[0]])
+        #print(reward)
+
+        self.episode_reward.append(reward)
+        return reward
+    
+    def replay(self, batch_size, episode ):
+        minibatch = random.sample(self.memory, batch_size)
+        for state, action, reward, next_state in minibatch:
+            target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,4))))
+            target_f = self.model.predict(state)
+            target_f[0][action] = target
+            self.model.fit(state, target_f, epochs=1, verbose=0)
+        if self.epsilon > self.epsilon_min:
+            self.epsilon *= self.epsilon_decay
+        if self.DoubleDQN and episode % 5 == 0 and episode != 0:
+            self.target_model.set_weights(self.model.get_weights())
+            print("Weights copied to target model")            
+
+    def copy_weights(self):
+        self.target_model.set_weights(self.model.get_weights())
+        print("Weights copied to target model")  
