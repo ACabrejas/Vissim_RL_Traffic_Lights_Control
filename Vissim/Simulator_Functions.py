@@ -51,8 +51,8 @@ def load_agents(vissim_working_directory, model_name, Agents):
 	for index, agent in enumerate(Agents):
 		Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'.h5')
 		agent.model = load_model(Filename)
-		Memory_Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'_Memory'+'.h5')
-		agent.memory = pickle.load(Memory_Filename)
+		Memory_Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'_Memory'+'.p')
+		agent.memory = pickle.load(open(Memory_Filename, 'wb'))
 	print('Items successfully loaded.')
 	return(Agents)
 
@@ -61,8 +61,8 @@ def save_agents(vissim_working_directory, model_name, Agents):
 		Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'.h5')
 		print('Saving architecture, weights and optimizer state for agent{}'.format(index))
 		agent.model.save(Filename)
-		Memory_Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'_Memory'+'.h5')
+		Memory_Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'_Memory'+'.p')
 		print('Dumping agent\'s {} memory into pickle file'.format(index))
-		pickle.dump(agent.memory, Memory_Filename)
+		pickle.dump(agent.memory, open(Memory_Filename, 'wb'))
 	print('Model, architecture, weights, optimizer and memory succesfully saved. Succesfully Terminated.')
         
