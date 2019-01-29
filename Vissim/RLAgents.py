@@ -4,9 +4,9 @@ import random
 
 import tensorflow as tf
 from keras import backend as K
-from keras.models import load_model
-from keras.models import Sequential
-from keras.layers import Dense
+from keras.models import load_model, Sequential, Model
+from keras.layers import merge, Dense, Input, Lambda
+from keras.layers.core import Activation, Flatten
 from keras.optimizers import Adam
 
 ######################################################################################
@@ -14,7 +14,7 @@ from keras.optimizers import Adam
 ######################################################################################
 
 class DQNAgent:
-    def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, Vissim, DoubleDQN):
+    def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, Vissim, DoubleDQN, Dueling):
         self.signal_id = ID
         self.signal_controller = npa.signal_controllers[self.signal_id]
         self.state_size = state_size
@@ -25,15 +25,21 @@ class DQNAgent:
         self.epsilon_min = epsilon_end        # final exploration rate
         self.epsilon_decay = epsilon_decay    # decay of exploration rate
         self.learning_rate = alpha            # learning rate
+        self.DoubleDQN = DoubleDQN            # Double DQN Flag
+        self.Dueling = Dueling                # Dueling Q Networks Flag
         self.model = self._build_model()
-        self.DoubleDQN = DoubleDQN
-        if DoubleDQN:
+        if self.DoubleDQN:
             self.target_model = self._build_model()
             self.target_model.set_weights(self.model.get_weights())
-            print("Deploying instance of Double Deep Q Learning Agent(s)")
+            if self.Dueling:
+                print("Deploying instance of Dueling Double Deep Q Learning Agent(s)")
+            else:
+                print("Deploying instance of Double Deep Q Learning Agent(s)")
         else:
-            print("Deploying instance of Standard Deep Q Learning Agent(s)")
-
+            if self.Dueling:
+                print("Deploying instance of Dueling Deep Q Learning Agent(s)")
+            else:
+                print("Deploying instance of Standard Deep Q Learning Agent(s)")
 
         self.state = np.reshape([0,0,0,0], [1,state_size])
         self.newstate = np.reshape([0,0,0,0], [1,state_size])
@@ -48,13 +54,35 @@ class DQNAgent:
     
     # DNN definition
     def _build_model(self):
-        # Neural Net for Deep-Q learning Model
-        model = Sequential()
-        model.add(Dense(24, input_dim=self.state_size, activation='relu'))
-        model.add(Dense(48, activation='relu'))
-        model.add(Dense(self.action_size, activation='linear'))
-        model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
-        return model
+        if self.Dueling:
+            # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
+            #model = Sequential()
+            input_layer = Input(shape = (self.state_size,))
+            dense1 = Dense(10, input_dim=self.state_size, activation='relu')(input_layer)
+            #dense2 = Dense(48, activation='relu')(dense1)
+            #flatten = Flatten()(dense2)
+            fc1 = Dense(10)(dense1)
+            dueling_actions = Dense(self.action_size)(fc1)
+            fc2 = Dense(10)(dense1)
+            dueling_values = Dense(1)(fc2)
+
+            def dueling_operator(duel_input):
+                duel_v = duel_input[0]
+                duel_a = duel_input[1]
+                return (duel_v + (duel_a - K.mean(duel_a, axis = 1, keepdims = True)))
+
+            policy = Lambda(dueling_operator, name = 'policy')([dueling_values, dueling_actions])
+            model = Model(inputs=[input_layer], outputs=[policy])
+            model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+            return(model)
+        else:
+            # Architecture for the Neural Net in Deep-Q learning Model
+            model = Sequential()
+            model.add(Dense(24, input_dim=self.state_size, activation='relu'))
+            model.add(Dense(48, activation='relu'))
+            model.add(Dense(self.action_size, activation='linear'))
+            model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
+            return model
     
     # Obtain the state based on different state definitions
     def get_state(self, state_type, state_size, Vissim):
@@ -129,8 +157,8 @@ class DQNAgent:
             target_f[0][action] = target
             self.model.fit(state, target_f, epochs=1, verbose=0)
         if self.epsilon > self.epsilon_min:
-            self.epsilon *= self.epsilon_decay
-        if self.DoubleDQN and episode % 5 == 0 and episode != 0:
+            self.epsilon += self.epsilon_decay
+        if self.DoubleDQN and (episode+1) % 5 == 0 and episode != 0:
             self.target_model.set_weights(self.model.get_weights())
             print("Weights copied to target model")            
 

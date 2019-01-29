@@ -2003,7 +2003,7 @@
 		<queueCounter link="7" name="North" no="4" pos="254.79815377517255"/>
 	</queueCounters>
 	<signalControllers>
-		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="3" offset="0" progFile="#exe#vissig_controller.dll" progNo="4" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Straight1.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="3" offset="0" progFile="#exe#vissig_controller.dll" progNo="3" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Straight1.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="South" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West" no="2" redAmber="1" type="NORMAL"/>
@@ -2194,19 +2194,19 @@
 	</vehicleRoutingDecisionsStatic>
 	<vehicleTravelTimeMeasurements>
 		<vehicleTravelTimeMeasurement name="" no="1">
-			<end link="6" pos="0.5"/>
+			<end link="6" pos="250"/>
 			<start link="1" pos="0.5"/>
 		</vehicleTravelTimeMeasurement>
 		<vehicleTravelTimeMeasurement name="" no="2">
-			<end link="8" pos="0.5"/>
+			<end link="8" pos="250"/>
 			<start link="3" pos="0.5"/>
 		</vehicleTravelTimeMeasurement>
 		<vehicleTravelTimeMeasurement name="" no="3">
-			<end link="2" pos="0.5"/>
+			<end link="2" pos="250"/>
 			<start link="5" pos="0.5"/>
 		</vehicleTravelTimeMeasurement>
 		<vehicleTravelTimeMeasurement name="" no="4">
-			<end link="4" pos="0.5"/>
+			<end link="4" pos="250"/>
 			<start link="7" pos="0.5"/>
 		</vehicleTravelTimeMeasurement>
 	</vehicleTravelTimeMeasurements>

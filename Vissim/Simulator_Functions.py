@@ -1,6 +1,8 @@
 import numpy as np
 import os
 import pickle
+from keras.models import load_model
+
 
 def Set_Quickmode(Vissim):
 	# Set speed parameters in Vissim
@@ -46,23 +48,22 @@ def average_reward(reward_storage, Agents, episode, episodes):
 		print("Prediction for [5000,0,5000,0] is: {}".format(Agents[0].model.predict(np.reshape([5000,0,5000,0], [1,4]))))
 	return(reward_storage, average_reward)
 
-def load_agents(vissim_working_directory, model_name, Agents):
+def load_agents(vissim_working_directory, model_name, Agents, Session_ID):
 	print('Loading Pre-Trained Agent, Architecture, Optimizer and Memory.')
 	for index, agent in enumerate(Agents):
-		Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'.h5')
+		Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'.h5')
 		agent.model = load_model(Filename)
-		Memory_Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'_Memory'+'.p')
-		agent.memory = pickle.load(open(Memory_Filename, 'wb'))
+		Memory_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Memory'+'.p')
+		agent.memory = pickle.load(open(Memory_Filename, 'rb'))
 	print('Items successfully loaded.')
 	return(Agents)
 
-def save_agents(vissim_working_directory, model_name, Agents):
+def save_agents(vissim_working_directory, model_name, Agents, Session_ID):
 	for index,agent in enumerate(Agents):    
-		Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'.h5')
-		print('Saving architecture, weights and optimizer state for agent{}'.format(index))
+		Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'.h5')
+		print('Saving architecture, weights and optimizer state for agent-{}'.format(index))
 		agent.model.save(Filename)
-		Memory_Filename = os.path.join(vissim_working_directory, model_name, 'Agent'+str(index)+'_Memory'+'.p')
-		print('Dumping agent\'s {} memory into pickle file'.format(index))
+		Memory_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Memory'+'.p')
+		print('Dumping agent-{} memory into pickle file'.format(index))
 		pickle.dump(agent.memory, open(Memory_Filename, 'wb'))
 	print('Model, architecture, weights, optimizer and memory succesfully saved. Succesfully Terminated.')
-        
