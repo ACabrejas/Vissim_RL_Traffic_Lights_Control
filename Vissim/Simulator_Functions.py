@@ -10,7 +10,7 @@ def Set_Quickmode(Vissim):
     Vissim.Graphics.CurrentNetworkWindow.SetAttValue("QuickMode",1)
     Vissim.SuspendUpdateGUI()  
 
-def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_length):
+def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_length, Demo_Mode):
 	cycle_t = 0
 	for time_t in range(simulation_length):
 		if cycle_t == 900:
@@ -18,6 +18,8 @@ def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_le
 				agent.newstate = agent.get_state(state_type, state_size, Vissim)
 				agent.action   = agent.act(agent.newstate)
 				agent.reward   = agent.get_reward()
+				if Demo_Mode:
+					print('Agent Reward in this cycle is : {}'.format(round(agent.reward,2)))
 				agent.memory   = agent.remember(agent.state, agent.action, agent.reward, agent.newstate)
 				agent.state    = agent.newstate
 			cycle_t = 0
@@ -45,7 +47,7 @@ def average_reward(reward_storage, Agents, episode, episodes):
 				print("Agent {}, Average agent reward: {}".format(agent, average_reward[index]))
 	else:
 		print("Episode: {}/{}, Epsilon:{}, Average reward: {}".format(episode+1, episodes, np.round(Agents[0].epsilon,2), np.round(average_reward,2)))
-		print("Prediction for [5000,0,5000,0] is: {}".format(Agents[0].model.predict(np.reshape([5000,0,5000,0], [1,4]))))
+		print("Prediction for [500,0,500,0] is: {}".format(Agents[0].model.predict(np.reshape([500,0,500,0], [1,4]))))
 	return(reward_storage, average_reward)
 
 def load_agents(vissim_working_directory, model_name, Agents, Session_ID):
@@ -55,10 +57,13 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID):
 		agent.model = load_model(Filename)
 		Memory_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Memory'+'.p')
 		agent.memory = pickle.load(open(Memory_Filename, 'rb'))
+	Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Training'+'.p')
+	agent.memory = pickle.load(open(Training_Progress_Filename, 'rb'))
+
 	print('Items successfully loaded.')
 	return(Agents)
 
-def save_agents(vissim_working_directory, model_name, Agents, Session_ID):
+def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward_storage):
 	for index,agent in enumerate(Agents):    
 		Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'.h5')
 		print('Saving architecture, weights and optimizer state for agent-{}'.format(index))
@@ -66,4 +71,7 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID):
 		Memory_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Memory'+'.p')
 		print('Dumping agent-{} memory into pickle file'.format(index))
 		pickle.dump(agent.memory, open(Memory_Filename, 'wb'))
-	print('Model, architecture, weights, optimizer and memory succesfully saved. Succesfully Terminated.')
+	Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Training'+'.p')
+	print('Dumping Training Results into pickle file.')
+	pickle.dump(reward_storage, open(Memory_Filename, 'wb'))
+	print('Model, architecture, weights, optimizer, memory and training results succesfully saved. Succesfully Terminated.')

@@ -14,7 +14,7 @@ from keras.optimizers import Adam
 ######################################################################################
 
 class DQNAgent:
-    def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, Vissim, DoubleDQN, Dueling):
+    def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, copy_weights_frequency, Vissim, DoubleDQN, Dueling):
         self.signal_id = ID
         self.signal_controller = npa.signal_controllers[self.signal_id]
         self.state_size = state_size
@@ -27,6 +27,7 @@ class DQNAgent:
         self.learning_rate = alpha            # learning rate
         self.DoubleDQN = DoubleDQN            # Double DQN Flag
         self.Dueling = Dueling                # Dueling Q Networks Flag
+        self.copy_weights_frequency = copy_weights_frequency
         self.model = self._build_model()
         if self.DoubleDQN:
             self.target_model = self._build_model()
@@ -152,16 +153,28 @@ class DQNAgent:
     def replay(self, batch_size, episode ):
         minibatch = random.sample(self.memory, batch_size)
         for state, action, reward, next_state in minibatch:
-            target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,4))))
+
+            if self.DoubleDQN:
+                next_action = np.argmax(self.target_model.predict(np.reshape(next_state,(1,4))), axis=1)
+                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,4)))[0][next_action]
+            else:
+                target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,4))))
+                # No fixed targets version
+                #target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,4))))
+
             target_f = self.model.predict(state)
             target_f[0][action] = target
+
             self.model.fit(state, target_f, epochs=1, verbose=0)
+
+        # Exploration rate decay
         if self.epsilon > self.epsilon_min:
             self.epsilon += self.epsilon_decay
-        if self.DoubleDQN and (episode+1) % 5 == 0 and episode != 0:
-            self.target_model.set_weights(self.model.get_weights())
-            print("Weights copied to target model")            
+        # Copy weights every 5 episodes
+        if self.DoubleDQN and (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
+            self.copy_weights()           
 
+    # Copy weights function
     def copy_weights(self):
         self.target_model.set_weights(self.model.get_weights())
         print("Weights copied to target model")  
