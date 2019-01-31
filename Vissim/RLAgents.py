@@ -177,4 +177,4 @@ class DQNAgent:
     # Copy weights function
     def copy_weights(self):
         self.target_model.set_weights(self.model.get_weights())
-        print("Weights copied to target model")  
+        print("Weights succesfully copied to Target model.")  
