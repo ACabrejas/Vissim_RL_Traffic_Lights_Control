@@ -5,7 +5,6 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, Start_Fr
     ## Connecting the COM Server => Open a new Vissim Window:
     # Server should only be dispatched in first run. Otherwise reload model.
     # Setting Working Directory
-    vissim_working_directory = 'C:\\Users\\acabrejasegea\\OneDrive - The Alan Turing Institute\\Desktop\\ATI\\0_TMF\\MLforFlowOptimisation\\Vissim\\'
     
     if verbose:
         print ('Working Directory set to: ' + vissim_working_directory)
@@ -66,19 +65,18 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, Start_Fr
         print('Sever Redispatched.')
     return(Vissim, Simulation, Network, cache_flag)
 
-def COMServerReload(Vissim, model_name, vissim_working_directory, sim_length, Start_Fresh, reset_flag):
+def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_length, Start_Fresh, reset_flag):
     ## Connecting the COM Server => Open a new Vissim Window:
     # Server should only be dispatched in first run. Otherwise reload model.
     # Setting Working Directory
-    vissim_working_directory = 'C:\\Users\\acabrejasegea\\OneDrive - The Alan Turing Institute\\Desktop\\ATI\\0_TMF\\MLforFlowOptimisation\\Vissim\\'
+
     ## Load the Network:
     Filename = os.path.join(vissim_working_directory, model_name, (model_name+'.inpx'))
 
     Vissim.LoadNet(Filename)
 
     ## Setting Simulation End
-    Vissim.Simulation.SetAttValue('SimPeriod', sim_length)
-
+    Vissim.Simulation.SetAttValue('SimPeriod', simulation_length)
     ## If a fresh start is needed
     if reset_flag == True:
         if Start_Fresh == True:

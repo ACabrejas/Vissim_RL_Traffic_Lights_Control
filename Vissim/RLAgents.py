@@ -150,7 +150,7 @@ class DQNAgent:
         self.episode_reward.append(reward)
         return reward
     
-    def replay(self, batch_size, episode ):
+    def replay(self, batch_size, episode):
         minibatch = random.sample(self.memory, batch_size)
         for state, action, reward, next_state in minibatch:
 

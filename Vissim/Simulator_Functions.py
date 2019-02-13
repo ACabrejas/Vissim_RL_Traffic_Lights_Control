@@ -12,6 +12,7 @@ def Set_Quickmode(Vissim):
 
 def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_length, Demo_Mode):
 	cycle_t = 0
+	#Vissim.Simulation.RunContinuous()
 	for time_t in range(simulation_length):
 		if cycle_t == 900:
 			for agent in Agents:
@@ -50,12 +51,15 @@ def average_reward(reward_storage, Agents, episode, episodes):
 		print("Prediction for [500,0,500,0] is: {}".format(Agents[0].model.predict(np.reshape([500,0,500,0], [1,4]))))
 	return(reward_storage, average_reward)
 
-def load_agents(vissim_working_directory, model_name, Agents, Session_ID):
+def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
 	print('Loading Pre-Trained Agent, Architecture, Optimizer and Memory.')
 	for index, agent in enumerate(Agents):
 		Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'.h5')
 		agent.model = load_model(Filename)
-		Memory_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Memory'+'.p')
+		if best:
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_BestAgent'+str(index)+'_Memory'+'.p')
+		else:
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Memory'+'.p')
 		agent.memory = pickle.load(open(Memory_Filename, 'rb'))
 	Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Training'+'.p')
 	agent.memory = pickle.load(open(Training_Progress_Filename, 'rb'))
@@ -74,4 +78,12 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 	Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Training'+'.p')
 	print('Dumping Training Results into pickle file.')
 	pickle.dump(reward_storage, open(Memory_Filename, 'wb'))
-	print('Model, architecture, weights, optimizer, memory and training results succesfully saved. Succesfully Terminated.')
+
+def best_agent(reward_storage, average_reward, best_agent_weights, vissim_working_directory, model_name, Agents, Session_ID):
+	if average_reward == np.max(reward_storage):
+		for index, agent in enumerate(Agents):
+			best_agent_weights = agent.memory
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_BestAgent'+str(index)+'_Memory'+'.p')
+			pickle.dump(agent.memory, open(Memory_Filename, 'wb'))
+			print("New best agent found. Saved in {}".format(Memory_Filename))
+	return(best_agent_weights)
