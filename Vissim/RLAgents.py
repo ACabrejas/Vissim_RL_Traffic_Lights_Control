@@ -29,9 +29,9 @@ class DQNAgent:
         self.Dueling = Dueling                # Dueling Q Networks Flag
         self.copy_weights_frequency = copy_weights_frequency
         self.model = self._build_model()
+        self.target_model = self._build_model()
+        self.target_model.set_weights(self.model.get_weights())
         if self.DoubleDQN:
-            self.target_model = self._build_model()
-            self.target_model.set_weights(self.model.get_weights())
             if self.Dueling:
                 print("Deploying instance of Dueling Double Deep Q Learning Agent(s)")
             else:
@@ -171,7 +171,7 @@ class DQNAgent:
         if self.epsilon > self.epsilon_min:
             self.epsilon += self.epsilon_decay
         # Copy weights every 5 episodes
-        if self.DoubleDQN and (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
+        if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
             self.copy_weights()           
 
     # Copy weights function

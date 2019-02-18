@@ -83,11 +83,11 @@ def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_len
             # Delete all previous simulation runs first:
             for simRun in Vissim.Net.SimulationRuns:
                 Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
-            print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
+            #print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
 
     
     #Pre-fetch objects for stability
     Simulation = Vissim.Simulation
     Network = Vissim.Net
-    print('Reloading complete. Executing new episode...')
+    #print('Reloading complete. Executing new episode...')
     return(Simulation,Network)
