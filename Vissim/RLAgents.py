@@ -150,7 +150,7 @@ class DQNAgent:
         self.episode_reward.append(reward)
         return reward
     
-    def replay(self, batch_size, episode):
+    def replay(self, batch_size, episode, loss):
         minibatch = random.sample(self.memory, batch_size)
         for state, action, reward, next_state in minibatch:
 
@@ -166,13 +166,15 @@ class DQNAgent:
             target_f[0][action] = target
 
             self.model.fit(state, target_f, epochs=1, verbose=0)
+            loss.append(self.model.history.history['loss'])
 
         # Exploration rate decay
         if self.epsilon > self.epsilon_min:
             self.epsilon += self.epsilon_decay
         # Copy weights every 5 episodes
         if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
-            self.copy_weights()           
+            self.copy_weights()   
+        return(loss)      
 
     # Copy weights function
     def copy_weights(self):
