@@ -11,8 +11,9 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, Start_Fr
         # Check Chache
         print ('Generating Cache...')
     
-    Vissim = win32com.client.gencache.EnsureDispatch("Vissim.Vissim") 
-    
+#    Vissim = win32com.client.gencache.EnsureDispatch("Vissim.Vissim") 
+    Vissim = win32com.client.dynamic.Dispatch("Vissim.Vissim") 
+
     if verbose:
         print ('Cache generated.\n')
     cache_flag = True

@@ -63,9 +63,9 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, loss, 
 		agent.memory = pickle.load(open(Memory_Filename, 'rb'))
 		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Training'+'.p')
 		agent.memory = pickle.load(open(Training_Progress_Filename, 'rb'))
-		Loss_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Loss'+'.p')
-		Loss = pickle.load(open(Loss_Filename, 'rb'))
-
+		#Loss_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Loss'+'.p')
+		#Loss = pickle.load(open(Loss_Filename, 'rb'))
+		Loss = []
 	print('Items successfully loaded.')
 	return(Agents, Loss)
 
@@ -82,7 +82,7 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 		pickle.dump(reward_storage, open(Training_Progress_Filename, 'wb'))
 		Loss_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Loss'+'.p')
 		print('Dumping Loss Results into pickle file.')
-		pickle.dump(loss, open(Memory_Filename, 'wb'))
+		pickle.dump(loss, open(Loss_Filename, 'wb'))
 
 
 
