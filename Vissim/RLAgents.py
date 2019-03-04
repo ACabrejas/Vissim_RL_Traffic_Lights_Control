@@ -175,7 +175,41 @@ class DQNAgent:
         if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
             self.copy_weights()   
         return(loss)      
+   
+    def replay2(self, batch_size, episode, loss):
+        minibatch = random.sample(self.memory, batch_size)
+        state_vector = []
+        target_f_vector = [] 
+        for state, action, reward, next_state in minibatch:
 
+            if self.DoubleDQN:
+                next_action = np.argmax(self.target_model.predict(np.reshape(next_state,(1,4))), axis=1)
+                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,4)))[0][next_action]
+            else:
+                target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,4))))
+                # No fixed targets version
+                #target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,4))))
+
+            target_f = self.model.predict(state)
+            target_f[0][action] = target
+
+            state_vector.append(state)
+            target_f_vector.append(target_f)
+
+        state_matrix = np.asarray(state_vector)
+        target_f_matrix = np.asarray(target_f_vector)
+
+
+        self.model.fit(state_matrix, target_f_matrix, epochs=1, verbose=0)
+        loss.append(self.model.history.history['loss'])
+
+        # Exploration rate decay
+        if self.epsilon > self.epsilon_min:
+            self.epsilon += self.epsilon_decay
+        # Copy weights every 5 episodes
+        if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
+            self.copy_weights()   
+        return(loss)
     # Copy weights function
     def copy_weights(self):
         self.target_model.set_weights(self.model.get_weights())
