@@ -17,20 +17,26 @@ class DQNAgent:
     def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, copy_weights_frequency, Vissim, DoubleDQN, Dueling):
         self.signal_id = ID
         self.signal_controller = npa.signal_controllers[self.signal_id]
+
         self.state_size = state_size
         self.action_size = action_size
         self.memory = deque(maxlen=memory_size)
+
         self.gamma = gamma                    # discount rate
         self.epsilon = epsilon_start          # starting exploration rate
         self.epsilon_min = epsilon_end        # final exploration rate
         self.epsilon_decay = epsilon_decay    # decay of exploration rate
         self.learning_rate = alpha            # learning rate
+
         self.DoubleDQN = DoubleDQN            # Double DQN Flag
         self.Dueling = Dueling                # Dueling Q Networks Flag
+
         self.copy_weights_frequency = copy_weights_frequency
         self.model = self._build_model()
+
         self.target_model = self._build_model()
         self.target_model.set_weights(self.model.get_weights())
+        
         if self.DoubleDQN:
             if self.Dueling:
                 print("Deploying instance of Dueling Double Deep Q Learning Agent(s)")
@@ -59,12 +65,12 @@ class DQNAgent:
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
             #model = Sequential()
             input_layer = Input(shape = (self.state_size,))
-            dense1 = Dense(10, input_dim=self.state_size, activation='relu')(input_layer)
+            dense1 = Dense(24, input_dim=self.state_size, activation='relu')(input_layer)
             #dense2 = Dense(48, activation='relu')(dense1)
             #flatten = Flatten()(dense2)
-            fc1 = Dense(10)(dense1)
+            fc1 = Dense(48)(dense1)
             dueling_actions = Dense(self.action_size)(fc1)
-            fc2 = Dense(10)(dense1)
+            fc2 = Dense(48)(dense1)
             dueling_values = Dense(1)(fc2)
 
             def dueling_operator(duel_input):
@@ -150,7 +156,7 @@ class DQNAgent:
         self.episode_reward.append(reward)
         return reward
     
-    def replay(self, batch_size, episode, loss):
+    def replay_single(self, batch_size, episode, loss):
         minibatch = random.sample(self.memory, batch_size)
         for state, action, reward, next_state in minibatch:
 
@@ -176,7 +182,7 @@ class DQNAgent:
             self.copy_weights()   
         return(loss)      
    
-    def replay2(self, batch_size, episode, loss):
+    def replay_batch(self, batch_size, episode, loss):
         minibatch = random.sample(self.memory, batch_size)
         state_vector = []
         target_f_vector = [] 
@@ -193,12 +199,11 @@ class DQNAgent:
             target_f = self.model.predict(state)
             target_f[0][action] = target
 
-            state_vector.append(state)
-            target_f_vector.append(target_f)
+            state_vector.append(state[0])
+            target_f_vector.append(target_f[0])
 
         state_matrix = np.asarray(state_vector)
         target_f_matrix = np.asarray(target_f_vector)
-
 
         self.model.fit(state_matrix, target_f_matrix, epochs=1, verbose=0)
         loss.append(self.model.history.history['loss'])
