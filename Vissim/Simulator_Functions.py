@@ -3,26 +3,30 @@ import os
 import pickle
 from keras.models import load_model
 
-
+# Set Fastest Mode in Simulator
 def Set_Quickmode(Vissim):
 	# Set speed parameters in Vissim
     Vissim.Simulation.SetAttValue('UseMaxSimSpeed', True)
     Vissim.Graphics.CurrentNetworkWindow.SetAttValue("QuickMode",1)
     Vissim.SuspendUpdateGUI()  
 
-def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_length, Demo_Mode):
+# Run a Single Episode for a set simulation length
+def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_length, Demo_Mode, PER_activated):
 	cycle_t = 0
 	#Vissim.Simulation.RunContinuous()
 	for time_t in range(simulation_length):
 		if cycle_t == 900:
 			for agent in Agents:
+
 				agent.newstate = agent.get_state(state_type, state_size, Vissim)
-				agent.action   = agent.act(agent.newstate)
 				agent.reward   = agent.get_reward()
+				agent.remember(agent.state, agent.action, agent.reward, agent.newstate)
+				agent.action = agent.act(agent.newstate)
 				if Demo_Mode:
 					print('Agent Reward in this cycle is : {}'.format(round(agent.reward,2)))
-				agent.memory   = agent.remember(agent.state, agent.action, agent.reward, agent.newstate)
+
 				agent.state    = agent.newstate
+
 			cycle_t = 0
 		else:
 			cycle_t += 1
@@ -32,6 +36,48 @@ def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_le
 	# Stop the simulation    
 	Vissim.Simulation.Stop()
 
+def PER_prepopulate_memory(Agents, Vissim, state_type, state_size, memory_size, vissim_working_directory, model_name):
+	memory = []
+	# Chech if suitable file exists
+	PER_prepopulation_filename =  os.path.join(vissim_working_directory, model_name, 'PER_Prepopulation_length_'+ str(memory_size) +'.p')
+	PER_prepopulation_exists = os.path.isfile(PER_prepopulation_filename)
+	# If it does, process it into the memory
+	if PER_prepopulation_exists:
+		print("Previous Experience Found")
+		for agent in Agents:
+			memory = pickle.load(open(PER_prepopulation_filename, 'rb'))
+			for s,a,r,s_ in memory:
+				agent.remember(s,a,r,s_)
+	# Otherwise generate random data, store it in the agent and generate the file above
+	else:
+		memory_full = False
+		cycle_t = 0
+		while not memory_full:
+			if cycle_t == 900:
+				for agent in Agents:
+					agent.newstate = agent.get_state(state_type, state_size, Vissim)
+					agent.reward   = agent.get_reward()
+	
+					memory.append((agent.state, agent.action, agent.reward, agent.newstate))
+					agent.remember(agent.state, agent.action, agent.reward, agent.newstate)
+	
+					agent.action   = agent.act(agent.newstate)
+					agent.state    = agent.newstate
+					if len(memory) == memory_size:
+						memory_full = True
+				cycle_t = 0
+			else:
+				cycle_t += 1
+ 	         
+			# Advance the game to the next frame based on the action.
+			Vissim.Simulation.RunSingleStep()
+		# Dump random transitions into pickle file for later prepopulation of PER
+		pickle.dump(memory, open(PER_prepopulation_filename, 'wb'))
+		# Stop the simulation   
+		Vissim.Simulation.Stop()
+	return(memory)
+
+# Average reward across agents after an episode
 def average_reward(reward_storage, Agents, episode, episodes):
 	average_reward = []
 	for agent in Agents:
@@ -51,6 +97,7 @@ def average_reward(reward_storage, Agents, episode, episodes):
 		print("Prediction for [500,0,500,0] is: {}".format(Agents[0].model.predict(np.reshape([500,0,500,0], [1,4]))))
 	return(reward_storage, average_reward)
 
+# Reload agents
 def load_agents(vissim_working_directory, model_name, Agents, Session_ID, loss, best):
 	print('Loading Pre-Trained Agent, Architecture, Optimizer and Memory.')
 	for index, agent in enumerate(Agents):
@@ -69,6 +116,7 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, loss, 
 	print('Items successfully loaded.')
 	return(Agents, Loss)
 
+# Save agents
 def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward_storage, loss):
 	for index,agent in enumerate(Agents):    
 		Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'.h5')
@@ -84,9 +132,7 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 		print('Dumping Loss Results into pickle file.')
 		pickle.dump(loss, open(Loss_Filename, 'wb'))
 
-
-
-
+# Save the agent producing best reward
 def best_agent(reward_storage, average_reward, best_agent_weights, vissim_working_directory, model_name, Agents, Session_ID):
 	if average_reward == np.max(reward_storage):
 		for index, agent in enumerate(Agents):

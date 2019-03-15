@@ -1,6 +1,7 @@
 from collections import deque
 import numpy as np
 import random
+import PER
 
 import tensorflow as tf
 from keras import backend as K
@@ -14,29 +15,34 @@ from keras.optimizers import Adam
 ######################################################################################
 
 class DQNAgent:
-    def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, copy_weights_frequency, Vissim, DoubleDQN, Dueling):
+    def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, copy_weights_frequency, Vissim, PER_activated, DoubleDQN, Dueling):
+        # Agent Junction ID and Controller ID
         self.signal_id = ID
         self.signal_controller = npa.signal_controllers[self.signal_id]
-
+        
+        # Number of states, action space and memory
         self.state_size = state_size
         self.action_size = action_size
-        self.memory = deque(maxlen=memory_size)
 
+        # Agent Hyperparameters
         self.gamma = gamma                    # discount rate
         self.epsilon = epsilon_start          # starting exploration rate
         self.epsilon_min = epsilon_end        # final exploration rate
         self.epsilon_decay = epsilon_decay    # decay of exploration rate
         self.learning_rate = alpha            # learning rate
 
-        self.DoubleDQN = DoubleDQN            # Double DQN Flag
+        # Agent Architecture
+        self.DoubleDQN = DoubleDQN            # Double Deep Q Network Flag
         self.Dueling = Dueling                # Dueling Q Networks Flag
+        self.PER_activated = PER_activated    # Prioritized Experience Replay Flag
 
-        self.copy_weights_frequency = copy_weights_frequency
+        # Model and target networks
+        self.copy_weights_frequency = copy_weights_frequency    # Frequency to copy weights to target network
         self.model = self._build_model()
-
         self.target_model = self._build_model()
         self.target_model.set_weights(self.model.get_weights())
         
+        # Architecture Debug Messages
         if self.DoubleDQN:
             if self.Dueling:
                 print("Deploying instance of Dueling Double Deep Q Learning Agent(s)")
@@ -48,18 +54,28 @@ class DQNAgent:
             else:
                 print("Deploying instance of Standard Deep Q Learning Agent(s)")
 
+        # Initial Setup of S, A, R, S_
         self.state = np.reshape([0,0,0,0], [1,state_size])
         self.newstate = np.reshape([0,0,0,0], [1,state_size])
         self.action = 0
         self.reward = 0
         
+        # Metrics Storage Initialization
         self.episode_reward = []
-        
+
+        if self.PER_activated:
+            # If PER_activated spawn BinaryTree and Memory object to store priorities and experiences
+            self.memory = PER.Memory(memory_size)
+        else:
+            # Else use the deque structure to only store experiences which will be sampled uniformly
+            self.memory = deque(maxlen=memory_size)
+
+    # Update the Junction IDs for the agent
     def update_IDS(self, ID, npa):
         self.signal_id = ID
         self.signal_controller = npa.signal_controllers[self.signal_id]
     
-    # DNN definition
+    # Agent Neural Network definition
     def _build_model(self):
         if self.Dueling:
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
@@ -83,7 +99,7 @@ class DQNAgent:
             model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
             return(model)
         else:
-            # Architecture for the Neural Net in Deep-Q learning Model
+            # Architecture for the Neural Net in Deep-Q learning Model (also Double version)
             model = Sequential()
             model.add(Dense(24, input_dim=self.state_size, activation='relu'))
             model.add(Dense(48, activation='relu'))
@@ -130,8 +146,11 @@ class DQNAgent:
     
     # Add memory on the right, if over memory limit, pop leftmost item
     def remember(self, state, action, reward, next_state):
-        self.memory.append((state, action, reward, next_state))
-        return(self.memory)
+        if self.PER_activated:
+            experience = (state, action, reward, next_state)
+            self.memory.store(experience)
+        else:
+            self.memory.append((state, action, reward, next_state))
     
     # Choosing actions
     def act(self, state):
@@ -161,12 +180,12 @@ class DQNAgent:
         for state, action, reward, next_state in minibatch:
 
             if self.DoubleDQN:
-                next_action = np.argmax(self.target_model.predict(np.reshape(next_state,(1,4))), axis=1)
-                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,4)))[0][next_action]
+                next_action = np.argmax(self.target_model.predict(np.reshape(next_state,(1,self.state_size))), axis=1)
+                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,self.state_size)))[0][next_action]
             else:
-                target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,4))))
+                target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,self.state_size))))
                 # No fixed targets version
-                #target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,4))))
+                #target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,self.state_size))))
 
             target_f = self.model.predict(state)
             target_f[0][action] = target
@@ -183,20 +202,30 @@ class DQNAgent:
         return(loss)      
    
     def replay_batch(self, batch_size, episode, loss):
-        minibatch = random.sample(self.memory, batch_size)
         state_vector = []
-        target_f_vector = [] 
+        target_f_vector = []
+        absolute_errors = [] 
+
+        if self.PER_activated:
+            tree_idx, minibatch, ISWeights_mb = self.memory.sample(batch_size)
+            minibatch = [item[0] for item in minibatch]
+            #return(minibatch)
+        else:
+            minibatch = random.sample(self.memory, batch_size)
+
         for state, action, reward, next_state in minibatch:
-
             if self.DoubleDQN:
-                next_action = np.argmax(self.target_model.predict(np.reshape(next_state,(1,4))), axis=1)
-                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,4)))[0][next_action]
+                next_action = np.argmax(self.target_model.predict(np.reshape(next_state,(1,self.state_size))), axis=1)
+                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,self.state_size)))[0][next_action]
             else:
-                target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,4))))
+                # Fixed Q-Target
+                target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,self.state_size))))
                 # No fixed targets version
-                #target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,4))))
+                #target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,self.state_size))))
 
+            # This section incorporates the reward into the prediction and calculates the absolute error between old and new
             target_f = self.model.predict(state)
+            absolute_errors.append(abs(target_f[0][action] - target)[0])
             target_f[0][action] = target
 
             state_vector.append(state[0])
@@ -207,6 +236,10 @@ class DQNAgent:
 
         self.model.fit(state_matrix, target_f_matrix, epochs=1, verbose=0)
         loss.append(self.model.history.history['loss'])
+
+        if self.PER_activated:
+            #Update priority
+            self.memory.batch_update(tree_idx, absolute_errors)
 
         # Exploration rate decay
         if self.epsilon > self.epsilon_min:
