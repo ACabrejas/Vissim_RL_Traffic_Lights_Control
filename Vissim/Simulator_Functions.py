@@ -13,6 +13,7 @@ def Set_Quickmode(Vissim):
 # Run a Single Episode for a set simulation length
 def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_length, Demo_Mode, PER_activated):
 	cycle_t = 0
+	Vissim.Simulation.SetAttValue('SimRes', 1)
 	#Vissim.Simulation.RunContinuous()
 	for time_t in range(simulation_length):
 		if cycle_t == 900:
@@ -98,7 +99,7 @@ def average_reward(reward_storage, Agents, episode, episodes):
 	return(reward_storage, average_reward)
 
 # Reload agents
-def load_agents(vissim_working_directory, model_name, Agents, Session_ID, loss, best):
+def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
 	print('Loading Pre-Trained Agent, Architecture, Optimizer and Memory.')
 	for index, agent in enumerate(Agents):
 		Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'.h5')
@@ -111,13 +112,13 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, loss, 
 		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Training'+'.p')
 		agent.memory = pickle.load(open(Training_Progress_Filename, 'rb'))
 		Loss_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Loss'+'.p')
-		Loss = pickle.load(open(Loss_Filename, 'rb'))
+		agent.Loss = pickle.load(open(Loss_Filename, 'rb'))
 		
 	print('Items successfully loaded.')
-	return(Agents, Loss)
+	return(Agents)
 
 # Save agents
-def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward_storage, loss):
+def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward_storage):
 	for index,agent in enumerate(Agents):    
 		Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'.h5')
 		print('Saving architecture, weights and optimizer state for agent-{}'.format(index))
@@ -130,7 +131,7 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 		pickle.dump(reward_storage, open(Training_Progress_Filename, 'wb'))
 		Loss_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Loss'+'.p')
 		print('Dumping Loss Results into pickle file.')
-		pickle.dump(loss, open(Loss_Filename, 'wb'))
+		pickle.dump(agent.loss, open(Loss_Filename, 'wb'))
 
 # Save the agent producing best reward
 def best_agent(reward_storage, average_reward, best_agent_weights, vissim_working_directory, model_name, Agents, Session_ID):

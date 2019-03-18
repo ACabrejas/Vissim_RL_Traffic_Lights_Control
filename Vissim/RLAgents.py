@@ -62,6 +62,7 @@ class DQNAgent:
         
         # Metrics Storage Initialization
         self.episode_reward = []
+        self.loss = []
 
         if self.PER_activated:
             # If PER_activated spawn BinaryTree and Memory object to store priorities and experiences
@@ -191,7 +192,7 @@ class DQNAgent:
             target_f[0][action] = target
 
             self.model.fit(state, target_f, epochs=1, verbose=0)
-            loss.append(self.model.history.history['loss'])
+            self.loss.append(self.model.history.history['loss'][0])
 
         # Exploration rate decay
         if self.epsilon > self.epsilon_min:
@@ -199,7 +200,6 @@ class DQNAgent:
         # Copy weights every 5 episodes
         if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
             self.copy_weights()   
-        return(loss)      
    
     def replay_batch(self, batch_size, episode, loss):
         state_vector = []
@@ -235,7 +235,7 @@ class DQNAgent:
         target_f_matrix = np.asarray(target_f_vector)
 
         self.model.fit(state_matrix, target_f_matrix, epochs=1, verbose=0)
-        loss.append(self.model.history.history['loss'])
+        self.loss.append(self.model.history.history['loss'])
 
         if self.PER_activated:
             #Update priority
@@ -247,7 +247,7 @@ class DQNAgent:
         # Copy weights every 5 episodes
         if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
             self.copy_weights()   
-        return(loss)
+
     # Copy weights function
     def copy_weights(self):
         self.target_model.set_weights(self.model.get_weights())
