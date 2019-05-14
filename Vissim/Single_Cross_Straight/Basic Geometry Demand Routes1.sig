@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sc version="201801" id="1" name="" frequency="1" steps="0" defaultIntergreenMatrix="0" interstagesUsingMinDurations="true" checkSum="2629555299">
+<sc version="201801" id="10" name="" frequency="1" steps="0" defaultIntergreenMatrix="0" interstagesUsingMinDurations="true" checkSum="3311760615">
   <signaldisplays>
     <display id="1" name="Red" state="RED">
       <patterns>
@@ -35,7 +35,7 @@
     </signalsequence>
   </signalsequences>
   <sgs>
-    <sg id="1" name="West" defaultSignalSequence="3">
+    <sg id="1" name="South" defaultSignalSequence="3">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="2" duration="1000" />
@@ -43,7 +43,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
     </sg>
-    <sg id="2" name="South" defaultSignalSequence="3">
+    <sg id="2" name="West" defaultSignalSequence="3">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="2" duration="1000" />
@@ -51,7 +51,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
     </sg>
-    <sg id="3" name="East" defaultSignalSequence="3">
+    <sg id="3" name="North" defaultSignalSequence="3">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="2" duration="1000" />
@@ -59,7 +59,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
     </sg>
-    <sg id="4" name="North" defaultSignalSequence="3">
+    <sg id="4" name="East" defaultSignalSequence="3">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="2" duration="1000" />
@@ -99,8 +99,8 @@
         </sg>
         <sg sg_id="2" signal_sequence="3">
           <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="2000" />
+            <cmd display="3" begin="26000" />
+            <cmd display="1" begin="40000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
@@ -109,8 +109,8 @@
         </sg>
         <sg sg_id="3" signal_sequence="3">
           <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="2000" />
+            <cmd display="3" begin="45000" />
+            <cmd display="1" begin="65000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
@@ -119,8 +119,8 @@
         </sg>
         <sg sg_id="4" signal_sequence="3">
           <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="2000" />
+            <cmd display="3" begin="71000" />
+            <cmd display="1" begin="87000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />

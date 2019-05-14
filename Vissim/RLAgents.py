@@ -176,13 +176,13 @@ class DQNAgent:
         self.episode_reward.append(reward)
         return reward
     
-    def replay_single(self, batch_size, episode, loss):
+    def replay_single(self, batch_size, episode):
         minibatch = random.sample(self.memory, batch_size)
         for state, action, reward, next_state in minibatch:
 
             if self.DoubleDQN:
                 next_action = np.argmax(self.target_model.predict(np.reshape(next_state,(1,self.state_size))), axis=1)
-                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,self.state_size)))[0][next_action]
+                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,self.state_size)))[0][next_action][0]
             else:
                 target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,self.state_size))))
                 # No fixed targets version
@@ -201,7 +201,7 @@ class DQNAgent:
         if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
             self.copy_weights()   
    
-    def replay_batch(self, batch_size, episode, loss):
+    def replay_batch(self, batch_size, episode):
         state_vector = []
         target_f_vector = []
         absolute_errors = [] 
@@ -209,14 +209,15 @@ class DQNAgent:
         if self.PER_activated:
             tree_idx, minibatch, ISWeights_mb = self.memory.sample(batch_size)
             minibatch = [item[0] for item in minibatch]
+            #print(minibatch)
             #return(minibatch)
         else:
             minibatch = random.sample(self.memory, batch_size)
 
         for state, action, reward, next_state in minibatch:
             if self.DoubleDQN:
-                next_action = np.argmax(self.target_model.predict(np.reshape(next_state,(1,self.state_size))), axis=1)
-                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,self.state_size)))[0][next_action]
+                next_action = np.argmax(self.model.predict(np.reshape(next_state,(1,self.state_size))), axis=1)
+                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,self.state_size)))[0][next_action][0]
             else:
                 # Fixed Q-Target
                 target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,self.state_size))))
@@ -225,7 +226,7 @@ class DQNAgent:
 
             # This section incorporates the reward into the prediction and calculates the absolute error between old and new
             target_f = self.model.predict(state)
-            absolute_errors.append(abs(target_f[0][action] - target)[0])
+            absolute_errors.append(abs(target_f[0][action] - target))
             target_f[0][action] = target
 
             state_vector.append(state[0])

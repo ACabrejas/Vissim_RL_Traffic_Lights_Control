@@ -1,0 +1,34 @@
+-- VAP213_E.WTT: Wert-Typ-Tabelle für VAP 2.13 (englisch!)
+-- =======================================================
+
+LDP  LANG "Status Stage"      KURZ "Stage"          KFG "PHA_ZUST"
+     LBOX "Status Stage"      KATEGORIE "STA No."   NUMMER VON 1 BIS 999
+     CODE 11001    FALLS   0 "."
+                   FALLS   1 "I"
+                   FALLS   2 "|"
+
+LDP  LANG "Status IS"         KURZ "IS"             KFG "PUE_ZUST"
+     LBOX "Status IS"         KATEGORIE "IS No."    NUMMER VON 1 BIS 999
+     CODE 11002    FALLS   0 "."
+                   FALLS   1 "|"
+
+LDP  LANG "Variable No."      KURZ "Var"            KFG "VARIABLE"
+     LBOX "Variable"          KATEGORIE "VAR No."   NUMMER VON 0 BIS 999
+     CODE 11011    ZAHL VON 0 BIS 999
+
+SZP  LANG "Status Stage"      KURZ "Stage"          KFG "PHA_ZUST"
+     LBOX "Status Stage"      KATEGORIE "STA No."   NUMMER VON 1 BIS 999
+     CODE 11001    FALLS   0                 LINIE ROT
+                   FALLS   1 FLAECHE GRUEN
+                   FALLS   2                             RAHMEN GRUEN
+
+SZP  LANG "Status IS"         KURZ "IS"             KFG "PUE_ZUST"
+     LBOX "Status IS"         KATEGORIE "IS No."    NUMMER VON 1 BIS 999
+     CODE 11002    FALLS   0                 LINIE ROT
+                   FALLS   1                             RAHMEN GRUEN
+
+SZP  LANG "Variable No."      KURZ "Var"            KFG "VARIABLE"
+     LBOX "Variable"          KATEGORIE "VAR No."   NUMMER VON 0 BIS 999
+     CODE 11011    FALLS   0                 LINIE ROT
+                   FALLS   1 FLAECHE GRUEN
+                   FALLS   2                             RAHMEN GRUEN
