@@ -15,14 +15,20 @@ from keras.optimizers import Adam
 ######################################################################################
 
 class DQNAgent:
-    def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, copy_weights_frequency, Vissim, PER_activated, DoubleDQN, Dueling):
+    def __init__(self, state_size, action_size, action_type, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, copy_weights_frequency, Vissim, PER_activated, DoubleDQN, Dueling):
+        
+        ## External Methods
+
+
         # Agent Junction ID and Controller ID
         self.signal_id = ID
         self.signal_controller = npa.signal_controllers[self.signal_id]
-        
+        self.signal_groups = npa.signal_groups[self.signal_id]
+
         # Number of states, action space and memory
         self.state_size = state_size
         self.action_size = action_size
+        self.action_type = action_type
 
         # Agent Hyperparameters
         self.gamma = gamma                    # discount rate
@@ -41,7 +47,13 @@ class DQNAgent:
         self.model = self._build_model()
         self.target_model = self._build_model()
         self.target_model.set_weights(self.model.get_weights())
-        
+
+        # Potential actions (compatible phases) and transitions
+        self.update_counter = 0                                 # Timesteps until next update
+        self.compatible_actions = [[1,0,1,0],[0,1,0,1]]         # Potential actions (compatible phases), 1 means green.
+        self.intermediate_phase = False                         # Boolean indicating an ongoing green-red or red-green transition
+        self.transition_vector = []                             # Vector that will store the transitions between updates
+
         # Architecture Debug Messages
         if self.DoubleDQN:
             if self.Dueling:
@@ -58,6 +70,7 @@ class DQNAgent:
         self.state = np.reshape([0,0,0,0], [1,state_size])
         self.newstate = np.reshape([0,0,0,0], [1,state_size])
         self.action = 0
+        self.newaction = 0
         self.reward = 0
         
         # Metrics Storage Initialization
@@ -82,12 +95,12 @@ class DQNAgent:
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
             #model = Sequential()
             input_layer = Input(shape = (self.state_size,))
-            dense1 = Dense(24, input_dim=self.state_size, activation='relu')(input_layer)
+            dense1 = Dense(12, input_dim=self.state_size, activation='relu')(input_layer)
             #dense2 = Dense(48, activation='relu')(dense1)
             #flatten = Flatten()(dense2)
-            fc1 = Dense(48)(dense1)
+            fc1 = Dense(24)(dense1)
             dueling_actions = Dense(self.action_size)(fc1)
-            fc2 = Dense(48)(dense1)
+            fc2 = Dense(24)(dense1)
             dueling_values = Dense(1)(fc2)
 
             def dueling_operator(duel_input):
@@ -102,8 +115,8 @@ class DQNAgent:
         else:
             # Architecture for the Neural Net in Deep-Q learning Model (also Double version)
             model = Sequential()
-            model.add(Dense(24, input_dim=self.state_size, activation='relu'))
-            model.add(Dense(48, activation='relu'))
+            model.add(Dense(12, input_dim=self.state_size, activation='relu'))
+            model.add(Dense(24, activation='relu'))
             model.add(Dense(self.action_size, activation='linear'))
             model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
             return model
@@ -154,18 +167,15 @@ class DQNAgent:
             self.memory.append((state, action, reward, next_state))
     
     # Choosing actions
-    def act(self, state):
+    def choose_action(self, state):
         if np.random.rand() <= self.epsilon:
-            action = random.randrange(self.action_size) 
-            self.signal_controller.SetAttValue('ProgNo', int(action+1))
+            action = random.randrange(self.action_size)
             #print('Chosen Random Action {}'.format(action+1))
-            return action
         else:
             act_values = self.model.predict(state)
             action = np.argmax(act_values[0]) 
-            self.signal_controller.SetAttValue('ProgNo', int(action+1))
             #print('Chosen Not-Random Action {}'.format(action+1))
-            return action  # returns action
+        return action
     
     def get_reward(self):
         #reward = -np.absolute((self.newstate[0][0]-self.newstate[0][2])-(self.newstate[0][1]-self.newstate[0][3])) - 

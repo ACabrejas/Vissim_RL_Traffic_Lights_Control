@@ -24,7 +24,7 @@ class NetworkParser:
     def __init__(self, Vissim):
         ## Get all SignalControllers
         self.signal_controllers     = toList(Vissim.Net.SignalControllers.GetAll())
-        self.signal_controllers_ids = range(len(self.signal_controllers)) #Vissim count starts at 1
+        self.signal_controllers_ids = range(0,len(self.signal_controllers)) #Vissim count starts at 1
                  
         ## Create SignalGroupContainers and unpack the SignalGroups into a list by SignalController
         self.signal_groups = [[] for _ in self.signal_controllers_ids]
