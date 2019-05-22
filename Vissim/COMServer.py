@@ -68,8 +68,8 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, timestep
             if _ != 4:
                 print("Failed load attempt " +str(_+1)+ "/5. Re-attempting.")
             elif _ == 4:
-                print("Failed 5th loading attempt. Please restart program.")
-                
+                print("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
+                quit()
 def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_length, timesteps_per_second, delete_results):
     ## Connecting the COM Server => Open a new Vissim Window:
     # Server should only be dispatched in first run. Otherwise reload model.
@@ -100,4 +100,5 @@ def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_len
             if _ != 4:
                 print("Failed load attempt " +str(_+1)+ "/5. Re-attempting.")
             elif _ == 4:
-                print("Failed 5th loading attempt. Please restart program.")
+                print("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
+                quit()

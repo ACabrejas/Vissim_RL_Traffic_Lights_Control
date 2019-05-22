@@ -15,11 +15,8 @@ from keras.optimizers import Adam
 ######################################################################################
 
 class DQNAgent:
-    def __init__(self, state_size, action_size, action_type, ID, state_type, npa, memory_size, gamma, epsilon_start, epsilon_end, epsilon_decay, alpha, copy_weights_frequency, Vissim, PER_activated, DoubleDQN, Dueling):
+    def __init__(self, state_size, action_size, action_type, ID, state_type, npa, memory_size, gamma, epsilon, alpha, copy_weights_frequency, Vissim, PER_activated, DoubleDQN, Dueling):
         
-        ## External Methods
-
-
         # Agent Junction ID and Controller ID
         self.signal_id = ID
         self.signal_controller = npa.signal_controllers[self.signal_id]
@@ -31,11 +28,9 @@ class DQNAgent:
         self.action_type = action_type
 
         # Agent Hyperparameters
-        self.gamma = gamma                    # discount rate
-        self.epsilon = epsilon_start          # starting exploration rate
-        self.epsilon_min = epsilon_end        # final exploration rate
-        self.epsilon_decay = epsilon_decay    # decay of exploration rate
-        self.learning_rate = alpha            # learning rate
+        self.gamma = gamma                  # discount rate
+        self.epsilon = epsilon              # exploration rate
+        self.learning_rate = alpha          # learning rate
 
         # Agent Architecture
         self.DoubleDQN = DoubleDQN            # Double Deep Q Network Flag
@@ -49,8 +44,10 @@ class DQNAgent:
         self.target_model.set_weights(self.model.get_weights())
 
         # Potential actions (compatible phases) and transitions
-        self.update_counter = 0                                 # Timesteps until next update
-        self.compatible_actions = [[1,0,1,0],[0,1,0,1]]         # Potential actions (compatible phases), 1 means green.
+        self.update_counter = 1                                 # Timesteps until next update
+        self.compatible_actions = [[1,0,1,0],[0,1,0,1]]         # Potential actions (compatible phases), 1 means green
+
+        # Internal State Traffic Control Variables
         self.intermediate_phase = False                         # Boolean indicating an ongoing green-red or red-green transition
         self.transition_vector = []                             # Vector that will store the transitions between updates
 
@@ -252,10 +249,7 @@ class DQNAgent:
             #Update priority
             self.memory.batch_update(tree_idx, absolute_errors)
 
-        # Exploration rate decay
-        if self.epsilon > self.epsilon_min:
-            self.epsilon += self.epsilon_decay
-        # Copy weights every 5 episodes
+        # Copy weights every "copy_weights_frequency" episodes
         if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
             self.copy_weights()   
 
