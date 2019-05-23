@@ -15,7 +15,7 @@ from keras.optimizers import Adam
 ######################################################################################
 
 class DQNAgent:
-    def __init__(self, state_size, action_size, action_type, ID, state_type, npa, memory_size, gamma, epsilon, alpha, copy_weights_frequency, Vissim, PER_activated, DoubleDQN, Dueling):
+    def __init__(self, state_size, action_size, ID, state_type, npa, memory_size, gamma, epsilon, alpha, copy_weights_frequency, Vissim, PER_activated, DoubleDQN, Dueling):
         
         # Agent Junction ID and Controller ID
         self.signal_id = ID
@@ -25,7 +25,6 @@ class DQNAgent:
         # Number of states, action space and memory
         self.state_size = state_size
         self.action_size = action_size
-        self.action_type = action_type
 
         # Agent Hyperparameters
         self.gamma = gamma                  # discount rate
@@ -118,43 +117,6 @@ class DQNAgent:
             model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
             return model
     
-    # Obtain the state based on different state definitions
-    def get_state(self, state_type, state_size, Vissim):
-        if state_type == 'Queues':
-            #Obtain Queue Values (average value over the last period)
-            West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
-            South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
-            East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
-            North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
-            state = [West_Queue, South_Queue, East_Queue, North_Queue]
-            state = np.reshape(state, [1,state_size])
-            return(state)
-        elif state_type == 'Delay':
-            # Obtain Delay Values (average delay in lane * nr cars in queue)
-            West_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(1).AttValue('VehDelay(Current,Last,All)') 
-            West_Stopped  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QStops(Current,Last)')
-            South_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(2).AttValue('VehDelay(Current,Last,All)') 
-            South_Stopped = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QStops(Current,Last)')
-            East_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(3).AttValue('VehDelay(Current,Last,All)') 
-            East_Stopped  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QStops(Current,Last)')
-            North_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(4).AttValue('VehDelay(Current,Last,All)') 
-            North_Stopped = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QStops(Current,Last)')
-            
-            pre_state = [West_Delay, South_Delay, East_Delay, North_Delay, West_Stopped, South_Stopped, East_Stopped, North_Stopped]
-            pre_state = [0 if state is None else state for state in pre_state]
-            
-            state = [pre_state[0]*pre_state[4], pre_state[1]*pre_state[5], pre_state[2]*pre_state[6], pre_state[3]*pre_state[7]]
-            state = np.reshape(state, [1,state_size])
-            return(state)
-        elif state_type == 'MaxFlow':
-            pass
-        elif state_type == 'FuelConsumption':
-            pass
-        elif state_type == 'NOx':
-            pass
-        elif state_type == "COM":
-            pass
-    
     # Add memory on the right, if over memory limit, pop leftmost item
     def remember(self, state, action, reward, next_state):
         if self.PER_activated:
@@ -173,15 +135,6 @@ class DQNAgent:
             action = np.argmax(act_values[0]) 
             #print('Chosen Not-Random Action {}'.format(action+1))
         return action
-    
-    def get_reward(self):
-        #reward = -np.absolute((self.newstate[0][0]-self.newstate[0][2])-(self.newstate[0][1]-self.newstate[0][3])) - 
-        #reward = -np.sum(Agents[0].newstate[0])
-        reward = -np.sum([0 if state is None else state for state in self.newstate[0]])
-        #print(reward)
-
-        self.episode_reward.append(reward)
-        return reward
     
     def replay_single(self, batch_size, episode):
         minibatch = random.sample(self.memory, batch_size)
