@@ -13,7 +13,6 @@ def Set_Quickmode(Vissim, timesteps_per_second):
 
 # Run a Single Episode for a set simulation length
 def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_length, timesteps_per_second, seconds_per_green, seconds_per_yellow, mode, PER_activated):
-	# During each timestep in the simulation
 	for time_t in range(simulation_length):
 
 		# Cycle through all agents and update them
@@ -24,11 +23,12 @@ def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_le
 			Vissim.Simulation.RunSingleStep()
 
 	for agent in Agents:
-		agent.update_counter = 0
+		agent.update_counter = 1
 		agent.intermediate_phase = False
 		agent.action = 0
 	# Stop the simulation    
 	Vissim.Simulation.Stop()
+	print("Update counter is: "+str(Agents[0].update_counter))
 
 def Agents_update(Agents, Vissim, state_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t):
 	for index, agent in enumerate(Agents):
