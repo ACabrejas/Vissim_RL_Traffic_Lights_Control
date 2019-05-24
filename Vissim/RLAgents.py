@@ -84,6 +84,7 @@ class DQNAgent:
     def update_IDS(self, ID, npa):
         self.signal_id = ID
         self.signal_controller = npa.signal_controllers[self.signal_id]
+        self.signal_groups = npa.signal_groups[self.signal_id]
     
     # Agent Neural Network definition
     def _build_model(self):

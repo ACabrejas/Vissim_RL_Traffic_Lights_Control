@@ -22,6 +22,11 @@ def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_le
 		# Advance the game to the next second (proportionally to the simulator resolution).
 		for _ in range(0, timesteps_per_second):
 			Vissim.Simulation.RunSingleStep()
+
+	for agent in Agents:
+		agent.update_counter = 0
+		agent.intermediate_phase = False
+		agent.action = 0
 	# Stop the simulation    
 	Vissim.Simulation.Stop()
 
@@ -77,49 +82,6 @@ def Agents_update(Agents, Vissim, state_type, state_size, seconds_per_green, sec
 
 	return(Agents)
 
-
-def calculate_state(Vissim, state_type, state_size):
-	if state_type == 'Queues':
-    	#Obtain Queue Values (average value over the last period)
-		West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
-		South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
-		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
-		North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
-		state = [West_Queue, South_Queue, East_Queue, North_Queue]
-		state = np.reshape(state, [1,state_size])
-		return(state)
-	elif state_type == 'Delay':
-		# Obtain Delay Values (average delay in lane * nr cars in queue)
-		West_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(1).AttValue('VehDelay(Current,Last,All)') 
-		West_Stopped  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QStops(Current,Last)')
-		South_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(2).AttValue('VehDelay(Current,Last,All)') 
-		South_Stopped = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QStops(Current,Last)')
-		East_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(3).AttValue('VehDelay(Current,Last,All)') 
-		East_Stopped  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QStops(Current,Last)')
-		North_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(4).AttValue('VehDelay(Current,Last,All)') 
-		North_Stopped = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QStops(Current,Last)')
-
-		pre_state = [West_Delay, South_Delay, East_Delay, North_Delay, West_Stopped, South_Stopped, East_Stopped, North_Stopped]
-		pre_state = [0 if state is None else state for state in pre_state]
-        
-		state = [pre_state[0]*pre_state[4], pre_state[1]*pre_state[5], pre_state[2]*pre_state[6], pre_state[3]*pre_state[7]]
-		state = np.reshape(state, [1,state_size])
-		return(state)
-	elif state_type == 'MaxFlow':
-		pass
-	elif state_type == 'FuelConsumption':
-		pass
-	elif state_type == 'NOx':
-		pass
-	elif state_type == "COM":
-		pass
-
-def calculate_reward(agent):
-    reward = -np.sum([0 if state is None else state for state in agent.newstate[0]])
-    #print(reward)
-    agent.episode_reward.append(reward)
-    return reward
-
 def green_red_to_amber(agent, seconds_per_yellow):
 	# Fetch the meaning of the Actions from the compatible Actions in the Agent
 	previous_action = agent.compatible_actions[agent.action]
@@ -165,6 +127,48 @@ def amber_to_green_red(agent, seconds_per_green	):
 	# Set timer for next update 
 	agent.update_counter += seconds_per_green - 1
 	return(agent)
+
+def calculate_state(Vissim, state_type, state_size):
+	if state_type == 'Queues':
+    	#Obtain Queue Values (average value over the last period)
+		West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
+		South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
+		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
+		North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
+		state = [West_Queue, South_Queue, East_Queue, North_Queue]
+		state = np.reshape(state, [1,state_size])
+		return(state)
+	elif state_type == 'Delay':
+		# Obtain Delay Values (average delay in lane * nr cars in queue)
+		West_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(1).AttValue('VehDelay(Current,Last,All)') 
+		West_Stopped  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QStops(Current,Last)')
+		South_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(2).AttValue('VehDelay(Current,Last,All)') 
+		South_Stopped = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QStops(Current,Last)')
+		East_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(3).AttValue('VehDelay(Current,Last,All)') 
+		East_Stopped  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QStops(Current,Last)')
+		North_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(4).AttValue('VehDelay(Current,Last,All)') 
+		North_Stopped = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QStops(Current,Last)')
+
+		pre_state = [West_Delay, South_Delay, East_Delay, North_Delay, West_Stopped, South_Stopped, East_Stopped, North_Stopped]
+		pre_state = [0 if state is None else state for state in pre_state]
+        
+		state = [pre_state[0]*pre_state[4], pre_state[1]*pre_state[5], pre_state[2]*pre_state[6], pre_state[3]*pre_state[7]]
+		state = np.reshape(state, [1,state_size])
+		return(state)
+	elif state_type == 'MaxFlow':
+		pass
+	elif state_type == 'FuelConsumption':
+		pass
+	elif state_type == 'NOx':
+		pass
+	elif state_type == "COM":
+		pass
+
+def calculate_reward(agent):
+    reward = -np.sum([0 if state is None else state for state in agent.newstate[0]])
+    #print(reward)
+    agent.episode_reward.append(reward)
+    return reward
 
 def PER_prepopulate_memory(Agents, Vissim, state_type, state_size, memory_size, vissim_working_directory, model_name, Session_ID, seconds_per_green, seconds_per_yellow, timesteps_per_second):
 	memory = []
