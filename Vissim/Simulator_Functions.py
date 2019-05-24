@@ -28,7 +28,6 @@ def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_le
 		agent.action = 0
 	# Stop the simulation    
 	Vissim.Simulation.Stop()
-	print("Update counter is: "+str(Agents[0].update_counter))
 
 def Agents_update(Agents, Vissim, state_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t):
 	for index, agent in enumerate(Agents):
@@ -275,12 +274,12 @@ def average_reward(reward_storage, Agents, episode, episodes):
 	if len(Agents)>1:
 			# Print the score and break out of the loop
 			print("Episode: {}/{}, Epsilon:{}, Average reward: {}".format(episode+1, episodes, np.round(Agents[0].epsilon,2),np.round(average_reward,2)))
-			print("Prediction for [5000,0,5000,0] is: {}".format(Agents[0].model.predict(np.reshape([5000,0,5000,0], [1,4]))))
+			#print("Prediction for [5000,0,5000,0] is: {}".format(Agents[0].model.predict(np.reshape([5000,0,5000,0], [1,4]))))
 			for agent in enumerate(Agents):
 				print("Agent {}, Average agent reward: {}".format(agent, average_reward[index]))
 	else:
 		print("Episode: {}/{}, Epsilon:{}, Average reward: {}".format(episode+1, episodes, np.round(Agents[0].epsilon,2), np.round(average_reward,2)))
-		print("Prediction for [500,0,500,0] is: {}".format(Agents[0].model.predict(np.reshape([500,0,500,0], [1,4]))))
+		#print("Prediction for [500,0,500,0] is: {}".format(Agents[0].model.predict(np.reshape([500,0,500,0], [1,4]))))
 	return(reward_storage, average_reward)
 
 # Reload agents
