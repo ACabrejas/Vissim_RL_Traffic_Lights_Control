@@ -28,7 +28,6 @@ def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_le
 		agent.action = 0
 	# Stop the simulation    
 	Vissim.Simulation.Stop()
-	print("Update counter is: "+str(Agents[0].update_counter))
 
 def Agents_update(Agents, Vissim, state_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t):
 	for index, agent in enumerate(Agents):
