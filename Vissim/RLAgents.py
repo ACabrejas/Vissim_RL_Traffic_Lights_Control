@@ -92,12 +92,12 @@ class DQNAgent:
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
             #model = Sequential()
             input_layer = Input(shape = (self.state_size,))
-            dense1 = Dense(12, input_dim=self.state_size, activation='relu')(input_layer)
+            dense1 = Dense(8, input_dim=self.state_size, activation='relu')(input_layer)
             #dense2 = Dense(48, activation='relu')(dense1)
             #flatten = Flatten()(dense2)
-            fc1 = Dense(24)(dense1)
+            fc1 = Dense(16)(dense1)
             dueling_actions = Dense(self.action_size)(fc1)
-            fc2 = Dense(24)(dense1)
+            fc2 = Dense(16)(dense1)
             dueling_values = Dense(1)(fc2)
 
             def dueling_operator(duel_input):
@@ -112,8 +112,8 @@ class DQNAgent:
         else:
             # Architecture for the Neural Net in Deep-Q learning Model (also Double version)
             model = Sequential()
-            model.add(Dense(12, input_dim=self.state_size, activation='relu'))
-            model.add(Dense(24, activation='relu'))
+            model.add(Dense(8, input_dim=self.state_size, activation='relu'))
+            model.add(Dense(12, activation='relu'))
             model.add(Dense(self.action_size, activation='linear'))
             model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
             return model
@@ -137,32 +137,8 @@ class DQNAgent:
             #print('Chosen Not-Random Action {}'.format(action+1))
         return action
     
-    def replay_single(self, batch_size, episode):
-        minibatch = random.sample(self.memory, batch_size)
-        for state, action, reward, next_state in minibatch:
-
-            if self.DoubleDQN:
-                next_action = np.argmax(self.target_model.predict(np.reshape(next_state,(1,self.state_size))), axis=1)
-                target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,self.state_size)))[0][next_action][0]
-            else:
-                target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,self.state_size))))
-                # No fixed targets version
-                #target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,self.state_size))))
-
-            target_f = self.model.predict(state)
-            target_f[0][action] = target
-
-            self.model.fit(state, target_f, epochs=1, verbose=0)
-            self.loss.append(self.model.history.history['loss'][0])
-
-        # Exploration rate decay
-        if self.epsilon > self.epsilon_min:
-            self.epsilon += self.epsilon_decay
-        # Copy weights every 5 episodes
-        if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
-            self.copy_weights()   
-   
-    def replay_batch(self, batch_size, episode):
+    # Sample a batch of "batch_size" experiences and perform 1 step of gradient descent on all of them simultaneously
+    def learn_batch(self, batch_size, episode):
         state_vector = []
         target_f_vector = []
         absolute_errors = [] 
