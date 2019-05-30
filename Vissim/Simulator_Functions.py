@@ -12,8 +12,12 @@ def Set_Quickmode(Vissim, timesteps_per_second):
 	Vissim.SuspendUpdateGUI()  
 
 # Run a Single Episode for a set simulation length
-def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_length, timesteps_per_second, seconds_per_green, seconds_per_yellow, mode, PER_activated):
+def run_simulation_episode(Agents, Vissim, state_type, state_size, simulation_length, timesteps_per_second, seconds_per_green, seconds_per_yellow, demand_list, demand_change_timesteps, mode, PER_activated):
 	for time_t in range(simulation_length):
+
+		# Change demand every 450 seconds.
+		if time_t % demand_change_timesteps == 0:
+			change_demand(Vissim, demand_list, demand_change_timesteps, time_t)
 
 		# Cycle through all agents and update them
 		Agents = Agents_update(Agents, Vissim, state_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t)
@@ -174,7 +178,7 @@ def calculate_reward(agent, state_type):
 	agent.episode_reward.append(reward)
 	return reward
 
-def PER_prepopulate_memory(Agents, Vissim, state_type, state_size, memory_size, vissim_working_directory, model_name, Session_ID, seconds_per_green, seconds_per_yellow, timesteps_per_second):
+def PER_prepopulate_memory(Agents, Vissim, state_type, state_size, memory_size, vissim_working_directory, model_name, Session_ID, seconds_per_green, seconds_per_yellow, timesteps_per_second, demand_list, demand_change_timesteps):
 	memory = []
 	# Chech if suitable folder exists
 	PER_prepopulation_directory =  os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID)
@@ -191,7 +195,7 @@ def PER_prepopulate_memory(Agents, Vissim, state_type, state_size, memory_size, 
 			for s,a,r,s_ in memory:
 				agent.remember(s,a,r,s_)
 			# FCalculate importance sampling weights
-			SF.update_priority_weights(agent, memory_size)
+			update_priority_weights(agent, memory_size)
 			# No simulation ran
 			runflag = False
 	# Otherwise generate random data, store it in the agent and generate the file above
@@ -202,8 +206,14 @@ def PER_prepopulate_memory(Agents, Vissim, state_type, state_size, memory_size, 
 		# A simulation execution is necessary
 		runflag = True
 		while not memory_full:
+			# Change demand every 450 seconds.
+			if time_t % demand_change_timesteps == 0:
+				change_demand(Vissim, demand_list, demand_change_timesteps, time_t)
+
 			if time_t % 1000 == 0:
 				print("After {} timesteps, memory is {} percent full".format(time_t, np.round(100*len(memory)/memory_size,2)))
+			
+			# Check every timestep whether the agents need to be updated
 			for index, agent in enumerate(Agents):
 				# Check if agent needs to update
 				if agent.update_counter > 0:
@@ -258,7 +268,7 @@ def PER_prepopulate_memory(Agents, Vissim, state_type, state_size, memory_size, 
 
 		# Fit once to calculate importance sampling weights
 		for agent in Agents:
-			SF.update_priority_weights(agent, memory_size)
+			update_priority_weights(agent, memory_size)
 		# Stop the simulation    
 		Vissim.Simulation.Stop() 	         
 
@@ -302,7 +312,7 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
 		agent.memory = pickle.load(open(Memory_Filename, 'rb'))
 		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Training'+'.p')
 		agent.memory = pickle.load(open(Training_Progress_Filename, 'rb'))
-		Loss_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Loss'+'.p')
+		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Loss'+'.p')
 		agent.Loss = pickle.load(open(Loss_Filename, 'rb'))
 		
 	print('Items successfully loaded.')
@@ -325,20 +335,25 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 		print('Dumping Loss Results into pickle file.')
 		pickle.dump(agent.loss, open(Loss_Filename, 'wb'))
 
+######################################################
+##### THIS DOESNT WORK FOR MULTIPLE AGENTS. FIX!!!!
 # Save the agent producing best reward
-def best_agent(reward_storage, average_reward, best_agent_weights, vissim_working_directory, model_name, Agents, Session_ID):
+def best_agent(reward_storage, average_reward, best_agent_weights, best_agent_memory, vissim_working_directory, model_name, Agents, Session_ID):
 	if average_reward == np.max(reward_storage):
 		for index, agent in enumerate(Agents):
-			best_agent_weights = agent.memory
-			Memory_Filename = os.path.join(vissim_working_directory, model_name, model_name+'_'+ Session_ID + '_BestAgent'+str(index)+'_Memory'+'.p')
-			pickle.dump(agent.memory, open(Memory_Filename, 'wb'))
+			best_agent_memory = agent.memory
+			best_agent_weights = agent.model
+			Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_BestAgent'+str(index)+'_Weights'+'.h5')
+			agent.model.save(Weights_Filename)
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_BestAgent'+str(index)+'_Memory'+'.p')
+			pickle.dump(best_agent_memory, open(Memory_Filename, 'wb'))
 			print("New best agent found. Saved in {}".format(Memory_Filename))
-	return(best_agent_weights)
+	return(best_agent_weights, best_agent_memory)
 
 def update_priority_weights(agent, memory_size):
         absolute_errors = [] 
         # Sample all memory
-        tree_idx, minibatch, ISWeights_mb = ageny.memory.sample(memory_size)
+        tree_idx, minibatch, ISWeights_mb = agent.memory.sample(memory_size)
         minibatch = [item[0] for item in minibatch]
 
         for state, action, reward, next_state in minibatch:
@@ -358,7 +373,12 @@ def update_priority_weights(agent, memory_size):
         #Update priority sampling weights
         agent.memory.batch_update(tree_idx, absolute_errors)
 
-def change_demand():
-	for vehicle_input in len(Network.VehicleInputs):
-		Vissim.Net.VehicleInputs.ItemByKey(vehicle_input).SetAttValue('Volume(1)', demands[np.random.randint(0,len(demands)-1)])    
+def change_demand(Vissim, demand_list, demand_change_timesteps, time_t):
+	for vehicle_input in range(1,(len(Vissim.Net.VehicleInputs)+1)):
+		if vehicle_input % 2 == 0:
+			Vissim.Net.VehicleInputs.ItemByKey(vehicle_input).SetAttValue('Volume(1)', demand_list[int(time_t/demand_change_timesteps)%len(demand_list)][1])    
+		else:
+			Vissim.Net.VehicleInputs.ItemByKey(vehicle_input).SetAttValue('Volume(1)', demand_list[int(time_t/demand_change_timesteps)%len(demand_list)][0])    
+
+
         
