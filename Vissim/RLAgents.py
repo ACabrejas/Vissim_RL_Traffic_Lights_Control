@@ -112,8 +112,9 @@ class DQNAgent:
         else:
             # Architecture for the Neural Net in Deep-Q learning Model (also Double version)
             model = Sequential()
-            model.add(Dense(8, input_dim=self.state_size, activation='relu'))
-            model.add(Dense(12, activation='relu'))
+            model.add(Dense(4, input_dim=self.state_size, activation='relu'))
+            #model.add(Dense(16, activation='relu'))
+            #model.add(Dense(16, activation='relu'))
             model.add(Dense(self.action_size, activation='linear'))
             model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
             return model
@@ -133,7 +134,7 @@ class DQNAgent:
             #print('Chosen Random Action {}'.format(action+1))
         else:
             act_values = self.model.predict(state)
-            action = np.argmax(act_values[0]) 
+            action = np.argmax(act_values[0])
             #print('Chosen Not-Random Action {}'.format(action+1))
         return action
     
