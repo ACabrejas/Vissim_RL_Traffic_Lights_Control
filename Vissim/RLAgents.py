@@ -173,7 +173,7 @@ class DQNAgent:
         state_matrix = np.asarray(state_vector)
         target_f_matrix = np.asarray(target_f_vector)
 
-        self.model.fit(state_matrix, target_f_matrix, epochs=1, verbose=0)
+        self.model.fit(state_matrix, target_f_matrix, epochs=1, verbose=0, batch_size = batch_size)
         self.loss.append(self.model.history.history['loss'])
 
         if self.PER_activated:

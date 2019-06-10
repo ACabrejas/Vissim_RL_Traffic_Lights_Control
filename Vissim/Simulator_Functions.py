@@ -81,7 +81,7 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 
 		# Error protection against negative update counters
 		else:
-			print("ERROR: Update Counter for agent {} is negative. Please investigate.".format(index))
+			raise Exception("ERROR: Update Counter for agent {} is negative. Please investigate.".format(index))
 
 	return(Agents)
 
@@ -104,8 +104,8 @@ def green_red_to_amber(agent, seconds_per_yellow):
 		elif agent.transition_vector[index_group] == 0:
 			pass
 		else:
-			print("ERROR: Incongruent new phase and previous phase. Please review the code.")
-			break
+			raise Exception("ERROR: Incongruent new phase and previous phase. Please review the code.")
+			
 	# Extend timer after transition is started
 	agent.update_counter += seconds_per_yellow	 - 1
 	# Record that a transition is happening
@@ -123,8 +123,8 @@ def amber_to_green_red(agent, seconds_per_green	):
 		elif agent.transition_vector[index_group] == 0:
 			pass
 		else:
-			print("ERROR: Incongruent new phase and previous phase. Please review the code.")
-			break
+			raise Exception("ERROR: Incongruent new phase and previous phase. Please review the code.")
+			
 	# Mark the transition as finished
 	agent.intermediate_phase = False	
 	# Set timer for next update 
@@ -167,21 +167,37 @@ def calculate_state(Vissim, state_type, state_size):
 	elif state_type == "COM":
 		pass
 	else:
-		print("ERROR IN STATE SELECTION")
+		raise Exception("ERROR IN STATE SELECTION")
 
-def calculate_reward(agent, state_type):
-	if state_type == 'Queues':
+def calculate_reward(agent, reward_type):
+	if reward_type == 'Queues':
 		reward = -np.sum([0 if state is None else state for state in agent.newstate[0]])
 		#print(reward)
-	elif state_type == 'QueuesDifference':
+	elif reward_type == 'QueuesDiff':
 		current_queue_sum = np.sum([0 if state is None else state for state in agent.newstate[0]])
 		previous_queue_sum =  np.sum([0 if state is None else state for state in agent.state[0]])
 		#print("Previous queue: {}".format(previous_queue_sum))
 		#print("Current queue:  {}".format(current_queue_sum))
 		#print("Substracted:    {}".format(revious_queue_sum - current_queue_sum))
 		reward = previous_queue_sum - current_queue_sum
+	elif reward_type == "QueuesDiffSC":
+		current_queue_sum = np.sum([0 if state is None else state for state in agent.newstate[0]])
+		previous_queue_sum =  np.sum([0 if state is None else state for state in agent.state[0]])
+		#print("Previous queue: {}".format(previous_queue_sum))
+		#print("Current queue:  {}".format(current_queue_sum))
+		#print("Substracted:    {}".format(revious_queue_sum - current_queue_sum))
+		queue_diff = previous_queue_sum - current_queue_sum
+		reward = queue_diff * 10 - current_queue_sum
+	elif reward_type == "QueuesDiffSQ":
+		current_queue_sum = np.sum([0 if state is None else state for state in agent.newstate[0]])
+		previous_queue_sum =  np.sum([0 if state is None else state for state in agent.state[0]])
+		#print("Previous queue: {}".format(previous_queue_sum))
+		#print("Current queue:  {}".format(current_queue_sum))
+		#print("Substracted:    {}".format(revious_queue_sum - current_queue_sum))
+		queue_diff = previous_queue_sum - current_queue_sum
+		reward = queue_diff * 10000 - np.sum(np.array([0 if state is None else state for state in agent.newstate[0]])**2)
 	else:
-		print("ERROR SELECTING REWARD FUNCTION")
+		raise Exception("ERROR SELECTING REWARD FUNCTION")
 	agent.episode_reward.append(reward)
 	return reward
 
@@ -193,9 +209,9 @@ def prepopulate_memory(Agents, Vissim, state_type, reward_type, state_size, memo
 		os.makedirs(prepopulation_directory)
 	# Chech if suitable file exists
 	if PER_activated:
-		prepopulation_filename =  os.path.join(prepopulation_directory, Session_ID	+ '_PER_Prepop_len_'+ str(memory_size) +'.p')
+		prepopulation_filename =  os.path.join(prepopulation_directory, Session_ID	+ '_PERPre_'+ str(memory_size) +'.p')
 	else:
-		prepopulation_filename =  os.path.join(prepopulation_directory, Session_ID	+ '_Prepop_len_'+ str(memory_size) +'.p')
+		prepopulation_filename =  os.path.join(prepopulation_directory, Session_ID	+ '_Pre_'+ str(memory_size) +'.p')
 	prepopulation_exists = os.path.isfile(prepopulation_filename)
 	# If it does, process it into the memory
 	if prepopulation_exists:
@@ -273,7 +289,7 @@ def prepopulate_memory(Agents, Vissim, state_type, reward_type, state_size, memo
 		
 				# Error protection against negative update counters
 				else:
-					print("ERROR: Update Counter for agent {} is negative. Please investigate.".format(index))
+					raise Exception("ERROR: Update Counter for agent {} is negative. Please investigate.".format(index))
 			
 			if len(memory) == memory_size:
 				memory_full = True
@@ -327,8 +343,8 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
 		else:
 			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Memory'+'.p')
 		agent.memory = pickle.load(open(Memory_Filename, 'rb'))
-		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Training'+'.p')
-		agent.memory = pickle.load(open(Training_Progress_Filename, 'rb'))
+		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Train'+'.p')
+		reward_storage = pickle.load(open(Training_Progress_Filename, 'rb'))
 		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Loss'+'.p')
 		agent.Loss = pickle.load(open(Loss_Filename, 'rb'))
 		
@@ -345,7 +361,7 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 		Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name + '_Agent'+str(index)+'_Memory'+'.p')
 		print('Dumping agent-{} memory into pickle file'.format(index))
 		pickle.dump(agent.memory, open(Memory_Filename, 'wb'))
-		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ '_Agent'+str(index)+'_Training'+'.p')
+		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Train'+'.p')
 		print('Dumping Training Results into pickle file.')
 		pickle.dump(reward_storage, open(Training_Progress_Filename, 'wb'))
 		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Loss'+'.p')
