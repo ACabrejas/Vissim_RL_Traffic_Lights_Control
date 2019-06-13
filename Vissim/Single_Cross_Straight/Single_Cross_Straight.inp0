@@ -1013,17 +1013,17 @@
 		<areaMeasResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<areaResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<convergence writeFile="false"/>
-		<dataColl collectData="true" fromTime="0" interval="3" toTime="99999"/>
+		<dataColl collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<delays collectData="true" fromTime="0" interval="3" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
 		<greenTimeDistribution fromTime="0" toTime="99999" writeFile="false"/>
-		<linkResults collectData="true" fromTime="0" interval="3" perLane="false" toTime="99999"/>
+		<linkResults collectData="false" fromTime="0" interval="99999" perLane="false" toTime="99999"/>
 		<lnChgs filterType="ALL" fromTime="0" toTime="99999" writeFile="false"/>
 		<managedLanes writeFile="false"/>
 		<mesoEvaluationConfig collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<nodeRawData fromTime="0" toTime="99999" writeDatabase="false" writeFile="false"/>
-		<nodeResults collectData="true" fromTime="0" interval="3" toTime="99999"/>
+		<nodeResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<odPairs collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<ptWaitingTimes writeFile="false"/>
 		<pedGridCell cellSize="1" collectData="false" collectOnlyLastInterval="false" densThresh="0" experDensThresh="0" fromTime="0" interval="99999" rangeOfInfluence="1" speedThresh="0" toTime="99999" velVarThresh="0"/>
@@ -1056,7 +1056,7 @@
 			</attributes>
 		</vehRec>
 		<vehTravTmRawData fromTime="0" toTime="99999" writeDatabase="false" writeFile="false"/>
-		<vehTravTms aggrBySect="DESTINATION" collectData="true" fromTime="0" interval="3" toTime="99999"/>
+		<vehTravTms aggrBySect="DESTINATION" collectData="true" fromTime="0" interval="99999" toTime="99999"/>
 	</evaluation>
 	<levels>
 		<level name="Base" no="1" zCoord="0"/>
@@ -2027,7 +2027,7 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 1" localNo="0" name="" no="3" orSG="3 4" pos="255.81475162095245" sg="3 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="4" orSG="3 3" pos="254.24821607791634" sg="3 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="18005" simRes="1" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="7200010" simRes="1" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>

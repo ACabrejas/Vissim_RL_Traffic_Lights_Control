@@ -3,6 +3,36 @@ import os
 import pickle
 from keras.models import load_model
 
+### COLLECTION OF USEFUL ATTRIBUTES IN VISSIM
+# Nummber of queue stops in the last time interval (added vehices falling below speed in "Begin" queue attribute)
+# Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QStops(Current,Last)'
+#
+# Queue Length
+# Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
+#
+# Link Name associated with the queue counter
+# Vissim.Net.QueueCounters.ItemByKey(1).AttValue('Link')
+#
+# Total Vehicle Delay accumulated over the last measuring timestep
+# Vissim.Net.VehicleNetworkPerformanceMeasurement.AttValue('DelayTot(Current,Last, All)')
+#
+# Total Vehicle Delay due to Stops accumulated over the last measuring timestep
+# Vissim.Net.VehicleNetworkPerformanceMeasurement.AttValue('DelayStopTot(Current,Last, All)')
+
+
+def get_queue_lengths(Vissim, agent):
+	West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
+	South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
+	East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
+	North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
+	Queue_length_list = [West_Queue, South_Queue, East_Queue, North_Queue]
+	Queue_length_list = [0 if item is None else item for item in Queue_length_list]
+	return(Queue_length_list)
+
+def get_delay_timestep(Vissim):
+	delay_this_timestep = Vissim.Net.VehicleNetworkPerformanceMeasurement.AttValue('DelayTot(Current,Last, All)')
+	return(0 if delay_this_timestep is None else delay_this_timestep)
+
 # Set Fastest Mode in Simulator
 def Set_Quickmode(Vissim, timesteps_per_second):
 	# Set speed parameters in Vissim
@@ -21,6 +51,12 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type, state_size, 
 
 		# Cycle through all agents and update them
 		Agents = Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t)
+
+		# If we are doing a performance evaluation, gather data
+		if mode == "test":
+			for agent in Agents:
+				agent.queues_over_time.append(get_queue_lengths(Vissim, agent))
+				agent.accumulated_delay.append(agent.accumulated_delay[len(agent.accumulated_delay)-1]+get_delay_timestep(Vissim))
            
 		# Advance the game to the next second (proportionally to the simulator resolution).
 		for _ in range(0, timesteps_per_second):
@@ -329,7 +365,11 @@ def average_reward(reward_storage, Agents, episode, episodes):
 				print("Agent {}, Average agent reward: {}".format(agent, average_reward[index]))
 	else:
 		print("Episode: {}/{}, Epsilon:{}, Average reward: {}".format(episode+1, episodes, np.round(Agents[0].epsilon,2), np.round(average_reward,2)))
-		print("Prediction for [50,0,50,0] is: {}".format(Agents[0].model.predict(np.reshape([50,0,50,0], [1,4]))))
+		print("Prediction for [50,0,50,0] is: {}".format(Agents[0].model.predict(np.reshape([50,0,50,0], [1,4])))\
+          	 + ("OK" if Agents[0].model.predict(np.reshape([50,0,50,0], [1,4]))[0][0] < Agents[0].model.predict(np.reshape([50,0,50,0], [1,4]))[0][1]  else "NO"))
+		print("Prediction for [0,50,0,50] is: {}".format(Agents[0].model.predict(np.reshape([0,50,0,50], [1,4])))\
+        	 + ("OK" if Agents[0].model.predict(np.reshape([0,50,0,50], [1,4]))[0][0] > Agents[0].model.predict(np.reshape([0,50,0,50], [1,4]))[0][1]  else "NO"))
+   
 	return(reward_storage, average_reward)
 
 # Reload agents
