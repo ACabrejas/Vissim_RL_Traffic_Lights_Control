@@ -27,9 +27,6 @@
     </display>
   </signaldisplays>
   <signalsequences>
-    <signalsequence id="1" name="Permanent Red">
-      <state display="1" isFixedDuration="false" isClosed="true" defaultDuration="0" />
-    </signalsequence>
     <signalsequence id="3" name="Red-Red/Amber-Green-Amber">
       <state display="1" isFixedDuration="false" isClosed="true" defaultDuration="1000" />
       <state display="2" isFixedDuration="true" isClosed="true" defaultDuration="1000" />
@@ -151,8 +148,8 @@
       <sgs>
         <sg sg_id="1" signal_sequence="3">
           <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="78000" />
+            <cmd display="3" begin="1000" />
+            <cmd display="1" begin="20000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
@@ -162,7 +159,7 @@
         <sg sg_id="2" signal_sequence="3">
           <cmds>
             <cmd display="3" begin="1000" />
-            <cmd display="1" begin="77000" />
+            <cmd display="1" begin="20000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
@@ -171,8 +168,8 @@
         </sg>
         <sg sg_id="3" signal_sequence="3">
           <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="78000" />
+            <cmd display="3" begin="1000" />
+            <cmd display="1" begin="20000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
@@ -181,79 +178,37 @@
         </sg>
         <sg sg_id="4" signal_sequence="3">
           <cmds>
-            <cmd display="3" begin="1000" />
-            <cmd display="1" begin="77000" />
+            <cmd display="3" begin="23000" />
+            <cmd display="1" begin="43000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="5" signal_sequence="1">
+        <sg sg_id="5" signal_sequence="3">
           <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="6" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="7" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="8" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="9" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="10" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="11" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="12" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-      </sgs>
-    </prog>
-    <prog id="2" cycletime="90000" switchpoint="0" offset="0" intergreens="0" fitness="0.000000" vehicleCount="0" name="Signal program 2">
-      <sgs>
-        <sg sg_id="1" signal_sequence="3">
-          <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="67000" />
+            <cmd display="3" begin="23000" />
+            <cmd display="1" begin="43000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="2" signal_sequence="3">
+        <sg sg_id="6" signal_sequence="3">
           <cmds>
-            <cmd display="3" begin="1000" />
+            <cmd display="3" begin="23000" />
+            <cmd display="1" begin="43000" />
+          </cmds>
+          <fixedstates>
+            <fixedstate display="2" duration="1000" />
+            <fixedstate display="4" duration="3000" />
+          </fixedstates>
+        </sg>
+        <sg sg_id="7" signal_sequence="3">
+          <cmds>
+            <cmd display="3" begin="46000" />
             <cmd display="1" begin="66000" />
           </cmds>
           <fixedstates>
@@ -261,19 +216,9 @@
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="3" signal_sequence="3">
+        <sg sg_id="8" signal_sequence="3">
           <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="67000" />
-          </cmds>
-          <fixedstates>
-            <fixedstate display="2" duration="1000" />
-            <fixedstate display="4" duration="3000" />
-          </fixedstates>
-        </sg>
-        <sg sg_id="4" signal_sequence="3">
-          <cmds>
-            <cmd display="3" begin="1000" />
+            <cmd display="3" begin="46000" />
             <cmd display="1" begin="66000" />
           </cmds>
           <fixedstates>
@@ -281,329 +226,45 @@
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="5" signal_sequence="1">
+        <sg sg_id="9" signal_sequence="3">
           <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="6" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="7" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="8" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="9" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="10" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="11" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="12" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-      </sgs>
-    </prog>
-    <prog id="3" cycletime="90000" switchpoint="0" offset="0" intergreens="0" fitness="0.000000" vehicleCount="0" name="Signal program 3">
-      <sgs>
-        <sg sg_id="1" signal_sequence="3">
-          <cmds>
-            <cmd display="1" begin="0" />
             <cmd display="3" begin="46000" />
+            <cmd display="1" begin="66000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="2" signal_sequence="3">
+        <sg sg_id="10" signal_sequence="3">
           <cmds>
-            <cmd display="3" begin="1000" />
-            <cmd display="1" begin="45000" />
+            <cmd display="3" begin="69000" />
+            <cmd display="1" begin="88000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="3" signal_sequence="3">
+        <sg sg_id="11" signal_sequence="3">
           <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="46000" />
+            <cmd display="3" begin="69000" />
+            <cmd display="1" begin="88000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="4" signal_sequence="3">
+        <sg sg_id="12" signal_sequence="3">
           <cmds>
-            <cmd display="3" begin="1000" />
-            <cmd display="1" begin="45000" />
+            <cmd display="3" begin="69000" />
+            <cmd display="1" begin="88000" />
           </cmds>
           <fixedstates>
             <fixedstate display="2" duration="1000" />
             <fixedstate display="4" duration="3000" />
           </fixedstates>
-        </sg>
-        <sg sg_id="5" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="6" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="7" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="8" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="9" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="10" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="11" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="12" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-      </sgs>
-    </prog>
-    <prog id="4" cycletime="90000" switchpoint="0" offset="0" intergreens="0" fitness="0.000000" vehicleCount="0" name="Signal program 4">
-      <sgs>
-        <sg sg_id="1" signal_sequence="3">
-          <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="25000" />
-          </cmds>
-          <fixedstates>
-            <fixedstate display="2" duration="1000" />
-            <fixedstate display="4" duration="3000" />
-          </fixedstates>
-        </sg>
-        <sg sg_id="2" signal_sequence="3">
-          <cmds>
-            <cmd display="3" begin="1000" />
-            <cmd display="1" begin="24000" />
-          </cmds>
-          <fixedstates>
-            <fixedstate display="2" duration="1000" />
-            <fixedstate display="4" duration="3000" />
-          </fixedstates>
-        </sg>
-        <sg sg_id="3" signal_sequence="3">
-          <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="25000" />
-          </cmds>
-          <fixedstates>
-            <fixedstate display="2" duration="1000" />
-            <fixedstate display="4" duration="3000" />
-          </fixedstates>
-        </sg>
-        <sg sg_id="4" signal_sequence="3">
-          <cmds>
-            <cmd display="3" begin="1000" />
-            <cmd display="1" begin="24000" />
-          </cmds>
-          <fixedstates>
-            <fixedstate display="2" duration="1000" />
-            <fixedstate display="4" duration="3000" />
-          </fixedstates>
-        </sg>
-        <sg sg_id="5" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="6" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="7" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="8" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="9" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="10" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="11" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="12" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-      </sgs>
-    </prog>
-    <prog id="5" cycletime="90000" switchpoint="0" offset="0" intergreens="0" fitness="0.000000" vehicleCount="0" name="Signal program 5">
-      <sgs>
-        <sg sg_id="1" signal_sequence="3">
-          <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="14000" />
-          </cmds>
-          <fixedstates>
-            <fixedstate display="2" duration="1000" />
-            <fixedstate display="4" duration="3000" />
-          </fixedstates>
-        </sg>
-        <sg sg_id="2" signal_sequence="3">
-          <cmds>
-            <cmd display="3" begin="1000" />
-            <cmd display="1" begin="13000" />
-          </cmds>
-          <fixedstates>
-            <fixedstate display="2" duration="1000" />
-            <fixedstate display="4" duration="3000" />
-          </fixedstates>
-        </sg>
-        <sg sg_id="3" signal_sequence="3">
-          <cmds>
-            <cmd display="1" begin="0" />
-            <cmd display="3" begin="14000" />
-          </cmds>
-          <fixedstates>
-            <fixedstate display="2" duration="1000" />
-            <fixedstate display="4" duration="3000" />
-          </fixedstates>
-        </sg>
-        <sg sg_id="4" signal_sequence="3">
-          <cmds>
-            <cmd display="3" begin="1000" />
-            <cmd display="1" begin="13000" />
-          </cmds>
-          <fixedstates>
-            <fixedstate display="2" duration="1000" />
-            <fixedstate display="4" duration="3000" />
-          </fixedstates>
-        </sg>
-        <sg sg_id="5" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="6" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="7" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="8" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="9" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="10" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="11" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
-        </sg>
-        <sg sg_id="12" signal_sequence="1">
-          <cmds>
-            <cmd display="1" begin="0" />
-          </cmds>
-          <fixedstates />
         </sg>
       </sgs>
     </prog>

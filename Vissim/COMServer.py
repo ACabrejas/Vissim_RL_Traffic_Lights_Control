@@ -37,7 +37,7 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, timestep
                 print ('Load process successful')
         
             ## Setting Simulation End
-            Vissim.Simulation.SetAttValue('SimPeriod', sim_length*timesteps_per_second)
+            Vissim.Simulation.SetAttValue('SimPeriod', sim_length)
             
             if verbose:
                 print ('Simulation length set to '+str(sim_length) + ' seconds.')

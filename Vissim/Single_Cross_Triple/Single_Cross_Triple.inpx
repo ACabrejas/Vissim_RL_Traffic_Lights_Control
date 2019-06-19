@@ -1081,7 +1081,7 @@
 		<routGuid1 interval="999999" offset="0" strategy="NEWROUTETODESTINATIONPARKINGLOT"/>
 		<routGuid2 interval="999999" offset="0" strategy="NEWROUTETODESTINATIONPARKINGLOT"/>
 	</dynamicAssignment>
-	<evaluation autoCreateResultColumns="true" databaseConnection="" evalOutDir="#data#" keepPrevResults="KEEPALL" listAutoExportType="FILE" nodesDelaySegmentStart="100" queueBeginSpeed="20" queueConsiderAdjacentLanes="true" queueEndSpeed="30" queueMaxHeadway="20" queueMaxLength="999">
+	<evaluation autoCreateResultColumns="true" databaseConnection="" evalOutDir="#data#" keepPrevResults="KEEPCURRENT" listAutoExportType="FILE" nodesDelaySegmentStart="100" queueBeginSpeed="20" queueConsiderAdjacentLanes="true" queueEndSpeed="30" queueMaxHeadway="20" queueMaxLength="999">
 		<areaMeasRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<areaMeasResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<areaResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
@@ -2266,17 +2266,57 @@
 		<queueCounter link="7" name="North" no="4" pos="254.79815377517255"/>
 	</queueCounters>
 	<reducedSpeedAreas>
-		<reducedSpeedArea anmFlag="false" lane="10007 1" length="6.2413565216109976" name="" no="1" pos="7.3966066898286655" timeFrom="0" timeTo="99999"/>
-		<reducedSpeedArea anmFlag="false" lane="10004 1" length="7.363274730009266" name="" no="2" pos="6.2252979702578894" timeFrom="0" timeTo="99999"/>
-		<reducedSpeedArea anmFlag="false" lane="10005 1" length="7.5447939576206622" name="" no="3" pos="6.0748189327146722" timeFrom="0" timeTo="99999"/>
-		<reducedSpeedArea anmFlag="false" lane="10006 1" length="6.4305202384954105" name="" no="4" pos="5.1340677884261359" timeFrom="0" timeTo="99999"/>
-		<reducedSpeedArea anmFlag="false" lane="10009 1" length="16.365037623715402" name="" no="5" pos="8.4235149884672715" timeFrom="0" timeTo="99999"/>
-		<reducedSpeedArea anmFlag="false" lane="10010 1" length="16.616262213091161" name="" no="6" pos="9.4164510300435733" timeFrom="0" timeTo="99999"/>
-		<reducedSpeedArea anmFlag="false" lane="10011 1" length="17.120463022174377" name="" no="7" pos="6.5954380819151641" timeFrom="0" timeTo="99999"/>
-		<reducedSpeedArea anmFlag="false" lane="10008 1" length="14.810937908532477" name="" no="8" pos="12.995165896555175" timeFrom="0" timeTo="99999"/>
+		<reducedSpeedArea anmFlag="false" lane="10007 1" length="6.2413565216109976" name="" no="1" pos="7.3966066898286655" timeFrom="0" timeTo="99999">
+			<vehClassSpeedRed>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="10"/>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="20"/>
+			</vehClassSpeedRed>
+		</reducedSpeedArea>
+		<reducedSpeedArea anmFlag="false" lane="10004 1" length="7.363274730009266" name="" no="2" pos="6.2252979702578894" timeFrom="0" timeTo="99999">
+			<vehClassSpeedRed>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="10"/>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="20"/>
+			</vehClassSpeedRed>
+		</reducedSpeedArea>
+		<reducedSpeedArea anmFlag="false" lane="10005 1" length="7.5447939576206622" name="" no="3" pos="6.0748189327146722" timeFrom="0" timeTo="99999">
+			<vehClassSpeedRed>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="10"/>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="20"/>
+			</vehClassSpeedRed>
+		</reducedSpeedArea>
+		<reducedSpeedArea anmFlag="false" lane="10006 1" length="6.4305202384954105" name="" no="4" pos="5.1340677884261359" timeFrom="0" timeTo="99999">
+			<vehClassSpeedRed>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="10"/>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="20"/>
+			</vehClassSpeedRed>
+		</reducedSpeedArea>
+		<reducedSpeedArea anmFlag="false" lane="10009 1" length="16.365037623715402" name="" no="5" pos="8.4235149884672715" timeFrom="0" timeTo="99999">
+			<vehClassSpeedRed>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="10"/>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="20"/>
+			</vehClassSpeedRed>
+		</reducedSpeedArea>
+		<reducedSpeedArea anmFlag="false" lane="10010 1" length="16.616262213091161" name="" no="6" pos="9.4164510300435733" timeFrom="0" timeTo="99999">
+			<vehClassSpeedRed>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="10"/>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="20"/>
+			</vehClassSpeedRed>
+		</reducedSpeedArea>
+		<reducedSpeedArea anmFlag="false" lane="10011 1" length="17.120463022174377" name="" no="7" pos="6.5954380819151641" timeFrom="0" timeTo="99999">
+			<vehClassSpeedRed>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="10"/>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="20"/>
+			</vehClassSpeedRed>
+		</reducedSpeedArea>
+		<reducedSpeedArea anmFlag="false" lane="10008 1" length="14.810937908532477" name="" no="8" pos="12.995165896555175" timeFrom="0" timeTo="99999">
+			<vehClassSpeedRed>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="10"/>
+				<vehClassSpeedReduction decel="2" desSpeedDistr="25" vehClass="20"/>
+			</vehClassSpeedRed>
+		</reducedSpeedArea>
 	</reducedSpeedAreas>
 	<signalControllers>
-		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="3" offset="0" progFile="#exe#vissig_controller.dll" progNo="3" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Straight1.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="1" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Triple.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West - Left" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West - Middle" no="2" redAmber="1" type="NORMAL"/>
@@ -2292,18 +2332,18 @@
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="North - Right" no="12" redAmber="1" type="NORMAL"/>
 			</sgs>
 			<sigTmsTabConfig>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 1" title="" varNo="1" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 2" title="" varNo="2" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 3" title="" varNo="3" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 4" title="" varNo="4" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 5" title="" varNo="5" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 6" title="" varNo="6" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 7" title="" varNo="7" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 8" title="" varNo="8" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 9" title="" varNo="9" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 10" title="" varNo="10" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 11" title="" varNo="11" wttFilename="vissim"/>
-				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 12" title="" varNo="12" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 1" title="" varNo="1" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 2" title="" varNo="2" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 3" title="" varNo="3" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 4" title="" varNo="4" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 5" title="" varNo="5" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 6" title="" varNo="6" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 7" title="" varNo="7" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 8" title="" varNo="8" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 9" title="" varNo="9" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 10" title="" varNo="10" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 11" title="" varNo="11" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 12" title="" varNo="12" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
 				<intObjectRef key="1"/>
@@ -2311,20 +2351,20 @@
 		</signalController>
 	</signalControllers>
 	<signalHeads>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 3" localNo="0" name="" no="1" orSG="3 1" pos="253.44103450213743" sg="3 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 2" localNo="0" name="" no="2" orSG="3 2" pos="253.4958011621909" sg="3 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="3" orSG="3 3" pos="253.4958011621909" sg="3 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 3" localNo="0" name="" no="4" orSG="3 7" pos="258.81486865550414" sg="3 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 2" localNo="0" name="" no="5" orSG="3 5" pos="258.81486865550414" sg="3 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 1" localNo="0" name="" no="6" orSG="3 6" pos="258.81486865550414" sg="3 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 3" localNo="0" name="" no="7" orSG="3 7" pos="255.98770043507858" sg="3 7" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 2" localNo="0" name="" no="8" orSG="3 8" pos="255.98770043507858" sg="3 8" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 1" localNo="0" name="" no="9" orSG="3 9" pos="255.98770043507858" sg="3 9" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 3" localNo="0" name="" no="10" orSG="3 10" pos="253.56450255204612" sg="3 10" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="3 11" pos="253.55211558027827" sg="3 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="3 12" pos="253.54569270602826" sg="3 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 3" localNo="0" name="" no="1" orSG="1 1" pos="253.44103450213743" sg="1 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 2" localNo="0" name="" no="2" orSG="1 2" pos="253.4958011621909" sg="1 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="3" orSG="1 3" pos="253.4958011621909" sg="1 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 3" localNo="0" name="" no="4" orSG="1 4" pos="258.81486865550414" sg="1 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 2" localNo="0" name="" no="5" orSG="1 5" pos="258.81486865550414" sg="1 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 1" localNo="0" name="" no="6" orSG="1 6" pos="258.81486865550414" sg="1 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 3" localNo="0" name="" no="7" orSG="1 7" pos="255.98770043507858" sg="1 7" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 2" localNo="0" name="" no="8" orSG="1 8" pos="255.98770043507858" sg="1 8" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 1" localNo="0" name="" no="9" orSG="1 9" pos="255.98770043507858" sg="1 9" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 3" localNo="0" name="" no="10" orSG="1 10" pos="253.56450255204612" sg="1 10" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="1 11" pos="253.55211558027827" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="1 12" pos="253.54569270602826" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="720001" simRes="1" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3601" simRes="1" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
@@ -2452,76 +2492,76 @@
 		</vehicleInput>
 	</vehicleInputs>
 	<vehicleRoutingDecisionsStatic>
-		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="1" name="" no="1" pos="10.986323757841205" routeChoiceMeth="STATIC">
+		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="1" name="West" no="1" pos="10.986323757841205" routeChoiceMeth="STATIC">
 			<vehRoutSta>
-				<vehicleRouteStatic destLink="4" destPos="235.30293657296826" formula="" name="" no="1" relFlow="2 0:2">
+				<vehicleRouteStatic destLink="4" destPos="235.30293657296826" formula="" name="South" no="1" relFlow="2 0:2">
 					<linkSeq>
 						<intObjectRef key="10007"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="6" destPos="237.73679517801844" formula="" name="" no="2" relFlow="2 0:4">
+				<vehicleRouteStatic destLink="6" destPos="237.73679517801844" formula="" name="East" no="2" relFlow="2 0:4">
 					<linkSeq>
 						<intObjectRef key="10000"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="8" destPos="234.74805523213956" formula="" name="" no="3" relFlow="">
+				<vehicleRouteStatic destLink="8" destPos="234.74805523213956" formula="" name="North" no="3" relFlow="">
 					<linkSeq>
 						<intObjectRef key="10008"/>
 					</linkSeq>
 				</vehicleRouteStatic>
 			</vehRoutSta>
 		</vehicleRoutingDecisionStatic>
-		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="3" name="" no="2" pos="19.51157100064944" routeChoiceMeth="STATIC">
+		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="3" name="South" no="2" pos="19.51157100064944" routeChoiceMeth="STATIC">
 			<vehRoutSta>
-				<vehicleRouteStatic destLink="2" destPos="238.71423204491839" formula="" name="" no="1" relFlow="">
+				<vehicleRouteStatic destLink="2" destPos="238.71423204491839" formula="" name="West" no="1" relFlow="">
 					<linkSeq>
 						<intObjectRef key="10009"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="6" destPos="242.40648147355779" formula="" name="" no="2" relFlow="2 0:2">
+				<vehicleRouteStatic destLink="6" destPos="242.40648147355779" formula="" name="East" no="2" relFlow="2 0:2">
 					<linkSeq>
 						<intObjectRef key="10004"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="8" destPos="244.07924631071273" formula="" name="" no="3" relFlow="2 0:4">
+				<vehicleRouteStatic destLink="8" destPos="244.07924631071273" formula="" name="North" no="3" relFlow="2 0:4">
 					<linkSeq>
 						<intObjectRef key="10001"/>
 					</linkSeq>
 				</vehicleRouteStatic>
 			</vehRoutSta>
 		</vehicleRoutingDecisionStatic>
-		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="5" name="" no="3" pos="25.949665172273967" routeChoiceMeth="STATIC">
+		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="5" name="East" no="3" pos="25.949665172273967" routeChoiceMeth="STATIC">
 			<vehRoutSta>
-				<vehicleRouteStatic destLink="4" destPos="238.41606076999437" formula="" name="" no="1" relFlow="">
+				<vehicleRouteStatic destLink="4" destPos="238.41606076999437" formula="" name="South" no="1" relFlow="">
 					<linkSeq>
 						<intObjectRef key="10010"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="8" destPos="242.5349138134292" formula="" name="" no="2" relFlow="2 0:2">
+				<vehicleRouteStatic destLink="8" destPos="242.5349138134292" formula="" name="North" no="2" relFlow="2 0:2">
 					<linkSeq>
 						<intObjectRef key="10005"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="2" destPos="248.05360463599675" formula="" name="" no="3" relFlow="2 0:4">
+				<vehicleRouteStatic destLink="2" destPos="248.05360463599675" formula="" name="West" no="3" relFlow="2 0:4">
 					<linkSeq>
 						<intObjectRef key="10002"/>
 					</linkSeq>
 				</vehicleRouteStatic>
 			</vehRoutSta>
 		</vehicleRoutingDecisionStatic>
-		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="7" name="" no="4" pos="15.480749003896952" routeChoiceMeth="STATIC">
+		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="7" name="North" no="4" pos="15.480749003896952" routeChoiceMeth="STATIC">
 			<vehRoutSta>
-				<vehicleRouteStatic destLink="2" destPos="240.27079414343154" formula="" name="" no="1" relFlow="">
+				<vehicleRouteStatic destLink="2" destPos="240.27079414343154" formula="" name="West" no="1" relFlow="">
 					<linkSeq>
 						<intObjectRef key="10006"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="4" destPos="236.85949867148133" formula="" name="" no="2" relFlow="">
+				<vehicleRouteStatic destLink="4" destPos="236.85949867148133" formula="" name="South" no="2" relFlow="">
 					<linkSeq>
 						<intObjectRef key="10003"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="6" destPos="237.73679517801844" formula="" name="" no="3" relFlow="">
+				<vehicleRouteStatic destLink="6" destPos="237.73679517801844" formula="" name="East" no="3" relFlow="">
 					<linkSeq>
 						<intObjectRef key="10011"/>
 					</linkSeq>
