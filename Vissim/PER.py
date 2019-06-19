@@ -2,85 +2,44 @@ import numpy as np
 
 class SumTree(object):
     """
-    This SumTree code is modified version of Morvan Zhou: 
+    This SumTree code is modified version of Morvan Zhou:
     https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow/blob/master/contents/5.2_Prioritized_Replay_DQN/RL_brain.py
     """
+
+
+    """
+    This SumTree code is a modified version and the original code is from:
+    https://github.com/jaara/AI-blog/blob/master/SumTree.py
+    Story data with its priority in the tree.
+    """
     data_pointer = 0
-    
-    # Here we initialize the tree with all nodes = 0, and initialize the data with all values = 0
+
     def __init__(self, capacity):
-        self.capacity = capacity # Number of leaf nodes (final nodes) that contains experiences
-        
-        # Generate the tree with all nodes values = 0
-        # To understand this calculation (2 * capacity - 1) look at the schema above
-        # Remember we are in a binary node (each node has max 2 children) so 2x size of leaf (capacity) - 1 (root node)
-        # Parent nodes = capacity - 1
-        # Leaf nodes = capacity
+        self.capacity = capacity  # for all priority values
         self.tree = np.zeros(2 * capacity - 1)
-        
-        """ tree:
-            0
-           / \
-          0   0
-         / \ / \
-        0  0 0  0  [Size: capacity] it's at this line that there is the priorities score (aka pi)
-        """
-        
-        # Contains the experiences (so the size of data is capacity)
-        self.data = np.zeros(capacity, dtype=object)
-    
-    # Here we add our priority score in the sumtree leaf and add the experience in data
-    def add(self, priority, data):
-        # Look at what index we want to put the experience
-        tree_index = self.data_pointer + self.capacity - 1
-        
-        """ tree_index:
-            0
-           / \
-          0   0
-         / \ / \
-        0  0 0  0  We fill the leaves from left to right
-        """
-        
-        # Update data frame
-        self.data[self.data_pointer] = data
-        
-        # Update the leaf
-        self.update (tree_index, priority)
-        
-        # Add 1 to data_pointer
+        # [--------------Parent nodes-------------][-------leaves to recode priority-------]
+        #             size: capacity - 1                       size: capacity
+        self.data = np.zeros(capacity, dtype=object)  # for all transitions
+        # [--------------data frame-------------]
+        #             size: capacity
+
+    def add(self, p, data):
+        tree_idx = self.data_pointer + self.capacity - 1
+        self.data[self.data_pointer] = data  # update data_frame
+        self.update(tree_idx, p)  # update tree_frame
+
         self.data_pointer += 1
-        
-        if self.data_pointer >= self.capacity:  # If we're above the capacity, you go back to first index (we overwrite)
+        if self.data_pointer >= self.capacity:  # replace when exceed the capacity
             self.data_pointer = 0
-            
-    # Update the leaf priority score and propagate the change through tree
-    def update(self, tree_index, priority):
-        # Change = new priority score - former priority score
-        change = priority - self.tree[tree_index]
-        self.tree[tree_index] = priority
+
+    def update(self, tree_idx, p):
+        change = p - self.tree[tree_idx]
+        self.tree[tree_idx] = p
         # then propagate the change through tree
-        while tree_index != 0:    # this method is faster than the recursive loop in the reference code
-            
-            """
-            Here we want to access the line above
-            THE NUMBERS IN THIS TREE ARE THE INDEXES NOT THE PRIORITY VALUES
-                0
-               / \
-              1   2
-             / \ / \
-            3  4 5  [6] 
-            """
-            # If we are in leaf at index 6, we updated the priority score
-            # We need then to update index 2 node
-            # So tree_index = (tree_index - 1) // 2
-            # tree_index = (6-1)//2
-            # tree_index = 2 (because // round the result)
-            
-            tree_index = (tree_index - 1) // 2
-            self.tree[tree_index] += change
-    
-    # Here we get the leaf_index, priority value of that leaf and experience associated with that index
+        while tree_idx != 0:    # this method is faster than the recursive loop in the reference code
+            tree_idx = (tree_idx - 1) // 2
+            self.tree[tree_idx] += change
+
     def get_leaf(self, v):
         """
         Tree structure and array storage:
@@ -89,112 +48,79 @@ class SumTree(object):
             / \
           1     2
          / \   / \
-        3   4 5   6    -> storing priority for experiences
+        3   4 5   6    -> storing priority for transitions
         Array type for storing:
         [0,1,2,3,4,5,6]
         """
-        parent_index = 0
-        
-        while True: # the while loop is faster than the method in the reference code
-            left_child_index = 2 * parent_index + 1
-            right_child_index = left_child_index + 1   
-            # If we reach bottom, end the search
-            if left_child_index >= len(self.tree):
-                leaf_index = parent_index
+        parent_idx = 0
+        while True:     # the while loop is faster than the method in the reference code
+            cl_idx = 2 * parent_idx + 1         # this leaf's left and right kids
+            cr_idx = cl_idx + 1
+            if cl_idx >= len(self.tree):        # reach bottom, end search
+                leaf_idx = parent_idx
                 break
-            else: # downward search, always search for a higher priority node
-                if v <= self.tree[left_child_index]:
-                    parent_index = left_child_index
+            else:       # downward search, always search for a higher priority node
+                if v <= self.tree[cl_idx]:
+                    parent_idx = cl_idx
                 else:
-                    v -= self.tree[left_child_index]
-                    parent_index = right_child_index
-            
-        data_index = leaf_index - self.capacity + 1
-        return leaf_index, self.tree[leaf_index], self.data[data_index]
-    
+                    v -= self.tree[cl_idx]
+                    parent_idx = cr_idx
+
+        data_idx = leaf_idx - self.capacity + 1
+        return leaf_idx, self.tree[leaf_idx], self.data[data_idx]
+
     @property
-    def total_priority(self):
-        return self.tree[0] # Returns the root node
+    def total_p(self):
+        return self.tree[0]  # the root
+
 
 class Memory(object):  # stored as ( s, a, r, s_ ) in SumTree
-    #This SumTree code is modified version and the original code is from:
-    #https://github.com/jaara/AI-blog/blob/master/Seaquest-DDQN-PER.py
-    
-    PER_e = 0.01  # Hyperparameter that we use to avoid some experiences to have 0 probability of being taken
-    PER_a = 0.6   # Hyperparameter that we use to make a tradeoff between taking only exp with high priority and sampling randomly
-    PER_b = 0.4   # importance-sampling, from initial value increasing to 1
-    
-    PER_b_increment_per_sampling = 0.001
-    
-    absolute_error_upper = 1.  # clipped abs error
+    """
+    This Memory class is modified based on the original code from:
+    https://github.com/jaara/AI-blog/blob/master/Seaquest-DDQN-PER.py
+    """
+    epsilon = 0.01  # small amount to avoid zero priority
+    alpha = 0.6  # [0~1] convert the importance of TD error to priority
+    beta = 0.4  # importance-sampling, from initial value increasing to 1
+    beta_increment_per_sampling = 0.001
+    abs_err_upper = 1.  # clipped abs error
 
     def __init__(self, capacity):
-        # Making the tree 
-        # Remember that our tree is composed of a sum tree that contains the priority scores at his leaf
-        # And also a data array
-        # We don't use deque because it means that at each timestep our experiences change index by one.
-        # We prefer to use a simple array and to overwrite when the memory is full.
         self.tree = SumTree(capacity)
-        
-    # Store a new experience in our tree. Input should be of the shape
-    # Each new experience have a score of max_prority (it will be then improved when we use this exp to train our DDQN)
-    def store(self, experience):
-        # Find the max priority
-        max_priority = np.max(self.tree.tree[-self.tree.capacity:])
-        
-        # If the max priority = 0 we can't put priority = 0 since this exp will never have a chance to be selected
-        # So we use a minimum priority
-        if max_priority == 0:
-            max_priority = self.absolute_error_upper
-        
-        self.tree.add(max_priority, experience)   # set the max p for new p
 
-    # - First, to sample a minibatch of k size, the range [0, priority_total] is / into k ranges.
-    # - Then a value is uniformly sampled from each range
-    # - We search in the sumtree, the experience where priority score correspond to sample values are retrieved from.
-    # - Then, we calculate IS weights for each minibatch element
+    def store(self, transition):
+        max_p = np.max(self.tree.tree[-self.tree.capacity:])
+        if max_p == 0:
+            max_p = self.abs_err_upper
+        self.tree.add(max_p, transition)   # set the max p for new p
+
     def sample(self, n):
-        # Create a sample array that will contains the minibatch
-        memory_b = []
-        
-        b_idx, b_ISWeights = np.empty((n,), dtype=np.int32), np.empty((n, 1), dtype=np.float32)
-        
-        # Calculate the priority segment
-        # Here, as explained in the paper, we divide the Range[0, ptotal] into n ranges
-        priority_segment = self.tree.total_priority / n       # priority segment
-    
-        # Here we increasing the PER_b each time we sample a new minibatch
-        self.PER_b = np.min([1., self.PER_b + self.PER_b_increment_per_sampling])  # max = 1
-        
-        # Calculating the max_weight
-        p_min = np.min(self.tree.tree[-self.tree.capacity:]) / self.tree.total_priority
+        b_idx, b_memory, ISWeights = np.empty((n,), dtype=np.int32), np.empty((n, self.tree.data[0].size),dtype = object), np.empty((n, 1))
+        pri_seg = self.tree.total_p / n       # priority segment
+        self.beta = np.min([1., self.beta + self.beta_increment_per_sampling])  # max = 1
 
-        max_weight = (p_min * n) ** (-self.PER_b)
-        
+        min_prob = np.min(self.tree.tree[-self.tree.capacity:]) / self.tree.total_p     # for later calculate ISweight
         for i in range(n):
-            # A value is uniformly sample from each range
-            a, b = priority_segment * i, priority_segment * (i + 1)
-            value = np.random.uniform(a, b)
-            
-            # Experience that correspond to each value is retrieved
-            index, priority, data = self.tree.get_leaf(value)
-            
-            #P(j)
-            sampling_probabilities = priority / self.tree.total_priority
-            
-            #  IS = (1/N * 1/P(i))**b /max wi == (N*P(i))**-b  /max wi
-            b_ISWeights[i, 0] = np.power(n * sampling_probabilities, -self.PER_b)/ max_weight                    
-            b_idx[i]= index
-            experience = [data]
-            memory_b.append(experience)
-        
-        return b_idx, memory_b, b_ISWeights
-    
-    # Update the priorities on the tree
-    def batch_update(self, tree_idx, abs_errors):
-        abs_errors = [item + self.PER_e for item in abs_errors]  # convert to abs and avoid 0
-        clipped_errors = np.minimum(abs_errors, self.absolute_error_upper)
-        ps = np.power(clipped_errors, self.PER_a)
+            a, b = pri_seg * i, pri_seg * (i + 1)
+            v = np.random.uniform(a, b)
+            idx, p, data = self.tree.get_leaf(v)
+            prob = p / self.tree.total_p
+            ISWeights[i, 0] = np.power(prob/min_prob, -self.beta)
+            b_idx[i] = idx
+            b_memory[i, :] = data
 
+
+        return b_idx, b_memory, ISWeights
+
+    def batch_update(self, tree_idx, abs_errors):
+        #print(abs_errors)
+        abs_errors += self.epsilon  # convert to abs and avoid 0
+        #print(abs_errors)
+        clipped_errors = np.minimum(abs_errors, self.abs_err_upper)
+        ps = np.power(clipped_errors, self.alpha)
+        #print(ps)
         for ti, p in zip(tree_idx, ps):
+            #print(p)
             self.tree.update(ti, p)
+
+
