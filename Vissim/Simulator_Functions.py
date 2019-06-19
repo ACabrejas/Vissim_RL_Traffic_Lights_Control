@@ -175,8 +175,7 @@ def calculate_state(Vissim, state_type, state_size):
 		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
 		North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
 		state = [West_Queue, South_Queue, East_Queue, North_Queue]
-		state = np.reshape(state, [1,state_size])
-		return(state)
+		
 	elif state_type == 'Delay':
 		# Obtain Delay Values (average delay in lane * nr cars in queue)
 		West_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(1).AttValue('VehDelay(Current,Last,All)') 
@@ -204,6 +203,9 @@ def calculate_state(Vissim, state_type, state_size):
 		pass
 	else:
 		raise Exception("ERROR IN STATE SELECTION")
+
+	state = np.reshape(state, [1,state_size])
+	return(state)
 
 def calculate_reward(agent, reward_type):
 	if reward_type == 'Queues':

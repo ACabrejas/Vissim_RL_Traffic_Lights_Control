@@ -3728,7 +3728,7 @@
 		<routGuid1 interval="999999" offset="0" strategy="NEWROUTETODESTINATIONPARKINGLOT"/>
 		<routGuid2 interval="999999" offset="0" strategy="NEWROUTETODESTINATIONPARKINGLOT"/>
 	</dynamicAssignment>
-	<evaluation autoCreateResultColumns="true" databaseConnection="" evalOutDir="#data#" keepPrevResults="KEEPALL" listAutoExportType="FILE" nodesDelaySegmentStart="100" queueBeginSpeed="5" queueConsiderAdjacentLanes="true" queueEndSpeed="10" queueMaxHeadway="20" queueMaxLength="500">
+	<evaluation autoCreateResultColumns="true" databaseConnection="" evalOutDir="#data#" keepPrevResults="KEEPNONE" listAutoExportType="FILE" nodesDelaySegmentStart="100" queueBeginSpeed="5" queueConsiderAdjacentLanes="true" queueEndSpeed="10" queueMaxHeadway="20" queueMaxLength="500">
 		<areaMeasRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<areaMeasResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<areaResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
@@ -3764,9 +3764,7 @@
 		<ssam writeFile="false"/>
 		<sigChgs writeDatabase="false" writeFile="false"/>
 		<vehClasses>
-			<intObjectRef key="80"/>
-			<intObjectRef key="90"/>
-			<intObjectRef key="100"/>
+			<intObjectRef key="40"/>
 		</vehClasses>
 		<vehInpData writeFile="false"/>
 		<vehNetPerf collectData="true" fromTime="0" interval="300" toTime="10800"/>
@@ -13595,7 +13593,7 @@
 		</reducedSpeedArea>
 	</reducedSpeedAreas>
 	<signalControllers>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC02" no="2" offset="55" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC02.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC02" no="2" offset="55" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC02.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1L" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1SR" no="2" redAmber="1" type="NORMAL"/>
@@ -13639,10 +13637,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="14" title="" varNo="14" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC03" no="3" offset="88" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC03.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC03" no="3" offset="88" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC03.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1L" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1SR" no="2" redAmber="1" type="NORMAL"/>
@@ -13674,10 +13672,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="10" title="" varNo="10" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC04" no="4" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="false" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC04.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC04" no="4" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC04.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1L" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1SR" no="2" redAmber="1" type="NORMAL"/>
@@ -13741,10 +13739,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="31" title="" varNo="31" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC05" no="5" offset="73" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC05.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC05" no="5" offset="73" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC05.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1L" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1SR" no="2" redAmber="1" type="NORMAL"/>
@@ -13788,10 +13786,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="14" title="" varNo="14" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC06" no="6" offset="72" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC06.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC06" no="6" offset="72" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC06.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1L" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1SR" no="2" redAmber="1" type="NORMAL"/>
@@ -13814,10 +13812,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="11" title="" varNo="11" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC08" no="8" offset="5" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC08.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC08" no="8" offset="5" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC08.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG2" no="2" redAmber="1" type="NORMAL"/>
@@ -13841,10 +13839,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="6" title="" varNo="6" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC09" no="9" offset="57" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC09.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC09" no="9" offset="57" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC09.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG2" no="2" redAmber="1" type="NORMAL"/>
@@ -13874,10 +13872,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="12" title="" varNo="12" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC10" no="10" offset="51" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC10.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC10" no="10" offset="51" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC10.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG2L" no="2" redAmber="1" type="NORMAL"/>
@@ -13924,10 +13922,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="23" title="" varNo="23" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC12" no="12" offset="23" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC12.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC12" no="12" offset="23" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC12.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG2" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG3" no="2" redAmber="1" type="NORMAL"/>
@@ -13954,10 +13952,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="7" title="" varNo="7" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC13" no="13" offset="29" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC13.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC13" no="13" offset="29" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC13.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG2" no="2" redAmber="1" type="NORMAL"/>
@@ -13989,10 +13987,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="10" title="" varNo="10" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC15" no="15" offset="23" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC15.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC15" no="15" offset="23" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="false" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC15.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG2" no="2" redAmber="1" type="NORMAL"/>
@@ -14022,10 +14020,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="8" title="" varNo="8" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC16" no="16" offset="9" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC16.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC16" no="16" offset="9" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#PTV Balance PTV Epics Vision Suite Workflow SC16.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG2" no="2" redAmber="1" type="NORMAL"/>
@@ -14055,10 +14053,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="8" title="" varNo="8" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC17" no="17" offset="23" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC17.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC17" no="17" offset="23" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC17.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG2" no="2" redAmber="1" type="NORMAL"/>
@@ -14103,10 +14101,10 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="31" title="" varNo="31" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC33" no="33" offset="86" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC33.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="SC33" no="33" offset="86" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow SC33.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG1" no="1" redAmber="1" type="NORMAL"/>
 				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="SG2" no="2" redAmber="1" type="NORMAL"/>
@@ -14141,12 +14139,12 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="11" title="" varNo="11" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="true" guiFile="#exe#vissig_gui.dll" name="Balance Central" no="34" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow StandardDemand.anmroutes" supplyFile3="" type="FIXEDTIME">
+		<signalController active="false" cycTm="0" cycTmIsVar="false" debug="false" guiFile="#exe#vissig_gui.dll" name="Balance Central" no="34" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="PTV Balance PTV Epics Vision Suite Workflow StandardDemand.anmroutes" supplyFile3="" type="FIXEDTIME">
 			<wttFiles>
-				<intObjectRef key="4"/>
+				<intObjectRef key="7"/>
 			</wttFiles>
 		</signalController>
 	</signalControllers>
@@ -21300,7 +21298,7 @@
 		</vehicleType>
 	</vehicleTypes>
 	<wttFiles>
-		<wttFile file="#exe#vissig.wtt" no="4"/>
+		<wttFile file="#exe#vissig.wtt" no="7"/>
 	</wttFiles>
 	<walkingBehaviors>
 		<walkingBehavior aSocIso="2.72" aSocMean="0.4" bSocIso="0.2" bSocMean="2.8" lambda="0.176" name="Default" no="1" noise="1.2" reactToN="8" sidePref="NONE" tau="0.4" vd="3"/>

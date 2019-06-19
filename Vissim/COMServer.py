@@ -26,9 +26,12 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, timestep
             Filename = os.path.join(vissim_working_directory, model_name, (model_name+'.inpx'))
             
             if verbose:
-                print ('Loading Model File: ' + model_name+'.inpx ...')
+                print ('Attempting to load Model File: ' + model_name+'.inpx ...')
             
-            Vissim.LoadNet(Filename)
+            if os.path.exists(Filename):
+                Vissim.LoadNet(Filename)
+            else:
+                raise Exception("ERROR: Could not find Model file: {}".format(Filename))
             
             if verbose:
                 print ('Load process successful')

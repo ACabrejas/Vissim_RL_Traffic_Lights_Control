@@ -44,7 +44,19 @@ class DQNAgent:
 
         # Potential actions (compatible phases) and transitions
         self.update_counter = 1                                 # Timesteps until next update
-        self.compatible_actions = [[1,0,1,0],[0,1,0,1]]         # Potential actions (compatible phases), 1 means green
+        if self.action_size == 4:
+            self.compatible_actions = [[1,0,1,0],[0,1,0,1]]         # Potential actions (compatible phases), 1 means green
+        elif self.action_size == 8:
+            self.compatible_actions = [[1,1,1,0,0,0,0,0,0,0,0,0],
+                                        [0,0,0,1,1,1,0,0,0,0,0,0],
+                                        [0,0,0,0,0,0,1,1,1,0,0,0],
+                                        [0,0,0,0,0,0,0,0,0,1,1,1],
+                                        [1,0,0,0,0,0,1,0,0,0,0,0],
+                                        [0,0,0,1,0,0,0,0,0,1,0,0],
+                                        [0,1,1,0,0,0,0,1,1,0,0,0],
+                                        [0,0,0,0,1,1,0,0,0,0,1,1]]
+        else:
+            raise Exception("ERROR: Wrong Action Size. Please review master settings and RLAgents.py")
 
         # Internal State Traffic Control Variables
         self.intermediate_phase = False                         # Boolean indicating an ongoing green-red or red-green transition
