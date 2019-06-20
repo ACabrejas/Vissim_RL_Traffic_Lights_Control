@@ -320,9 +320,9 @@ def prepopulate_memory(Agents, Vissim, state_type, reward_type, state_size, memo
 		os.makedirs(prepopulation_directory)
 	# Chech if suitable file exists
 	if PER_activated:
-		PER_prepopulation_filename =  os.path.join(prepopulation_directory, Session_ID	+ '_PERPre_'+ str(memory_size) +'.p')
+		PER_prepopulation_filename =  os.path.join(prepopulation_directory,'PERPre_'+ str(memory_size) +'.p')
 	else:
-		PER_prepopulation_filename =  os.path.join(prepopulation_directory, Session_ID	+ '_Pre_'+ str(memory_size) +'.p')
+		PER_prepopulation_filename =  os.path.join(prepopulation_directory,'Pre_'+ str(memory_size) +'.p')
 	prepopulation_exists = os.path.isfile(PER_prepopulation_filename)
 	# If it does, process it into the memory
 	if prepopulation_exists:
@@ -493,6 +493,11 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
 
 # Save agents
 def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward_storage):
+
+	# Chech if suitable folder exists
+	folder =  os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID)
+	if not os.path.exists(folder):
+		os.makedirs(folder)
 	for index, agent in enumerate(Agents):
 
 		if agent.type == 'AC':
@@ -507,7 +512,7 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 			print('Saving architecture, weights and optimizer state for agent-{}'.format(index))
 			agent.model.save(Filename)
 
-		Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,Session_ID + 'Agent'+str(index)+'_Memory'+'.p')
+		Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Memory'+'.p')
 		print('Dumping agent-{} memory into pickle file'.format(index))
 		pickle.dump(agent.memory, open(Memory_Filename, 'wb'))
 		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Train'+'.p')
@@ -521,6 +526,11 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 ##### THIS DOESNT WORK FOR MULTIPLE AGENTS. FIX!!!!
 # Save the agent producing best reward
 def best_agent(reward_storage, average_reward, best_agent_weights, best_agent_memory, vissim_working_directory, model_name, Agents, Session_ID):
+
+	# Chech if suitable folder exists
+	folder =  os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID)
+	if not os.path.exists(folder):
+		os.makedirs(folder)
 	if average_reward == np.max(reward_storage):
 		for index, agent in enumerate(Agents):
 			best_agent_memory = agent.memory
@@ -573,7 +583,8 @@ def update_priority_weights(agent, memory_size):
 		
 	else:
 		# Fixed Q-Target
-		target = reward + agent.gamma * np.max(agent.target_model.predict(np.reshape(next_state,(len(state),agent.state_size))),axis=1)
+		target = reward + agent.gamma * np.max(agent.target_model.predict(np.reshape(next_state,(len(state),agent.state_size))),axis=1).reshape(len(state),1)
+		print(target.shape)
 
 	target_f = agent.model.predict(state)
 	absolute_errors = np.abs(target_f[np.arange(len(target_f)),action].reshape(len(state),1)-target)

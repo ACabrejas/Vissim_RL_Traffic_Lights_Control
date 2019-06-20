@@ -4,7 +4,7 @@ import random
 import PER
 
 import tensorflow as tf
-from tensorflow.python.keras import backend as k
+from tensorflow.python.keras import backend as K
 from tensorflow.keras.models import load_model, Sequential, Model
 from tensorflow.keras.layers import Dense, Input, Lambda
 from tensorflow.keras.optimizers import Adam
@@ -178,7 +178,8 @@ class DQNAgent:
             target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(batch_size,self.state_size)))[np.arange(batch_size),next_action].reshape(batch_size,1)
         else:
             # Fixed Q-Target
-            target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(batch_size,self.state_size))),axis=1)
+            target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(batch_size,self.state_size))),axis=1).reshape(batch_size,1)
+            print(target.shape)
             # No fixed targets version
             # target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,self.state_size))))    
         
