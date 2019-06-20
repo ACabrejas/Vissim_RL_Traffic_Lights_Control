@@ -460,9 +460,9 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
 		if agent.type == 'AC':
 			print('Loading Pre-Trained Agent, Architecture and Memory.')
 			if best:
-				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_BestAgent'+str(index)+'_Weights'+'.h5')
+				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Weights'+'.h5')
 			else :
-				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Weights'+'.h5')
+				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Weights'+'.h5')
 
 			# this is to build the network (to be corrected) 
 			agent.test()
@@ -472,20 +472,20 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
 		else :
 			print('Loading Pre-Trained Agent, Architecture, Optimizer and Memory.')
 			if best:
-				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_BestAgent'+str(index)+'_Weights'+'.h5')
+				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'.h5')
 			else :
-				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Weights'+'.h5')
-			Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'.h5')
+				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'.h5')
+			
 			agent.model = load_model(Filename)
 
 		if best:
-			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_BestAgent'+str(index)+'_Memory'+'.p')
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Memory'+'.p')
 		else:
-			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Memory'+'.p')
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Memory'+'.p')
 		agent.memory = pickle.load(open(Memory_Filename, 'rb'))
-		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_Agent'+str(index)+'_Train'+'.p')
+		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Train'+'.p')
 		reward_storage = pickle.load(open(Training_Progress_Filename, 'rb'))
-		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_Agent'+str(index)+'_Loss'+'.p')
+		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Loss'+'.p')
 		agent.Loss = pickle.load(open(Loss_Filename, 'rb'))
 		
 	print('Items successfully loaded.')
@@ -496,24 +496,24 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 	for index, agent in enumerate(Agents):
 
 		if agent.type == 'AC':
-			Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Weights'+'.h5')
+			Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Weights'+'.h5')
 			print('Saving architecture, weights state for agent-{}'.format(index))
 			
 			# little change to save weight instead of the all agent
 			agent.model.save_weights(Weights_Filename)
 
 		else :
-			Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_Agent'+str(index)+'.h5')
+			Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'.h5')
 			print('Saving architecture, weights and optimizer state for agent-{}'.format(index))
 			agent.model.save(Filename)
 
-		Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name +'_'+ Session_ID +  '_Agent'+str(index)+'_Memory'+'.p')
+		Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,Session_ID + 'Agent'+str(index)+'_Memory'+'.p')
 		print('Dumping agent-{} memory into pickle file'.format(index))
 		pickle.dump(agent.memory, open(Memory_Filename, 'wb'))
-		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name +'_'+ Session_ID  + '_Agent'+str(index)+'_Train'+'.p')
+		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Train'+'.p')
 		print('Dumping Training Results into pickle file.')
 		pickle.dump(reward_storage, open(Training_Progress_Filename, 'wb'))
-		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_Agent'+str(index)+'_Loss'+'.p')
+		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Loss'+'.p')
 		print('Dumping Loss Results into pickle file.')
 		pickle.dump(agent.loss, open(Loss_Filename, 'wb'))
 
@@ -527,13 +527,14 @@ def best_agent(reward_storage, average_reward, best_agent_weights, best_agent_me
 
 			if agent.type == 'AC' :
 				best_agent_weights = agent.model.get_weights()
-				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +'_BestAgent'+str(index)+'_Weights'+'.h5')
+				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Weights'+'.h5')
 				agent.model.save_weights(Weights_Filename)
 			else : 
 				best_agent_weights = agent.model
-				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_BestAgent'+str(index)+'_Weights'+'.h5')
-				agent.model.save(Weights_Filename)
-			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_BestAgent'+str(index)+'_Memory'+'.p')
+				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'.h5')
+				agent.model.save(Filename)
+
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Memory'+'.p')
 			pickle.dump(best_agent_memory, open(Memory_Filename, 'wb'))
 			print("New best agent found. Saved in {}".format(Memory_Filename))
 	return(best_agent_weights, best_agent_memory)
@@ -602,6 +603,7 @@ def Set_Quickmode(Vissim, timesteps_per_second):
 # This function will deprecate the select Set_Quickmode
 def Select_Vissim_Mode(Vissim, mode):
     
+
     # In test mode all the data is stored (The simulation will be slow)
 	if mode == 'test' :
 
@@ -651,32 +653,32 @@ def Select_Vissim_Mode(Vissim, mode):
         
 		# set the data mesurement
 		Vissim.Evaluation.SetAttValue('DataCollCollectData', False)
-		Vissim.Evaluation.SetAttValue('DataCollInterval', 1)
+		Vissim.Evaluation.SetAttValue('DataCollInterval', 99999)
         
         # set the delay mesurement
 		Vissim.Evaluation.SetAttValue('DelaysCollectData', False)
-		Vissim.Evaluation.SetAttValue('DelaysInterval', 1)
+		Vissim.Evaluation.SetAttValue('DelaysInterval', 99999)
         
 		# set the data mesurement for each link
 		Vissim.Evaluation.SetAttValue('LinkResCollectData', False)
-		Vissim.Evaluation.SetAttValue('LinkResInterval', 1)
+		Vissim.Evaluation.SetAttValue('LinkResInterval', 99999)
         
         # set the data mesurement for each node
 		Vissim.Evaluation.SetAttValue('NodeResCollectData', False)
-		Vissim.Evaluation.SetAttValue('NodeResInterval', 1)
+		Vissim.Evaluation.SetAttValue('NodeResInterval', 99999)
         
         
 		# set the queues mesurement 
 		Vissim.Evaluation.SetAttValue('QueuesCollectData', True)
-		Vissim.Evaluation.SetAttValue('QueuesInterval', 1)
+		Vissim.Evaluation.SetAttValue('QueuesInterval', 3)
         
         # set the vehicles perf mesurement 
 		Vissim.Evaluation.SetAttValue('VehNetPerfCollectData', False)
-		Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 1)
+		Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 99999)
         
 		# set the vehicles travel time mesurement 
 		Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', False)
-		Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 1)
+		Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 99999)
         
     
     # In demo mode we only use the queue counter and the delay counter for the moment    
@@ -692,19 +694,19 @@ def Select_Vissim_Mode(Vissim, mode):
 
         # set the data mesurement
 		Vissim.Evaluation.SetAttValue('DataCollCollectData', False)
-		Vissim.Evaluation.SetAttValue('DataCollInterval', 3)
+		Vissim.Evaluation.SetAttValue('DataCollInterval', 99999)
         
         # set the delay mesurement
 		Vissim.Evaluation.SetAttValue('DelaysCollectData', False)
-		Vissim.Evaluation.SetAttValue('DelaysInterval', 3)
+		Vissim.Evaluation.SetAttValue('DelaysInterval', 99999)
         
 		# set the data mesurement for each link
 		Vissim.Evaluation.SetAttValue('LinkResCollectData', False)
-		Vissim.Evaluation.SetAttValue('LinkResInterval', 1)
+		Vissim.Evaluation.SetAttValue('LinkResInterval', 99999)
         
         # set the data mesurement for each node
 		Vissim.Evaluation.SetAttValue('NodeResCollectData', False)
-		Vissim.Evaluation.SetAttValue('NodeResInterval', 1)
+		Vissim.Evaluation.SetAttValue('NodeResInterval', 99999)
         
         
 		# set the queues mesurement 
@@ -713,11 +715,11 @@ def Select_Vissim_Mode(Vissim, mode):
         
 		# set the vehicles perf mesurement 
 		Vissim.Evaluation.SetAttValue('VehNetPerfCollectData', False)
-		Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 1)
+		Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 99999)
         
 		# set the vehicles travel time mesurement 
 		Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', False)
-		Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 1)
+		Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 99999)
         
 
         
