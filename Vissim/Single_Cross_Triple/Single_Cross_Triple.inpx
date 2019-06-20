@@ -194,32 +194,24 @@
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10010" link2="10011" mesoCritGap="3.5" minGapBlockDef="3" no="60" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 	</conflictAreas>
 	<dataCollectionMeasurements>
-		<dataCollectionMeasurement name="West" no="1">
-			<dataCollectionPoints>
-				<intObjectRef key="1"/>
-			</dataCollectionPoints>
-		</dataCollectionMeasurement>
-		<dataCollectionMeasurement name="South" no="2">
-			<dataCollectionPoints>
-				<intObjectRef key="2"/>
-			</dataCollectionPoints>
-		</dataCollectionMeasurement>
-		<dataCollectionMeasurement name="East" no="3">
-			<dataCollectionPoints>
-				<intObjectRef key="3"/>
-			</dataCollectionPoints>
-		</dataCollectionMeasurement>
-		<dataCollectionMeasurement name="North" no="4">
-			<dataCollectionPoints>
-				<intObjectRef key="4"/>
-			</dataCollectionPoints>
-		</dataCollectionMeasurement>
+		<dataCollectionMeasurement name="West" no="1"/>
+		<dataCollectionMeasurement name="South" no="2"/>
+		<dataCollectionMeasurement name="East" no="3"/>
+		<dataCollectionMeasurement name="North" no="4"/>
 	</dataCollectionMeasurements>
 	<dataCollectionPoints>
-		<dataCollectionPoint lane="1 1" name="West" no="1" pos="255.37946353887952"/>
-		<dataCollectionPoint lane="3 1" name="South" no="2" pos="260.21990532178216"/>
-		<dataCollectionPoint lane="5 1" name="East" no="3" pos="257.12553637949497"/>
-		<dataCollectionPoint lane="7 1" name="North" no="4" pos="255.61432538636683"/>
+		<dataCollectionPoint lane="1 3" name="West - Left" no="1" pos="253.83013755035677"/>
+		<dataCollectionPoint lane="1 2" name="West - Mid" no="2" pos="253.830138"/>
+		<dataCollectionPoint lane="1 1" name="West - Right" no="3" pos="253.830138"/>
+		<dataCollectionPoint lane="3 3" name="South - Left" no="4" pos="259.20412894347839"/>
+		<dataCollectionPoint lane="3 2" name="South - Mid" no="5" pos="259.20412894347839"/>
+		<dataCollectionPoint lane="3 1" name="South - Right" no="6" pos="259.204129"/>
+		<dataCollectionPoint lane="5 3" name="East - Left" no="7" pos="256.13804898838521"/>
+		<dataCollectionPoint lane="5 2" name="East - Mid" no="8" pos="256.13804898838521"/>
+		<dataCollectionPoint lane="5 1" name="East - Right" no="9" pos="256.138049"/>
+		<dataCollectionPoint lane="7 3" name="North - Left" no="10" pos="253.90006133592661"/>
+		<dataCollectionPoint lane="7 2" name="North - Mid" no="11" pos="253.900061"/>
+		<dataCollectionPoint lane="7 1" name="North - Right" no="12" pos="253.900061"/>
 	</dataCollectionPoints>
 	<delayMeasurements>
 		<delayMeasurement name="" no="1">
@@ -2352,8 +2344,8 @@
 	</signalControllers>
 	<signalHeads>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 3" localNo="0" name="" no="1" orSG="1 1" pos="253.44103450213743" sg="1 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 2" localNo="0" name="" no="2" orSG="1 2" pos="253.4958011621909" sg="1 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="3" orSG="1 3" pos="253.4958011621909" sg="1 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 2" localNo="0" name="" no="2" orSG="1 2" pos="253.441" sg="1 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="3" orSG="1 3" pos="253.441" sg="1 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 3" localNo="0" name="" no="4" orSG="1 4" pos="258.81486865550414" sg="1 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 2" localNo="0" name="" no="5" orSG="1 5" pos="258.81486865550414" sg="1 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 1" localNo="0" name="" no="6" orSG="1 6" pos="258.81486865550414" sg="1 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
@@ -2364,7 +2356,7 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="1 11" pos="253.55211558027827" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="1 12" pos="253.54569270602826" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3601" simRes="1" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10000" simRes="1" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
