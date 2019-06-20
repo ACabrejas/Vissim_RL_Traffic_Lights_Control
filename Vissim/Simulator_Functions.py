@@ -483,9 +483,9 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
 		else:
 			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID + '_Agent'+str(index)+'_Memory'+'.p')
 		agent.memory = pickle.load(open(Memory_Filename, 'rb'))
-		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Train'+'.p')
+		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_Agent'+str(index)+'_Train'+'.p')
 		reward_storage = pickle.load(open(Training_Progress_Filename, 'rb'))
-		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Loss'+'.p')
+		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_Agent'+str(index)+'_Loss'+'.p')
 		agent.Loss = pickle.load(open(Loss_Filename, 'rb'))
 		
 	print('Items successfully loaded.')
@@ -503,17 +503,17 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 			agent.model.save_weights(Weights_Filename)
 
 		else :
-			Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'.h5')
+			Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_Agent'+str(index)+'.h5')
 			print('Saving architecture, weights and optimizer state for agent-{}'.format(index))
 			agent.model.save(Filename)
 
-		Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name + '_Agent'+str(index)+'_Memory'+'.p')
+		Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name +'_'+ Session_ID +  '_Agent'+str(index)+'_Memory'+'.p')
 		print('Dumping agent-{} memory into pickle file'.format(index))
 		pickle.dump(agent.memory, open(Memory_Filename, 'wb'))
-		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Train'+'.p')
+		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name +'_'+ Session_ID  + '_Agent'+str(index)+'_Train'+'.p')
 		print('Dumping Training Results into pickle file.')
 		pickle.dump(reward_storage, open(Training_Progress_Filename, 'wb'))
-		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_Agent'+str(index)+'_Loss'+'.p')
+		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_Agent'+str(index)+'_Loss'+'.p')
 		print('Dumping Loss Results into pickle file.')
 		pickle.dump(agent.loss, open(Loss_Filename, 'wb'))
 
@@ -531,9 +531,9 @@ def best_agent(reward_storage, average_reward, best_agent_weights, best_agent_me
 				agent.model.save_weights(Weights_Filename)
 			else : 
 				best_agent_weights = agent.model
-				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_BestAgent'+str(index)+'_Weights'+'.h5')
+				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_BestAgent'+str(index)+'_Weights'+'.h5')
 				agent.model.save(Weights_Filename)
-			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+ '_BestAgent'+str(index)+'_Memory'+'.p')
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID, model_name+'_'+ Session_ID +  '_BestAgent'+str(index)+'_Memory'+'.p')
 			pickle.dump(best_agent_memory, open(Memory_Filename, 'wb'))
 			print("New best agent found. Saved in {}".format(Memory_Filename))
 	return(best_agent_weights, best_agent_memory)
