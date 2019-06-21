@@ -81,12 +81,11 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 				# Commit previous State, previous Action, Reward generated and current State to memory
 					agent.remember(agent.state, agent.action, agent.reward, agent.newstate)
 					
-				agent.episode_reward.append(agent.reward)
-										
+				agent.episode_reward.append(agent.reward)		
 				#print(agent.newstate)
+
 				# Compute the new Action and store it in the agent
 				agent.newaction = agent.choose_action(agent.newstate)
-				
 				
 				# In Demonstration Mode, show the Reward of the last cycle
 				if mode == "demo":
@@ -169,7 +168,6 @@ def amber_to_green_red(agent, seconds_per_green,Surtrac=False):
 		# Use transition vector from previous iteration to finish the change
 		if agent.transition_vector[index_group] == 1:
 			sig_group.SetAttValue("SigState", "RED")
-			print()
 		elif agent.transition_vector[index_group] == -1:
 			sig_group.SetAttValue("SigState", "GREEN")
 		elif agent.transition_vector[index_group] == 0:
