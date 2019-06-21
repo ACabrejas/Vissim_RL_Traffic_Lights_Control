@@ -24,17 +24,23 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
  state_size, simulation_length, timesteps_per_second, seconds_per_green,\
   seconds_per_yellow, demand_list, demand_change_timesteps, mode, PER_activated, Surtrac = False, AC = False):
 	
+
 	
 	for time_t in range(simulation_length):
 
 		# Change demand every 450 seconds.
 		if time_t % demand_change_timesteps == 0:
 			change_demand(Vissim, demand_list, demand_change_timesteps, time_t)
+		
+		# Pass the control over to COM
+		if time_t == 1:
+			for agent in Agents:
+    			for group in agent.signal_groups:
+        			group.SetAttValue('ContrByCOM',1)
 
 		# Cycle through all agents and update them
 		Agents_update(Agents, Vissim, state_type,reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = Surtrac , AC = AC )
 		
-           
 		# Advance the game to the next second (proportionally to the simulator resolution).
 		for _ in range(0, timesteps_per_second):
 			Vissim.Simulation.RunSingleStep()
@@ -44,6 +50,7 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 				agent.queues_over_time.append(get_queue_lengths(Vissim, agent))
 				agent.accumulated_delay.append(agent.accumulated_delay[-1]+get_delay_timestep(Vissim))
 
+	# Reconfigure agents for the start of the next episode
 	for agent in Agents:
 		agent.update_counter = 1
 		agent.intermediate_phase = False
