@@ -22,7 +22,7 @@ def get_delay_timestep(Vissim):
 # Run a Single Episode for a set simulation length
 def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
  state_size, simulation_length, timesteps_per_second, seconds_per_green,\
-  seconds_per_yellow, demand_list, demand_change_timesteps, mode, PER_activated, Surtrac = False, AC = False):
+  seconds_per_yellow, demand_list, demand_change_timesteps, mode, PER_activated, Surtrac = False):
 	
 	
 	for time_t in range(simulation_length):
@@ -31,8 +31,14 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 		if time_t % demand_change_timesteps == 0:
 			change_demand(Vissim, demand_list, demand_change_timesteps, time_t)
 
+		# Pass the control over to COM
+		if time_t == 1:
+			for agent in Agents:
+				for group in agent.signal_groups:
+					group.SetAttValue('ContrByCOM',1)
+
 		# Cycle through all agents and update them
-		Agents_update(Agents, Vissim, state_type,reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = Surtrac , AC = AC )
+		Agents_update(Agents, Vissim, state_type,reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = Surtrac)
 		
            
 		# Advance the game to the next second (proportionally to the simulator resolution).
@@ -51,7 +57,7 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 	# Stop the simulation    
 	Vissim.Simulation.Stop()
 
-def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = False, AC = False):
+def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = False):
 	
 	for index, agent in enumerate(Agents):
 		# Check if agent needs to update
@@ -111,9 +117,9 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 			agent.action = agent.newaction  
 			
 			# Training during the episode
-			if mode == 'training' and AC :
+			if mode == 'training' and agent.type == 'AC' :
 				agent.trainstep += 1
-				if len(agent.memory) == agent.n_step_size and agent.trainstep >= 1:
+				if len(agent.memory) == agent.n_step_size and agent.trainstep >= agent.n_step_size:
 					agent.learn()
 					agent.trainstep = 0				
 		# Error protection against negative update counters
@@ -134,7 +140,8 @@ def green_red_to_amber(agent, seconds_per_yellow,Surtrac=False):
 			sig_group.SetAttValue("SigState", "AMBER")
 		# If the transition vector is < 0, we are changing from RED to GREEN, so set to REDAMBER
 		elif agent.transition_vector[index_group] == -1:
-			sig_group.SetAttValue("SigState", "REDAMBER")
+			#sig_group.SetAttValue("SigState", "REDAMBER")
+			pass
 		# If the transition vector is zero, the phase stays the same
 		elif agent.transition_vector[index_group] == 0:
 			pass
@@ -183,6 +190,7 @@ def calculate_state(Vissim, state_type, state_size):
 		state = [0. if state is None else state for state in state]
 		state = np.reshape(state, [1,state_size])
 		return(state)
+
 	elif state_type == 'Delay':
 		# Obtain Delay Values (average delay in lane * nr cars in queue)
 		West_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(1).AttValue('VehDelay(Current,Last,All)') 
@@ -208,26 +216,62 @@ def calculate_state(Vissim, state_type, state_size):
 		North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
 		
 		# Obtain the signal state  We only need 2 out of 4 for our basic intersection in fact we only need 1 out of 4
-		West_Signal = Vissim.Net.SignalHeads.ItemByKey(1).AttValue('SigState') 
-		West_Signal = 0. if West_Signal == 'RED' else 1.
+		action = Vissim.Net.SignalHeads.ItemByKey(1).AttValue('SigState') 
+		action = 0. if action == 'RED' else 1.
 		
-		South_Signal = Vissim.Net.SignalHeads.ItemByKey(2).AttValue('SigState') 		
-		South_Signal = 0. if South_Signal == 'RED' else 1.
 		
-		state = [West_Queue, South_Queue, East_Queue, North_Queue, West_Signal, South_Signal]
+		state = [West_Queue, South_Queue, East_Queue, North_Queue, action]
 		state = [0. if state is None else state for state in state]
 		state = np.reshape(state, [1,state_size])
 		
 		
 		return(state)
 		
-	elif state_type == 'QueuesSpeedavrOccuperate':
-    	#Obtain Queue Values (average value over the last period)
-		West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
-		South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
-		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
-		North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
-		pass
+	elif state_type == 'CellsSpeedSig':
+		DataPoints = Vissim.Net.DataCollectionMeasurements.GetAll()
+		state = [0 for i in range(len(DataPoints)+1)]
+		for index , DataPoint in enumerate(DataPoints):
+			state[index] = DataPoint.AttValue('SpeedAvgArith(Current,Last,All)') 
+
+		action = Vissim.Net.SignalHeads.ItemByKey(1).AttValue('SigState') 
+		action = 0. if action == 'RED' else 1.
+		state[-1] = action
+
+		state = [-1. if state is None else state for state in state]
+		state = np.reshape(state, [1,state_size])
+	
+		return(state)
+
+	elif state_type == 'CellsSpeedOccSig':
+		DataPoints = Vissim.Net.DataCollectionMeasurements.GetAll()
+		state = [0 for i in range(2*len(DataPoints)+1)]
+		for index , DataPoint in enumerate(DataPoints):
+			state[2*index] = DataPoint.AttValue('SpeedAvgArith(Current,Last,All)') 
+			state[2*index+1] = DataPoint.AttValue('OccupRate(Current,Last,All)') 
+
+		action = Vissim.Net.SignalHeads.ItemByKey(1).AttValue('SigState') 
+		action = 0. if action == 'RED' else 1.
+		state[-1] = action
+
+		state = [0. if state is None else state for state in state]
+		state = np.reshape(state, [1,state_size])
+
+		return(state)
+
+	elif state_type == 'CellsOccSig':
+		DataPoints = Vissim.Net.DataCollectionMeasurements.GetAll()
+		state = [0 for i in range(len(DataPoints)+1)]
+		for index , DataPoint in enumerate(DataPoints):
+			state[index] = DataPoint.AttValue('OccupRate(Current,Last,All)') 
+
+		action = Vissim.Net.SignalHeads.ItemByKey(1).AttValue('SigState') 
+		action = 0. if action == 'RED' else 1.
+		state[-1] = action
+
+		state = [0. if state is None else state for state in state]
+		state = np.reshape(state, [1,state_size])
+
+		return(state)
 		
 	elif state_type == 'MaxFlow':
 		pass
@@ -459,7 +503,7 @@ def average_reward(reward_storage, Agents, episode, episodes):
 	else:
 		if Agents[0].type == 'AC':
 			print("Episode: {}/{}, Epsilon:{}, Average reward: {}".format(episode+1, episodes, np.round(Agents[0].epsilon,2), np.round(average_reward,2)))
-		else :
+		elif Agents[0].type == 'DQN' and Agents[0].state_size == 4 :
 			print("Episode: {}/{}, Epsilon:{}, Average reward: {}".format(episode+1, episodes, np.round(Agents[0].epsilon,2), np.round(average_reward,2)))
 			print("Prediction for [50,0,50,0] is: {}".format(Agents[0].model.predict(np.reshape([50,0,50,0], [1,4])))\
 	          	 + ("OK" if Agents[0].model.predict(np.reshape([50,0,50,0], [1,4]))[0][0] < Agents[0].model.predict(np.reshape([50,0,50,0], [1,4]))[0][1]  else "NO"))

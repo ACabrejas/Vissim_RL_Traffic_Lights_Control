@@ -12,12 +12,12 @@
     <retries>2</retries>
   </connection>
   <simulator_data>
-    <vissim_input_file>C:\Users\Rzhang\Desktop\MLforFlowOptimisation\Vissim\Single_Cross_MOVA\Single_Cross_MOVA.inpx</vissim_input_file>
+    <vissim_input_file>C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_MOVA\Single_Cross_MOVA.inpx</vissim_input_file>
     <simulation_start_time>00:00:00</simulation_start_time>
     <junction>
       <name>1</name>
       <ctrltype>extern_pcmova</ctrltype>
-      <mova_dataset>C:\Users\Rzhang\Desktop\MLforFlowOptimisation\Vissim\Single_Cross_MOVA\Single_Cross_Straight.mxds</mova_dataset>
+      <mova_dataset>C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_MOVA\Single_Cross_Straight.mxds</mova_dataset>
       <simulator_id>3</simulator_id>
       <detector>
         <vissim_number>1</vissim_number>
@@ -85,8 +85,8 @@
       </signal_stage>
       <phase_delays />
       <phase_intergreens>
-        <phase_intergreen from_phase="1" to_phase="2">3</phase_intergreen>
-        <phase_intergreen from_phase="2" to_phase="1">3</phase_intergreen>
+        <phase_intergreen from_phase="1" to_phase="2">5</phase_intergreen>
+        <phase_intergreen from_phase="2" to_phase="1">5</phase_intergreen>
       </phase_intergreens>
       <phase_confirms />
     </junction>
