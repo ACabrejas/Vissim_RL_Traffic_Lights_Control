@@ -5,12 +5,24 @@ from tensorflow.keras.models import load_model
 
 
 
+def get_queue_lengths(Vissim, agent):
+	West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
+	South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
+	East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
+	North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
+	Queue_length_list = [West_Queue, South_Queue, East_Queue, North_Queue]
+	Queue_length_list = [0 if item is None else item for item in Queue_length_list]
+	return(Queue_length_list)
+
+def get_delay_timestep(Vissim):
+	delay_this_timestep = Vissim.Net.VehicleNetworkPerformanceMeasurement.AttValue('DelayTot(Current, Last, All)')
+	return(0 if delay_this_timestep is None else delay_this_timestep)
 
 
 # Run a Single Episode for a set simulation length
 def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
  state_size, simulation_length, timesteps_per_second, seconds_per_green,\
-  seconds_per_yellow, demand_list, demand_change_timesteps, mode, PER_activated,Surtrac=False, AC = False):
+  seconds_per_yellow, demand_list, demand_change_timesteps, mode, PER_activated, Surtrac = False, AC = False):
 	
 	
 	for time_t in range(simulation_length):
@@ -27,6 +39,11 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 		for _ in range(0, timesteps_per_second):
 			Vissim.Simulation.RunSingleStep()
 
+	if mode == "test":
+		for agent in Agents:
+			agent.queues_over_time.append(get_queue_lengths(Vissim, agent))
+			agent.accumulated_delay.append(agent.accumulated_delay[-1]+get_delay_timestep(Vissim))
+
 	for agent in Agents:
 		agent.update_counter = 1
 		agent.intermediate_phase = False
@@ -34,7 +51,7 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 	# Stop the simulation    
 	Vissim.Simulation.Stop()
 
-def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = False, AC =False):
+def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = False, AC = False):
 	
 	for index, agent in enumerate(Agents):
 		# Check if agent needs to update

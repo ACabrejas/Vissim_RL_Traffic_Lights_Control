@@ -115,6 +115,8 @@ class ACAgent:
         # Metrics Storage Initialization
         self.episode_reward = []
         self.loss = []
+        self.queues_over_time = [[0,0,0,0]]
+        self.accumulated_delay= [0]
 
 
         # The memory will store (state , action , reward, next_state) in a batch

@@ -86,7 +86,9 @@ class DQNAgent:
         # Metrics Storage Initialization
         self.episode_reward = []
         self.loss = []
-
+        self.queues_over_time = [[0,0,0,0]]
+        self.accumulated_delay= [0]
+        
         if self.PER_activated:
             # If PER_activated spawn BinaryTree and Memory object to store priorities and experiences
             self.memory = PER.Memory(memory_size)
