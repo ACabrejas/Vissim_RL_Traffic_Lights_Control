@@ -24,8 +24,6 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
  state_size, simulation_length, timesteps_per_second, seconds_per_green,\
   seconds_per_yellow, demand_list, demand_change_timesteps, mode, PER_activated, Surtrac = False, AC = False):
 	
-
-	
 	for time_t in range(simulation_length):
 
 		# Change demand every 450 seconds.
@@ -35,8 +33,8 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 		# Pass the control over to COM
 		if time_t == 1:
 			for agent in Agents:
-    			for group in agent.signal_groups:
-        			group.SetAttValue('ContrByCOM',1)
+				for group in agent.signal_groups:
+					group.SetAttValue('ContrByCOM',1)
 
 		# Cycle through all agents and update them
 		Agents_update(Agents, Vissim, state_type,reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = Surtrac , AC = AC )
@@ -127,7 +125,7 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 					agent.trainstep = 0				
 		# Error protection against negative update counters
 		else:
-			print("ERROR: Update Counter for agent {} is negative. Please investigate.".format(index))
+			raise Exception("ERROR: Update Counter for agent {} is negative. Please investigate.".format(index))
 
 def green_red_to_amber(agent, seconds_per_yellow,Surtrac=False):
 	# Fetch the meaning of the Actions from the compatible Actions in the Agent
@@ -156,8 +154,8 @@ def green_red_to_amber(agent, seconds_per_yellow,Surtrac=False):
 		elif agent.transition_vector[index_group] == 0:
 			pass
 		else:
-			print("ERROR: Incongruent new phase and previous phase. Please review the code.")
-			break
+			raise Exception("ERROR: Incongruent new phase and previous phase. Please review the code.")
+			
 	# Extend timer after transition is started
 	agent.update_counter += seconds_per_yellow	 - 1
 	if Surtrac:
@@ -177,8 +175,8 @@ def amber_to_green_red(agent, seconds_per_green,Surtrac=False):
 		elif agent.transition_vector[index_group] == 0:
 			pass
 		else:
-			print("ERROR: Incongruent new phase and previous phase. Please review the code.")
-			break
+			raise Exception("ERROR: Incongruent new phase and previous phase. Please review the code.")
+			
 	# Mark the transition as finished
 	agent.intermediate_phase = False	
 	# Set timer for next update 
@@ -235,8 +233,6 @@ def calculate_state(Vissim, state_type, state_size):
 		state = [West_Queue, South_Queue, East_Queue, North_Queue, West_Signal, South_Signal]
 		state = [0. if state is None else state for state in state]
 		state = np.reshape(state, [1,state_size])
-		
-		
 		return(state)
 		
 	elif state_type == 'QueuesSpeedavrOccuperate':
@@ -259,6 +255,8 @@ def calculate_state(Vissim, state_type, state_size):
 	elif state_type == "Clusters":
 		return(Vp.Clustering(Vissim))
 	# Output : - The clustering : A tuple countaining lists of clusters ordered by their time arrival.
+	else:
+ 		raise Exception("ERROR SELECTING REWARD FUNCTION")
 
 
 
@@ -292,8 +290,7 @@ def calculate_state(Vissim, state_type, state_size):
 # 		#print("Substracted:    {}".format(revious_queue_sum - current_queue_sum))
 # 		queue_diff = previous_queue_sum - current_queue_sum
 # 		reward = queue_diff * 10000 - np.sum(np.array([0 if state is None else state for state in agent.newstate[0]])**2)
-# 	else:
-# 		raise Exception("ERROR SELECTING REWARD FUNCTION")
+
 # 	agent.episode_reward.append(reward)
 # 	return reward
 

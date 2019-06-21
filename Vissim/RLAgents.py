@@ -108,12 +108,12 @@ class DQNAgent:
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
             #model = Sequential()
             input_layer = Input(shape = (self.state_size,))
-            dense1 = Dense(8, input_dim=self.state_size, activation='relu')(input_layer)
+            dense1 = Dense(64, input_dim=self.state_size, activation='relu')(input_layer)
             #dense2 = Dense(48, activation='relu')(dense1)
             #flatten = Flatten()(dense2)
-            fc1 = Dense(16)(dense1)
+            fc1 = Dense(48)(dense1)
             dueling_actions = Dense(self.action_size)(fc1)
-            fc2 = Dense(16)(dense1)
+            fc2 = Dense(48)(dense1)
             dueling_values = Dense(1)(fc2)
 
             def dueling_operator(duel_input):
