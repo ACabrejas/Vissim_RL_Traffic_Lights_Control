@@ -39,10 +39,10 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 		for _ in range(0, timesteps_per_second):
 			Vissim.Simulation.RunSingleStep()
 
-	if mode == "test":
-		for agent in Agents:
-			agent.queues_over_time.append(get_queue_lengths(Vissim, agent))
-			agent.accumulated_delay.append(agent.accumulated_delay[-1]+get_delay_timestep(Vissim))
+		if mode == "test":
+			for agent in Agents:
+				agent.queues_over_time.append(get_queue_lengths(Vissim, agent))
+				agent.accumulated_delay.append(agent.accumulated_delay[-1]+get_delay_timestep(Vissim))
 
 	for agent in Agents:
 		agent.update_counter = 1
