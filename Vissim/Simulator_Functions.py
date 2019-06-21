@@ -39,10 +39,10 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 		for _ in range(0, timesteps_per_second):
 			Vissim.Simulation.RunSingleStep()
 
-	if mode == "test":
-		for agent in Agents:
-			agent.queues_over_time.append(get_queue_lengths(Vissim, agent))
-			agent.accumulated_delay.append(agent.accumulated_delay[-1]+get_delay_timestep(Vissim))
+		if mode == "test":
+			for agent in Agents:
+				agent.queues_over_time.append(get_queue_lengths(Vissim, agent))
+				agent.accumulated_delay.append(agent.accumulated_delay[-1]+get_delay_timestep(Vissim))
 
 	for agent in Agents:
 		agent.update_counter = 1
@@ -94,11 +94,13 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 						agent.update_counter += agent.actiontime - 1
 					else:
 						agent.update_counter += seconds_per_green - 1
-				
+					#print("Extended Phase")
+
 				# If a different Action is chosen
 				elif agent.newaction != agent.action:
 					# Transition from green to amber and from red to redamber
 					green_red_to_amber(agent, seconds_per_yellow,Surtrac)
+					#print("Finished Transition")
 
 			# If the agent is in the middle of a transition
 			elif agent.intermediate_phase == True:
@@ -123,18 +125,26 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 def green_red_to_amber(agent, seconds_per_yellow,Surtrac=False):
 	# Fetch the meaning of the Actions from the compatible Actions in the Agent
 	previous_action = agent.compatible_actions[agent.action]
+	#print("Previous action {}:".format(agent.action+1) + str(previous_action))
 	current_action = agent.compatible_actions[agent.newaction]
+	#print("Current action {}:".format(agent.newaction+1) + str(current_action))
+
 	# Check transition vector for the whole intersection (1, 0 or -1)
 	agent.transition_vector = np.subtract(previous_action, current_action)
+	#print("Transition vect:" + str(agent.transition_vector))
 
 	# Cycle through the groups and start the transition
 	for index_group, sig_group in enumerate(agent.signal_groups):
 		# If the transition vector is > 0, we are changing from GREEN to RED, so set AMBER
 		if agent.transition_vector[index_group] == 1:
 			sig_group.SetAttValue("SigState", "AMBER")
+			#print("Changing Light {} to Red".format(index_group+1))
+
 		# If the transition vector is < 0, we are changing from RED to GREEN, so set to REDAMBER
 		elif agent.transition_vector[index_group] == -1:
-			sig_group.SetAttValue("SigState", "REDAMBER")
+			#sig_group.SetAttValue("SigState", "REDAMBER")
+			#print("Changing Light {} to Green".format(index_group+1))
+			pass
 		# If the transition vector is zero, the phase stays the same
 		elif agent.transition_vector[index_group] == 0:
 			pass
@@ -154,6 +164,7 @@ def amber_to_green_red(agent, seconds_per_green,Surtrac=False):
 		# Use transition vector from previous iteration to finish the change
 		if agent.transition_vector[index_group] == 1:
 			sig_group.SetAttValue("SigState", "RED")
+			print()
 		elif agent.transition_vector[index_group] == -1:
 			sig_group.SetAttValue("SigState", "GREEN")
 		elif agent.transition_vector[index_group] == 0:
