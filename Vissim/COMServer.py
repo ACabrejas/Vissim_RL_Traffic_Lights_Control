@@ -85,7 +85,7 @@ def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_len
             Vissim.LoadNet(Filename)
 
             ## Setting Simulation End
-            Vissim.Simulation.SetAttValue('SimPeriod', simulation_length * timesteps_per_second)
+            Vissim.Simulation.SetAttValue('SimPeriod', simulation_length)
             ## If a fresh start is needed
             if delete_results == True:
                 # Delete all previous simulation runs first:
