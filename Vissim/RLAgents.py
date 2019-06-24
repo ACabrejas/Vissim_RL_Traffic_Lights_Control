@@ -108,14 +108,14 @@ class DQNAgent:
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
             #model = Sequential()
             input_layer = Input(shape = (self.state_size,))
-            dense1 = Dense(128, input_dim=self.state_size, activation='relu',kernel_regularizer=regularizers.l2(0.01))(input_layer)
-            dense2 = Dense(42, activation='relu', kernel_regularizer=regularizers.l2(0.01))(dense1)
+            dense1 = Dense(256, input_dim=self.state_size, activation='relu',kernel_regularizer=regularizers.l2(0.001))(input_layer)
+            dense2 = Dense(128, activation='relu', kernel_regularizer=regularizers.l2(0.001))(dense1)
 
             #flatten = Flatten()(dense2)
             fc1 = Dense(42)(dense2)
-            dueling_actions = Dense(self.action_size,kernel_regularizer=regularizers.l2(0.01))(fc1)
+            dueling_actions = Dense(self.action_size,kernel_regularizer=regularizers.l2(0.001))(fc1)
             fc2 = Dense(42)(dense2)
-            dueling_values = Dense(1,kernel_regularizer=regularizers.l2(0.01))(fc2)
+            dueling_values = Dense(1,kernel_regularizer=regularizers.l2(0.001))(fc2)
 
             def dueling_operator(duel_input):
                 duel_v = duel_input[0]
@@ -177,11 +177,11 @@ class DQNAgent:
         
         
         if self.DoubleDQN:
-            next_action = np.argmax(self.model.predict(np.reshape(next_state,(batch_size,self.state_size))), axis=1)
-            target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(batch_size,self.state_size)))[np.arange(batch_size),next_action].reshape(batch_size,1)
+            next_action = np.argmax(self.model.predict(next_state), axis=1)
+            target = reward + self.gamma * self.target_model.predict(next_state)[np.arange(batch_size),next_action].reshape(batch_size,1)
         else:
             # Fixed Q-Target
-            target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(batch_size,self.state_size))),axis=1).reshape(batch_size,1)
+            target = reward + self.gamma * np.max(self.target_model.predict(next_state),axis=1).reshape(batch_size,1)
             print(target.shape)
             # No fixed targets version
             # target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,self.state_size))))    

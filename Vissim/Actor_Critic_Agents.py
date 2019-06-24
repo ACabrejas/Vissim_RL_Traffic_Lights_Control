@@ -20,11 +20,11 @@ class Model(tf.keras.Model):
         super().__init__('mlp_policy')
         # no tf.get_variable(), just simple Keras API
 
-        self.core1 = kl.Dense(128, activation='relu')
+        self.core1 = kl.Dense(32, activation='relu')
         # self.core2 = kl.Dense(42, activation='relu')
 
-        self.hidden1 = kl.Dense(42, activation='relu')
-        self.hidden2 = kl.Dense(42, activation='relu')
+        self.hidden1 = kl.Dense(128, activation='relu') #64
+        self.hidden2 = kl.Dense(128, activation='relu')
         self.value = kl.Dense(1, name='value')
         # logits are unnormalized log probabilities
         self.logits = kl.Dense(num_actions, name='policy_logits')
@@ -35,7 +35,7 @@ class Model(tf.keras.Model):
         x = tf.convert_to_tensor(inputs, dtype=tf.float32)
 
         # This it the core of the model
-        # x = self.core1(x)
+        x = self.core1(x)
         # x = self.core2(x)
         # separate hidden layers from the core
         hidden_logs = self.hidden1(x)
@@ -230,7 +230,7 @@ class ACAgent:
 
         # a trick to input actions and advantages through same API
 
-        acts_and_advs = np.concatenate([actions[:, None], advs[:, None]], axis=-1)
+        acts_and_advs = np.concatenate([actions[:, np.newaxis], advs[:, np.newaxis]], axis=-1)
 
         # performs a full training step on the collected batch
         # note: no need to mess around with gradients, Keras API handles it
