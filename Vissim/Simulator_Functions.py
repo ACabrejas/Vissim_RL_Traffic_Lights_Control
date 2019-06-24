@@ -119,7 +119,7 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 			# Training during the episode
 			if mode == 'training' and agent.type == 'AC' :
 				agent.trainstep += 1
-				if len(agent.memory) == agent.n_step_size and agent.trainstep >= agent.n_step_size:
+				if len(agent.memory) == agent.n_step_size and agent.trainstep >= 1 :
 					agent.learn()
 					agent.trainstep = 0				
 		# Error protection against negative update counters
@@ -228,10 +228,10 @@ def calculate_state(Vissim, state_type, state_size):
 		return(state)
 		
 	elif state_type == 'CellsSpeedSig':
-		DataPoints = Vissim.Net.DataCollectionMeasurements.GetAll()
-		state = [0 for i in range(len(DataPoints)+1)]
-		for index , DataPoint in enumerate(DataPoints):
-			state[index] = DataPoint.AttValue('SpeedAvgArith(Current,Last,All)') 
+		Detectors = Vissim.Net.Detectors.GetAll()
+		state = [0 for i in range(len(Detectors)+1)]
+		for index , Detector in enumerate(Detectors):
+			state[index] = Detector.AttValue('VehSpeed') 
 
 		action = Vissim.Net.SignalHeads.ItemByKey(1).AttValue('SigState') 
 		action = 0. if action == 'RED' else 1.
@@ -243,11 +243,11 @@ def calculate_state(Vissim, state_type, state_size):
 		return(state)
 
 	elif state_type == 'CellsSpeedOccSig':
-		DataPoints = Vissim.Net.DataCollectionMeasurements.GetAll()
-		state = [0 for i in range(2*len(DataPoints)+1)]
-		for index , DataPoint in enumerate(DataPoints):
-			state[2*index] = DataPoint.AttValue('SpeedAvgArith(Current,Last,All)') 
-			state[2*index+1] = DataPoint.AttValue('OccupRate(Current,Last,All)') 
+		Detectors = Vissim.Net.Detectors.GetAll()
+		state = [0 for i in range(2*len(Detectors)+1)]
+		for index , Detector in enumerate(Detectors):
+			state[2*index] = Detector.AttValue('VehSpeed') 
+			state[2*index+1] = Detector.AttValue('OccupRate') 
 
 		action = Vissim.Net.SignalHeads.ItemByKey(1).AttValue('SigState') 
 		action = 0. if action == 'RED' else 1.
@@ -259,10 +259,10 @@ def calculate_state(Vissim, state_type, state_size):
 		return(state)
 
 	elif state_type == 'CellsOccSig':
-		DataPoints = Vissim.Net.DataCollectionMeasurements.GetAll()
-		state = [0 for i in range(len(DataPoints)+1)]
-		for index , DataPoint in enumerate(DataPoints):
-			state[index] = DataPoint.AttValue('OccupRate(Current,Last,All)') 
+		Detectors = Vissim.Net.Detectors.GetAll()
+		state = [0 for i in range(len(Detectors)+1)]
+		for index , Detector in enumerate(Detectors):
+			state[index] = Detector.AttValue('OccupRate') 
 
 		action = Vissim.Net.SignalHeads.ItemByKey(1).AttValue('SigState') 
 		action = 0. if action == 'RED' else 1.
@@ -501,7 +501,7 @@ def average_reward(reward_storage, Agents, episode, episodes):
 
 	# will have to go back here later to make it work with AC			
 	else:
-		if Agents[0].type == 'AC':
+		if Agents[0].type == 'AC' or Agents[0].type == 'DQN' :
 			print("Episode: {}/{}, Epsilon:{}, Average reward: {}".format(episode+1, episodes, np.round(Agents[0].epsilon,2), np.round(average_reward,2)))
 		elif Agents[0].type == 'DQN' and Agents[0].state_size == 4 :
 			print("Episode: {}/{}, Epsilon:{}, Average reward: {}".format(episode+1, episodes, np.round(Agents[0].epsilon,2), np.round(average_reward,2)))
@@ -766,7 +766,7 @@ def Select_Vissim_Mode(Vissim, mode):
 
         # set the data mesurement
 		Vissim.Evaluation.SetAttValue('DataCollCollectData', False)
-		Vissim.Evaluation.SetAttValue('DataCollInterval', 99999)
+		Vissim.Evaluation.SetAttValue('DataCollInterval', 3)
         
         # set the delay mesurement
 		Vissim.Evaluation.SetAttValue('DelaysCollectData', False)
