@@ -1,6 +1,7 @@
 import numpy as np
 import os
 import pickle
+import Vissimpython as Vp
 from tensorflow.keras.models import load_model
 
 
@@ -252,6 +253,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 
 		state = [0. if state is None else state for state in state]
 		state = np.reshape(state, [1,state_size])
+		print(state)
 
 		return(state)
 
