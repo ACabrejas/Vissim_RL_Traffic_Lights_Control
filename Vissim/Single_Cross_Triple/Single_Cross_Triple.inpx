@@ -1040,6 +1040,32 @@
 			</speedDistrDatPts>
 		</desSpeedDistribution>
 	</desSpeedDistributions>
+	<detectors>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="3" maxPedSpeed="3.6" name="" no="1" portNo="1" pos="213" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="3" maxPedSpeed="3.6" name="" no="2" portNo="2" pos="153" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="3" maxPedSpeed="3.6" name="" no="3" portNo="3" pos="213" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="3" maxPedSpeed="3.6" name="" no="4" portNo="4" pos="153" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="3" maxPedSpeed="3.6" name="" no="5" portNo="5" pos="213" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="3" maxPedSpeed="3.6" name="" no="6" portNo="6" pos="153" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="3" maxPedSpeed="3.6" name="" no="7" portNo="7" pos="218" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="3" maxPedSpeed="3.6" name="" no="8" portNo="8" pos="158" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="3" maxPedSpeed="3.6" name="" no="9" portNo="9" pos="218" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="3" maxPedSpeed="3.6" name="" no="10" portNo="10" pos="158" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="3" maxPedSpeed="3.6" name="" no="11" portNo="11" pos="218" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="3" maxPedSpeed="3.6" name="" no="12" portNo="12" pos="158" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="3" maxPedSpeed="3.6" name="" no="13" portNo="13" pos="215" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="3" maxPedSpeed="3.6" name="" no="14" portNo="14" pos="155" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="3" maxPedSpeed="3.6" name="" no="15" portNo="15" pos="215" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="3" maxPedSpeed="3.6" name="" no="16" portNo="16" pos="155" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="3" maxPedSpeed="3.6" name="" no="17" portNo="17" pos="215" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="3" maxPedSpeed="3.6" name="" no="18" portNo="18" pos="155" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="3" maxPedSpeed="3.6" name="" no="19" portNo="19" pos="213" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="3" maxPedSpeed="3.6" name="" no="20" portNo="20" pos="153" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="3" maxPedSpeed="3.6" name="" no="21" portNo="21" pos="213" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="3" maxPedSpeed="3.6" name="" no="22" portNo="22" pos="153" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="3" maxPedSpeed="3.6" name="" no="23" portNo="23" pos="213" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="3" maxPedSpeed="3.6" name="" no="24" portNo="24" pos="153" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+	</detectors>
 	<displayTypes>
 		<displayType allSidesSame="false" anisoFilt="true" borderColor="ff808080" borderLineStyle="SOLIDLINE" curved="false" fillColor="ff808080" fillStyle="SOLIDFILL" invisible="false" name="Road gray" no="1" noMipmap="false" rail="false" railFlangeHgt="0.013" railFlangeWid="0.15" railGauge="1.435" railHeadHgt="0.043" railHeadWid="0.073" railHgt="0.172" railType="STANDARD" railWebWid="0.016" texHorizLen="1" textureFilename="" tiesHgt="0.02" tiesLen="2.6" tiesSpac="0.6" tiesTexFilename="" tiesTexHorizLen="1" tiesType="STANDARD" tiesWid="0.26"/>
 		<displayType allSidesSame="false" anisoFilt="true" borderColor="ff655c4b" borderLineStyle="SOLIDLINE" curved="true" fillColor="ff655c4b" fillStyle="SOLIDFILL" invisible="false" name="Rail (stones)" no="11" noMipmap="false" rail="true" railFlangeHgt="0.01" railFlangeWid="0.15" railGauge="1.435" railHeadHgt="0.038" railHeadWid="0.065" railHgt="0.13" railType="STANDARD" railWebWid="0.013" texHorizLen="3.333333" textureFilename="#3dmodels#Textures\Material\Stones02.bmp" tiesHgt="0.02" tiesLen="2.2" tiesSpac="0.6" tiesTexFilename="" tiesTexHorizLen="1" tiesType="STANDARD" tiesWid="0.22"/>
@@ -2308,20 +2334,20 @@
 		</reducedSpeedArea>
 	</reducedSpeedAreas>
 	<signalControllers>
-		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="1" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Triple.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="100" cycTmIsVar="true" debug="false" guiFile="#data#PCMOVAEdit_x64.dll" name="" no="1" offset="0" progFile="#data#PCMOVAControl_x64.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="Single_Cross_Triple.cfg" supplyFile2="Single_Cross_Triple.conn" supplyFile3="" type="EXTERNAL">
 			<sgs>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West - Left" no="1" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West - Middle" no="2" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West - Right" no="3" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="South - Left" no="4" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="South - Middle" no="5" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="South - Right" no="6" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="East - Left" no="7" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="East - Middle" no="8" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="East - Right" no="9" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="North - Left" no="10" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="North - Middle" no="11" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="North - Right" no="12" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="A" no="1" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="B" no="2" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="C" no="3" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="D" no="4" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="E" no="5" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="F" no="6" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="G" no="7" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="H" no="8" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="I" no="9" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="J" no="10" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="K" no="11" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="L" no="12" redAmber="2" type="NORMAL"/>
 			</sgs>
 			<sigTmsTabConfig>
 				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 1" title="" varNo="1" wttFilename="vissim"/>
@@ -2336,27 +2362,48 @@
 				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 10" title="" varNo="10" wttFilename="vissim"/>
 				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 11" title="" varNo="11" wttFilename="vissim"/>
 				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 12" title="" varNo="12" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="1" title="" varNo="1" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="2" title="" varNo="2" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="3" title="" varNo="3" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="4" title="" varNo="4" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="5" title="" varNo="5" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="6" title="" varNo="6" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="7" title="" varNo="7" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="8" title="" varNo="8" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="9" title="" varNo="9" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="10" title="" varNo="10" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="11" title="" varNo="11" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="12" title="" varNo="12" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="13" title="" varNo="13" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="14" title="" varNo="14" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="15" title="" varNo="15" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="16" title="" varNo="16" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="17" title="" varNo="17" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="18" title="" varNo="18" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="19" title="" varNo="19" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="20" title="" varNo="20" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="21" title="" varNo="21" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="22" title="" varNo="22" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="23" title="" varNo="23" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="24" title="" varNo="24" wttFilename="vissim"/>
 			</sigTmsTabConfig>
-			<wttFiles>
-				<intObjectRef key="1"/>
-			</wttFiles>
 		</signalController>
 	</signalControllers>
 	<signalHeads>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 3" localNo="0" name="" no="1" orSG="1 1" pos="253.44103450213743" sg="1 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 2" localNo="0" name="" no="2" orSG="1 2" pos="253.441" sg="1 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="3" orSG="1 3" pos="253.441" sg="1 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 3" localNo="0" name="" no="4" orSG="1 4" pos="258.81486865550414" sg="1 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 2" localNo="0" name="" no="5" orSG="1 5" pos="258.81486865550414" sg="1 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 1" localNo="0" name="" no="6" orSG="1 6" pos="258.81486865550414" sg="1 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 3" localNo="0" name="" no="7" orSG="1 7" pos="255.98770043507858" sg="1 7" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 2" localNo="0" name="" no="8" orSG="1 8" pos="255.98770043507858" sg="1 8" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 1" localNo="0" name="" no="9" orSG="1 9" pos="255.98770043507858" sg="1 9" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 3" localNo="0" name="" no="10" orSG="1 10" pos="253.56450255204612" sg="1 10" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="1 11" pos="253.55211558027827" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="1 12" pos="253.54569270602826" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 3" localNo="0" name="" no="1" orSG="1 1" pos="253" sg="1 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 2" localNo="0" name="" no="2" orSG="1 2" pos="253" sg="1 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="3" orSG="1 3" pos="253" sg="1 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 3" localNo="0" name="" no="4" orSG="1 4" pos="258" sg="1 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 2" localNo="0" name="" no="5" orSG="1 5" pos="258" sg="1 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 1" localNo="0" name="" no="6" orSG="1 6" pos="258" sg="1 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 3" localNo="0" name="" no="7" orSG="1 7" pos="255" sg="1 7" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 2" localNo="0" name="" no="8" orSG="1 8" pos="255" sg="1 8" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 1" localNo="0" name="" no="9" orSG="1 9" pos="255" sg="1 9" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 3" localNo="0" name="" no="10" orSG="1 10" pos="253" sg="1 10" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="1 11" pos="253" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="1 12" pos="253" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10000" simRes="1" simSpeed="3" startTm="0" useAllCores="true" useMaxSimSpeed="false" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10000" simRes="10" simSpeed="3" startTm="0" useAllCores="true" useMaxSimSpeed="false" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
@@ -2464,22 +2511,22 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="false" link="1" name="WE" no="1">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="150"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="150"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>
@@ -2677,9 +2724,6 @@
 			</parkLotSelPars>
 		</vehicleType>
 	</vehicleTypes>
-	<wttFiles>
-		<wttFile file="#exe#vissig.wtt" no="1"/>
-	</wttFiles>
 	<walkingBehaviors>
 		<walkingBehavior aSocIso="2.72" aSocMean="0.4" bSocIso="0.2" bSocMean="2.8" lambda="0.176" name="Default" no="1" noise="1.2" reactToN="8" sidePref="NONE" tau="0.4" vd="3"/>
 		<walkingBehavior aSocIso="2.72" aSocMean="0.4" bSocIso="0.2" bSocMean="2.8" lambda="0.176" name="Elevator (In Cab)" no="2" noise="0.3" reactToN="8" sidePref="NONE" tau="0.4" vd="3"/>
