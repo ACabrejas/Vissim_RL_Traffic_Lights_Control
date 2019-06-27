@@ -2092,6 +2092,16 @@
 				<intObjectRef key="1"/>
 			</wttFiles>
 		</signalController>
+		<signalController active="false" cycTm="100" cycTmIsVar="false" debug="false" guiFile="C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_MOVA\PCMOVAEdit_x64.dll" name="" no="4" offset="0" progFile="C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_MOVA\PCMOVAControl_x64.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="Single_Cross_Mod.cfg" supplyFile2="Single_Cross_Mod.conn" supplyFile3="" type="EXTERNAL">
+			<sgs>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="A" no="1" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="B" no="2" redAmber="2" type="NORMAL"/>
+			</sgs>
+			<sigTmsTabConfig>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="4 1" title="" varNo="1" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="4 2" title="" varNo="2" wttFilename="vissim"/>
+			</sigTmsTabConfig>
+		</signalController>
 	</signalControllers>
 	<signalHeads>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="1" orSG="3 2" pos="254.55808299421335" sg="3 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>

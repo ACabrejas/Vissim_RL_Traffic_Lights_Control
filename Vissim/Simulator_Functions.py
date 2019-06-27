@@ -251,9 +251,9 @@ def calculate_state(Vissim, state_type, state_size, action):
 		
 		state[-1] = action
 
-		state = [0. if state is None else state for state in state]
+		state = [-1. if state is None else state for state in state]
 		state = np.reshape(state, [1,state_size])
-		print(state)
+		#print(state)
 
 		return(state)
 
@@ -266,7 +266,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 		
 		state[-1] = agent.action
 
-		state = [0. if state is None else state for state in state]
+		state = [-1. if state is None else state for state in state]
 		state = np.reshape(state, [1,state_size])
 
 		return(state)
@@ -281,7 +281,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 		
 		state[-1] = action
 
-		state = [0. if state is None else state for state in state]
+		state = [-1. if state is None else state for state in state]
 		state = np.reshape(state, [1,state_size])
 
 		return(state)	
