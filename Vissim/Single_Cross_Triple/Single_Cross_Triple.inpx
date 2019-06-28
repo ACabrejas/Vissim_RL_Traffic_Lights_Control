@@ -2186,6 +2186,20 @@
 	<occupancyDistributions>
 		<occupancyDistribution mean="1" name="Single Occupancy" no="1" stdDev="0" type="NORMAL"/>
 	</occupancyDistributions>
+	<pavementMarkings>
+		<pavementMarking anmFlag="false" arrowDir="LEFT" lane="5 3" length="5" name="" no="1" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="LEFT" lane="1 3" length="5" name="" no="2" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="LEFT" lane="3 3" length="5" name="" no="3" pos="248" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="LEFT" lane="7 3" length="5" name="" no="4" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="STRAIGHT" lane="7 2" length="5" name="" no="5" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="RIGHT,STRAIGHT" lane="7 1" length="5" name="" no="6" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="STRAIGHT" lane="1 2" length="5" name="" no="7" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="RIGHT,STRAIGHT" lane="1 1" length="5" name="" no="8" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="STRAIGHT" lane="5 2" length="5" name="" no="9" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="RIGHT,STRAIGHT" lane="5 1" length="5" name="" no="10" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="STRAIGHT" lane="3 2" length="5" name="" no="11" pos="248" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="RIGHT,STRAIGHT" lane="3 1" length="5" name="" no="12" pos="248" rndDir="" type="ARROW"/>
+	</pavementMarkings>
 	<pedestrianClasses>
 		<pedestrianClass color="ff000000" name="Man, Woman" no="10" usePedTypeColor="true">
 			<pedTypes>

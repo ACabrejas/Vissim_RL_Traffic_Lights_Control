@@ -20,7 +20,7 @@ class Model(tf.keras.Model):
         super().__init__('mlp_policy')
         # no tf.get_variable(), just simple Keras API
 
-        self.core1 = kl.Dense(60, activation='relu')
+        #self.core1 = kl.Dense(60, activation='relu')
         
         self.value1 = kl.Dense(60, activation='relu', name='value1') #64
         self.value2 = kl.Dense(21, activation='relu', name='value2')
@@ -58,8 +58,14 @@ class Model(tf.keras.Model):
         # action = tf.random.categorical(logits, 1)
         return action , value
 
+class Modelconv(tf.keras.Model):
+    """docstring for Modelconv"""
+    def __init__(self, arg):
+        super().__init__('mlp_policy')
+        self.arg = arg
+        
 
-# An working model training with entropy = 0.00001 en nstep = 32 and learn every step lr = 0.000065 gama = 0.99 
+# An working model training with entropy = 0.00001 en nstep = 32 and learn every step lr = 0.000065 gamma = 0.99 
 class Modelsave1(tf.keras.Model):
     def __init__(self, num_actions):
         super().__init__('mlp_policy')

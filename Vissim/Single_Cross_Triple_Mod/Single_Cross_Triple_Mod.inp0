@@ -1041,54 +1041,54 @@
 		</desSpeedDistribution>
 	</desSpeedDistributions>
 	<detectors>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="9" maxPedSpeed="3.6" name="" no="1" portNo="1" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="9" maxPedSpeed="3.6" name="" no="2" portNo="2" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="9" maxPedSpeed="3.6" name="" no="3" portNo="3" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="9" maxPedSpeed="3.6" name="" no="4" portNo="4" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="9" maxPedSpeed="3.6" name="" no="5" portNo="5" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="9" maxPedSpeed="3.6" name="" no="6" portNo="6" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="9" maxPedSpeed="3.6" name="" no="7" portNo="7" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="9" maxPedSpeed="3.6" name="" no="8" portNo="8" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="9" maxPedSpeed="3.6" name="" no="9" portNo="9" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="9" maxPedSpeed="3.6" name="" no="10" portNo="10" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="9" maxPedSpeed="3.6" name="" no="11" portNo="11" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="9" maxPedSpeed="3.6" name="" no="12" portNo="12" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="9" maxPedSpeed="3.6" name="" no="13" portNo="13" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="9" maxPedSpeed="3.6" name="" no="14" portNo="14" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="9" maxPedSpeed="3.6" name="" no="15" portNo="15" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="9" maxPedSpeed="3.6" name="" no="16" portNo="16" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="9" maxPedSpeed="3.6" name="" no="17" portNo="17" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="9" maxPedSpeed="3.6" name="" no="18" portNo="18" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="9" maxPedSpeed="3.6" name="" no="19" portNo="19" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="9" maxPedSpeed="3.6" name="" no="20" portNo="20" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="9" maxPedSpeed="3.6" name="" no="21" portNo="21" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="9" maxPedSpeed="3.6" name="" no="22" portNo="22" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="9" maxPedSpeed="3.6" name="" no="23" portNo="23" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="9" maxPedSpeed="3.6" name="" no="24" portNo="24" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="9" maxPedSpeed="3.6" name="" no="25" portNo="25" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="9" maxPedSpeed="3.6" name="" no="26" portNo="26" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="9" maxPedSpeed="3.6" name="" no="27" portNo="27" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="9" maxPedSpeed="3.6" name="" no="28" portNo="28" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="9" maxPedSpeed="3.6" name="" no="29" portNo="29" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="9" maxPedSpeed="3.6" name="" no="30" portNo="30" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="9" maxPedSpeed="3.6" name="" no="31" portNo="31" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="9" maxPedSpeed="3.6" name="" no="32" portNo="32" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="9" maxPedSpeed="3.6" name="" no="33" portNo="33" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="9" maxPedSpeed="3.6" name="" no="34" portNo="34" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="9" maxPedSpeed="3.6" name="" no="35" portNo="35" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="9" maxPedSpeed="3.6" name="" no="36" portNo="36" pos="150" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="9" maxPedSpeed="3.6" name="" no="37" portNo="37" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="9" maxPedSpeed="3.6" name="" no="38" portNo="38" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="9" maxPedSpeed="3.6" name="" no="39" portNo="39" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="9" maxPedSpeed="3.6" name="" no="40" portNo="40" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="9" maxPedSpeed="3.6" name="" no="41" portNo="41" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="9" maxPedSpeed="3.6" name="" no="42" portNo="42" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="9" maxPedSpeed="3.6" name="" no="43" portNo="43" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="9" maxPedSpeed="3.6" name="" no="44" portNo="44" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="9" maxPedSpeed="3.6" name="" no="45" portNo="45" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="9" maxPedSpeed="3.6" name="" no="46" portNo="46" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="9" maxPedSpeed="3.6" name="" no="47" portNo="47" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
-		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="9" maxPedSpeed="3.6" name="" no="48" portNo="48" pos="100" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="15" maxPedSpeed="3.6" name="" no="1" portNo="1" pos="240" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="15" maxPedSpeed="3.6" name="" no="2" portNo="2" pos="240" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="15" maxPedSpeed="3.6" name="" no="3" portNo="3" pos="240" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="15" maxPedSpeed="3.6" name="" no="4" portNo="4" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="15" maxPedSpeed="3.6" name="" no="5" portNo="5" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="6" portNo="6" pos="245" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="15" maxPedSpeed="3.6" name="" no="7" portNo="7" pos="240" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="15" maxPedSpeed="3.6" name="" no="8" portNo="8" pos="240" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="9" portNo="9" pos="240" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="15" maxPedSpeed="3.6" name="" no="10" portNo="10" pos="240" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="15" maxPedSpeed="3.6" name="" no="11" portNo="11" pos="240" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="12" portNo="12" pos="240" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="15" maxPedSpeed="3.6" name="" no="13" portNo="13" pos="220" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="15" maxPedSpeed="3.6" name="" no="14" portNo="14" pos="220" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="15" maxPedSpeed="3.6" name="" no="15" portNo="15" pos="220" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="15" maxPedSpeed="3.6" name="" no="16" portNo="16" pos="225" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="15" maxPedSpeed="3.6" name="" no="17" portNo="17" pos="225" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="18" portNo="18" pos="225" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="15" maxPedSpeed="3.6" name="" no="19" portNo="19" pos="220" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="15" maxPedSpeed="3.6" name="" no="20" portNo="20" pos="220" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="21" portNo="21" pos="220" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="15" maxPedSpeed="3.6" name="" no="22" portNo="22" pos="220" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="15" maxPedSpeed="3.6" name="" no="23" portNo="23" pos="220" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="24" portNo="24" pos="220" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="15" maxPedSpeed="3.6" name="" no="25" portNo="25" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="15" maxPedSpeed="3.6" name="" no="26" portNo="26" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="15" maxPedSpeed="3.6" name="" no="27" portNo="27" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="15" maxPedSpeed="3.6" name="" no="28" portNo="28" pos="205" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="15" maxPedSpeed="3.6" name="" no="29" portNo="29" pos="205" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="30" portNo="30" pos="205" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="15" maxPedSpeed="3.6" name="" no="31" portNo="31" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="15" maxPedSpeed="3.6" name="" no="32" portNo="32" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="33" portNo="33" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="15" maxPedSpeed="3.6" name="" no="34" portNo="34" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="15" maxPedSpeed="3.6" name="" no="35" portNo="35" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="36" portNo="36" pos="200" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 3" length="15" maxPedSpeed="3.6" name="" no="37" portNo="37" pos="180" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 2" length="15" maxPedSpeed="3.6" name="" no="38" portNo="38" pos="180" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="15" maxPedSpeed="3.6" name="" no="39" portNo="39" pos="180" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 3" length="15" maxPedSpeed="3.6" name="" no="40" portNo="40" pos="185" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 2" length="15" maxPedSpeed="3.6" name="" no="41" portNo="41" pos="185" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="42" portNo="42" pos="185" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 3" length="15" maxPedSpeed="3.6" name="" no="43" portNo="43" pos="180" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 2" length="15" maxPedSpeed="3.6" name="" no="44" portNo="44" pos="180" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="45" portNo="45" pos="180" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 3" length="15" maxPedSpeed="3.6" name="" no="46" portNo="46" pos="180" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 2" length="15" maxPedSpeed="3.6" name="" no="47" portNo="47" pos="180" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="48" portNo="48" pos="180" sc="1" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
 	</detectors>
 	<displayTypes>
 		<displayType allSidesSame="false" anisoFilt="true" borderColor="ff808080" borderLineStyle="SOLIDLINE" curved="false" fillColor="ff808080" fillStyle="SOLIDFILL" invisible="false" name="Road gray" no="1" noMipmap="false" rail="false" railFlangeHgt="0.013" railFlangeWid="0.15" railGauge="1.435" railHeadHgt="0.043" railHeadWid="0.073" railHgt="0.172" railType="STANDARD" railWebWid="0.016" texHorizLen="1" textureFilename="" tiesHgt="0.02" tiesLen="2.6" tiesSpac="0.6" tiesTexFilename="" tiesTexHorizLen="1" tiesType="STANDARD" tiesWid="0.26"/>
@@ -1130,7 +1130,7 @@
 		<convergence writeFile="false"/>
 		<dataColl collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
-		<delays collectData="true" fromTime="0" interval="3" toTime="99999"/>
+		<delays collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
 		<greenTimeDistribution fromTime="0" toTime="99999" writeFile="false"/>
 		<linkResults collectData="false" fromTime="0" interval="99999" perLane="false" toTime="99999"/>
@@ -1159,7 +1159,7 @@
 		<ssam writeFile="false"/>
 		<sigChgs writeDatabase="false" writeFile="false"/>
 		<vehInpData writeFile="false"/>
-		<vehNetPerf collectData="true" fromTime="0" interval="3" toTime="99999"/>
+		<vehNetPerf collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<vehRec filterType="ALL" fromTime="0" inclParkVehs="false" resolution="1" toTime="99999" writeDatabase="false" writeFile="false">
 			<attributes>
 				<attributeSelection attributeID="SIMSEC" decimals="2" format="SECONDS" showUnits="false"/>
@@ -1171,7 +1171,7 @@
 			</attributes>
 		</vehRec>
 		<vehTravTmRawData fromTime="0" toTime="99999" writeDatabase="false" writeFile="false"/>
-		<vehTravTms aggrBySect="DESTINATION" collectData="true" fromTime="0" interval="99999" toTime="99999"/>
+		<vehTravTms aggrBySect="DESTINATION" collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 	</evaluation>
 	<levels>
 		<level name="Base" no="1" zCoord="0"/>
@@ -2454,7 +2454,7 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="1 11" pos="253.55211558027827" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="1 12" pos="253.54569270602826" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10000" simRes="1" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3600" simRes="10" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
@@ -2562,7 +2562,7 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="false" link="1" name="WE" no="1">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="150"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
@@ -2572,7 +2572,7 @@
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="150"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
