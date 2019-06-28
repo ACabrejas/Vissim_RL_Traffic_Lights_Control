@@ -24,17 +24,21 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
  state_size, simulation_length, timesteps_per_second, seconds_per_green,\
   seconds_per_yellow, demand_list, demand_change_timesteps, mode, PER_activated, Surtrac = False, AC = False):
 	
-	
 	for time_t in range(simulation_length):
 
 		# Change demand every 450 seconds.
 		if time_t % demand_change_timesteps == 0:
 			change_demand(Vissim, demand_list, demand_change_timesteps, time_t)
+		
+		# Pass the control over to COM
+		if time_t == 1:
+			for agent in Agents:
+				for group in agent.signal_groups:
+					group.SetAttValue('ContrByCOM',1)
 
 		# Cycle through all agents and update them
 		Agents_update(Agents, Vissim, state_type,reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = Surtrac , AC = AC )
 		
-           
 		# Advance the game to the next second (proportionally to the simulator resolution).
 		for _ in range(0, timesteps_per_second):
 			Vissim.Simulation.RunSingleStep()
@@ -44,6 +48,7 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 				agent.queues_over_time.append(get_queue_lengths(Vissim, agent))
 				agent.accumulated_delay.append(agent.accumulated_delay[-1]+get_delay_timestep(Vissim))
 
+	# Reconfigure agents for the start of the next episode
 	for agent in Agents:
 		agent.update_counter = 1
 		agent.intermediate_phase = False
@@ -76,12 +81,11 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 				# Commit previous State, previous Action, Reward generated and current State to memory
 					agent.remember(agent.state, agent.action, agent.reward, agent.newstate)
 					
-				agent.episode_reward.append(agent.reward)
-										
+				agent.episode_reward.append(agent.reward)		
 				#print(agent.newstate)
+
 				# Compute the new Action and store it in the agent
 				agent.newaction = agent.choose_action(agent.newstate)
-				
 				
 				# In Demonstration Mode, show the Reward of the last cycle
 				if mode == "demo":
@@ -94,11 +98,13 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 						agent.update_counter += agent.actiontime - 1
 					else:
 						agent.update_counter += seconds_per_green - 1
-				
+					#print("Extended Phase")
+
 				# If a different Action is chosen
 				elif agent.newaction != agent.action:
 					# Transition from green to amber and from red to redamber
 					green_red_to_amber(agent, seconds_per_yellow,Surtrac)
+					#print("Finished Transition")
 
 			# If the agent is in the middle of a transition
 			elif agent.intermediate_phase == True:
@@ -118,29 +124,37 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 					agent.trainstep = 0				
 		# Error protection against negative update counters
 		else:
-			print("ERROR: Update Counter for agent {} is negative. Please investigate.".format(index))
+			raise Exception("ERROR: Update Counter for agent {} is negative. Please investigate.".format(index))
 
 def green_red_to_amber(agent, seconds_per_yellow,Surtrac=False):
 	# Fetch the meaning of the Actions from the compatible Actions in the Agent
 	previous_action = agent.compatible_actions[agent.action]
+	#print("Previous action {}:".format(agent.action+1) + str(previous_action))
 	current_action = agent.compatible_actions[agent.newaction]
+	#print("Current action {}:".format(agent.newaction+1) + str(current_action))
+
 	# Check transition vector for the whole intersection (1, 0 or -1)
 	agent.transition_vector = np.subtract(previous_action, current_action)
+	#print("Transition vect:" + str(agent.transition_vector))
 
 	# Cycle through the groups and start the transition
 	for index_group, sig_group in enumerate(agent.signal_groups):
 		# If the transition vector is > 0, we are changing from GREEN to RED, so set AMBER
 		if agent.transition_vector[index_group] == 1:
 			sig_group.SetAttValue("SigState", "AMBER")
+			#print("Changing Light {} to Red".format(index_group+1))
+
 		# If the transition vector is < 0, we are changing from RED to GREEN, so set to REDAMBER
 		elif agent.transition_vector[index_group] == -1:
-			sig_group.SetAttValue("SigState", "REDAMBER")
+			#sig_group.SetAttValue("SigState", "REDAMBER")
+			#print("Changing Light {} to Green".format(index_group+1))
+			pass
 		# If the transition vector is zero, the phase stays the same
 		elif agent.transition_vector[index_group] == 0:
 			pass
 		else:
-			print("ERROR: Incongruent new phase and previous phase. Please review the code.")
-			break
+			raise Exception("ERROR: Incongruent new phase and previous phase. Please review the code.")
+			
 	# Extend timer after transition is started
 	agent.update_counter += seconds_per_yellow	 - 1
 	if Surtrac:
@@ -159,8 +173,8 @@ def amber_to_green_red(agent, seconds_per_green,Surtrac=False):
 		elif agent.transition_vector[index_group] == 0:
 			pass
 		else:
-			print("ERROR: Incongruent new phase and previous phase. Please review the code.")
-			break
+			raise Exception("ERROR: Incongruent new phase and previous phase. Please review the code.")
+			
 	# Mark the transition as finished
 	agent.intermediate_phase = False	
 	# Set timer for next update 
@@ -217,8 +231,6 @@ def calculate_state(Vissim, state_type, state_size):
 		state = [West_Queue, South_Queue, East_Queue, North_Queue, West_Signal, South_Signal]
 		state = [0. if state is None else state for state in state]
 		state = np.reshape(state, [1,state_size])
-		
-		
 		return(state)
 		
 	elif state_type == 'QueuesSpeedavrOccuperate':
@@ -241,6 +253,8 @@ def calculate_state(Vissim, state_type, state_size):
 	elif state_type == "Clusters":
 		return(Vp.Clustering(Vissim))
 	# Output : - The clustering : A tuple countaining lists of clusters ordered by their time arrival.
+	else:
+ 		raise Exception("ERROR SELECTING REWARD FUNCTION")
 
 
 
@@ -274,8 +288,7 @@ def calculate_state(Vissim, state_type, state_size):
 # 		#print("Substracted:    {}".format(revious_queue_sum - current_queue_sum))
 # 		queue_diff = previous_queue_sum - current_queue_sum
 # 		reward = queue_diff * 10000 - np.sum(np.array([0 if state is None else state for state in agent.newstate[0]])**2)
-# 	else:
-# 		raise Exception("ERROR SELECTING REWARD FUNCTION")
+
 # 	agent.episode_reward.append(reward)
 # 	return reward
 
