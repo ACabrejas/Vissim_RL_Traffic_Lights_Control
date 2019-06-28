@@ -141,7 +141,7 @@ def green_red_to_amber(agent, seconds_per_yellow,Surtrac=False):
 	for index_group, sig_group in enumerate(agent.signal_groups):
 		# If the transition vector is > 0, we are changing from GREEN to RED, so set AMBER
 		if agent.transition_vector[index_group] == 1:
-			sig_group.SetAttValue("SigState", "AMBER")
+			 
 			#print("Changing Light {} to Red".format(index_group+1))
 
 		# If the transition vector is < 0, we are changing from RED to GREEN, so set to REDAMBER

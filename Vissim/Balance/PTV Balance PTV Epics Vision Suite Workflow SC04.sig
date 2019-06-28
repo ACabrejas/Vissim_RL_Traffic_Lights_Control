@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sc version="201602" id="4" name="SC04" frequency="1" steps="0" defaultIntergreenMatrix="1" EPICSTimeHorizon="100000" EPICSLogLevel="2" interstagesUsingMinDurations="false" checkSum="780584787">
+<sc version="201801" id="4" name="SC04" frequency="1" steps="0" defaultIntergreenMatrix="1" EPICSTimeHorizon="100000" EPICSLogLevel="2" interstagesUsingMinDurations="false" checkSum="3363009040">
   <signaldisplays>
     <display id="1" name="Red" state="RED">
       <patterns>
@@ -223,49 +223,49 @@
         </EPICSPTDemand>
       </EPICSTrafficDemands>
     </sg>
-    <sg id="21" name="Crosswalk1S" defaultSignalSequence="4" underEPICSControl="true">
+    <sg id="9" name="Crosswalk1S" defaultSignalSequence="4" underEPICSControl="true">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="3" duration="5000" />
       </defaultDurations>
     </sg>
-    <sg id="22" name="Crosswalk1N" defaultSignalSequence="4" underEPICSControl="true">
+    <sg id="10" name="Crosswalk1N" defaultSignalSequence="4" underEPICSControl="true">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="3" duration="5000" />
       </defaultDurations>
     </sg>
-    <sg id="23" name="Crosswalk2E" defaultSignalSequence="4" underEPICSControl="true">
+    <sg id="11" name="Crosswalk2E" defaultSignalSequence="4" underEPICSControl="true">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="3" duration="5000" />
       </defaultDurations>
     </sg>
-    <sg id="24" name="Crosswalk2W" defaultSignalSequence="4" underEPICSControl="true">
+    <sg id="12" name="Crosswalk2W" defaultSignalSequence="4" underEPICSControl="true">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="3" duration="5000" />
       </defaultDurations>
     </sg>
-    <sg id="25" name="Crosswalk3N" defaultSignalSequence="4" underEPICSControl="true">
+    <sg id="13" name="Crosswalk3N" defaultSignalSequence="4" underEPICSControl="true">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="3" duration="5000" />
       </defaultDurations>
     </sg>
-    <sg id="26" name="Crosswalk3S" defaultSignalSequence="4" underEPICSControl="true">
+    <sg id="14" name="Crosswalk3S" defaultSignalSequence="4" underEPICSControl="true">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="3" duration="5000" />
       </defaultDurations>
     </sg>
-    <sg id="27" name="Crosswalk4W" defaultSignalSequence="4" underEPICSControl="true">
+    <sg id="15" name="Crosswalk4W" defaultSignalSequence="4" underEPICSControl="true">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="3" duration="5000" />
       </defaultDurations>
     </sg>
-    <sg id="28" name="Crosswalk4E" defaultSignalSequence="4" underEPICSControl="true">
+    <sg id="16" name="Crosswalk4E" defaultSignalSequence="4" underEPICSControl="true">
       <defaultDurations>
         <defaultDuration display="1" duration="1000" />
         <defaultDuration display="3" duration="5000" />
@@ -324,12 +324,12 @@
       <intergreen clearingsg="4" enteringsg="1" value="2000" />
       <intergreen clearingsg="7" enteringsg="1" value="4000" />
       <intergreen clearingsg="8" enteringsg="1" value="4000" />
-      <intergreen clearingsg="22" enteringsg="1" value="8000" />
+      <intergreen clearingsg="10" enteringsg="1" value="8000" />
       <intergreen clearingsg="3" enteringsg="2" value="3000" />
       <intergreen clearingsg="4" enteringsg="2" value="2000" />
       <intergreen clearingsg="5" enteringsg="2" value="4000" />
-      <intergreen clearingsg="22" enteringsg="2" value="8000" />
-      <intergreen clearingsg="25" enteringsg="2" value="5000" />
+      <intergreen clearingsg="10" enteringsg="2" value="8000" />
+      <intergreen clearingsg="13" enteringsg="2" value="5000" />
       <intergreen clearingsg="1" enteringsg="3" value="4000" />
       <intergreen clearingsg="1" enteringsg="4" value="5000" />
       <intergreen clearingsg="2" enteringsg="4" value="5000" />
@@ -340,9 +340,9 @@
       <intergreen clearingsg="6" enteringsg="4" value="2000" />
       <intergreen clearingsg="7" enteringsg="4" value="6000" />
       <intergreen clearingsg="8" enteringsg="3" value="4000" />
-      <intergreen clearingsg="24" enteringsg="3" value="10000" />
-      <intergreen clearingsg="24" enteringsg="4" value="10000" />
-      <intergreen clearingsg="27" enteringsg="4" value="5000" />
+      <intergreen clearingsg="12" enteringsg="3" value="10000" />
+      <intergreen clearingsg="12" enteringsg="4" value="10000" />
+      <intergreen clearingsg="15" enteringsg="4" value="5000" />
       <intergreen clearingsg="1" enteringsg="6" value="5000" />
       <intergreen clearingsg="6" enteringsg="1" value="1000" />
       <intergreen clearingsg="2" enteringsg="5" value="1000" />
@@ -354,9 +354,9 @@
       <intergreen clearingsg="7" enteringsg="6" value="2000" />
       <intergreen clearingsg="8" enteringsg="5" value="2000" />
       <intergreen clearingsg="8" enteringsg="6" value="2000" />
-      <intergreen clearingsg="21" enteringsg="6" value="4000" />
-      <intergreen clearingsg="26" enteringsg="6" value="8000" />
-      <intergreen clearingsg="26" enteringsg="5" value="8000" />
+      <intergreen clearingsg="9" enteringsg="6" value="4000" />
+      <intergreen clearingsg="14" enteringsg="6" value="8000" />
+      <intergreen clearingsg="14" enteringsg="5" value="8000" />
       <intergreen clearingsg="1" enteringsg="7" value="3000" />
       <intergreen clearingsg="1" enteringsg="8" value="2000" />
       <intergreen clearingsg="2" enteringsg="7" value="3000" />
@@ -369,21 +369,21 @@
       <intergreen clearingsg="6" enteringsg="8" value="5000" />
       <intergreen clearingsg="7" enteringsg="2" value="5000" />
       <intergreen clearingsg="8" enteringsg="2" value="4000" />
-      <intergreen clearingsg="28" enteringsg="7" value="10000" />
-      <intergreen clearingsg="28" enteringsg="8" value="10000" />
-      <intergreen clearingsg="23" enteringsg="8" value="5000" />
-      <intergreen clearingsg="6" enteringsg="21" value="3000" />
-      <intergreen clearingsg="1" enteringsg="22" value="1000" />
-      <intergreen clearingsg="2" enteringsg="22" value="1000" />
-      <intergreen clearingsg="8" enteringsg="23" value="3000" />
-      <intergreen clearingsg="3" enteringsg="24" value="1000" />
-      <intergreen clearingsg="4" enteringsg="24" value="1000" />
-      <intergreen clearingsg="2" enteringsg="25" value="3000" />
-      <intergreen clearingsg="5" enteringsg="26" value="1000" />
-      <intergreen clearingsg="6" enteringsg="26" value="1000" />
-      <intergreen clearingsg="4" enteringsg="27" value="3000" />
-      <intergreen clearingsg="7" enteringsg="28" value="1000" />
-      <intergreen clearingsg="8" enteringsg="28" value="1000" />
+      <intergreen clearingsg="16" enteringsg="7" value="10000" />
+      <intergreen clearingsg="16" enteringsg="8" value="10000" />
+      <intergreen clearingsg="11" enteringsg="8" value="5000" />
+      <intergreen clearingsg="6" enteringsg="9" value="3000" />
+      <intergreen clearingsg="1" enteringsg="10" value="1000" />
+      <intergreen clearingsg="2" enteringsg="10" value="1000" />
+      <intergreen clearingsg="8" enteringsg="11" value="3000" />
+      <intergreen clearingsg="3" enteringsg="12" value="1000" />
+      <intergreen clearingsg="4" enteringsg="12" value="1000" />
+      <intergreen clearingsg="2" enteringsg="13" value="3000" />
+      <intergreen clearingsg="5" enteringsg="14" value="1000" />
+      <intergreen clearingsg="6" enteringsg="14" value="1000" />
+      <intergreen clearingsg="4" enteringsg="15" value="3000" />
+      <intergreen clearingsg="7" enteringsg="16" value="1000" />
+      <intergreen clearingsg="8" enteringsg="16" value="1000" />
     </intergreenmatrix>
   </intergreenmatrices>
   <progs />
@@ -398,14 +398,14 @@
         <activation sg_id="6" activation="ON" />
         <activation sg_id="7" activation="OFF" />
         <activation sg_id="8" activation="OFF" />
-        <activation sg_id="21" activation="OFF" />
-        <activation sg_id="22" activation="OFF" />
-        <activation sg_id="23" activation="ON" />
-        <activation sg_id="24" activation="ON" />
-        <activation sg_id="25" activation="OFF" />
-        <activation sg_id="26" activation="OFF" />
-        <activation sg_id="27" activation="ON" />
-        <activation sg_id="28" activation="ON" />
+        <activation sg_id="9" activation="OFF" />
+        <activation sg_id="10" activation="OFF" />
+        <activation sg_id="11" activation="ON" />
+        <activation sg_id="12" activation="ON" />
+        <activation sg_id="13" activation="OFF" />
+        <activation sg_id="14" activation="OFF" />
+        <activation sg_id="15" activation="ON" />
+        <activation sg_id="16" activation="ON" />
       </activations>
     </stage>
     <stage id="2" name="Stage 2" isPseudoStage="false">
@@ -418,14 +418,14 @@
         <activation sg_id="6" activation="OFF" />
         <activation sg_id="7" activation="OFF" />
         <activation sg_id="8" activation="OFF" />
-        <activation sg_id="21" activation="OFF" />
-        <activation sg_id="22" activation="OFF" />
-        <activation sg_id="23" activation="OFF" />
-        <activation sg_id="24" activation="OFF" />
-        <activation sg_id="25" activation="OFF" />
-        <activation sg_id="26" activation="OFF" />
-        <activation sg_id="27" activation="OFF" />
-        <activation sg_id="28" activation="OFF" />
+        <activation sg_id="9" activation="OFF" />
+        <activation sg_id="10" activation="OFF" />
+        <activation sg_id="11" activation="OFF" />
+        <activation sg_id="12" activation="OFF" />
+        <activation sg_id="13" activation="OFF" />
+        <activation sg_id="14" activation="OFF" />
+        <activation sg_id="15" activation="OFF" />
+        <activation sg_id="16" activation="OFF" />
       </activations>
     </stage>
     <stage id="3" name="Stage 3" isPseudoStage="false">
@@ -438,14 +438,14 @@
         <activation sg_id="6" activation="OFF" />
         <activation sg_id="7" activation="OFF" />
         <activation sg_id="8" activation="ON" />
-        <activation sg_id="21" activation="ON" />
-        <activation sg_id="22" activation="ON" />
-        <activation sg_id="23" activation="OFF" />
-        <activation sg_id="24" activation="OFF" />
-        <activation sg_id="25" activation="ON" />
-        <activation sg_id="26" activation="ON" />
-        <activation sg_id="27" activation="OFF" />
-        <activation sg_id="28" activation="OFF" />
+        <activation sg_id="9" activation="ON" />
+        <activation sg_id="10" activation="ON" />
+        <activation sg_id="11" activation="OFF" />
+        <activation sg_id="12" activation="OFF" />
+        <activation sg_id="13" activation="ON" />
+        <activation sg_id="14" activation="ON" />
+        <activation sg_id="15" activation="OFF" />
+        <activation sg_id="16" activation="OFF" />
       </activations>
     </stage>
     <stage id="4" name="Stage 4" isPseudoStage="false">
@@ -458,14 +458,14 @@
         <activation sg_id="6" activation="OFF" />
         <activation sg_id="7" activation="ON" />
         <activation sg_id="8" activation="OFF" />
-        <activation sg_id="21" activation="OFF" />
-        <activation sg_id="22" activation="OFF" />
-        <activation sg_id="23" activation="OFF" />
-        <activation sg_id="24" activation="OFF" />
-        <activation sg_id="25" activation="OFF" />
-        <activation sg_id="26" activation="OFF" />
-        <activation sg_id="27" activation="OFF" />
-        <activation sg_id="28" activation="OFF" />
+        <activation sg_id="9" activation="OFF" />
+        <activation sg_id="10" activation="OFF" />
+        <activation sg_id="11" activation="OFF" />
+        <activation sg_id="12" activation="OFF" />
+        <activation sg_id="13" activation="OFF" />
+        <activation sg_id="14" activation="OFF" />
+        <activation sg_id="15" activation="OFF" />
+        <activation sg_id="16" activation="OFF" />
       </activations>
     </stage>
   </stages>
@@ -524,44 +524,44 @@
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="21" signal_sequence="1">
+        <sg sg_id="9" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="1">
+        <sg sg_id="10" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="4">
+        <sg sg_id="11" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="3000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="4">
+        <sg sg_id="12" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="3000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="1">
+        <sg sg_id="13" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="1">
+        <sg sg_id="14" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="4">
+        <sg sg_id="15" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="3000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="4">
+        <sg sg_id="16" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="3000" />
@@ -624,56 +624,56 @@
             <fixedstate display="2" duration="1000" />
           </fixedstates>
         </sg>
-        <sg sg_id="21" signal_sequence="4">
+        <sg sg_id="9" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="3000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="4">
+        <sg sg_id="10" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="1000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="4">
+        <sg sg_id="11" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="5000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="4">
+        <sg sg_id="12" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="4">
+        <sg sg_id="13" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="3000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="4">
+        <sg sg_id="14" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="1000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="4">
+        <sg sg_id="15" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="5000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="4">
+        <sg sg_id="16" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="0" />
@@ -736,44 +736,44 @@
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="21" signal_sequence="1">
+        <sg sg_id="9" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="1">
+        <sg sg_id="10" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="4">
+        <sg sg_id="11" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="10000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="4">
+        <sg sg_id="12" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="1">
+        <sg sg_id="13" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="1">
+        <sg sg_id="14" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="4">
+        <sg sg_id="15" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="10000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="4">
+        <sg sg_id="16" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="0" />
@@ -836,44 +836,44 @@
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="21" signal_sequence="1">
+        <sg sg_id="9" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="1">
+        <sg sg_id="10" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="4">
+        <sg sg_id="11" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="4">
+        <sg sg_id="12" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="1">
+        <sg sg_id="13" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="1">
+        <sg sg_id="14" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="4">
+        <sg sg_id="15" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="4">
+        <sg sg_id="16" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
@@ -936,47 +936,47 @@
             <fixedstate display="2" duration="1000" />
           </fixedstates>
         </sg>
-        <sg sg_id="21" signal_sequence="4">
+        <sg sg_id="9" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="4">
+        <sg sg_id="10" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="1000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="1">
+        <sg sg_id="11" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="1">
+        <sg sg_id="12" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="4">
+        <sg sg_id="13" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="4">
+        <sg sg_id="14" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="1000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="1">
+        <sg sg_id="15" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="1">
+        <sg sg_id="16" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
@@ -1036,35 +1036,35 @@
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="21" signal_sequence="1">
+        <sg sg_id="9" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="1">
+        <sg sg_id="10" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="1">
+        <sg sg_id="11" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="1">
+        <sg sg_id="12" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="1">
+        <sg sg_id="13" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="1">
+        <sg sg_id="14" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="1">
+        <sg sg_id="15" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="1">
+        <sg sg_id="16" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
@@ -1124,56 +1124,56 @@
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="21" signal_sequence="4">
+        <sg sg_id="9" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="4000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="4">
+        <sg sg_id="10" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="4">
+        <sg sg_id="11" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="3000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="4">
+        <sg sg_id="12" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="1000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="4">
+        <sg sg_id="13" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="3000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="4">
+        <sg sg_id="14" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="4">
+        <sg sg_id="15" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="3000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="4">
+        <sg sg_id="16" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="1000" />
@@ -1236,47 +1236,47 @@
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="21" signal_sequence="4">
+        <sg sg_id="9" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="8000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="4">
+        <sg sg_id="10" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="1">
+        <sg sg_id="11" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="1">
+        <sg sg_id="12" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="4">
+        <sg sg_id="13" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="8000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="4">
+        <sg sg_id="14" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="1">
+        <sg sg_id="15" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="1">
+        <sg sg_id="16" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
@@ -1336,47 +1336,47 @@
             <fixedstate display="4" duration="3000" />
           </fixedstates>
         </sg>
-        <sg sg_id="21" signal_sequence="4">
+        <sg sg_id="9" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="4000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="4">
+        <sg sg_id="10" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="4000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="1">
+        <sg sg_id="11" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="1">
+        <sg sg_id="12" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="4">
+        <sg sg_id="13" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="4000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="4">
+        <sg sg_id="14" signal_sequence="4">
           <cmds>
             <cmd display="3" begin="0" />
             <cmd display="1" begin="4000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="1">
+        <sg sg_id="15" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="1">
+        <sg sg_id="16" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
@@ -1436,44 +1436,44 @@
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="21" signal_sequence="1">
+        <sg sg_id="9" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="1">
+        <sg sg_id="10" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="4">
+        <sg sg_id="11" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="4">
+        <sg sg_id="12" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="1000" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="1">
+        <sg sg_id="13" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="1">
+        <sg sg_id="14" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="4">
+        <sg sg_id="15" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="4">
+        <sg sg_id="16" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="1000" />
@@ -1536,35 +1536,35 @@
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="21" signal_sequence="1">
+        <sg sg_id="9" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="1">
+        <sg sg_id="10" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="1">
+        <sg sg_id="11" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="1">
+        <sg sg_id="12" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="1">
+        <sg sg_id="13" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="1">
+        <sg sg_id="14" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="1">
+        <sg sg_id="15" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="1">
+        <sg sg_id="16" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
@@ -1624,47 +1624,47 @@
             <fixedstate display="2" duration="1000" />
           </fixedstates>
         </sg>
-        <sg sg_id="21" signal_sequence="4">
+        <sg sg_id="9" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="22" signal_sequence="4">
+        <sg sg_id="10" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="23" signal_sequence="1">
+        <sg sg_id="11" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="24" signal_sequence="1">
+        <sg sg_id="12" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="25" signal_sequence="4">
+        <sg sg_id="13" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="26" signal_sequence="4">
+        <sg sg_id="14" signal_sequence="4">
           <cmds>
             <cmd display="1" begin="0" />
             <cmd display="3" begin="0" />
           </cmds>
           <fixedstates />
         </sg>
-        <sg sg_id="27" signal_sequence="1">
+        <sg sg_id="15" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
-        <sg sg_id="28" signal_sequence="1">
+        <sg sg_id="16" signal_sequence="1">
           <cmds />
           <fixedstates />
         </sg>
@@ -1672,7 +1672,7 @@
     </interstageProg>
   </interstageProgs>
   <stageProgs>
-    <stageProg id="1" cycletime="90000" switchpoint="0" offset="5000" intergreens="1" fitness="0.000000" vehicleCount="0" weightBalance="5" weightStops="0" balanceFixedTimeControl="false" name="Stage 1, Stage 2, Stage 3, Stage 4">
+    <stageProg id="1" cycletime="90000" switchpoint="0" offset="5000" intergreens="1" fitness="0.000000" vehicleCount="0" weightBalance="5" weightStops="0" factorMaxRedPuT="-1.000000" balanceFixedTimeControl="false" name="Stage 1, Stage 2, Stage 3, Stage 4">
       <interstages>
         <interstage display="1" begin="0" />
         <interstage display="5" begin="13000" />
@@ -1706,17 +1706,17 @@
         <sg sg_id="6" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="26000" balMaxGreen="90000" balWeightDelay="1.500000" balWeightQueue="15.000000" balWeightStops="75.000000" notes="" />
         <sg sg_id="7" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
         <sg sg_id="8" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="21" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="22" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="23" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="24" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="25" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="26" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="27" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="28" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="9" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="10" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="11" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="12" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="13" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="14" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="15" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="16" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
       </sgs>
     </stageProg>
-    <stageProg id="2" cycletime="90000" switchpoint="0" offset="5000" intergreens="1" fitness="0.000000" vehicleCount="0" weightBalance="3" weightStops="0" balanceFixedTimeControl="true" name="Stage 1, Stage 2, Stage 3, Stage 4">
+    <stageProg id="2" cycletime="90000" switchpoint="0" offset="5000" intergreens="1" fitness="0.000000" vehicleCount="0" weightBalance="3" weightStops="0" factorMaxRedPuT="-1.000000" balanceFixedTimeControl="true" name="Stage 1, Stage 2, Stage 3, Stage 4">
       <interstages>
         <interstage display="1" begin="0" />
         <interstage display="5" begin="13000" />
@@ -1750,14 +1750,14 @@
         <sg sg_id="6" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="26000" balMaxGreen="90000" balWeightDelay="1.500000" balWeightQueue="15.000000" balWeightStops="75.000000" notes="" />
         <sg sg_id="7" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
         <sg sg_id="8" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="21" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="22" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="23" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="24" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="25" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="26" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="27" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="28" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="9" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="10" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="11" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="12" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="13" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="14" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="15" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="16" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
       </sgs>
     </stageProg>
   </stageProgs>
