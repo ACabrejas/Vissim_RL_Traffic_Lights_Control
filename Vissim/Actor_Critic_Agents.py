@@ -20,16 +20,16 @@ class Model(tf.keras.Model):
         super().__init__('mlp_policy')
         # no tf.get_variable(), just simple Keras API
 
-        self.core1 = kl.Dense(32, activation='relu')
+        self.core1 = kl.Dense(60, activation='relu')
         
-        self.value1 = kl.Dense(42, activation='relu', name='value1') #64
-        self.value2 = kl.Dense(42, activation='relu', name='value2')
+        self.value1 = kl.Dense(60, activation='relu', name='value1') #64
+        self.value2 = kl.Dense(21, activation='relu', name='value2')
         self.value3 = kl.Dense(1, name='value3')
         # logits are unnormalized log probabilities
 
 
-        self.logits1 = kl.Dense(42, activation='relu', name='policy_logits1')
-        self.logits2 = kl.Dense(42, activation='relu', name='policy_logits2')
+        self.logits1 = kl.Dense(60, activation='relu', name='policy_logits1')
+        self.logits2 = kl.Dense(21, activation='relu', name='policy_logits2')
         self.logits3 = kl.Dense(num_actions, name='policy_logits3')
 
         self.dist = ProbabilityDistribution()
@@ -39,7 +39,7 @@ class Model(tf.keras.Model):
         x = tf.convert_to_tensor(inputs, dtype=tf.float32)
 
         # This it the core of the model
-        x = self.core1(x)
+        #x = self.core1(x)
         
         # separate hidden layers from the core
         hidden_logs = self.logits1(x)
@@ -110,7 +110,7 @@ class ACAgent:
         # Model
         # hyperparameters for loss terms and Agent
         self.params = {'value': 0.5, 'entropy': entropy, 'gamma': gamma}
-        self.model = Modelsave1(action_size)
+        self.model = Model(action_size)
         self.model.compile(
             optimizer=ko.RMSprop(lr=alpha),
             # define separate losses for policy logits and value estimate
