@@ -288,11 +288,6 @@ class ACAgent:
 
         next_value = next_value.squeeze(axis = 0)
 
-        print(values.shape)
-        print(next_value.shape)
-
-
-
         returns, advs = self._returns_advantages(rewards, values, next_value)
 
         # a trick to input actions and advantages through same API

@@ -3,6 +3,7 @@ import os
 import pickle
 import Vissimpython as Vp
 from tensorflow.keras.models import load_model
+from tensorflow.python.keras import backend as K
 
 
 
@@ -557,13 +558,21 @@ def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
 			print('Loading Pre-Trained Agent, Architecture and Memory.')
 			if best:
 				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Weights'+'.h5')
+				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Optimizer'+'.h5')
+
 			else :
 				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Weights'+'.h5')
+				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Optimizer'+'.h5')
 
 			# this is to build the network (to be corrected) 
 			agent.test()
-
 			agent.model.load_weights(Weights_Filename)
+
+			agent.model._make_train_function()
+			with open(Optimizer_Filename, 'rb') as f:
+				weight_values = pickle.load(f)
+			agent.model.optimizer.set_weights(weight_values)
+			
 		
 		else :
 			print('Loading Pre-Trained Agent, Architecture, Optimizer and Memory.')
@@ -598,8 +607,14 @@ def save_agents(vissim_working_directory, model_name, Agents, Session_ID, reward
 
 		if agent.type == 'AC':
 			Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Weights'+'.h5')
-			print('Saving architecture, weights state for agent-{}'.format(index))
-			
+			Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Optimizer'+'.h5')
+			print('Saving architecture, weights, optimizer state for agent-{}'.format(index))
+
+			symbolic_weights = getattr(agent.model.optimizer, 'weights')
+			weight_values = K.batch_get_value(symbolic_weights)
+			with open(Optimizer_Filename, 'wb') as f:
+				pickle.dump(weight_values, f)
+
 			# little change to save weight instead of the all agent
 			agent.model.save_weights(Weights_Filename)
 
@@ -630,10 +645,17 @@ def best_agent(reward_storage, average_reward, best_agent_weights, best_agent_me
 	if average_reward == np.max(reward_storage):
 		for index, agent in enumerate(Agents):
 			best_agent_memory = agent.memory
-
+			print('Saving architecture, weights, optimizer state for best agent-{}'.format(index))
 			if agent.type == 'AC' :
 				best_agent_weights = agent.model.get_weights()
 				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Weights'+'.h5')
+				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Optimizer'+'.h5')
+			
+				symbolic_weights = getattr(agent.model.optimizer, 'weights')
+				weight_values = K.batch_get_value(symbolic_weights)
+				with open(Optimizer_Filename, 'wb') as f:
+					pickle.dump(weight_values, f)
+
 				agent.model.save_weights(Weights_Filename)
 			else : 
 				best_agent_weights = agent.model
@@ -643,6 +665,12 @@ def best_agent(reward_storage, average_reward, best_agent_weights, best_agent_me
 			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Memory'+'.p')
 			pickle.dump(best_agent_memory, open(Memory_Filename, 'wb'))
 			print("New best agent found. Saved in {}".format(Memory_Filename))
+			Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Train'+'.p')
+			print('Dumping Training Results into pickle file.')
+			Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Loss'+'.p')
+			print('Dumping Loss Results into pickle file.')
+			pickle.dump(agent.loss, open(Loss_Filename, 'wb'))
+
 	return(best_agent_weights, best_agent_memory)
 
 def update_priority_weights(agent, memory_size):
