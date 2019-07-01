@@ -273,16 +273,17 @@ def calculate_state(Vissim, state_type, state_size, action):
 
 	elif state_type == 'CellsT':
 		Detectors = Vissim.Net.Detectors.GetAll()
-		state = [0 for i in range(2*len(Detectors)+1)]
+		state = [0 for i in range(2*len(Detectors))]
 		for index , Detector in enumerate(Detectors):
 			state[2*index] = Detector.AttValue('VehSpeed') 
 			state[2*index+1] = Detector.AttValue('OccupRate') 
 
 		
-		state[-1] = action
+		#state[-1] = action
 
 		state = [-1. if state is None else state for state in state]
-		state = np.reshape(state, [1,state_size])
+		state = np.reshape(state, [1,1,8,6])
+		return(state)
 
 	elif state_type == 'QueuesCellsSpeedOccSig':
 		Detectors = Vissim.Net.Detectors.GetAll()
@@ -301,7 +302,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 		state = np.reshape(state, [1,state_size])
 		#print(state)
 
-		return(state)
+		
 
 		return(state)	
 	elif state_type == 'MaxFlow':

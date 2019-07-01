@@ -60,10 +60,53 @@ class Model(tf.keras.Model):
 
 class Modelconv(tf.keras.Model):
     """docstring for Modelconv"""
-    def __init__(self, arg):
+    
+    def __init__(self, num_actions):
         super().__init__('mlp_policy')
-        self.arg = arg
+
+        #self.core1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same')
+
+        self.value1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same')
+        self.value2 = kl.Dense(21, activation='relu', name='value2')
+        self.value3 = kl.Dense(1, name='value3')
+
+        self.flat1 = kl.Flatten() 
+        # logits are unnormalized log probabilities
+
+
+        self.logits1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same')
+        self.logits2 = kl.Dense(21, activation='relu', name='policy_logits2')
+        self.logits3 = kl.Dense(num_actions, name='policy_logits3')
+
+        self.flat2 = kl.Flatten()
+
+        self.dist = ProbabilityDistribution()
+
+    def call(self, inputs):
+        # inputs is a numpy array, convert to Tensor
+        x = tf.convert_to_tensor(inputs, dtype=tf.float32)
+
+        # This it the core of the model
+        #x = self.core1(x)
         
+        # separate hidden layers from the core
+        hidden_logs = self.logits1(x)
+        hidden_logs = self.flat1(hidden_logs)
+        hidden_logs = self.logits2(hidden_logs)
+
+        hidden_vals = self.value1(x)
+        hidden_vals = self.flat2(hidden_vals)
+        hidden_vals = self.value2(hidden_vals)
+
+        return self.logits3(hidden_logs), self.value3(hidden_vals)
+
+    def action_value(self, obs):
+        # executes call() under the hood
+        logits, value = self.predict(obs)
+        action = self.dist.predict(logits)
+        # a simpler option, will become clear later why we don't use it
+        # action = tf.random.categorical(logits, 1)
+        return action , value
 
 # An working model training with entropy = 0.00001 en nstep = 32 and learn every step lr = 0.000065 gamma = 0.99 
 class Modelsave1(tf.keras.Model):
@@ -116,7 +159,7 @@ class ACAgent:
         # Model
         # hyperparameters for loss terms and Agent
         self.params = {'value': 0.5, 'entropy': entropy, 'gamma': gamma}
-        self.model = Model(action_size)
+        self.model = Modelconv(action_size)
         self.model.compile(
             optimizer=ko.RMSprop(lr=alpha),
             # define separate losses for policy logits and value estimate
@@ -136,6 +179,12 @@ class ACAgent:
         self.update_counter = 1                                 # Timesteps until next update
         if self.action_size == 2:
             self.compatible_actions = [[0,1,0,1],[1,0,1,0]]         # Potential actions (compatible phases), 1 means green
+
+        elif self.action_size == 4:
+            self.compatible_actions = [[1,1,1,0,0,0,0,0,0,0,0,0],
+                                        [0,0,0,1,1,1,0,0,0,0,0,0],
+                                        [0,0,0,0,0,0,1,1,1,0,0,0],
+                                        [0,0,0,0,0,0,0,0,0,1,1,1]]
         elif self.action_size == 8:
             self.compatible_actions = [[1,1,1,0,0,0,0,0,0,0,0,0],
                                         [0,0,0,1,1,1,0,0,0,0,0,0],
@@ -153,8 +202,8 @@ class ACAgent:
 
 
         # Initial Setup of S, A, R, S_
-        self.state = np.zeros((1,state_size))
-        self.newstate = np.zeros((1,state_size))
+        self.state = np.zeros((1,1,8,6))
+        self.newstate = np.zeros((1,1,8,6))
         self.action = 0
         self.newaction = 0
         self.reward = 0
@@ -182,7 +231,10 @@ class ACAgent:
 
     # Need to test before loading to build the graph (surely an other way to do it ...)
     def test(self):
-        _,_ = self.model.action_value(np.empty((1,self.state_size)))
+
+        _,_ = self.model.action_value(np.empty((1,1,8,6))) 
+        self.model.summary()
+        print('To be corected')
 
 
     def _value_loss(self, returns, value):
@@ -225,16 +277,19 @@ class ACAgent:
 
         Sample = np.array(self.memory)
 
-        states, actions, rewards, next_state  = np.concatenate(Sample[:,0], axis=0), Sample[:,1].astype('int32'), Sample[:,2], np.concatenate(Sample[:,3], axis=0)
+        states, actions, rewards, next_state  = np.concatenate(Sample[:,0], axis=0), Sample[:,1].astype('int32'), Sample[:,2], np.concatenate(Sample[:,3], axis=0)[-1]
 
 
 
         _, values = self.model.action_value(states)
         values = values.squeeze()
 
-        _, next_value  = self.model.action_value(next_state)
+        _, next_value  = self.model.action_value(next_state[np.newaxis,:])
 
-        next_value = next_value[-1]
+        next_value = next_value.squeeze(axis = 0)
+
+        print(values.shape)
+        print(next_value.shape)
 
 
 

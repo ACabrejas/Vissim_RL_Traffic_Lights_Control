@@ -2092,7 +2092,7 @@
 				<intObjectRef key="1"/>
 			</wttFiles>
 		</signalController>
-		<signalController active="true" cycTm="100" cycTmIsVar="false" debug="false" guiFile="C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_MOVA\PCMOVAEdit_x64.dll" name="" no="4" offset="0" progFile="C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_MOVA\PCMOVAControl_x64.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="Single_Cross_Mod.cfg" supplyFile2="Single_Cross_Mod.conn" supplyFile3="" type="EXTERNAL">
+		<signalController active="false" cycTm="100" cycTmIsVar="false" debug="false" guiFile="C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_MOVA\PCMOVAEdit_x64.dll" name="" no="4" offset="0" progFile="C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_MOVA\PCMOVAControl_x64.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="Single_Cross_Mod.cfg" supplyFile2="Single_Cross_Mod.conn" supplyFile3="" type="EXTERNAL">
 			<sgs>
 				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="A" no="1" redAmber="2" type="NORMAL"/>
 				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="B" no="2" redAmber="2" type="NORMAL"/>

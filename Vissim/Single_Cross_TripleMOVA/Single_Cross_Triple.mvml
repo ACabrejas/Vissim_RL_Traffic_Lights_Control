@@ -12,12 +12,12 @@
     <retries>2</retries>
   </connection>
   <simulator_data>
-    <vissim_input_file>C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_Triple\Single_Cross_Triple.inpx</vissim_input_file>
+    <vissim_input_file>C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_TripleMOVA\Single_Cross_TripleMOVA.inpx</vissim_input_file>
     <simulation_start_time>00:00:00</simulation_start_time>
     <junction>
       <name>1</name>
       <ctrltype>extern_pcmova</ctrltype>
-      <mova_dataset>C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_Triple\Single_Cross_Triple.mxds</mova_dataset>
+      <mova_dataset>C:\Users\Rzhang\Desktop\MLforFlowOptimisationOrigine\Vissim\Single_Cross_TripleMOVA\Single_Cross_Triple.mxds</mova_dataset>
       <simulator_id>1</simulator_id>
       <detector>
         <vissim_number>1</vissim_number>

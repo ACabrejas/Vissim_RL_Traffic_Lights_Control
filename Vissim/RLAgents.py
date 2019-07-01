@@ -48,6 +48,12 @@ class DQNAgent:
         self.update_counter = 1                                 # Timesteps until next update
         if self.action_size == 2:
             self.compatible_actions = [[0,1,0,1],[1,0,1,0]]         # Potential actions (compatible phases), 1 means green
+            
+        elif self.action_size == 4:
+            self.compatible_actions = [[1,1,1,0,0,0,0,0,0,0,0,0],
+                                        [0,0,0,1,1,1,0,0,0,0,0,0],
+                                        [0,0,0,0,0,0,1,1,1,0,0,0],
+                                        [0,0,0,0,0,0,0,0,0,1,1,1]]
         elif self.action_size == 8:
             self.compatible_actions = [[1,1,1,0,0,0,0,0,0,0,0,0],
                                         [0,0,0,1,1,1,0,0,0,0,0,0],
