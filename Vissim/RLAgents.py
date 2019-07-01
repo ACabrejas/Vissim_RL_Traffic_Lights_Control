@@ -83,8 +83,8 @@ class DQNAgent:
                 print("Deploying instance of Standard Deep Q Learning Agent(s)")
 
         # Initial Setup of S, A, R, S_
-        self.state = np.zeros((1,state_size))
-        self.newstate = np.zeros((1,state_size))
+        self.state = np.zeros(state_size)[np.newaxis,:]
+        self.newstate = np.zeros(state_size)[np.newaxis,:]
         self.action = 0
         self.newaction = 0
         self.reward = 0

@@ -191,7 +191,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 		North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
 		state = [West_Queue, South_Queue, East_Queue, North_Queue]
 		state = [0. if state is None else state for state in state]
-		state = np.reshape(state, [1,state_size])
+		state = np.reshape(state, state_size)[np.newaxis,:]
 		return(state)
 
 	elif state_type == 'Delay':
@@ -208,7 +208,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 		pre_state = [West_Delay, South_Delay, East_Delay, North_Delay, West_Stopped, South_Stopped, East_Stopped, North_Stopped]
 		pre_state = [0. if state is None else state for state in pre_state]
 		state = [pre_state[0]*pre_state[4], pre_state[1]*pre_state[5], pre_state[2]*pre_state[6], pre_state[3]*pre_state[7]]
-		state = np.reshape(state, [1,state_size])
+		state = np.reshape(state, state_size)[np.newaxis,:]
 		return(state)
 	
 	elif state_type == 'QueuesSig':
@@ -223,7 +223,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 		
 		state = [West_Queue, South_Queue, East_Queue, North_Queue, action]
 		state = [0. if state is None else state for state in state]
-		state = np.reshape(state, [1,state_size])
+		state = np.reshape(state, state_size)[np.newaxis,:]
 		
 		
 		return(state)
@@ -238,7 +238,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 		state[-1] = action
 
 		state = [-1. if state is None else state for state in state]
-		state = np.reshape(state, [1,state_size])
+		state = np.reshape(state, state_size)[np.newaxis,:]
 	
 		return(state)
 
@@ -253,7 +253,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 		state[-1] = action
 
 		state = [-1. if state is None else state for state in state]
-		state = np.reshape(state, [1,state_size])
+		state = np.reshape(state, state_size)[np.newaxis,:]
 		#print(state)
 
 		return(state)
@@ -268,7 +268,7 @@ def calculate_state(Vissim, state_type, state_size, action):
 		state[-1] = agent.action
 
 		state = [-1. if state is None else state for state in state]
-		state = np.reshape(state, [1,state_size])
+		state = np.reshape(state, state_size)[np.newaxis,:]
 
 		return(state)
 
@@ -279,11 +279,8 @@ def calculate_state(Vissim, state_type, state_size, action):
 			state[2*index] = Detector.AttValue('VehSpeed') 
 			state[2*index+1] = Detector.AttValue('OccupRate') 
 
-		
-		#state[-1] = action
-
 		state = [-1. if state is None else state for state in state]
-		state = np.reshape(state, [1,1,8,6])
+		state = np.reshape(state, state_size)[np.newaxis,:]
 		return(state)
 
 	elif state_type == 'QueuesCellsSpeedOccSig':
@@ -300,11 +297,8 @@ def calculate_state(Vissim, state_type, state_size, action):
 		state[-5] = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
 
 		state = [-1. if state is None else state for state in state]
-		state = np.reshape(state, [1,state_size])
-		#print(state)
-
+		state = np.reshape(state, state_size)[np.newaxis,:]
 		
-
 		return(state)	
 	elif state_type == 'MaxFlow':
 		pass

@@ -202,8 +202,8 @@ class ACAgent:
 
 
         # Initial Setup of S, A, R, S_
-        self.state = np.zeros((1,1,8,6))
-        self.newstate = np.zeros((1,1,8,6))
+        self.state = np.zeros(state_size)[np.newaxis,:]
+        self.newstate = np.zeros(state_size)[np.newaxis,:]
         self.action = 0
         self.newaction = 0
         self.reward = 0
