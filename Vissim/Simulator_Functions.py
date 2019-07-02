@@ -4,6 +4,7 @@ import pickle
 import Vissimpython as Vp
 from tensorflow.keras.models import load_model
 from tensorflow.python.keras import backend as K
+from NParser import NetworkParser
 
 
 
@@ -26,6 +27,22 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
  state_size, simulation_length, timesteps_per_second, seconds_per_green,\
   seconds_per_yellow, demand_list, demand_change_timesteps, mode, PER_activated, Surtrac = False):
 	
+
+
+	# Run Network Parser and ensure agents are linked to their intersections
+    #npa.update(Vissim) 
+	npa = NetworkParser(Vissim)
+	for index, agent in enumerate(Agents):
+		#agent.update_IDS(npa.signal_controllers_ids[index], npa)
+		agent.update_IDS(agent.signal_id, npa)
+		agent.episode_reward = []
+		agent.update_counter = 1
+		agent.intermediate_phase = False
+		agent.action = 0
+
+		if agent.type == 'AC' and mode == 'training':
+			agent.check = True
+			agent.check_counter = 0
 	
 	for time_t in range(simulation_length):
 
@@ -52,11 +69,7 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 				agent.queues_over_time.append(get_queue_lengths(Vissim, agent))
 				agent.accumulated_delay.append(agent.accumulated_delay[-1]+get_delay_timestep(Vissim))
 
-	for agent in Agents:
-		agent.update_counter = 1
-		agent.intermediate_phase = False
-		agent.action = 0
-	# Stop the simulation    
+	 
 	Vissim.Simulation.Stop()
 
 def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_per_green, seconds_per_yellow, mode, time_t, Surtrac = False):
@@ -89,6 +102,25 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 				#print(agent.newstate)
 				# Compute the new Action and store it in the agent
 				agent.newaction = agent.choose_action(agent.newstate)
+
+
+				# Training during the episode
+				if mode == 'training' and agent.type == 'AC' :
+					agent.trainstep += 1
+					agent.check_counter += 1
+					# That is some superbad coding
+					if agent.check and agent.check_counter == 100:
+						_, agent.predicted_value = agent.model.action_value(agent.state)
+						agent.predicted_value.squeeze(axis = 0)
+						agent.predicted_value = agent.predicted_value[0][0]
+						agent.check = False
+
+					if agent.check_counter == 150:
+						agent.true_value = np.sum(np.array(agent.episode_reward[100:150]) * (agent.params['gamma'] * np.ones(50))**np.arange(50))
+
+					if len(agent.memory) == agent.n_step_size and agent.trainstep >= 1 :
+						agent.learn()
+						agent.trainstep = 0
 				
 				
 				
@@ -119,12 +151,7 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 			# Update internal Action
 			agent.action = agent.newaction  
 			
-			# Training during the episode
-			if mode == 'training' and agent.type == 'AC' :
-				agent.trainstep += 1
-				if len(agent.memory) == agent.n_step_size and agent.trainstep >= 1 :
-					agent.learn()
-					agent.trainstep = 0				
+
 		# Error protection against negative update counters
 		else:
 			print("ERROR: Update Counter for agent {} is negative. Please investigate.".format(index))

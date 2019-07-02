@@ -64,18 +64,18 @@ class Modelconv(tf.keras.Model):
     def __init__(self, num_actions):
         super().__init__('mlp_policy')
 
-        #self.core1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same')
+        self.core1 = kl.Conv2D(5, (3, 3), activation='relu', padding='same')
 
-        self.value1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same')
-        self.value2 = kl.Dense(21, activation='relu', name='value2')
+        self.value1 = kl.Conv2D(16, (3, 3), activation='relu', padding='same')
+        self.value2 = kl.Dense(16, activation='relu', name='value2')
         self.value3 = kl.Dense(1, name='value3')
 
         self.flat1 = kl.Flatten() 
         # logits are unnormalized log probabilities
 
 
-        self.logits1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same')
-        self.logits2 = kl.Dense(21, activation='relu', name='policy_logits2')
+        self.logits1 = kl.Conv2D(16, (3, 3), activation='relu', padding='same')
+        self.logits2 = kl.Dense(8, activation='relu', name='policy_logits2')
         self.logits3 = kl.Dense(num_actions, name='policy_logits3')
 
         self.flat2 = kl.Flatten()
@@ -87,7 +87,7 @@ class Modelconv(tf.keras.Model):
         x = tf.convert_to_tensor(inputs, dtype=tf.float32)
 
         # This it the core of the model
-        #x = self.core1(x)
+        x = self.core1(x)
         
         # separate hidden layers from the core
         hidden_logs = self.logits1(x)
@@ -149,12 +149,11 @@ class ACAgent:
         # agent type flag 
         self.type = 'AC'
 
-
-
         #just temporary
         self.epsilon = 0
 
-        self.trainstep = 0
+
+        
 
         # Model
         # hyperparameters for loss terms and Agent
@@ -165,6 +164,13 @@ class ACAgent:
             # define separate losses for policy logits and value estimate
             loss=[self._logits_loss, self._value_loss]
         )
+
+        self.trainstep = 0
+        self.check_counter = 0
+        self.check = True
+        self.predicted_value = 0
+        self.true_value = 0 
+
 
         # Agent Junction ID and Controller ID
         self.signal_id = ID
@@ -232,7 +238,7 @@ class ACAgent:
     # Need to test before loading to build the graph (surely an other way to do it ...)
     def test(self):
 
-        _,_ = self.model.action_value(np.empty((1,1,8,6))) 
+        _,_ = self.model.action_value(np.empty(self.state_size)[np.newaxis,:]) 
         self.model.summary()
         print('To be corected')
 
