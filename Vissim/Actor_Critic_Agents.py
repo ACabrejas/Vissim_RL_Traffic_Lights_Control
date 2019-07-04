@@ -3,11 +3,15 @@ from collections import deque
 
 #Code adapted from http://inoryy.com/post/tensorflow2-deep-reinforcement-learning/
 
+
+
 import numpy as np
 import tensorflow as tf
 import tensorflow.keras.layers as kl
 import tensorflow.keras.losses as kls
 import tensorflow.keras.optimizers as ko
+
+
 
 
 class ProbabilityDistribution(tf.keras.Model):
@@ -64,21 +68,26 @@ class Modelconv(tf.keras.Model):
     def __init__(self, num_actions):
         super().__init__('mlp_policy')
 
-        self.core1 = kl.Conv2D(5, (3, 3), activation='relu', padding='same')
+        #self.core1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same' , name = 'core_conv1')
+        #self.core2 = kl.Conv2D(16, (3, 3), activation='relu', padding='same' , name = 'core_conv'2)
 
-        self.value1 = kl.Conv2D(16, (3, 3), activation='relu', padding='same')
+        self.valueconv1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same', name = 'value_conv1')
+        self.valueconv2 = kl.Conv2D(32, (3, 3), activation='relu', padding='same', name = 'value_conv2')
+        self.value1 = kl.Dense(16, activation='relu', name='value1')
         self.value2 = kl.Dense(16, activation='relu', name='value2')
-        self.value3 = kl.Dense(1, name='value3')
+        self.value = kl.Dense(1, name='value_last')
 
-        self.flat1 = kl.Flatten() 
+        self.flat1 = kl.Flatten(name = 'value_flat') 
         # logits are unnormalized log probabilities
 
 
-        self.logits1 = kl.Conv2D(16, (3, 3), activation='relu', padding='same')
-        self.logits2 = kl.Dense(8, activation='relu', name='policy_logits2')
-        self.logits3 = kl.Dense(num_actions, name='policy_logits3')
+        self.logitsconv1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same', name = 'policy_conv1')
+        self.logitsconv2 = kl.Conv2D(16, (3, 3), activation='relu', padding='same', name = 'policy_conv2')
+        self.logits1 = kl.Dense(16, activation='relu', name='policy_logits2')
+        self.logits2 = kl.Dense(8, activation='relu', name='policy_logits3')
+        self.logits = kl.Dense(num_actions, name='policy_last')
 
-        self.flat2 = kl.Flatten()
+        self.flat2 = kl.Flatten(name = 'policy_flat')
 
         self.dist = ProbabilityDistribution()
 
@@ -87,18 +96,77 @@ class Modelconv(tf.keras.Model):
         x = tf.convert_to_tensor(inputs, dtype=tf.float32)
 
         # This it the core of the model
-        x = self.core1(x)
+        # x = self.core1(x)
+        
+        # separate hidden layers from the core
+        hidden_logs = self.logitsconv1(x)
+        hidden_logs = self.logitsconv2(hidden_logs)
+        hidden_logs = self.flat1(hidden_logs)
+        hidden_logs = self.logits1(hidden_logs)
+        hidden_logs = self.logits2(hidden_logs)
+
+        hidden_vals = self.valueconv1(x)
+        hidden_vals = self.valueconv2(hidden_vals)
+        hidden_vals = self.flat2(hidden_vals)
+        hidden_vals = self.value1(hidden_vals)
+        hidden_vals = self.value2(hidden_vals)
+
+        return self.logits(hidden_logs), self.value(hidden_vals)
+
+    def action_value(self, obs):
+        # executes call() under the hood
+        logits, value = self.predict(obs)
+        action = self.dist.predict(logits)
+        # a simpler option, will become clear later why we don't use it
+        # action = tf.random.categorical(logits, 1)
+        return action , value
+
+class Modelconvsave1(tf.keras.Model):
+    """docstring for Modelconv"""
+    
+    def __init__(self, num_actions):
+        super().__init__('mlp_policy')
+
+        #self.core1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same' , name = 'core_conv1')
+        #self.core2 = kl.Conv2D(16, (3, 3), activation='relu', padding='same' , name = 'core_conv'2)
+
+        self.value1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same', name = 'value_conv1')
+        self.value2 = kl.Dense(16, activation='relu', name='value2')
+        self.value3 = kl.Dense(16, activation='relu', name='value3')
+        self.value = kl.Dense(1, name='value_last')
+
+        self.flat1 = kl.Flatten(name = 'value_flat') 
+        # logits are unnormalized log probabilities
+
+
+        self.logits1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same', name = 'policy_conv1')
+        self.logits2 = kl.Dense(16, activation='relu', name='policy_logits2')
+        self.logits3 = kl.Dense(8, activation='relu', name='policy_logits3')
+        self.logits = kl.Dense(num_actions, name='policy_last')
+
+        self.flat2 = kl.Flatten(name = 'policy_flat')
+
+        self.dist = ProbabilityDistribution()
+
+    def call(self, inputs):
+        # inputs is a numpy array, convert to Tensor
+        x = tf.convert_to_tensor(inputs, dtype=tf.float32)
+
+        # This it the core of the model
+        # x = self.core1(x)
         
         # separate hidden layers from the core
         hidden_logs = self.logits1(x)
         hidden_logs = self.flat1(hidden_logs)
         hidden_logs = self.logits2(hidden_logs)
+        hidden_logs = self.logits3(hidden_logs)
 
         hidden_vals = self.value1(x)
         hidden_vals = self.flat2(hidden_vals)
         hidden_vals = self.value2(hidden_vals)
+        hidden_vals = self.value3(hidden_vals)
 
-        return self.logits3(hidden_logs), self.value3(hidden_vals)
+        return self.logits(hidden_logs), self.value(hidden_vals)
 
     def action_value(self, obs):
         # executes call() under the hood
@@ -142,7 +210,7 @@ class Modelsave1(tf.keras.Model):
 
 class ACAgent:
 
-    def __init__(self, state_size, action_size, ID, state_type, npa, n_step_size, gamma, alpha, entropy ,  Vissim):
+    def __init__(self, state_size, action_size, ID, state_type, npa, n_step_size, gamma, alpha, entropy, value,  Vissim):
 
 
         print("Deploying instance of Actor_Critic Agent(s) !!! TENSORFLOW 2 IS NEEDED !!! ")
@@ -152,12 +220,9 @@ class ACAgent:
         #just temporary
         self.epsilon = 0
 
-
-        
-
         # Model
         # hyperparameters for loss terms and Agent
-        self.params = {'value': 0.5, 'entropy': entropy, 'gamma': gamma}
+        self.params = {'value': value, 'entropy': entropy, 'gamma': gamma}
         self.model = Modelconv(action_size)
         self.model.compile(
             optimizer=ko.RMSprop(lr=alpha),
@@ -166,8 +231,6 @@ class ACAgent:
         )
 
         self.trainstep = 0
-        self.check_counter = 0
-        self.check = True
         self.predicted_value = 0
         self.true_value = 0 
 
@@ -216,6 +279,7 @@ class ACAgent:
 
         # Metrics Storage Initialization
         self.episode_reward = []
+        self.episode_memory = []
         self.loss = []
         self.queues_over_time = [[0,0,0,0]]
         self.accumulated_delay= [0]
@@ -237,10 +301,49 @@ class ACAgent:
 
     # Need to test before loading to build the graph (surely an other way to do it ...)
     def test(self):
-
         _,_ = self.model.action_value(np.empty(self.state_size)[np.newaxis,:]) 
         self.model.summary()
         print('To be corected')
+
+    # A function to check if the predicted value of a state is converging or near the actual return.
+    # horizon : the number of steps used to compute the return
+    # n_step, the number of sample
+    def value_check(self, horizon, n_sample):
+
+        if len(self.episode_memory) < horizon :
+            raise ERROR("episode_memory too small ")
+
+        # random indexes to sample the value function
+        indexes = np.random.choice(len(self.episode_memory) - horizon, size = n_sample)
+        predicted_values = []
+        true_values = []
+        logits = []
+
+        state0 = np.zeros(self.state_size)[np.newaxis,:]
+        logit0, _ = self.model.predict(state0)
+        logit0 = np.round(logit0.squeeze(axis = 0))
+
+
+        
+        # We could find a way to vectorize this but it is not worth it
+        for index in indexes:
+
+            # Compute the predicted value by the model
+            state = self.episode_memory[index][0]
+            logit, predicted_value = self.model.predict(state)
+            predicted_value = predicted_value.squeeze(axis = 0)
+            predicted_value = np.round(predicted_value[0])
+            predicted_values.append(predicted_value)
+
+            logit = list(np.round(logit.squeeze(axis = 0), decimals=2))
+            logits.append(logit)
+
+            # Compute the return 
+            true_value = np.sum(np.array(self.episode_reward[index: index+horizon]) * (self.params['gamma'] * np.ones(horizon))**np.arange(horizon))
+            true_values.append(round(true_value))
+
+        return predicted_values, true_values, logit0, logits
+
 
 
     def _value_loss(self, returns, value):
@@ -284,8 +387,6 @@ class ACAgent:
         Sample = np.array(self.memory)
 
         states, actions, rewards, next_state  = np.concatenate(Sample[:,0], axis=0), Sample[:,1].astype('int32'), Sample[:,2], np.concatenate(Sample[:,3], axis=0)[-1]
-
-
 
         _, values = self.model.action_value(states)
         values = values.squeeze()

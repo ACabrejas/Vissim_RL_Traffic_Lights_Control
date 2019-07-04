@@ -91,6 +91,7 @@ class DQNAgent:
         
         # Metrics Storage Initialization
         self.episode_reward = []
+        self.episode_memory = []
         self.loss = []
         self.queues_over_time = [[0,0,0,0]]
         self.accumulated_delay= [0]

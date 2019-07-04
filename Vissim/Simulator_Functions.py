@@ -36,13 +36,11 @@ def run_simulation_episode(Agents, Vissim, state_type, reward_type,\
 		#agent.update_IDS(npa.signal_controllers_ids[index], npa)
 		agent.update_IDS(agent.signal_id, npa)
 		agent.episode_reward = []
+		agent.episode_memory = []
 		agent.update_counter = 1
 		agent.intermediate_phase = False
 		agent.action = 0
 
-		if agent.type == 'AC' and mode == 'training':
-			agent.check = True
-			agent.check_counter = 0
 	
 	for time_t in range(simulation_length):
 
@@ -96,6 +94,7 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 				if not Surtrac :
 				# Commit previous State, previous Action, Reward generated and current State to memory
 					agent.remember(agent.state, agent.action, agent.reward, agent.newstate)
+					agent.episode_memory.append([agent.state, agent.action, agent.reward, agent.newstate])
 					
 				agent.episode_reward.append(agent.reward)
 										
@@ -107,17 +106,6 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 				# Training during the episode
 				if mode == 'training' and agent.type == 'AC' :
 					agent.trainstep += 1
-					agent.check_counter += 1
-					# That is some superbad coding
-					if agent.check and agent.check_counter == 100:
-						_, agent.predicted_value = agent.model.action_value(agent.state)
-						agent.predicted_value.squeeze(axis = 0)
-						agent.predicted_value = agent.predicted_value[0][0]
-						agent.check = False
-
-					if agent.check_counter == 150:
-						agent.true_value = np.sum(np.array(agent.episode_reward[100:150]) * (agent.params['gamma'] * np.ones(50))**np.arange(50))
-
 					if len(agent.memory) == agent.n_step_size and agent.trainstep >= 1 :
 						agent.learn()
 						agent.trainstep = 0

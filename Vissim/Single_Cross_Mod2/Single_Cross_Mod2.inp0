@@ -1072,6 +1072,26 @@
 		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="22" portNo="22" pos="143" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
 		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="23" portNo="23" pos="140" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
 		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="24" portNo="24" pos="140" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="15" maxPedSpeed="3.6" name="" no="25" portNo="25" pos="120" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="26" portNo="26" pos="123" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="27" portNo="27" pos="120" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="28" portNo="28" pos="120" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="15" maxPedSpeed="3.6" name="" no="29" portNo="29" pos="100" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="30" portNo="30" pos="103" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="31" portNo="31" pos="100" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="32" portNo="32" pos="100" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="15" maxPedSpeed="3.6" name="" no="33" portNo="33" pos="80" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="34" portNo="34" pos="83" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="35" portNo="35" pos="80" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="36" portNo="36" pos="80" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="15" maxPedSpeed="3.6" name="" no="37" portNo="37" pos="60" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="38" portNo="38" pos="63" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="39" portNo="39" pos="60" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="40" portNo="40" pos="60" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="1 1" length="15" maxPedSpeed="3.6" name="" no="41" portNo="41" pos="40" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="3 1" length="15" maxPedSpeed="3.6" name="" no="42" portNo="42" pos="43" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="5 1" length="15" maxPedSpeed="3.6" name="" no="43" portNo="43" pos="40" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
+		<detector allPedTypes="true" allVehTypes="true" anmFlag="false" lane="7 1" length="15" maxPedSpeed="3.6" name="" no="44" portNo="44" pos="40" sc="3" smthFactDecr="0.25" smthFactIncr="0.25" soundFile="" tmBefDep="0" type="STANDARD"/>
 	</detectors>
 	<displayTypes>
 		<displayType allSidesSame="false" anisoFilt="true" borderColor="ff808080" borderLineStyle="SOLIDLINE" curved="false" fillColor="ff808080" fillStyle="SOLIDFILL" invisible="false" name="Road gray" no="1" noMipmap="false" rail="false" railFlangeHgt="0.013" railFlangeWid="0.15" railGauge="1.435" railHeadHgt="0.043" railHeadWid="0.073" railHgt="0.172" railType="STANDARD" railWebWid="0.016" texHorizLen="1" textureFilename="" tiesHgt="0.02" tiesLen="2.6" tiesSpac="0.6" tiesTexFilename="" tiesTexHorizLen="1" tiesType="STANDARD" tiesWid="0.26"/>
@@ -2137,6 +2157,26 @@
 				<signalOutputConfigurationElement configName="DETEKT" detPort="22" title="" varNo="22" wttFilename="vissim"/>
 				<signalOutputConfigurationElement configName="DETEKT" detPort="23" title="" varNo="23" wttFilename="vissim"/>
 				<signalOutputConfigurationElement configName="DETEKT" detPort="24" title="" varNo="24" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="25" title="" varNo="25" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="26" title="" varNo="26" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="27" title="" varNo="27" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="28" title="" varNo="28" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="29" title="" varNo="29" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="30" title="" varNo="30" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="31" title="" varNo="31" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="32" title="" varNo="32" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="33" title="" varNo="33" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="34" title="" varNo="34" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="35" title="" varNo="35" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="36" title="" varNo="36" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="37" title="" varNo="37" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="38" title="" varNo="38" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="39" title="" varNo="39" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="40" title="" varNo="40" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="41" title="" varNo="41" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="42" title="" varNo="42" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="43" title="" varNo="43" wttFilename="vissim"/>
+				<signalOutputConfigurationElement configName="DETEKT" detPort="44" title="" varNo="44" wttFilename="vissim"/>
 			</sigTmsTabConfig>
 			<wttFiles>
 				<intObjectRef key="1"/>
