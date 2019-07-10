@@ -141,7 +141,7 @@ def green_red_to_amber(agent, seconds_per_yellow,Surtrac=False):
 	for index_group, sig_group in enumerate(agent.signal_groups):
 		# If the transition vector is > 0, we are changing from GREEN to RED, so set AMBER
 		if agent.transition_vector[index_group] == 1:
-			 
+			sig_group.SetAttValue("SigState", "AMBER")
 			#print("Changing Light {} to Red".format(index_group+1))
 
 		# If the transition vector is < 0, we are changing from RED to GREEN, so set to REDAMBER
@@ -608,9 +608,7 @@ def update_priority_weights(agent, memory_size):
 	if agent.DoubleDQN:
 		next_action = np.argmax(agent.model.predict(np.reshape(next_state,(len(state),agent.state_size))), axis=1)
 		target = reward + agent.gamma * agent.target_model.predict(np.reshape(next_state,(len(state),agent.state_size)))[np.arange(len(state)) , next_action ].reshape(len(state),1)
-		
-		#print(target.shape)
-		
+				
 	else:
 		# Fixed Q-Target
 		target = reward + agent.gamma * np.max(agent.target_model.predict(np.reshape(next_state,(len(state),agent.state_size))),axis=1).reshape(len(state),1)
@@ -618,7 +616,6 @@ def update_priority_weights(agent, memory_size):
 
 	target_f = agent.model.predict(state)
 	absolute_errors = np.abs(target_f[np.arange(len(target_f)),action].reshape(len(state),1)-target)
-	
 	
 	#Update priority sampling weights
 	agent.memory.batch_update(tree_idx, absolute_errors)

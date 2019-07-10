@@ -38,10 +38,10 @@ class NetworkParser:
             for SG in range(self.signal_controllers[SC].SGs.Count):
                 self.signal_heads[SC].append(toList(self.signal_groups[SC][SG].SigHeads.GetAll())[0])
                 
-        self.lanes = [[[] for b in range(len(self.signal_heads[a])) ] for a in self.signal_controllers_ids]
+        self.signal_lanes = [[] for _ in self.signal_controllers_ids]
         for SC in self.signal_controllers_ids:
             for SH in range(len(self.signal_heads[SC])):
-                self.lanes[SC][SH].append(self.signal_heads[SC][SH].Lane)
+                self.signal_lanes[SC].append(self.signal_heads[SC][SH].AttValue('Lane'))
 
     def update(self, Vissim):
         ## Get all SignalControllers
