@@ -78,7 +78,7 @@ class Modelconv(tf.keras.Model):
 		#self.core2 = kl.Conv2D(32, (3, 3), activation=lrelu, padding='same' , name = 'core_conv2')
 		#self.core3 = kl.Conv2D(32, (3, 3), activation=lrelu, padding='same' , name = 'core_conv3')
 
-		self.valueconv1 = kl.Conv2D(32, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'value_conv1')
+		self.valueconv1 = kl.Conv2D(64, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'value_conv1')
 		self.valueconv2 = kl.Conv2D(32, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'value_conv2')
 		self.valueconv3 = kl.Conv2D(16, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'value_conv3')
 		self.value1 = kl.Dense(32, activation=lrelu, name='value1')
@@ -90,7 +90,7 @@ class Modelconv(tf.keras.Model):
 
 
 		self.logitsconv1 = kl.Conv2D(32, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'policy_conv1')
-		self.logitsconv2 = kl.Conv2D(16, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'policy_conv2')
+		self.logitsconv2 = kl.Conv2D(32, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'policy_conv2')
 		self.logitsconv3 = kl.Conv2D(16, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'policy_conv3')
 		self.logits1 = kl.Dense(32, activation=lrelu, name='policy_logits2')
 		self.logits2 = kl.Dense(16, activation=lrelu, name='policy_logits3')

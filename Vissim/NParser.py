@@ -30,6 +30,7 @@ class NetworkParser:
         self.signal_groups = [[] for _ in self.signal_controllers_ids]
         for SC in self.signal_controllers_ids:
             for SG in range(1,self.signal_controllers[SC].SGs.Count+1):
+                print(SC)
                 self.signal_groups[SC].append(self.signal_controllers[SC].SGs.ItemByKey(SG))
                 
         ## Create SignalHeadsCollection and unpack the SignalHeads into a list by SignalController
