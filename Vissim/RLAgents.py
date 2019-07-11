@@ -22,6 +22,8 @@ class DQNAgent:
         self.signal_id = ID
         self.signal_controller = npa.signal_controllers[self.signal_id]
         self.signal_groups = npa.signal_groups[self.signal_id]
+        self.signal_heads = npa.signal_heads[self.signal_id]
+        self.signal_lanes = npa.signal_lanes[self.signal_id]
 
         # Number of states, action space and memory
         self.state_size = state_size
@@ -72,14 +74,14 @@ class DQNAgent:
         # Architecture Debug Messages
         if self.DoubleDQN:
             if self.Dueling:
-                print("Deploying instance of Dueling Double Deep Q Learning Agent(s)")
+                print("Deploying instance of Dueling Double Deep Q Learning Agent(s) in Junction {}".format(ID))
             else:
-                print("Deploying instance of Double Deep Q Learning Agent(s)")
+                print("Deploying instance of Double Deep Q Learning Agent(s) in Junction {}".format(ID))
         else:
             if self.Dueling:
-                print("Deploying instance of Dueling Deep Q Learning Agent(s)")
+                print("Deploying instance of Dueling Deep Q Learning Agent(s) in Junction {}".format(ID))
             else:
-                print("Deploying instance of Standard Deep Q Learning Agent(s)")
+                print("Deploying instance of Standard Deep Q Learning Agent(s) in Junction {}".format(ID))
 
         # Initial Setup of S, A, R, S_
         self.state = np.zeros((1,state_size))
