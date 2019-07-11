@@ -1,3 +1,5 @@
+import numpy as np
+from time import time
  #SCU
 
 
@@ -88,6 +90,8 @@ class Signal_Control_Unit:
 	Alvaro's reward function needs to be more general
 	'''
 	def calculate_state(self,length=None,verbose = False):
+
+		tic = time()
 		
 		Queues = []
 		Lanes = []
@@ -108,6 +112,9 @@ class Signal_Control_Unit:
 			state = np.reshape(Queues,[1,length])
 		else :
 			state = np.reshape(Queues,[1,len(Queues)])
+
+		tac = time()
+		print(tac-tic)
 		
 		return (state)
 

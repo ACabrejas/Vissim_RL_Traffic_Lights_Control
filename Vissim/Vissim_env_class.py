@@ -4,6 +4,7 @@ from Vissim_SCU_class import Signal_Control_Unit
 import win32com.client
 import os
 
+from time import time
 
 
 # The environment class , 
@@ -15,13 +16,13 @@ class env():
 	-Deploy the SCU
 	-
 	"""
-	def __init__(self, model_name, vissim_working_directory, sim_length, controlers_actions,\
+	def __init__(self, model_name, vissim_working_directory, sim_length, controllers_actions,\
 					 timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
 
 		# Model parameters
 		self.model_name = model_name
 		self.vissim_working_directory = vissim_working_directory
-		self.controlers_actions = controlers_actions
+		self.controllers_actions = controllers_actions
 
 
 		# Simulation parameters
@@ -55,12 +56,13 @@ class env():
 		# Create a list of SCUs each scu control a signal controller
 		# Need to find later a way to give different green / yellow time to each SCUs
 		self.SCUs = []
+		tic = time()
 		for i in self.npa.signal_controllers_ids:
 			self.SCUs.append(\
 					  Signal_Control_Unit(
-						 Vissim,\
+						 self.Vissim,\
 						 self.npa.signal_controllers[i],\
-						 self.Controllers_Actions[i],\
+						 self.controllers_actions[i],\
 						 Signal_Groups = self.npa.signal_groups[i],\
 						 green_time = 5,\
 						 redamber_time = 1,\
@@ -68,6 +70,8 @@ class env():
 						 red_time = 1\
 						)\
 					  )
+		tac = time()
+		print(tac-tic)
 
 
 
@@ -81,42 +85,39 @@ class env():
 	def step(self,actions):
 		return(actions)
 
-	# # reset the environnement
-	# def reset(self):
-	# 	## Connecting the COM Server => Open a new Vissim Window:
-	# 	# Server should only be dispatched in first run. Otherwise reload model.
-	# 	# Setting Working Directory
-	# 	for _ in range(5):
-	# 		try:
-	# 			## Load the Network:
-	# 			Filename = os.path.join(self.vissim_working_directory, self.model_name, (self.model_name+'.inpx'))
+	# reset the environnement
+	def reset(self):
+		## Connecting the COM Server => Open a new Vissim Window:
+		# Server should only be dispatched in first run. Otherwise reload model.
+		# Setting Working Directory
 
-	# 			self.Vissim.LoadNet(Filename)
 
-	# 			## Setting Simulation End
-	# 			self.Vissim.Simulation.SetAttValue('SimPeriod', self.simulation_length)
-	# 			## If a fresh start is needed
-	# 			if self.delete_results == True:
-	# 				# Delete all previous simulation runs first:
-	# 				for simRun in self.Vissim.Net.SimulationRuns:
-	# 					self.Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
-	# 				#print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
-	# 		except:
-	# 			if _ != 4:
-	# 				print("Failed load attempt " +str(_+1)+ "/5. Re-attempting.")
-	# 			elif _ == 4:
-	# 				raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
-	# 				quit()
-		
-	# 	self.select_mode()
+		COMServerReload(self.Vissim, self.model_name, self.vissim_working_directory, self.sim_length, self.timesteps_per_second, self.delete_results)
+		self.npa = NetworkParser(self.Vissim) 
+		self.select_mode()
 
-	# 	# Simulate one step and give the control to COM
-	# 	for _ in range(self.timesteps_per_second):
-	# 		self.Vissim.Simulation.RunSingleStep()
+		# Simulate one step and give the control to COM
+		for _ in range(self.timesteps_per_second):
+			self.Vissim.Simulation.RunSingleStep()
 
-	# 	for SC in self.npa.signal_controllers_ids:
-	# 		for group in self.npa.signal_groups[SC]:
-	# 			group.SetAttValue('ContrByCOM', 1)
+		for SC in self.npa.signal_controllers_ids:
+			for group in self.npa.signal_groups[SC]:
+				group.SetAttValue('ContrByCOM', 1)
+
+		self.SCUs = []
+		for i in self.npa.signal_controllers_ids:
+			self.SCUs.append(\
+					  Signal_Control_Unit(
+						 self.Vissim,\
+						 self.npa.signal_controllers[i],\
+						 self.controllers_actions[i],\
+						 Signal_Groups = self.npa.signal_groups[i],\
+						 green_time = 5,\
+						 redamber_time = 1,\
+						 amber_time = 3, \
+						 red_time = 1\
+						)\
+					  )
 		
 
 
@@ -315,6 +316,39 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, timestep
 				print("Failed load attempt " +str(_+1)+ "/5. Re-attempting.")
 			elif _ == 4:
 				raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
+
+
+def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_length, timesteps_per_second, delete_results):
+    ## Connecting the COM Server => Open a new Vissim Window:
+    # Server should only be dispatched in first run. Otherwise reload model.
+    # Setting Working Directory
+    for _ in range(5):
+        try:
+            ## Load the Network:
+            Filename = os.path.join(vissim_working_directory, model_name, (model_name+'.inpx'))
+
+            Vissim.LoadNet(Filename)
+
+            ## Setting Simulation End
+            Vissim.Simulation.SetAttValue('SimPeriod', simulation_length)
+            ## If a fresh start is needed
+            if delete_results == True:
+                # Delete all previous simulation runs first:
+                for simRun in Vissim.Net.SimulationRuns:
+                    Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
+                #print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
+
+            #Pre-fetch objects for stability
+            
+            #print('Reloading complete. Executing new episode...')
+            return()
+        # If loading fails
+        except:
+            if _ != 4:
+                print("Failed load attempt " +str(_+1)+ "/5. Re-attempting.")
+            elif _ == 4:
+                raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
+                quit()
 
 
 
