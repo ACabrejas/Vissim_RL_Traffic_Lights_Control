@@ -104,7 +104,7 @@ def Agents_update(Agents, Vissim, state_type, reward_type, state_size, seconds_p
 
 
 				# Training during the episode
-				if mode == 'training' and agent.type == 'AC' :
+				if (mode == 'training' or mode == 'retraining')  and agent.type == 'AC' :
 					agent.trainstep += 1
 					if len(agent.memory) == agent.n_step_size and agent.trainstep >= 1 :
 						agent.learn()
@@ -289,13 +289,22 @@ def calculate_state(Vissim, state_type, state_size, action):
 
 	elif state_type == 'CellsT':
 		Detectors = Vissim.Net.Detectors.GetAll()
-		state = [0 for i in range(2*len(Detectors))]
+		Occupancy = [0 for i in range(len(Detectors))]
+		Speed = [0 for i in range(len(Detectors))]
 		for index , Detector in enumerate(Detectors):
-			state[2*index] = Detector.AttValue('VehSpeed') 
-			state[2*index+1] = Detector.AttValue('OccupRate') 
+			Speed[index] = Detector.AttValue('VehSpeed') 
+			Occupancy[index] = Detector.AttValue('OccupRate') 
 
-		state = [-1. if state is None else state for state in state]
+		Occupancy = [-1. if occ is None else occ for occ in Occupancy]
+		Speed = [-1. if sp is None else sp for sp in Speed]
+
+		Occupancy = np.reshape(Occupancy, state_size[1:])[np.newaxis, :]
+		Speed = np.reshape(Speed, state_size[1:])[np.newaxis, :]
+
+		state = np.concatenate([Occupancy, Speed], axis=0)
+
 		state = np.reshape(state, state_size)[np.newaxis,:]
+
 		return(state)
 
 	elif state_type == 'QueuesCellsSpeedOccSig':
@@ -687,9 +696,6 @@ def update_priority_weights(agent, memory_size):
 	# Sample all memory
 	tree_idx, minibatch, ISWeights_mb = agent.memory.sample(memory_size)
 	
-	
-	
-	
         # for state, action, reward, next_state in minibatch:
         #     if agent.DoubleDQN:
         #         next_action = np.argmax(agent.model.predict(np.reshape(next_state,(1,agent.state_size))), axis=1)
@@ -710,6 +716,7 @@ def update_priority_weights(agent, memory_size):
 		
 	if agent.DoubleDQN:
 		next_action = np.argmax(agent.model.predict(next_state), axis=1)
+		print(agent.target_model.predict(next_state).shape)
 		target = reward + agent.gamma * agent.target_model.predict(next_state)[np.arange(len(state)) , next_action ].reshape(len(state),1)
 		
 		#print(target.shape)

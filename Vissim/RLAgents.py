@@ -4,13 +4,27 @@ import random
 import PER
 
 import tensorflow as tf
+import tensorflow.keras.layers as kl
+
+
+import tensorflow.keras.losses as kls
+
 from tensorflow.python.keras import backend as K
 from tensorflow.keras.models import load_model, Sequential, Model
-from tensorflow.keras.layers import Dense, Input, Lambda
+from tensorflow.keras.layers import Dense, Input, Lambda, Flatten
 from tensorflow.keras.optimizers import Adam
 import tensorflow.keras.losses as kls
 from tensorflow.keras import regularizers
 
+from tensorflow.keras.activations import relu
+
+
+
+###
+#leaky relu
+lrelu = lambda x : relu(x, alpha =0.01)
+
+###
 ######################################################################################
 ## Deep Q Learning Agent (Use DoubleDQN flag to swap to DDQN)
 ######################################################################################
@@ -114,11 +128,14 @@ class DQNAgent:
         if self.Dueling:
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
             #model = Sequential()
-            input_layer = Input(shape = (self.state_size,))
-            dense1 = Dense(64, input_dim=self.state_size, activation='relu',kernel_regularizer=regularizers.l2(0.001))(input_layer)
-            #dense2 = Dense(64, activation='relu', kernel_regularizer=regularizers.l2(0.001))(dense1)
+            input_layer = Input(shape = self.state_size )
+            conv1 = kl.Conv2D(32, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv1')(input_layer)
+            conv2 = kl.Conv2D(64, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv2')(conv1)
+            conv3 = kl.Conv2D(64, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv3')(conv2)
+            flatten = Flatten()(conv3)
+            dense1 = Dense(128, activation= lrelu, kernel_regularizer=regularizers.l2(0.001))(flatten)
 
-            #flatten = Flatten()(dense2)
+            
             fc1 = Dense(48)(dense1)
             dueling_actions = Dense(self.action_size,kernel_regularizer=regularizers.l2(0.001))(fc1)
             fc2 = Dense(48)(dense1)
