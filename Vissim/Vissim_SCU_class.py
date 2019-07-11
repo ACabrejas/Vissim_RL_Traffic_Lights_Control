@@ -57,7 +57,7 @@ class Signal_Control_Unit:
 		  
 		self.time_steps_per_second = self.Vissim.Simulation.AttValue('SimRes')
 		
-		self.green_time = green_time * self.time_steps_per_second
+		self.green_time = green_time * self.time_steps_per_second # the green time is in step
 		self.redamber_time = redamber_time * self.time_steps_per_second
 		self.amber_time = amber_time * self.time_steps_per_second
 		self.red_time = red_time * self.time_steps_per_second
@@ -89,7 +89,7 @@ class Signal_Control_Unit:
 	calculate_state:
 	Alvaro's reward function needs to be more general
 	'''
-	def calculate_state(self,length=None,verbose = False):
+	def calculate_state(self, length = None, verbose = False):
 
 		tic = time()
 		
@@ -137,9 +137,9 @@ class Signal_Control_Unit:
 		-- id of action
 		-- green_time, if specified by agent (in seconds)
 	'''    
-	def action_update(self,action_key,green_time=None):
+	def action_update(self, action_key, green_time=None):
 		self.intermediate_phase = True # initate intermediate_phase
-		self.update_counter = 0 # set update counter zero (will get reset at self.update() )
+		self.update_counter = 1 # set update counter zero (will get reset at self.update() )
 		self.action_key = action_key
 		self.current_action = self.compatible_actions[action_key] 
 		self.new_colors = [ 2*val for val in self.current_action] # converts action to 0,1,2 range
@@ -246,12 +246,12 @@ class Signal_Control_Unit:
 		self.update_counter -= 1
 		
 		# These 'if' clauses mean update computation only happens if needed
-		if self.update_counter <= 0 :
+		if self.update_counter == 0 :
 			# if update counter just went zero 
 			# then ask for an action 
 			if self.intermediate_phase is False :
 				self.action_required = True 
-				return self.action_required
+				
 					
 			# if during a change
 			# then make the change
@@ -261,7 +261,7 @@ class Signal_Control_Unit:
 				# Get light color right for each signal group
 				for sg in self.signal_groups :
 					ID = sg.AttValue('No')-1
-					self._color_changer(sg,self.new_colors[ID],self.stage)
+					self._color_changer(sg, self.new_colors[ID], self.stage)
 						
 				# change the current stage and get time the stage last for
 				time = self._stage_changer(self.stage)

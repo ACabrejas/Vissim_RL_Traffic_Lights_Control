@@ -53,27 +53,36 @@ class env():
 				group.SetAttValue('ContrByCOM',1)
 
 		
-		# Create a list of SCUs each scu control a signal controller
-		# Need to find later a way to give different green / yellow time to each SCUs
-		self.SCUs = []
+		# Create a dictionnary of SCUs each scu control a signal controller
+		
+		
 		tic = time()
-		for i in self.npa.signal_controllers_ids:
-			self.SCUs.append(\
-					  Signal_Control_Unit(
+		self.SCUs = self._Load_SCUs()
+		tac = time()
+		print(tac-tic)
+
+	'''
+	_Load_SCUs :
+		provides a dictionary with at the SCUs
+		# Need to find later a way to give different green / yellow time to each SCUs
+	'''
+	def _Load_SCUs(self):
+		
+		SCUs = dict()
+		
+		for idx, sc in enumerate(self.npa.signal_controllers):
+			SCUs[idx] = Signal_Control_Unit(\
 						 self.Vissim,\
-						 self.npa.signal_controllers[i],\
-						 self.controllers_actions[i],\
-						 Signal_Groups = self.npa.signal_groups[i],\
+						 sc,\
+						 self.controllers_actions[idx],\
+						 Signal_Groups = None,\
 						 green_time = 5,\
 						 redamber_time = 1,\
 						 amber_time = 3, \
 						 red_time = 1\
-						)\
-					  )
-		tac = time()
-		print(tac-tic)
-
-
+						)
+		
+		return SCUs
 
 	# -function to get the SCUs to later deploy agent on them
 	def get_SCU(self):
@@ -82,8 +91,21 @@ class env():
 	# does a step in the simulator
 	# INPUT a dictionary of action
 	# return a dictionnary of (state, action, reward, ) the key will be the SCU's key
-	def step(self,actions):
-		return(actions)
+	def step(self, actions):
+		self.Vissim.Simulation.RunSingleStep()
+        Sars = dict()
+        
+        for idx, scu in self.SCUs:
+        	scu.action_update(actions[idx])
+        	scu.update()
+            if action_required :
+                Sars[idx] = scu.sars()
+        
+        if len(actions_required) > 0 :
+            return True, Sars
+        else:
+            return False, None
+
 
 	# reset the environnement
 	def reset(self):
@@ -104,20 +126,8 @@ class env():
 			for group in self.npa.signal_groups[SC]:
 				group.SetAttValue('ContrByCOM', 1)
 
-		self.SCUs = []
-		for i in self.npa.signal_controllers_ids:
-			self.SCUs.append(\
-					  Signal_Control_Unit(
-						 self.Vissim,\
-						 self.npa.signal_controllers[i],\
-						 self.controllers_actions[i],\
-						 Signal_Groups = self.npa.signal_groups[i],\
-						 green_time = 5,\
-						 redamber_time = 1,\
-						 amber_time = 3, \
-						 red_time = 1\
-						)\
-					  )
+		self.SCUs = self._Load_SCUs()
+		
 		
 
 
@@ -319,36 +329,36 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, timestep
 
 
 def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_length, timesteps_per_second, delete_results):
-    ## Connecting the COM Server => Open a new Vissim Window:
-    # Server should only be dispatched in first run. Otherwise reload model.
-    # Setting Working Directory
-    for _ in range(5):
-        try:
-            ## Load the Network:
-            Filename = os.path.join(vissim_working_directory, model_name, (model_name+'.inpx'))
+	## Connecting the COM Server => Open a new Vissim Window:
+	# Server should only be dispatched in first run. Otherwise reload model.
+	# Setting Working Directory
+	for _ in range(5):
+		try:
+			## Load the Network:
+			Filename = os.path.join(vissim_working_directory, model_name, (model_name+'.inpx'))
 
-            Vissim.LoadNet(Filename)
+			Vissim.LoadNet(Filename)
 
-            ## Setting Simulation End
-            Vissim.Simulation.SetAttValue('SimPeriod', simulation_length)
-            ## If a fresh start is needed
-            if delete_results == True:
-                # Delete all previous simulation runs first:
-                for simRun in Vissim.Net.SimulationRuns:
-                    Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
-                #print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
+			## Setting Simulation End
+			Vissim.Simulation.SetAttValue('SimPeriod', simulation_length)
+			## If a fresh start is needed
+			if delete_results == True:
+				# Delete all previous simulation runs first:
+				for simRun in Vissim.Net.SimulationRuns:
+					Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
+				#print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
 
-            #Pre-fetch objects for stability
-            
-            #print('Reloading complete. Executing new episode...')
-            return()
-        # If loading fails
-        except:
-            if _ != 4:
-                print("Failed load attempt " +str(_+1)+ "/5. Re-attempting.")
-            elif _ == 4:
-                raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
-                quit()
+			#Pre-fetch objects for stability
+			
+			#print('Reloading complete. Executing new episode...')
+			return()
+		# If loading fails
+		except:
+			if _ != 4:
+				print("Failed load attempt " +str(_+1)+ "/5. Re-attempting.")
+			elif _ == 4:
+				raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
+				quit()
 
 
 
