@@ -64,8 +64,10 @@ class Signal_Control_Unit:
 	
 		# implement 1st action to start
 		self.action_key = 0   # dict key of current action (we start with 0) 
+		self.next_action_key = 0
+
 		self.action_required = False # used to requests an action from agent
-		self.update_counter = 0
+		self.update_counter = 1
 		self.intermediate_phase = True # tracks when initiating a new action
 		self.action_update(self.action_key)    
 		
@@ -78,11 +80,14 @@ class Signal_Control_Unit:
 	sars :
 	returns state, id of action, reward
 	'''     
-	def sar(self):
-		self.state = self.calculate_state()
-		self.reward = self.calculate_reward()
-		
-		return self.state, self.action_key, self.reward
+	def sars(self):
+	
+		sars =  [self.state, self.action_key, self.reward, self.next_state]
+
+		self.state = self.next_state
+		self.action = self.next_action_key
+
+		return(sars)
 
 	
 	'''
@@ -137,11 +142,11 @@ class Signal_Control_Unit:
 		-- id of action
 		-- green_time, if specified by agent (in seconds)
 	'''    
-	def action_update(self, action_key, green_time=None):
+	def action_update(self, next_action_key, green_time=None):
 		self.intermediate_phase = True # initate intermediate_phase
 		self.update_counter = 1 # set update counter zero (will get reset at self.update() )
-		self.action_key = action_key
-		self.current_action = self.compatible_actions[action_key] 
+		self.next_action_key = next_action_key
+		self.current_action = self.compatible_actions[next_action_key] 
 		self.new_colors = [ 2*val for val in self.current_action] # converts action to 0,1,2 range
 		
 		if green_time is not None:
@@ -246,17 +251,19 @@ class Signal_Control_Unit:
 		self.update_counter -= 1
 		
 		# These 'if' clauses mean update computation only happens if needed
-		if self.update_counter == 0 :
+		if self.update_counter == 0. :
 			# if update counter just went zero 
 			# then ask for an action 
 			if self.intermediate_phase is False :
 				self.action_required = True 
-				
+
+				self.next_state = self.calculate_state()
+				self.reward = self.calculate_reward()
 					
 			# if during a change
 			# then make the change
 			if self.intermediate_phase is True : 
-				self.action_reqired = False
+				self.action_required = False
 				
 				# Get light color right for each signal group
 				for sg in self.signal_groups :

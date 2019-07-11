@@ -27,6 +27,8 @@ class env():
 
 		# Simulation parameters
 		self.sim_length = sim_length
+		self.global_counter = 0
+
 		self.mode = mode
 		self.timesteps_per_second = timesteps_per_second
 
@@ -38,6 +40,7 @@ class env():
 		# ComServerDisp
 		self.Vissim, _, _, _ = COMServerDispatch(model_name, vissim_working_directory, self.sim_length,\
 												 self.timesteps_per_second, delete_results = self.delete_results, verbose = self.verbose)
+		self.done = False
 
 		# The parser can be a methode of the environment
 		self.npa = NetworkParser(self.Vissim) 
@@ -47,6 +50,8 @@ class env():
 		# Simulate one step and give the control to COM
 		for _ in range(self.timesteps_per_second):
 			self.Vissim.Simulation.RunSingleStep()
+			self.global_counter += 1
+
 
 		for SC in self.npa.signal_controllers_ids:
 			for group in self.npa.signal_groups[SC]:
@@ -57,7 +62,7 @@ class env():
 		
 		
 		tic = time()
-		self.SCUs = self._Load_SCUs()
+		self._Load_SCUs()
 		tac = time()
 		print(tac-tic)
 
@@ -68,10 +73,10 @@ class env():
 	'''
 	def _Load_SCUs(self):
 		
-		SCUs = dict()
+		self.SCUs = dict()
 		
 		for idx, sc in enumerate(self.npa.signal_controllers):
-			SCUs[idx] = Signal_Control_Unit(\
+			self.SCUs[idx] = Signal_Control_Unit(\
 						 self.Vissim,\
 						 sc,\
 						 self.controllers_actions[idx],\
@@ -82,7 +87,7 @@ class env():
 						 red_time = 1\
 						)
 		
-		return SCUs
+		
 
 	# -function to get the SCUs to later deploy agent on them
 	def get_SCU(self):
@@ -90,21 +95,28 @@ class env():
 
 	# does a step in the simulator
 	# INPUT a dictionary of action
-	# return a dictionnary of (state, action, reward, ) the key will be the SCU's key
+	# return a dictionnary of (state, action, reward, next_state , done) the key will be the SCU's key
 	def step(self, actions):
 		self.Vissim.Simulation.RunSingleStep()
-        Sars = dict()
-        
-        for idx, scu in self.SCUs:
-        	scu.action_update(actions[idx])
-        	scu.update()
-            if action_required :
-                Sars[idx] = scu.sars()
-        
-        if len(actions_required) > 0 :
-            return True, Sars
-        else:
-            return False, None
+		self.global_counter += 1
+		if self.global_counter > (self.sim_length-1) * self.timesteps_per_second:
+			self.done = True
+
+		Sarsd = dict()
+		
+		for idx, scu in self.SCUs.items():
+			if scu.action_required :
+				scu.action_update(actions[idx])
+			scu.update()
+			
+			if scu.action_required :
+				Sarsd[idx] = scu.sars()+[self.done]
+		
+
+		if len(Sarsd) > 0 :
+			return True, Sarsd
+		else:
+			return False, None
 
 
 	# reset the environnement
@@ -126,8 +138,8 @@ class env():
 			for group in self.npa.signal_groups[SC]:
 				group.SetAttValue('ContrByCOM', 1)
 
-		self.SCUs = self._Load_SCUs()
-		
+		self._Load_SCUs()
+		self.done = False
 		
 
 
