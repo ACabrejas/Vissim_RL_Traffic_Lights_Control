@@ -81,7 +81,7 @@ class env():
 						 sc,\
 						 self.controllers_actions[idx],\
 						 Signal_Groups = None,\
-						 green_time = 5,\
+						 green_time = 50,\
 						 redamber_time = 1,\
 						 amber_time = 3, \
 						 red_time = 1\
@@ -89,7 +89,7 @@ class env():
 		
 		
 
-	# -function to get the SCUs to later deploy agent on them
+	# -Function to get the SCUs to later deploy agent on them
 	def get_SCU(self):
 		return(self.SCUs)
 
@@ -106,9 +106,18 @@ class env():
 		
 		for idx, scu in self.SCUs.items():
 			if scu.action_required :
+				tic = time()
 				scu.action_update(actions[idx])
-			scu.update()
+				tac = time()
+				print('action_update')
+				print(tac-tic)
 			
+			tic = time()
+			scu.update()
+			tac = time()
+			print('update')
+			print(tac-tic)
+
 			if scu.action_required :
 				Sarsd[idx] = scu.sars()+[self.done]
 		

@@ -1,5 +1,5 @@
 import numpy as np
-from time import time
+import time as t
  #SCU
 
 
@@ -51,6 +51,7 @@ class Signal_Control_Unit:
 			
 		# get stae and reward parameters
 		self.state = self.calculate_state()
+		self.next_state = None
 		self.reward = self.calculate_reward()  
 	   
 		self.compatible_actions = compatible_actions
@@ -78,7 +79,7 @@ class Signal_Control_Unit:
 			
 	'''
 	sars :
-	returns state, id of action, reward
+	returns state, id of action, reward, next state
 	'''     
 	def sars(self):
 	
@@ -96,7 +97,8 @@ class Signal_Control_Unit:
 	'''
 	def calculate_state(self, length = None, verbose = False):
 
-		tic = time()
+		# mesure the time taken to do this action
+		tic = t.time()
 		
 		Queues = []
 		Lanes = []
@@ -118,8 +120,8 @@ class Signal_Control_Unit:
 		else :
 			state = np.reshape(Queues,[1,len(Queues)])
 
-		tac = time()
-		print(tac-tic)
+		tac = t.time()
+		#print(tac-tic)
 		
 		return (state)
 
@@ -151,6 +153,8 @@ class Signal_Control_Unit:
 		
 		if green_time is not None:
 			self.green_time = green_time * self.time_steps_per_second
+
+		self.action_required = False
 		
 
 	# internal helper function
@@ -175,7 +179,12 @@ class Signal_Control_Unit:
 	'''          
 	def _color_changer(self,signal_group,new_color,stage):
 		#Get the current color
+
+		print('current_color')
+		tic = t.time()
 		current_color = self._color_convert(signal_group.AttValue("SigState"))
+		tac = t.time()
+		print(tac-tic)
 		change = new_color-current_color
 		
 		# want green but currently red
@@ -222,6 +231,8 @@ class Signal_Control_Unit:
 			time = self.red_time
 			self.stage = "Red"
 		
+
+		# what is this red stage ? a stage where all the light are red ?
 		elif stage == "Red" :
 			time = self.redamber_time
 			self.stage = "RedAmber"
@@ -257,8 +268,10 @@ class Signal_Control_Unit:
 			if self.intermediate_phase is False :
 				self.action_required = True 
 
-				self.next_state = self.calculate_state()
-				self.reward = self.calculate_reward()
+				# Comment this out because it slow they are not implemented yet and are very slow
+
+				#self.next_state = self.calculate_state()
+				#self.reward = self.calculate_reward()
 					
 			# if during a change
 			# then make the change
@@ -267,8 +280,13 @@ class Signal_Control_Unit:
 				
 				# Get light color right for each signal group
 				for sg in self.signal_groups :
+					
 					ID = sg.AttValue('No')-1
+					tic = t.time()
 					self._color_changer(sg, self.new_colors[ID], self.stage)
+					tac = t.time()
+					print('_color_changer')
+					print(tac-tic)
 						
 				# change the current stage and get time the stage last for
 				time = self._stage_changer(self.stage)
