@@ -16,6 +16,7 @@ class env():
 	-Deploy the SCU
 	-
 	"""
+
 	def __init__(self, model_name, vissim_working_directory, sim_length, controllers_actions,\
 					 timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
 
