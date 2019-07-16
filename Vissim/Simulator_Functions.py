@@ -173,7 +173,7 @@ def green_red_to_amber(agent, seconds_per_yellow,Surtrac=False):
 	# Record that a transition is happening
 	agent.intermediate_phase = True
 
-def amber_to_green_red(agent, seconds_per_green,Surtrac=False):
+def amber_to_green_red(agent, seconds_per_green, Surtrac=False):
 	# Finalize the change
 	for index_group, sig_group in enumerate(agent.signal_groups):
 		# Use transition vector from previous iteration to finish the change
