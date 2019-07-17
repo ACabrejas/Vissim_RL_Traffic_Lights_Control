@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<network version="602" vissimVersion="11.00 - 03 [74735]">
+	<signalControllers>
+		<modified>
+			<signalController no="10" progFile="#data#VriVissim.exe">
+				<sgs>
+					<deleted>
+						<signalGroup no="1002"/>
+						<signalGroup no="1008"/>
+						<signalGroup no="1022"/>
+						<signalGroup no="1031"/>
+						<signalGroup no="1032"/>
+						<signalGroup no="1081"/>
+					</deleted>
+					<added>
+						<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="South" no="1" redAmber="1" type="NORMAL"/>
+						<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West" no="2" redAmber="1" type="NORMAL"/>
+						<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="North" no="3" redAmber="1" type="NORMAL"/>
+						<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="East" no="4" redAmber="1" type="NORMAL"/>
+					</added>
+				</sgs>
+				<sigTmsTabConfig>
+					<overwritten>
+						<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="10 1" title="" varNo="1" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="10 2" title="" varNo="2" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="10 3" title="" varNo="3" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="10 4" title="" varNo="4" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100201" title="" varNo="100201" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100202" title="" varNo="100202" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100203" title="" varNo="100203" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100204" title="" varNo="100204" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100205" title="" varNo="100205" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100801" title="" varNo="100801" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100802" title="" varNo="100802" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100803" title="" varNo="100803" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100804" title="" varNo="100804" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="100805" title="" varNo="100805" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="102201" title="" varNo="102201" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="102202" title="" varNo="102202" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="103101" title="" varNo="103101" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="103102" title="" varNo="103102" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="103201" title="" varNo="103201" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="103202" title="" varNo="103202" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="104201" title="" varNo="104201" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="104801" title="" varNo="104801" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="104802" title="" varNo="104802" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="108101" title="" varNo="108101" wttFilename="vissim"/>
+						<signalOutputConfigurationElement configName="DETEKT" detPort="108102" title="" varNo="108102" wttFilename="vissim"/>
+					</overwritten>
+				</sigTmsTabConfig>
+				<wttFiles>
+					<intObjectRef key="1041"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="11" progFile="#data#VriVissim.exe" supplyFile1="#data#none.stg" supplyFile2="#data#none.vxb">
+				<wttFiles>
+					<intObjectRef key="1041"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="21" progFile="#exe#TREND429.exe" supplyFile1="#data#none.stg" supplyFile2="#data#none.vxb">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="31" progFile="#exe#TREND429.exe" supplyFile1="#data#none.stg" supplyFile2="#data#none.vxb">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="35" progFile="#exe#TREND429.exe">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="40" progFile="#exe#TREND429.exe">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="41" progFile="#exe#TREND429.exe" supplyFile1="#data#none.stg" supplyFile2="#data#none.vxb">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="50" progFile="#exe#TREND429.exe">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="51" progFile="#exe#TREND429.exe" supplyFile1="#data#none.stg" supplyFile2="#data#none.vxb">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="60" progFile="#exe#TREND429.exe">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="61" progFile="#exe#TREND429.exe">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="70" progFile="#exe#TREND429.exe">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="80" progFile="#exe#TREND429.exe">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="90" progFile="#exe#TREND429.exe">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+			<signalController no="100" progFile="#exe#TREND429.exe">
+				<wttFiles>
+					<intObjectRef key="1039"/>
+				</wttFiles>
+			</signalController>
+		</modified>
+	</signalControllers>
+	<signalHeads>
+		<deleted>
+			<signalHead no="1"/>
+			<signalHead no="2"/>
+			<signalHead no="3"/>
+			<signalHead no="4"/>
+			<signalHead no="5"/>
+			<signalHead no="6"/>
+			<signalHead no="7"/>
+			<signalHead no="8"/>
+			<signalHead no="9"/>
+			<signalHead no="10"/>
+		</deleted>
+	</signalHeads>
+	<wttFiles>
+		<deleted>
+			<wttFile no="2"/>
+			<wttFile no="1001"/>
+			<wttFile no="1009"/>
+		</deleted>
+		<added>
+			<wttFile file="#exe#TREND429.WTT" no="1039"/>
+			<wttFile file="#exe#VriVissim.wtt" no="1041"/>
+		</added>
+	</wttFiles>
+</network>

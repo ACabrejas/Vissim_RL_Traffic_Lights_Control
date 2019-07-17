@@ -1,0 +1,37 @@
+
+*** UBER overflow
+illegal txb specification
+**** warning PL15: fc1511 illegal txd specification
+**** warning PL15: fc1512 illegal txb specification
+**** warning PL15: fc1512 illegal txd specification
+FAST Versie 03.00.00
+FAST: error reading path from registry. Searched for value 'SettingsPath' here: Software\Royal HaskoningDHV\FAST\CCOL\Deventer\
+FAST: removing file /rec/A040/1.fast
+FAST: Time offset real<>sim = -1:2:56
+FAST: Printing plan failed!
+FAST: Directory tried: /print/A040/A040.fast
+grensw.snelh.[km/h]: 1=  40 2=  50 3=  60 4=  85
+grensw.lengte [cm] : 1=  35 2=  60 3=  80 4= 120
+v971_,0000-1200,1=    0,2=    0,3=    0,4=    0,5=    0
+v972_,0000-1200,1=    0,2=    0,3=    0,4=    0,5=    0
+l971_,0000-1200,1=    0,2=    0,3=    0,4=    0,5=    0
+l972_,0000-1200,1=    0,2=    0,3=    0,4=    0,5=    0
+TI 16:30:00
+DA 16-06-2016
+grensw.snelh.[km/h]: 1=  40 2=  50 3=  60 4=  85
+grensw.lengte [cm] : 1=  35 2=  60 3=  80 4= 120
+v971_,0000-1630,1=    0,2=    0,3=    0,4=    0,5=    0
+v972_,0000-1630,1=    0,2=    0,3=    0,4=    0,5=    0
+l971_,0000-1630,1=    0,2=    0,3=    0,4=    0,5=    0
+l972_,0000-1630,1=    0,2=    0,3=    0,4=    0,5=    0
+FAST: Printing plan failed!
+FAST: Directory tried: /print/A040/A040.fast
+grensw.snelh.[km/h]: 1=  40 2=  50 3=  60 4=  85
+grensw.lengte [cm] : 1=  35 2=  60 3=  80 4= 120
+v971_,1600-1700,1=    0,2=    0,3=    0,4=    0,5=    0
+v972_,1600-1700,1=    0,2=    0,3=    0,4=    0,5=    0
+l971_,1600-1700,1=    0,2=    0,3=    0,4=    0,5=    0
+l972_,1600-1700,1=    0,2=    0,3=    0,4=    0,5=    0
+Wachttijd fc12 groter dan 120
+Wachttijd fc12 groter dan 120
+Wachttijd fc12 groter dan 120
