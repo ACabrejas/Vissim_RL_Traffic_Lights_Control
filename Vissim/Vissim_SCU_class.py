@@ -39,6 +39,13 @@ class Signal_Control_Unit:
 				 amber_time = 3, \
 				 red_time = 1\
 				):
+
+		# To be read derectly inside the model on inside a specified dictionnary
+		# created by hand for each model
+		self.state_type = 'QueuesSig'
+		self.state_size = [5]
+		self.reward_type = 'Queues'
+		self.ID = 0
 		
 		# get Vissim, signal controller and its signal groups
 		self.Vissim = Vissim
@@ -48,6 +55,11 @@ class Signal_Control_Unit:
 			self.signal_groups = self.signal_controller.SGs
 		else :
 			self.signal_groups = Signal_Groups
+
+
+		# implement 1st action to start
+		self.action_key = 0   # dict key of current action (we start with 0) 
+		self.next_action_key = 0
 			
 		# get stae and reward parameters
 		self.state = self.calculate_state()
@@ -63,9 +75,7 @@ class Signal_Control_Unit:
 		self.amber_time = amber_time * self.time_steps_per_second
 		self.red_time = red_time * self.time_steps_per_second
 	
-		# implement 1st action to start
-		self.action_key = 0   # dict key of current action (we start with 0) 
-		self.next_action_key = 0
+		
 
 		self.action_required = False # used to requests an action from agent
 		self.update_counter = 1
@@ -75,6 +85,10 @@ class Signal_Control_Unit:
 
 		self.stage = "Green" # tracks the stage particularly when in intermediate phase.
 							 # Stages appear in order: "Amber" -> "Red" -> "RedAmber" -> "Green"
+
+
+		
+
 
 			
 	'''
@@ -95,46 +109,54 @@ class Signal_Control_Unit:
 	calculate_state:
 	Alvaro's reward function needs to be more general
 	'''
-	def calculate_state(self, length = None, verbose = False):
+	# def calculate_state(self, length = None, verbose = False):
 
-		# mesure the time taken to do this action
-		tic = t.time()
+	# 	# mesure the time taken to do this action
+	# 	tic = t.time()
 		
-		Queues = []
-		Lanes = []
-		for sg in self.signal_groups :
-			q = 0 
-			for sh in sg.SigHeads:
-				if (sh.Lane.AttValue('Link'),sh.Lane.AttValue('Index')) not in Lanes :
-					Lanes.append((sh.Lane.AttValue('Link'),sh.Lane.AttValue('Index')))
-					for veh in sh.Lane.Vehs:
-						q += veh.AttValue('InQueue')
-			Queues.append(q)
-			# Summarize queue size in each lane
-			if verbose :
-				print(self.signal_controller.AttValue('No'),sg.AttValue('No'),q)
+	# 	Queues = []
+	# 	Lanes = []
+	# 	for sg in self.signal_groups :
+	# 		q = 0 
+	# 		for sh in sg.SigHeads:
+	# 			if (sh.Lane.AttValue('Link'),sh.Lane.AttValue('Index')) not in Lanes :
+	# 				Lanes.append((sh.Lane.AttValue('Link'),sh.Lane.AttValue('Index')))
+	# 				for veh in sh.Lane.Vehs:
+	# 					q += veh.AttValue('InQueue')
+	# 		Queues.append(q)
+	# 		# Summarize queue size in each lane
+	# 		if verbose :
+	# 			print(self.signal_controller.AttValue('No'),sg.AttValue('No'),q)
 			
-		# now reshape
-		if length is not None :
-			state = np.reshape(Queues,[1,length])
-		else :
-			state = np.reshape(Queues,[1,len(Queues)])
+	# 	# now reshape
+	# 	if length is not None :
+	# 		state = np.reshape(Queues,[1,length])
+	# 	else :
+	# 		state = np.reshape(Queues,[1,len(Queues)])
 
-		tac = t.time()
-		#print(tac-tic)
+	# 	tac = t.time()
+	# 	#print(tac-tic)
 		
-		return (state)
+	# 	return (state)
+
+	def calculate_state(self):
+		state = calculate_state(self.Vissim, self.state_type, self.state_size, self.next_action_key, self.ID)
+		return(state)
+
 
 	
-	'''
-	calculate_reward:
-	Alvaro's reward function needs to be more general
-	'''
-	def calculate_reward(self):
-		state = self.calculate_state()
-		reward = -np.sum(state)
+	# '''
+	# calculate_reward:
+	# Alvaro's reward function needs to be more general
+	# '''
+	# def calculate_reward(self):
+	# 	state = self.calculate_state()
+	# 	reward = -np.sum(state)
 		
-		return reward
+	# 	return reward
+	def calculate_reward(self):
+		reward = calculate_reward(self.Vissim, self.reward_type, self.ID)
+		return(reward)
  
 
 	'''
@@ -177,14 +199,14 @@ class Signal_Control_Unit:
 		-- new_color : 2 = green / 0 = red
 		-- stage : what stage all lights in the controller are.
 	'''          
-	def _color_changer(self,signal_group,new_color,stage):
+	def _color_changer(self, signal_group, new_color, stage):
 		#Get the current color
 
-		print('current_color')
+		#print('current_color')
 		tic = t.time()
 		current_color = self._color_convert(signal_group.AttValue("SigState"))
 		tac = t.time()
-		print(tac-tic)
+		#print(tac-tic)
 		change = new_color-current_color
 		
 		# want green but currently red
@@ -215,6 +237,9 @@ class Signal_Control_Unit:
 	
 	Track controllers stage (in the stages of Amber->Red->RedAmber-Green) 
 	and time for each transtion
+	
+	TO DO :
+	-Find a way to skip a stage if it's allocated time is 0 for exemple if we don't want redamber or red time.
 	
 		inputs:
 		-- stage
@@ -270,8 +295,8 @@ class Signal_Control_Unit:
 
 				# Comment this out because it slow they are not implemented yet and are very slow
 
-				#self.next_state = self.calculate_state()
-				#self.reward = self.calculate_reward()
+				self.next_state = self.calculate_state()
+				self.reward = self.calculate_reward()
 					
 			# if during a change
 			# then make the change
@@ -285,8 +310,8 @@ class Signal_Control_Unit:
 					tic = t.time()
 					self._color_changer(sg, self.new_colors[ID], self.stage)
 					tac = t.time()
-					print('_color_changer')
-					print(tac-tic)
+					#('_color_changer')
+					#print(tac-tic)
 						
 				# change the current stage and get time the stage last for
 				time = self._stage_changer(self.stage)
@@ -295,3 +320,198 @@ class Signal_Control_Unit:
 				# if full transition (Amber->Red->RedAmber-Green) to green done  
 				if self.stage == "Green" :
 					self.intermediate_phase = False # record current action is implemented
+
+
+# For one intersection here is the state and reward computation methode
+
+# We should script those function later because it is only for the basic intersection here
+# ID will be the ID / number of the intersection 
+def calculate_state(Vissim, state_type, state_size, action, ID):
+	if state_type == 'Queues':
+    	#Obtain Queue Values (average value over the last period)
+		West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
+		South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
+		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
+		North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
+		state = [West_Queue, South_Queue, East_Queue, North_Queue]
+		state = [0. if state is None else state for state in state]
+		state = np.reshape(state, state_size)[np.newaxis,:]
+		return(state)
+
+	elif state_type == 'Delay':
+		# Obtain Delay Values (average delay in lane * nr cars in queue)
+		West_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(1).AttValue('VehDelay(Current,Last,All)') 
+		West_Stopped  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QStops(Current,Last)')
+		South_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(2).AttValue('VehDelay(Current,Last,All)') 
+		South_Stopped = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QStops(Current,Last)')
+		East_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(3).AttValue('VehDelay(Current,Last,All)') 
+		East_Stopped  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QStops(Current,Last)')
+		North_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(4).AttValue('VehDelay(Current,Last,All)') 
+		North_Stopped = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QStops(Current,Last)')
+
+		pre_state = [West_Delay, South_Delay, East_Delay, North_Delay, West_Stopped, South_Stopped, East_Stopped, North_Stopped]
+		pre_state = [0. if state is None else state for state in pre_state]
+		state = [pre_state[0]*pre_state[4], pre_state[1]*pre_state[5], pre_state[2]*pre_state[6], pre_state[3]*pre_state[7]]
+		state = np.reshape(state, state_size)[np.newaxis,:]
+		return(state)
+	
+	elif state_type == 'QueuesSig':
+    	#Obtain Queue Values (average value over the last period)
+		West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')		
+		South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')		
+		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
+		North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
+		
+		# Obtain the signal state  We only need 2 out of 4 for our basic intersection in fact we only need 1 out of 4
+		
+		
+		state = [West_Queue, South_Queue, East_Queue, North_Queue, action]
+		state = [0. if state is None else state for state in state]
+		state = np.reshape(state, state_size)[np.newaxis,:]
+		
+		
+		return(state)
+		
+	elif state_type == 'CellsSpeedSig':
+		Detectors = Vissim.Net.Detectors.GetAll()
+		state = [0 for i in range(len(Detectors)+1)]
+		for index , Detector in enumerate(Detectors):
+			state[index] = Detector.AttValue('VehSpeed') 
+
+		
+		state[-1] = action
+
+		state = [-1. if state is None else state for state in state]
+		state = np.reshape(state, state_size)[np.newaxis,:]
+	
+		return(state)
+
+	elif state_type == 'CellsSpeedOccSig':
+		Detectors = Vissim.Net.Detectors.GetAll()
+		state = [0 for i in range(2*len(Detectors)+1)]
+		for index , Detector in enumerate(Detectors):
+			state[2*index] = Detector.AttValue('VehSpeed') 
+			state[2*index+1] = Detector.AttValue('OccupRate') 
+
+		
+		state[-1] = action
+
+		state = [-1. if state is None else state for state in state]
+		state = np.reshape(state, state_size)[np.newaxis,:]
+		#print(state)
+
+		return(state)
+
+	elif state_type == 'CellsOccSig':
+		Detectors = Vissim.Net.Detectors.GetAll()
+		state = [0 for i in range(len(Detectors)+1)]
+		for index , Detector in enumerate(Detectors):
+			state[index] = Detector.AttValue('OccupRate') 
+
+		
+		state[-1] = agent.action
+
+		state = [-1. if state is None else state for state in state]
+		state = np.reshape(state, state_size)[np.newaxis,:]
+
+		return(state)
+
+	elif state_type == 'CellsT':
+		Detectors = Vissim.Net.Detectors.GetAll()
+		Occupancy = [0 for i in range(len(Detectors))]
+		Speed = [0 for i in range(len(Detectors))]
+		for index , Detector in enumerate(Detectors):
+			Speed[index] = Detector.AttValue('VehSpeed') 
+			Occupancy[index] = Detector.AttValue('OccupRate') 
+
+		Occupancy = [-1. if occ is None else occ for occ in Occupancy]
+		Speed = [-1. if sp is None else sp for sp in Speed]
+
+		Occupancy = np.reshape(Occupancy, state_size[1:])[np.newaxis, :]
+		Speed = np.reshape(Speed, state_size[1:])[np.newaxis, :]
+
+		state = np.concatenate([Occupancy, Speed], axis=0)
+
+		state = np.reshape(state, state_size)[np.newaxis,:]
+
+		return(state)
+
+	elif state_type == 'QueuesCellsSpeedOccSig':
+		Detectors = Vissim.Net.Detectors.GetAll()
+		state = [0 for i in range(2*len(Detectors)+1+4)]
+		for index , Detector in enumerate(Detectors):
+			state[2*index] = Detector.AttValue('VehSpeed') 
+			state[2*index+1] = Detector.AttValue('OccupRate') 
+
+		state[-1] = action
+		state[-2]  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')		
+		state[-3] = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')		
+		state[-4]  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
+		state[-5] = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
+
+		state = [-1. if state is None else state for state in state]
+		state = np.reshape(state, state_size)[np.newaxis,:]
+		
+		return(state)	
+	elif state_type == 'MaxFlow':
+		pass
+	elif state_type == 'FuelConsumption':
+		pass
+	elif state_type == 'NOx':
+		pass
+	elif state_type == "COM":
+		pass
+# For the moment We only work on a particuliar junction    
+	elif state_type == "Clusters":
+		return(Vp.Clustering(Vissim))
+
+# The calculate reward is now separate from the agent state (this can cause the simulation to be slower)
+def calculate_reward(Vissim, reward_type, ID):
+	if reward_type == 'Queues':
+    	#Obtain Queue Values (average value over the last period)
+		West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
+		South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
+		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
+		North_Queue = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QLen(Current,Last)')
+		state = [West_Queue, South_Queue, East_Queue, North_Queue]
+		state = [0. if state is None else state for state in state]
+		state = np.reshape(state, [1,len(state)])
+		pass
+		
+		
+	elif reward_type == 'Delay':
+		# Obtain Delay Values (average delay in lane * nr cars in queue)
+		West_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(1).AttValue('VehDelay(Current,Last,All)') 
+		West_Stopped  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QStops(Current,Last)')
+		South_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(2).AttValue('VehDelay(Current,Last,All)') 
+		South_Stopped = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QStops(Current,Last)')
+		East_Delay    = Vissim.Net.DelayMeasurements.ItemByKey(3).AttValue('VehDelay(Current,Last,All)') 
+		East_Stopped  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QStops(Current,Last)')
+		North_Delay   = Vissim.Net.DelayMeasurements.ItemByKey(4).AttValue('VehDelay(Current,Last,All)') 
+		North_Stopped = Vissim.Net.QueueCounters.ItemByKey(4).AttValue('QStops(Current,Last)')
+
+		pre_state = [West_Delay, South_Delay, East_Delay, North_Delay, West_Stopped, South_Stopped, East_Stopped, North_Stopped]
+		pre_state = [0 if state is None else state for state in pre_state]
+		state = [pre_state[0]*pre_state[4], pre_state[1]*pre_state[5], pre_state[2]*pre_state[6], pre_state[3]*pre_state[7]]
+		state = np.reshape(state, [1,len(state)])
+		pass
+		
+	elif reward_type == 'MaxFlow':
+		pass
+	elif reward_type == 'FuelConsumption':
+		pass
+	elif reward_type == 'NOx':
+		pass
+	elif reward_type == "COM":
+		pass
+		
+	# For the moment We only work on a particuliar junction    	
+	if reward_type == 'Queues':
+		reward = -np.sum([0. if state is None else state for state in state[0]])
+    	#print(reward)
+	if reward_type == 'QueuesDifference':
+		current_queue_sum = -np.sum([0. if state is None else state for state in state[0]])
+		previous_queue_sum =  -np.sum([0. if state is None else state for state in state[0]])
+		reward = previous_queue_sum - current_queue_sum
+		
+	return reward

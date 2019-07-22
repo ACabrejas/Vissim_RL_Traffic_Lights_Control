@@ -81,7 +81,7 @@ class env():
 						 sc,\
 						 self.controllers_actions[idx],\
 						 Signal_Groups = None,\
-						 green_time = 50,\
+						 green_time = 6,\
 						 redamber_time = 1,\
 						 amber_time = 3, \
 						 red_time = 1\
@@ -109,14 +109,14 @@ class env():
 				tic = time()
 				scu.action_update(actions[idx])
 				tac = time()
-				print('action_update')
-				print(tac-tic)
+				#print('action_update')
+				#print(tac-tic)
 			
 			tic = time()
 			scu.update()
 			tac = time()
-			print('update')
-			print(tac-tic)
+			#print('update')
+			#print(tac-tic)
 
 			if scu.action_required :
 				Sarsd[idx] = scu.sars()+[self.done]
