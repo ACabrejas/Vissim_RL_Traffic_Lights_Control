@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="602" vissimVersion="11.00 - 03 [74735]">
+<network version="603" vissimVersion="11.00 - 08 [77763]">
 	<anmDefaults colorDistr="1" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="" panmRoutesFilename="" pedestrianVehicleType="510" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -1095,7 +1095,7 @@
 		<pedNetPerf collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<pedRec filterType="ALL" fromTime="0" resolution="1" toTime="99999" writeDatabase="false" writeFile="false">
 			<attributes>
-				<attributeSelection attributeID="SIMSEC" decimals="2" format="DEFAULT" showUnits="false"/>
+				<attributeSelection attributeID="SIMSEC" decimals="2" format="SECONDS" showUnits="false"/>
 				<attributeSelection attributeID="NO" decimals="0" format="DEFAULT" showUnits="false"/>
 				<attributeSelection attributeID="CONSTRELTYPE" decimals="0" format="DEFAULT" showUnits="false"/>
 				<attributeSelection attributeID="CONSTRELNO" decimals="0" format="DEFAULT" showUnits="false"/>
@@ -1112,7 +1112,7 @@
 		<vehNetPerf collectData="true" fromTime="0" interval="3" toTime="99999"/>
 		<vehRec filterType="ALL" fromTime="0" inclParkVehs="false" resolution="1" toTime="99999" writeDatabase="false" writeFile="false">
 			<attributes>
-				<attributeSelection attributeID="SIMSEC" decimals="2" format="DEFAULT" showUnits="false"/>
+				<attributeSelection attributeID="SIMSEC" decimals="2" format="SECONDS" showUnits="false"/>
 				<attributeSelection attributeID="NO" decimals="0" format="DEFAULT" showUnits="false"/>
 				<attributeSelection attributeID="LANE\LINK\NO" decimals="0" format="DEFAULT" showUnits="false"/>
 				<attributeSelection attributeID="LANE\INDEX" decimals="0" format="DEFAULT" showUnits="false"/>
@@ -2160,6 +2160,20 @@
 	<occupancyDistributions>
 		<occupancyDistribution mean="1" name="Single Occupancy" no="1" stdDev="0" type="NORMAL"/>
 	</occupancyDistributions>
+	<pavementMarkings>
+		<pavementMarking anmFlag="false" arrowDir="LEFT" lane="5 3" length="5" name="" no="1" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="LEFT" lane="1 3" length="5" name="" no="2" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="LEFT" lane="3 3" length="5" name="" no="3" pos="248" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="LEFT" lane="7 3" length="5" name="" no="4" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="STRAIGHT" lane="7 2" length="5" name="" no="5" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="RIGHT,STRAIGHT" lane="7 1" length="5" name="" no="6" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="STRAIGHT" lane="1 2" length="5" name="" no="7" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="RIGHT,STRAIGHT" lane="1 1" length="5" name="" no="8" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="STRAIGHT" lane="5 2" length="5" name="" no="9" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="RIGHT,STRAIGHT" lane="5 1" length="5" name="" no="10" pos="245" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="STRAIGHT" lane="3 2" length="5" name="" no="11" pos="248" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="false" arrowDir="RIGHT,STRAIGHT" lane="3 1" length="5" name="" no="12" pos="248" rndDir="" type="ARROW"/>
+	</pavementMarkings>
 	<pedestrianClasses>
 		<pedestrianClass color="ff000000" name="Man, Woman" no="10" usePedTypeColor="true">
 			<pedTypes>
@@ -2308,20 +2322,20 @@
 		</reducedSpeedArea>
 	</reducedSpeedAreas>
 	<signalControllers>
-		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="1" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Triple.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="100" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="1" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Triple.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West - Left" no="1" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West - Middle" no="2" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="West - Right" no="3" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="South - Left" no="4" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="South - Middle" no="5" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="South - Right" no="6" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="East - Left" no="7" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="East - Middle" no="8" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="East - Right" no="9" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="North - Left" no="10" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="North - Middle" no="11" redAmber="1" type="NORMAL"/>
-				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="North - Right" no="12" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="A" no="1" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="B" no="2" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="C" no="3" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="D" no="4" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="E" no="5" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="F" no="6" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="G" no="7" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="H" no="8" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="I" no="9" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="J" no="10" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="K" no="11" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="L" no="12" redAmber="2" type="NORMAL"/>
 			</sgs>
 			<sigTmsTabConfig>
 				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 1" title="" varNo="1" wttFilename="vissim"/>
@@ -2343,20 +2357,20 @@
 		</signalController>
 	</signalControllers>
 	<signalHeads>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 3" localNo="0" name="" no="1" orSG="1 1" pos="253.44103450213743" sg="1 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 2" localNo="0" name="" no="2" orSG="1 2" pos="253.441" sg="1 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="3" orSG="1 3" pos="253.441" sg="1 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 3" localNo="0" name="" no="4" orSG="1 4" pos="258.81486865550414" sg="1 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 2" localNo="0" name="" no="5" orSG="1 5" pos="258.81486865550414" sg="1 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 1" localNo="0" name="" no="6" orSG="1 6" pos="258.81486865550414" sg="1 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 3" localNo="0" name="" no="7" orSG="1 7" pos="255.98770043507858" sg="1 7" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 2" localNo="0" name="" no="8" orSG="1 8" pos="255.98770043507858" sg="1 8" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 1" localNo="0" name="" no="9" orSG="1 9" pos="255.98770043507858" sg="1 9" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 3" localNo="0" name="" no="10" orSG="1 10" pos="253.56450255204612" sg="1 10" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="1 11" pos="253.55211558027827" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="1 12" pos="253.54569270602826" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 3" localNo="0" name="" no="1" orSG="1 1" pos="253" sg="1 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 2" localNo="0" name="" no="2" orSG="1 2" pos="253" sg="1 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="1 1" localNo="0" name="" no="3" orSG="1 3" pos="253" sg="1 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 3" localNo="0" name="" no="4" orSG="1 4" pos="258" sg="1 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 2" localNo="0" name="" no="5" orSG="1 5" pos="258" sg="1 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="3 1" localNo="0" name="" no="6" orSG="1 6" pos="258" sg="1 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 3" localNo="0" name="" no="7" orSG="1 7" pos="255" sg="1 7" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 2" localNo="0" name="" no="8" orSG="1 8" pos="255" sg="1 8" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="5 1" localNo="0" name="" no="9" orSG="1 9" pos="255" sg="1 9" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 3" localNo="0" name="" no="10" orSG="1 10" pos="253" sg="1 10" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="1 11" pos="253" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="1 12" pos="253" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10000" simRes="1" simSpeed="10" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10000" simRes="10" simSpeed="3" startTm="0" useAllCores="true" useMaxSimSpeed="false" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
@@ -2464,22 +2478,22 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="false" link="1" name="WE" no="1">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="150"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="150"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>
