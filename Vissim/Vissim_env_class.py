@@ -93,6 +93,14 @@ class env():
 	def get_SCU(self):
 		return(self.SCUs)
 
+	# retrun the state of the environnement as a dictionnary
+	def get_state(self):
+		state = {}
+		for idx, scu in self.SCUs.items(): 
+			state[idx] = scu.state
+
+		return state
+
 	# does a step in the simulator
 	# INPUT a dictionary of action
 	# return a dictionnary of (state, action, reward, next_state , done) the key will be the SCU's key
@@ -134,6 +142,8 @@ class env():
 		# Server should only be dispatched in first run. Otherwise reload model.
 		# Setting Working Directory
 
+		self.global_counter = 0
+
 
 		COMServerReload(self.Vissim, self.model_name, self.vissim_working_directory, self.sim_length, self.timesteps_per_second, self.delete_results)
 		self.npa = NetworkParser(self.Vissim) 
@@ -142,6 +152,7 @@ class env():
 		# Simulate one step and give the control to COM
 		for _ in range(self.timesteps_per_second):
 			self.Vissim.Simulation.RunSingleStep()
+			self.global_counter += 1
 
 		for SC in self.npa.signal_controllers_ids:
 			for group in self.npa.signal_groups[SC]:

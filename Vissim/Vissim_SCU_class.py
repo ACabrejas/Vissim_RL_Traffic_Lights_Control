@@ -139,6 +139,9 @@ class Signal_Control_Unit:
 		
 	# 	return (state)
 
+
+
+	# Those two functions could be and should be methode of the class (when we will agree on a good methode)
 	def calculate_state(self):
 		state = calculate_state(self.Vissim, self.state_type, self.state_size, self.next_action_key, self.ID)
 		return(state)
@@ -253,14 +256,30 @@ class Signal_Control_Unit:
 			self.stage = "Amber" 
 	
 		elif stage == "Amber" :
-			time = self.red_time
-			self.stage = "Red"
+			if self.red_time == 0:
+				time = self.redamber_time
+				self.stage = "RedAmber"
+
+				if self.redamber_time == 0:
+					time = self.green_time
+					self.stage = "Green"
+
+
+			else :
+				time = self.red_time
+				self.stage = "Red"
 		
 
 		# what is this red stage ? a stage where all the light are red ?
 		elif stage == "Red" :
-			time = self.redamber_time
-			self.stage = "RedAmber"
+
+			if self.redamber_time == 0:
+				time = self.green_time
+				self.stage = "Green"
+
+			else :
+				time = self.redamber_time
+				self.stage = "RedAmber"
 				
 		# want green but currently redamber
 		elif stage == "RedAmber" :
@@ -293,7 +312,7 @@ class Signal_Control_Unit:
 			if self.intermediate_phase is False :
 				self.action_required = True 
 
-				# Comment this out because it slow they are not implemented yet and are very slow
+				# Comment this out because it slow they are not implemented yet 
 
 				self.next_state = self.calculate_state()
 				self.reward = self.calculate_reward()

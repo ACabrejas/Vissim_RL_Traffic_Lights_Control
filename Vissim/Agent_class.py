@@ -91,6 +91,8 @@ class ACAgent:
 
 		# The memory will store (state , action , reward, next_state) in a batch
 		self.memory = deque(maxlen=n_step_size)
+		self.episode_memory = []
+		self.episode_reward = []
 		self.n_step_size = n_step_size
 
 		self.test()
@@ -98,6 +100,14 @@ class ACAgent:
 	# Add memory on the right, if over memory limit, pop leftmost item
 	def remember(self, state, action, reward, next_state, done):
 		self.memory.append([state, action, reward, next_state, done])
+		self.episode_memory.append([state, action, reward, next_state, done])
+		self.episode_reward.append(reward)
+
+
+	# Flush the memory for the next episode 
+	def reset(self):
+		self.episode_memory = []
+		self.memory = []
 
 	# Update the Junction IDs for the agent
 	def update_IDS(self, ID, npa):
@@ -117,17 +127,17 @@ class ACAgent:
 	def value_check(self, horizon, n_sample):
 
 		if len(self.episode_memory) < horizon :
-			raise ERROR("episode_memory too small ")
+			raise Exception("Episode_memory too small ")
 
 		# random indexes to sample the value function
 		indexes = np.random.choice(len(self.episode_memory) - horizon, size = n_sample)
 		predicted_values = []
 		true_values = []
-		logits = []
+		probas = []
 
 		state0 = np.zeros(self.state_size)[np.newaxis,:]
 		logit0, _ = self.model.predict(state0)
-		logit0 = np.round(logit0.squeeze(axis = 0))
+		proba0 = np.round(tf.nn.softmax(logit0).numpy().squeeze(axis = 0), decimals = 2)
 
 
 		
@@ -141,14 +151,14 @@ class ACAgent:
 			predicted_value = np.round(predicted_value[0])
 			predicted_values.append(predicted_value)
 
-			logit = list(np.round(logit.squeeze(axis = 0), decimals=2))
-			logits.append(logit)
+			proba = list(np.round(tf.nn.softmax(logit).numpy().squeeze(axis = 0), decimals = 2))
+			probas.append(proba)
 
 			# Compute the return 
 			true_value = np.sum(np.array(self.episode_reward[index: index+horizon]) * (self.params['gamma'] * np.ones(horizon))**np.arange(horizon))
 			true_values.append(round(true_value))
 
-		return predicted_values, true_values, logit0, logits
+		return predicted_values, true_values, proba0, probas
 
 
 
@@ -167,7 +177,7 @@ class ACAgent:
 		actions = tf.cast(actions, tf.int32)
 		policy_loss = weighted_sparse_ce(actions, logits, sample_weight=advantages)
 		# entropy loss can be calculated via CE over itself
-		entropy_loss = kls.categorical_crossentropy(logits, logits, from_logits=True)
+		entropy_loss = kls.categorical_crossentropy(tf.nn.softmax(logits), logits, from_logits=True)
 		# here signs are flipped because optimizer minimizes
 		return policy_loss - self.params['entropy']*entropy_loss
 

@@ -158,7 +158,7 @@ def green_red_to_amber(agent, seconds_per_yellow,Surtrac=False):
 			sig_group.SetAttValue("SigState", "AMBER")
 		# If the transition vector is < 0, we are changing from RED to GREEN, so set to REDAMBER
 		elif agent.transition_vector[index_group] == -1:
-			#sig_group.SetAttValue("SigState", "REDAMBER")
+			sig_group.SetAttValue("SigState", "REDAMBER")
 			pass
 		# If the transition vector is zero, the phase stays the same
 		elif agent.transition_vector[index_group] == 0:
