@@ -16,13 +16,13 @@ class env():
 	-Deploy the SCU
 	-
 	"""
-	def __init__(self, model_name, vissim_working_directory, sim_length, controllers_actions,\
+	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionnary,\
 					 timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
 
 		# Model parameters
 		self.model_name = model_name
 		self.vissim_working_directory = vissim_working_directory
-		self.controllers_actions = controllers_actions
+		self.Model_dictionnary = Model_dictionnary
 
 
 		# Simulation parameters
@@ -53,9 +53,10 @@ class env():
 			self.global_counter += 1
 
 
-		for SC in self.npa.signal_controllers_ids:
-			for group in self.npa.signal_groups[SC]:
-				group.SetAttValue('ContrByCOM',1)
+		# That will be done inside of the SCU
+		# for SC in self.npa.signal_controllers_ids:
+		# 	for group in self.npa.signal_groups[SC]:
+		# 		group.SetAttValue('ContrByCOM',1)
 
 		
 		# Create a dictionnary of SCUs each scu control a signal controller
@@ -79,12 +80,8 @@ class env():
 			self.SCUs[idx] = Signal_Control_Unit(\
 						 self.Vissim,\
 						 sc,\
-						 self.controllers_actions[idx],\
-						 Signal_Groups = None,\
-						 green_time = 6,\
-						 redamber_time = 1,\
-						 amber_time = 3, \
-						 red_time = 1\
+						 self.Model_dictionnary[idx],\
+						 Signal_Groups = None
 						)
 		
 		

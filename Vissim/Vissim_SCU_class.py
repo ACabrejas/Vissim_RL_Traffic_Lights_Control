@@ -32,19 +32,15 @@ class Signal_Control_Unit:
 	def __init__(self,\
 				 Vissim,\
 				 Signal_Controller,\
-				 compatible_actions,\
+				 Intersection_info,\
 				 Signal_Groups = None,\
-				 green_time = 40,\
-				 redamber_time = 1,\
-				 amber_time = 3, \
-				 red_time = 1\
 				):
 
 		# To be read derectly inside the model on inside a specified dictionnary
 		# created by hand for each model
-		self.state_type = 'QueuesSig'
-		self.state_size = [5]
-		self.reward_type = 'Queues'
+		self.state_type = Intersection_info['state_type']
+		self.state_size = Intersection_info['state_size']
+		self.reward_type = Intersection_info['reward_type']
 		self.ID = 0
 		
 		# get Vissim, signal controller and its signal groups
@@ -66,18 +62,22 @@ class Signal_Control_Unit:
 		self.next_state = None
 		self.reward = self.calculate_reward()  
 	   
-		self.compatible_actions = compatible_actions
+		self.compatible_actions = Intersection_info['compatible_actions']
 		  
-		self.time_steps_per_second = self.Vissim.Simulation.AttValue('SimRes')
+		self.time_steps_per_second = Vissim.Simulation.AttValue('SimRes')
 		
-		self.green_time = green_time * self.time_steps_per_second # the green time is in step
-		self.redamber_time = redamber_time * self.time_steps_per_second
-		self.amber_time = amber_time * self.time_steps_per_second
-		self.red_time = red_time * self.time_steps_per_second
+
+		# Time of the different stage, and the minimal green time
+		self.green_time = Intersection_info['green_time'] * self.time_steps_per_second # the green time is in step
+		self.redamber_time = Intersection_info['redamber_time'] * self.time_steps_per_second
+		self.amber_time = Intersection_info['amber_time'] * self.time_steps_per_second
+		self.red_time = Intersection_info['red_time'] * self.time_steps_per_second
 	
 		
 
-		self.action_required = False # used to requests an action from agent
+		
+
+		#self.action_required = False # used to requests an action from agent
 		self.update_counter = 1
 		self.intermediate_phase = True # tracks when initiating a new action
 		self.action_update(self.action_key)    
