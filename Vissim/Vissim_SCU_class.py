@@ -41,56 +41,67 @@ class Signal_Control_Unit:
 		self.state_type = Intersection_info['state_type']
 		self.state_size = Intersection_info['state_size']
 		self.reward_type = Intersection_info['reward_type']
-		self.ID = 0
+		self.compatible_actions = Intersection_info['compatible_actions']
+
+		# Those are for the moment not Vissim object
+		self.Lanes_names = Intersection_info['lane']
+		self.Links_names = Intersection_info['link']
+
+		# Time of the different stage, and the minimal green time
+		self.time_steps_per_second = Vissim.Simulation.AttValue('SimRes')
+		self.green_time = Intersection_info['green_time'] * self.time_steps_per_second # the green time is in step
+		self.redamber_time = Intersection_info['redamber_time'] * self.time_steps_per_second
+		self.amber_time = Intersection_info['amber_time'] * self.time_steps_per_second
+		self.red_time = Intersection_info['red_time'] * self.time_steps_per_second
+
+		#Controle by com ?
+		self.controled_by_com = Intersection_info['controled_by_com']
 		
+		
+		# Those are Vissim objects (Do we need to work on the networkparser ?)
+		# or do we get rid of it completely
 		# get Vissim, signal controller and its signal groups
-		self.Vissim = Vissim
 		self.signal_controller = Signal_Controller
-		
 		if Signal_Groups is None :
 			self.signal_groups = self.signal_controller.SGs
 		else :
 			self.signal_groups = Signal_Groups
 
 
-		# implement 1st action to start
-		self.action_key = 0   # dict key of current action (we start with 0) 
-		self.next_action_key = 0
+		# Give the controle to com or not
+
+		if self.controled_by_com:
+			for group in self.signal_groups:
+				group.SetAttValue('ContrByCOM',1)
+			#self.action_required = False # used to requests an action from agent
+			self.update_counter = 1
+			# implement 1st action to start
+			self.action_key = 0   # dict key of current action (we start with 0) 
+			self.next_action_key = 0
+			self.action_update(self.action_key)    
+			self.stage = "Green" # tracks the stage particularly when in intermediate phase.
+								 # Stages appear in order: "Amber" -> "Red" -> "RedAmber" -> "Green"
+
+		else :
+			self.action_required = False
+
+		self.Vissim_Links = []
+		self.Vissim_Lanes = []
+		for link in self.Links_names:
+			self.Vissim_Links.append(Vissim.Net.Links.ItemByKey(link))
+
+		for link in self.Links_names:
+			for lane in Vissim.Net.Links.ItemByKey(link).Lanes:
+				self.Vissim_Lanes.append(lane)
+		
+		
 			
-		# get stae and reward parameters
+		# get state and reward parameters
 		self.state = self.calculate_state()
 		self.next_state = None
 		self.reward = self.calculate_reward()  
 	   
-		self.compatible_actions = Intersection_info['compatible_actions']
-		  
-		self.time_steps_per_second = Vissim.Simulation.AttValue('SimRes')
 		
-
-		# Time of the different stage, and the minimal green time
-		self.green_time = Intersection_info['green_time'] * self.time_steps_per_second # the green time is in step
-		self.redamber_time = Intersection_info['redamber_time'] * self.time_steps_per_second
-		self.amber_time = Intersection_info['amber_time'] * self.time_steps_per_second
-		self.red_time = Intersection_info['red_time'] * self.time_steps_per_second
-	
-		
-
-		
-
-		#self.action_required = False # used to requests an action from agent
-		self.update_counter = 1
-		self.intermediate_phase = True # tracks when initiating a new action
-		self.action_update(self.action_key)    
-		
-
-		self.stage = "Green" # tracks the stage particularly when in intermediate phase.
-							 # Stages appear in order: "Amber" -> "Red" -> "RedAmber" -> "Green"
-
-
-		
-
-
-			
 	'''
 	sars :
 	returns state, id of action, reward, next state
@@ -104,61 +115,20 @@ class Signal_Control_Unit:
 
 		return(sars)
 
-	
-	'''
-	calculate_state:
-	Alvaro's reward function needs to be more general
-	'''
-	# def calculate_state(self, length = None, verbose = False):
-
-	# 	# mesure the time taken to do this action
-	# 	tic = t.time()
-		
-	# 	Queues = []
-	# 	Lanes = []
-	# 	for sg in self.signal_groups :
-	# 		q = 0 
-	# 		for sh in sg.SigHeads:
-	# 			if (sh.Lane.AttValue('Link'),sh.Lane.AttValue('Index')) not in Lanes :
-	# 				Lanes.append((sh.Lane.AttValue('Link'),sh.Lane.AttValue('Index')))
-	# 				for veh in sh.Lane.Vehs:
-	# 					q += veh.AttValue('InQueue')
-	# 		Queues.append(q)
-	# 		# Summarize queue size in each lane
-	# 		if verbose :
-	# 			print(self.signal_controller.AttValue('No'),sg.AttValue('No'),q)
-			
-	# 	# now reshape
-	# 	if length is not None :
-	# 		state = np.reshape(Queues,[1,length])
-	# 	else :
-	# 		state = np.reshape(Queues,[1,len(Queues)])
-
-	# 	tac = t.time()
-	# 	#print(tac-tic)
-		
-	# 	return (state)
-
-
-
 	# Those two functions could be and should be methode of the class (when we will agree on a good methode)
 	def calculate_state(self):
-		state = calculate_state(self.Vissim, self.state_type, self.state_size, self.next_action_key, self.ID)
+		if self.state_type == 'Queues':
+			state = [get_queue(lane) for lane in self.Vissim_Lanes]
+
+		state = np.array(state)[np.newaxis,:]
+		
 		return(state)
 
 
-	
-	# '''
-	# calculate_reward:
-	# Alvaro's reward function needs to be more general
-	# '''
-	# def calculate_reward(self):
-	# 	state = self.calculate_state()
-	# 	reward = -np.sum(state)
-		
 	# 	return reward
 	def calculate_reward(self):
-		reward = calculate_reward(self.Vissim, self.reward_type, self.ID)
+		if self.reward_type == 'Queues':
+			reward = -np.sum(self.state)
 		return(reward)
  
 
@@ -302,43 +272,60 @@ class Signal_Control_Unit:
 	
 	'''   
 	def update(self):
-	
-		self.update_counter -= 1
-		
-		# These 'if' clauses mean update computation only happens if needed
-		if self.update_counter == 0. :
-			# if update counter just went zero 
-			# then ask for an action 
-			if self.intermediate_phase is False :
-				self.action_required = True 
 
-				# Comment this out because it slow they are not implemented yet 
+		if not self.controled_by_com :
+			pass
+		else :
+			self.update_counter -= 1
+			# These 'if' clauses mean update computation only happens if needed
+			if self.update_counter == 0. :
+				# if update counter just went zero 
+				# then ask for an action 
+				if self.intermediate_phase is False :
+					self.action_required = True 
 
-				self.next_state = self.calculate_state()
-				self.reward = self.calculate_reward()
-					
-			# if during a change
-			# then make the change
-			if self.intermediate_phase is True : 
-				self.action_required = False
-				
-				# Get light color right for each signal group
-				for sg in self.signal_groups :
-					
-					ID = sg.AttValue('No')-1
-					tic = t.time()
-					self._color_changer(sg, self.new_colors[ID], self.stage)
-					tac = t.time()
-					#('_color_changer')
-					#print(tac-tic)
+					# Comment this out because it slow they are not implemented yet 
+
+					self.next_state = self.calculate_state()
+					self.reward = self.calculate_reward()
 						
-				# change the current stage and get time the stage last for
-				time = self._stage_changer(self.stage)
-				self.update_counter = time
+				# if during a change
+				# then make the change
+				if self.intermediate_phase is True : 
+					self.action_required = False
 					
-				# if full transition (Amber->Red->RedAmber-Green) to green done  
-				if self.stage == "Green" :
-					self.intermediate_phase = False # record current action is implemented
+					# Get light color right for each signal group
+					for sg in self.signal_groups :
+						
+						ID = sg.AttValue('No')-1
+						tic = t.time()
+						self._color_changer(sg, self.new_colors[ID], self.stage)
+						tac = t.time()
+						#('_color_changer')
+						#print(tac-tic)
+							
+					# change the current stage and get time the stage last for
+					time = self._stage_changer(self.stage)
+					self.update_counter = time
+						
+					# if full transition (Amber->Red->RedAmber-Green) to green done  
+					if self.stage == "Green" :
+						self.intermediate_phase = False # record current action is implemented
+
+
+
+
+
+#Fonction to compute the queue in a lane
+
+def get_queue(lane):
+    vehicles_in_lane = lane.Vehs
+    queue_in_lane = 0
+    for vehicle in vehicles_in_lane:
+        if vehicle.AttValue('InQueue') == 1:
+            queue_in_lane +=1
+    return(queue_in_lane)
+
 
 
 # For one intersection here is the state and reward computation methode
@@ -347,7 +334,7 @@ class Signal_Control_Unit:
 # ID will be the ID / number of the intersection 
 def calculate_state(Vissim, state_type, state_size, action, ID):
 	if state_type == 'Queues':
-    	#Obtain Queue Values (average value over the last period)
+		#Obtain Queue Values (average value over the last period)
 		West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
 		South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
 		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
@@ -375,7 +362,7 @@ def calculate_state(Vissim, state_type, state_size, action, ID):
 		return(state)
 	
 	elif state_type == 'QueuesSig':
-    	#Obtain Queue Values (average value over the last period)
+		#Obtain Queue Values (average value over the last period)
 		West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')		
 		South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')		
 		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
@@ -487,7 +474,7 @@ def calculate_state(Vissim, state_type, state_size, action, ID):
 # The calculate reward is now separate from the agent state (this can cause the simulation to be slower)
 def calculate_reward(Vissim, reward_type, ID):
 	if reward_type == 'Queues':
-    	#Obtain Queue Values (average value over the last period)
+		#Obtain Queue Values (average value over the last period)
 		West_Queue  = Vissim.Net.QueueCounters.ItemByKey(1).AttValue('QLen(Current,Last)')
 		South_Queue = Vissim.Net.QueueCounters.ItemByKey(2).AttValue('QLen(Current,Last)')
 		East_Queue  = Vissim.Net.QueueCounters.ItemByKey(3).AttValue('QLen(Current,Last)')
@@ -527,7 +514,7 @@ def calculate_reward(Vissim, reward_type, ID):
 	# For the moment We only work on a particuliar junction    	
 	if reward_type == 'Queues':
 		reward = -np.sum([0. if state is None else state for state in state[0]])
-    	#print(reward)
+		#print(reward)
 	if reward_type == 'QueuesDifference':
 		current_queue_sum = -np.sum([0. if state is None else state for state in state[0]])
 		previous_queue_sum =  -np.sum([0. if state is None else state for state in state[0]])

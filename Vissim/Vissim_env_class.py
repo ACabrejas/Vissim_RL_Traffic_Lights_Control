@@ -52,12 +52,6 @@ class env():
 			self.Vissim.Simulation.RunSingleStep()
 			self.global_counter += 1
 
-
-		# That will be done inside of the SCU
-		# for SC in self.npa.signal_controllers_ids:
-		# 	for group in self.npa.signal_groups[SC]:
-		# 		group.SetAttValue('ContrByCOM',1)
-
 		
 		# Create a dictionnary of SCUs each scu control a signal controller
 		
