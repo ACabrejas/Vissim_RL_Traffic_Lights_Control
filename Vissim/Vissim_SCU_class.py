@@ -76,8 +76,14 @@ class Signal_Control_Unit:
 			#self.action_required = False # used to requests an action from agent
 			self.update_counter = 1
 			# implement 1st action to start
-			self.action_key = 0   # dict key of current action (we start with 0) 
+			self.action_key = 0   # dict key of current action (we start with 0)
+			self.action = self.compatible_actions[self.action_key] 
+
 			self.next_action_key = 0
+			self.next_action = self.compatible_actions[self.next_action_key] 
+
+
+
 			self.action_update(self.action_key)    
 			self.stage = "Green" # tracks the stage particularly when in intermediate phase.
 								 # Stages appear in order: "Amber" -> "Red" -> "RedAmber" -> "Green"
@@ -139,12 +145,13 @@ class Signal_Control_Unit:
 		-- id of action
 		-- green_time, if specified by agent (in seconds)
 	'''    
-	def action_update(self, next_action_key, green_time=None):
+	def action_update(self, action, green_time=None):
 		self.intermediate_phase = True # initate intermediate_phase
-		self.update_counter = 1 # set update counter zero (will get reset at self.update() )
-		self.next_action_key = next_action_key
-		self.current_action = self.compatible_actions[next_action_key] 
-		self.new_colors = [ 2*val for val in self.current_action] # converts action to 0,1,2 range
+		self.update_counter = 1 # set update counter zero (will get reset at self.update())
+		self.next_action_key = action
+
+		self.next_action = self.compatible_actions[action] 
+		
 		
 		if green_time is not None:
 			self.green_time = green_time * self.time_steps_per_second
@@ -155,6 +162,7 @@ class Signal_Control_Unit:
 	# internal helper function
 	# red = 0, amber/redamber = 1 and green = 2
 	def _color_convert(self,color):
+
 		if color == "RED" :
 			return 0
 		elif color == "GREEN" :
@@ -172,36 +180,37 @@ class Signal_Control_Unit:
 		-- new_color : 2 = green / 0 = red
 		-- stage : what stage all lights in the controller are.
 	'''          
-	def _color_changer(self, signal_group, new_color, stage):
+	def _color_changer(self):
 		#Get the current color
 
-		#print('current_color')
-		tic = t.time()
-		current_color = self._color_convert(signal_group.AttValue("SigState"))
-		tac = t.time()
-		#print(tac-tic)
-		change = new_color-current_color
+		current_color =  [2*val for val in self.action]
+		next_color = [2*val for val in self.next_action_key] 
+
+		transition_vector = np.subtract()
+
+		change = np.subtract(self.new_colors, self.current_color)
 		
 		# want green but currently red
-		if change == -2 and stage == "Green" :
-			signal_group.SetAttValue("SigState", "AMBER")
 		
+
+
 		# want red but currently amber
 		# if just gone red need on second before green change
-		elif change == -1 and stage == "Amber" :
-			signal_group.SetAttValue("SigState", "RED")
+		
+
+
 		
 		# want green but currently red 
-		elif change == 2 and stage == "Red" :
-			signal_group.SetAttValue("SigState", "REDAMBER")
+		
+
 				
 		# want green but currently redamber
-		elif change == 1 and stage == "RedAmber":
-			signal_group.SetAttValue("SigState", "GREEN")
+		
+
 		
 		# if both red or green pass (i.e. no change keep green)
-		elif change == 0 :
-			pass
+		
+
 	
 
 	'''
@@ -233,7 +242,6 @@ class Signal_Control_Unit:
 				if self.redamber_time == 0:
 					time = self.green_time
 					self.stage = "Green"
-
 
 			else :
 				time = self.red_time
@@ -284,8 +292,6 @@ class Signal_Control_Unit:
 				if self.intermediate_phase is False :
 					self.action_required = True 
 
-					# Comment this out because it slow they are not implemented yet 
-
 					self.next_state = self.calculate_state()
 					self.reward = self.calculate_reward()
 						
@@ -295,14 +301,18 @@ class Signal_Control_Unit:
 					self.action_required = False
 					
 					# Get light color right for each signal group
-					for sg in self.signal_groups :
+
+
+					self._color_changer()
+					
+					# for sg in self.signal_groups :
 						
-						ID = sg.AttValue('No')-1
-						tic = t.time()
-						self._color_changer(sg, self.new_colors[ID], self.stage)
-						tac = t.time()
-						#('_color_changer')
-						#print(tac-tic)
+					# 	ID = sg.AttValue('No')-1
+					# 	tic = t.time()
+					# 	self._color_changer(sg, self.new_colors[ID], self.stage)
+					# 	tac = t.time()
+					# 	#('_color_changer')
+					# 	#print(tac-tic)
 							
 					# change the current stage and get time the stage last for
 					time = self._stage_changer(self.stage)
@@ -319,12 +329,11 @@ class Signal_Control_Unit:
 #Fonction to compute the queue in a lane
 
 def get_queue(lane):
-    vehicles_in_lane = lane.Vehs
-    queue_in_lane = 0
-    for vehicle in vehicles_in_lane:
-        if vehicle.AttValue('InQueue') == 1:
-            queue_in_lane +=1
-    return(queue_in_lane)
+
+	vehicles_in_lane = lane.Vehs
+	queue_in_lane = np.sum([vehicle.AttValue('InQueue') for vehicle in vehicles_in_lane])
+
+	return(queue_in_lane)
 
 
 
