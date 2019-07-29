@@ -11,10 +11,12 @@ from time import time
 class env():
 
 	"""
+	This is an python environnement on top of VISSIM simulation softwar.
+
 	-Load the model
-		- it need the controller actions to be defined by hand
-	-Deploy the SCU
-	-
+		- it need the Model info to be defined by hand
+		- Deploy the SCU
+	
 	"""
 	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionnary,\
 					 timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
@@ -53,20 +55,18 @@ class env():
 			self.global_counter += 1
 
 		
-		# Create a dictionnary of SCUs each scu control a signal controller
-		
 		
 		tic = time()
-		self._Load_SCUs()
+		self._Load_SCUs() # Create a dictionnary of SCUs each scu control a signal controller
 		tac = time()
 		print(tac-tic)
 
-	'''
-	_Load_SCUs :
-		provides a dictionary with at the SCUs
-		# Need to find later a way to give different green / yellow time to each SCUs
-	'''
+	
 	def _Load_SCUs(self):
+		'''
+		_Load_SCUs 
+			provides and create a dictionary of SCUs
+		'''
 		
 		self.SCUs = dict()
 		
@@ -80,34 +80,44 @@ class env():
 		
 		
 
-	# -Function to get the SCUs to later deploy agent on them
-	def get_SCU(self):
-		return(self.SCUs)
-
-	# retrun the state of the environnement as a dictionnary
-	def get_state(self):
-		state = {}
-		for idx, scu in self.SCUs.items(): 
-			state[idx] = scu.state
-
-		return state
 
 	# does a step in the simulator
 	# INPUT a dictionary of action
 	# return a dictionnary of (state, action, reward, next_state , done) the key will be the SCU's key
 	def step(self, actions):
+		"""
+		Does one step in the simulator. 
+		ie performs the following action
+		- Advance on step time in the simulator (cars moving)
+		- Change the signal group light color controled by com if needed for every intersection 
+		- Compute the state of the intersections that need an action at the next time step
+
+		Input
+		- A dictionnary of actions. Each action is indexed by the number of the corresponding SCU
+
+		
+		Return
+		- if an action is required on the all network
+		- a dictionnary of (state, action, reward, next_state , done) the key will be the SCUs' key
+		"""
 		self.Vissim.Simulation.RunSingleStep()
+		# increase the update counter by one each step (until reach simulation length)
 		self.global_counter += 1
-		if self.global_counter > (self.sim_length-1) * self.timesteps_per_second:
+		if self.global_counter > (self.sim_length-10) * self.timesteps_per_second:
 			self.done = True
 
 		Sarsd = dict()
 
+
+		# Update the action of all the junction that needded one
 		[scu.action_update(actions[idx]) for idx,scu in self.SCUs.items() if scu.action_required]
 		
+		# performs an udapte on all the SCUs nearly simutaneously 
 		[scu.update() for idx,scu in self.SCUs.items()]
 
-		# not a nice way of doing this creatung the dictionnary
+		# not a nice way of doing this, 
+		# creating the dictionnary of all state, action, reward, next_state
+		# Of the junctions that need a new action for the next time step.
 		[to_dictionnary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]
 
 		
@@ -117,11 +127,12 @@ class env():
 			return False, None
 
 
-	# reset the environnement
+	
 	def reset(self):
-		## Connecting the COM Server => Open a new Vissim Window:
-		# Server should only be dispatched in first run. Otherwise reload model.
-		# Setting Working Directory
+		"""
+		Reset the environment by reloading the map
+		"""
+		
 
 		self.global_counter = 0
 
@@ -135,18 +146,24 @@ class env():
 			self.Vissim.Simulation.RunSingleStep()
 			self.global_counter += 1
 
-		for SC in self.npa.signal_controllers_ids:
-			for group in self.npa.signal_groups[SC]:
-				group.SetAttValue('ContrByCOM', 1)
+		
 
 		self._Load_SCUs()
 		self.done = False
 		
 
 
-	# Set mode to training, demo, debugging
 	def select_mode(self):
-		# Select the mode for the metric collection 
+		"""
+		Set mode to training, demo, debugging
+
+		Select the mode for the metric collection 
+
+		The metric are collected in a database located in <Model>.results
+		Some metric collection are also needed for the state computation
+
+		"""
+		# 
 
 		# In test mode all the data is stored (The simulation will be slow)
 		if self.mode == 'test' :
@@ -267,6 +284,9 @@ class env():
 
 # That is not a clean way to do this
 def to_dictionnary(dict,idx,value):
+	"""
+	Assign a value to an index in a dictionnary
+	"""
 	dict[idx] = value
 
 def COMServerDispatch(model_name, vissim_working_directory, sim_length, timesteps_per_second, delete_results = True, verbose = True):
