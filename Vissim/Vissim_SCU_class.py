@@ -183,13 +183,13 @@ class Signal_Control_Unit:
 			self.stage = "Green"
 			self.update_counter =  self.green_time
 			self.intermediate_phase = False
-			print('green_stay_green')
+			#print('green_stay_green')
 			return
 
 		elif  self.next_action_key != self.action_key :
 
 			if self.stage == "Green":
-				print('green to amber')
+				#print('green to amber')
 				current_colors =  [val for val in self.compatible_actions[self.action_key]]
 				next_colors = [val for val in  self.compatible_actions[self.next_action_key]] 
 
@@ -205,9 +205,9 @@ class Signal_Control_Unit:
 				return
 
 			elif self.stage == "Amber":
-				print("Amber")
+				#print("Amber")
 				if self.red_time != 0:
-					print("ambertored")
+					#print("ambertored")
 
 					[self.signal_groups[idx].SetAttValue("SigState", "RED") \
 								for idx,value in enumerate(self.change_vector) if value == -1]
@@ -244,7 +244,7 @@ class Signal_Control_Unit:
 
 				
 			elif self.stage == "Red":
-				print("Red")
+				#print("Red")
 				if self.redamber_time != 0 :
 					[self.signal_groups[idx].SetAttValue("SigState", "REDAMBER") \
 									for idx,value in enumerate(self.change_vector) if value == 1]
@@ -268,7 +268,7 @@ class Signal_Control_Unit:
 
 
 			elif self.stage == "RedAmber":
-				print("redamber")
+				#print("redamber")
 				[self.signal_groups[idx].SetAttValue("SigState", "GREEN") \
 									for idx,value in enumerate(self.change_vector) if value == 1]
 				
@@ -371,11 +371,11 @@ class Signal_Control_Unit:
 					# Get light color right for each signal group
 
 
-					print('_color_changer')
-					tic = t.time()
+					#print('_color_changer')
+					#tic = t.time()
 					self._color_changer()
-					tac = t.time()
-					print(tac-tic)
+					#tac = t.time()
+					#print(tac-tic)
 					
 					# for sg in self.signal_groups :
 						

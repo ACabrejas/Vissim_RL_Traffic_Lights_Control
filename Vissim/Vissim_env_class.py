@@ -102,25 +102,15 @@ class env():
 			self.done = True
 
 		Sarsd = dict()
-		
-		for idx, scu in self.SCUs.items():
-			if scu.action_required :
-				tic = time()
-				scu.action_update(actions[idx])
-				tac = time()
-				#print('action_update')
-				#print(tac-tic)
-			
-			tic = time()
-			scu.update()
-			tac = time()
-			#print('update')
-			#print(tac-tic)
 
-			if scu.action_required :
-				Sarsd[idx] = scu.sars()+[self.done]
+		[scu.action_update(actions[idx]) for idx,scu in self.SCUs.items() if scu.action_required]
 		
+		[scu.update() for idx,scu in self.SCUs.items()]
 
+		# not a nice way of doing this creatung the dictionnary
+		[to_dictionnary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]
+
+		
 		if len(Sarsd) > 0 :
 			return True, Sarsd
 		else:
@@ -275,8 +265,9 @@ class env():
 
 
 
-
-
+# That is not a clean way to do this
+def to_dictionnary(dict,idx,value):
+	dict[idx] = value
 
 def COMServerDispatch(model_name, vissim_working_directory, sim_length, timesteps_per_second, delete_results = True, verbose = True):
 	for _ in range(5):
