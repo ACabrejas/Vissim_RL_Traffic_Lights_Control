@@ -117,7 +117,7 @@ class Signal_Control_Unit:
 		sars =  [self.state, self.action_key, self.reward, self.next_state]
 
 		self.state = self.next_state
-		self.action = self.next_action_key
+		self.action_key = self.next_action_key
 
 		return(sars)
 
@@ -145,14 +145,11 @@ class Signal_Control_Unit:
 		-- id of action
 		-- green_time, if specified by agent (in seconds)
 	'''    
-	def action_update(self, action, green_time=None):
+	def action_update(self, action_key, green_time = None):
 		self.intermediate_phase = True # initate intermediate_phase
 		self.update_counter = 1 # set update counter zero (will get reset at self.update())
-		self.next_action_key = action
+		self.next_action_key = action_key
 
-		self.next_action = self.compatible_actions[action] 
-		
-		
 		if green_time is not None:
 			self.green_time = green_time * self.time_steps_per_second
 
@@ -161,7 +158,7 @@ class Signal_Control_Unit:
 
 	# internal helper function
 	# red = 0, amber/redamber = 1 and green = 2
-	def _color_convert(self,color):
+	def green(self,color):
 
 		if color == "RED" :
 			return 0
@@ -182,33 +179,104 @@ class Signal_Control_Unit:
 	'''          
 	def _color_changer(self):
 		#Get the current color
+		if self.next_action_key == self.action_key :
+			self.stage = "Green"
+			self.update_counter =  self.green_time
+			self.intermediate_phase = False
+			print('green_stay_green')
+			return
 
-		current_color =  [2*val for val in self.action]
-		next_color = [2*val for val in self.next_action_key] 
+		elif  self.next_action_key != self.action_key :
 
-		transition_vector = np.subtract()
+			if self.stage == "Green":
+				print('green to amber')
+				current_colors =  [val for val in self.compatible_actions[self.action_key]]
+				next_colors = [val for val in  self.compatible_actions[self.next_action_key]] 
 
-		change = np.subtract(self.new_colors, self.current_color)
-		
-		# want green but currently red
-		
+				self.change_vector = np.subtract(next_colors, current_colors)
+
+				[self.signal_groups[idx].SetAttValue("SigState", "AMBER") \
+								for idx,value in enumerate(self.change_vector) if value == -1]
+
+				self.stage = "Amber"
+				self.update_counter = self.amber_time
+				self.intermediate_phase = True
+				
+				return
+
+			elif self.stage == "Amber":
+				print("Amber")
+				if self.red_time != 0:
+					print("ambertored")
+
+					[self.signal_groups[idx].SetAttValue("SigState", "RED") \
+								for idx,value in enumerate(self.change_vector) if value == -1]
+					self.update_counter = self.red_time
+					self.stage = "Red"
+					self.intermediate_phase = True
+					return
+				
 
 
-		# want red but currently amber
-		# if just gone red need on second before green change
-		
+				elif self.red_time == 0:
+					if self.redamber_time != 0:
+						[self.signal_groups[idx].SetAttValue("SigState", Amber_to_Redamber(value)) \
+									for idx,value in enumerate(self.change_vector) if value != 0]
 
+						self.update_counter = self.redamber_time
+						self.stage = "RedAmber"
+						self.intermediate_phase = True
+						return
+						
+					
 
-		
-		# want green but currently red 
-		
+					elif  self.redamber_time == 0:
+						[self.signal_groups[idx].SetAttValue("SigState", Amber_to_Green(value)) \
+									for idx,value in enumerate(self.change_vector) if value != 0]
+
+						self.update_counter = self.green_time
+						self.stage = "Green"
+						self.intermediate_phase = False
+						return
+					
+				
+				
 
 				
-		# want green but currently redamber
-		
+			elif self.stage == "Red":
+				print("Red")
+				if self.redamber_time != 0 :
+					[self.signal_groups[idx].SetAttValue("SigState", "REDAMBER") \
+									for idx,value in enumerate(self.change_vector) if value == 1]
 
-		
-		# if both red or green pass (i.e. no change keep green)
+					self.update_counter = self.redamber_time
+					self.stage = "RedAmber"
+					self.intermediate_phase = True
+					return
+
+				elif self.redamber_time == 0 :
+					[self.signal_groups[idx].SetAttValue("SigState", "GREEN") \
+									for idx,value in enumerate(self.change_vector) if value == 1]
+
+					self.update_counter = self.green_time
+					self.stage = "Green"
+					self.intermediate_phase = True
+					return
+				
+				
+				
+
+
+			elif self.stage == "RedAmber":
+				print("redamber")
+				[self.signal_groups[idx].SetAttValue("SigState", "GREEN") \
+									for idx,value in enumerate(self.change_vector) if value == 1]
+				
+				self.update_counter = self.green_time
+				self.stage = "Green"
+				self.intermediate_phase = False
+				
+				pass
 		
 
 	
@@ -228,43 +296,43 @@ class Signal_Control_Unit:
 		
 	Nb. stage is a controller method while color is a sg property
 	'''
-	def _stage_changer(self,stage):
+	# def _stage_changer(self,stage):
 		
-		if stage == "Green" :
-			time = self.amber_time
-			self.stage = "Amber" 
+	# 	if stage == "Green" :
+	# 		time = self.amber_time
+	# 		self.stage = "Amber" 
 	
-		elif stage == "Amber" :
-			if self.red_time == 0:
-				time = self.redamber_time
-				self.stage = "RedAmber"
+	# 	elif stage == "Amber" :
+	# 		if self.red_time == 0:
+	# 			time = self.redamber_time
+	# 			self.stage = "RedAmber"
 
-				if self.redamber_time == 0:
-					time = self.green_time
-					self.stage = "Green"
+	# 			if self.redamber_time == 0:
+	# 				time = self.green_time
+	# 				self.stage = "Green"
 
-			else :
-				time = self.red_time
-				self.stage = "Red"
+	# 		else :
+	# 			time = self.red_time
+	# 			self.stage = "Red"
 		
 
-		# what is this red stage ? a stage where all the light are red ?
-		elif stage == "Red" :
+	# 	# what is this red stage ? a stage where all the light are red ?
+	# 	elif stage == "Red" :
 
-			if self.redamber_time == 0:
-				time = self.green_time
-				self.stage = "Green"
+	# 		if self.redamber_time == 0:
+	# 			time = self.green_time
+	# 			self.stage = "Green"
 
-			else :
-				time = self.redamber_time
-				self.stage = "RedAmber"
+	# 		else :
+	# 			time = self.redamber_time
+	# 			self.stage = "RedAmber"
 				
-		# want green but currently redamber
-		elif stage == "RedAmber" :
-			time = self.green_time
-			self.stage = "Green"
+	# 	# want green but currently redamber
+	# 	elif stage == "RedAmber" :
+	# 		time = self.green_time
+	# 		self.stage = "Green"
 		
-		return time
+	# 	return time
 				
 		
 	'''
@@ -303,7 +371,11 @@ class Signal_Control_Unit:
 					# Get light color right for each signal group
 
 
+					print('_color_changer')
+					tic = t.time()
 					self._color_changer()
+					tac = t.time()
+					print(tac-tic)
 					
 					# for sg in self.signal_groups :
 						
@@ -311,20 +383,30 @@ class Signal_Control_Unit:
 					# 	tic = t.time()
 					# 	self._color_changer(sg, self.new_colors[ID], self.stage)
 					# 	tac = t.time()
-					# 	#('_color_changer')
+					# 	#print('_color_changer')
 					# 	#print(tac-tic)
 							
 					# change the current stage and get time the stage last for
-					time = self._stage_changer(self.stage)
-					self.update_counter = time
+					# time = self._stage_changer(self.stage)
+					# self.update_counter = time
 						
 					# if full transition (Amber->Red->RedAmber-Green) to green done  
-					if self.stage == "Green" :
-						self.intermediate_phase = False # record current action is implemented
+					# if self.stage == "Green" :
+					# 	self.intermediate_phase = False # record current action is implemented
 
 
 
+def Amber_to_Redamber(val):
+	if val == 1 :
+		return "REDAMBER"
+	elif val == -1:
+		return "RED"
 
+def Amber_to_Green(val):
+	if val == 1 :
+		return "GREEN"
+	elif val == -1:
+		return "RED"
 
 #Fonction to compute the queue in a lane
 
