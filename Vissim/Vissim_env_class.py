@@ -61,6 +61,8 @@ class env():
 		tac = time()
 		print(tac-tic)
 
+		self.action_required = False
+
 	
 	def _Load_SCUs(self):
 		'''
@@ -120,14 +122,47 @@ class env():
 		# Of the junctions that need a new action for the next time step.
 		[to_dictionnary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]
 
-		
 		if len(Sarsd) > 0 :
-			return True, Sarsd
+			self.action_required = True
+
+		if len(Sarsd) > 0 :
+			return self.action_required, Sarsd
 		else:
-			return False, None
+			return self.action_required, None
+
+
+	def step_to_next_action(self. actions):
+		"""
+		Does steps until an action is required the simulator. 
+		ie performs the following action
+		- Advance on step time in the simulator (cars moving)
+		- Change the signal group light color controled by com if needed for every intersection 
+		- Compute the state of the intersections that need an action at the next time step
+
+		Input
+		- A dictionnary of actions. Each action is indexed by the number of the corresponding SCU
+
+		
+		Return
+		- if an action is required on the all network
+		- a dictionnary of (state, action, reward, next_state , done) the key will be the SCUs' key
+		"""
+
+		while not self.action_required:
+			action, Sarsd = self.step(actions)
+			
+		self.action_required = False
+
+		return True, Sarsd
+
 
 
 	
+
+
+
+
+
 	def reset(self):
 		"""
 		Reset the environment by reloading the map
