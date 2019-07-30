@@ -149,11 +149,11 @@ class env():
 		"""
 
 		while not self.action_required:
-			action, Sarsd = self.step(actions)
-			
+			action_required, Sarsd = self.step(actions)
+
 		self.action_required = False
 
-		return True, Sarsd
+		return action_required, Sarsd
 
 
 
