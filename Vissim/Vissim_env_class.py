@@ -64,6 +64,14 @@ class env():
 		self.action_required = False
 
 	
+	# retrun the state of the environnement as a dictionnary
+	def get_state(self):
+		state = {}
+		for idx, scu in self.SCUs.items(): 
+			state[idx] = scu.state
+
+		return state
+		
 	def _Load_SCUs(self):
 		'''
 		_Load_SCUs 
@@ -131,7 +139,7 @@ class env():
 			return self.action_required, None
 
 
-	def step_to_next_action(self. actions):
+	def step_to_next_action(self, actions):
 		"""
 		Does steps until an action is required the simulator. 
 		ie performs the following action
