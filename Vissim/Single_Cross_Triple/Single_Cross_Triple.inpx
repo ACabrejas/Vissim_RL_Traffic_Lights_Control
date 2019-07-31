@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="603" vissimVersion="11.00 - 08 [77763]">
+<network version="603" vissimVersion="11.00 - 09 [78629]">
 	<anmDefaults colorDistr="1" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="" panmRoutesFilename="" pedestrianVehicleType="510" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -2322,20 +2322,20 @@
 		</reducedSpeedArea>
 	</reducedSpeedAreas>
 	<signalControllers>
-		<signalController active="true" cycTm="100" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="1" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Triple.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="90" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="1" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Triple.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="A" no="1" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="B" no="2" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="C" no="3" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="D" no="4" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="E" no="5" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="F" no="6" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="G" no="7" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="H" no="8" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="I" no="9" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="J" no="10" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="K" no="11" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="L" no="12" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="A" no="1" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="B" no="2" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="C" no="3" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="D" no="4" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="E" no="5" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="F" no="6" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="G" no="7" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="H" no="8" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="I" no="9" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="J" no="10" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="K" no="11" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="L" no="12" redAmber="1" type="NORMAL"/>
 			</sgs>
 			<sigTmsTabConfig>
 				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 1" title="" varNo="1" wttFilename="vissim"/>
@@ -2478,22 +2478,22 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="false" link="1" name="WE" no="1">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="1000"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="1000"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="1000"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="1000"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>
