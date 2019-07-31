@@ -18,14 +18,13 @@ class env():
 		- Deploy the SCU
 	
 	"""
-	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionnary,\
+	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionary,\
 					 timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
 
 		# Model parameters
 		self.model_name = model_name
 		self.vissim_working_directory = vissim_working_directory
-		self.Model_dictionnary = Model_dictionnary
-
+		self.Model_dictionary = Model_dictionary
 
 		# Simulation parameters
 		self.sim_length = sim_length
@@ -38,8 +37,7 @@ class env():
 		self.delete_results = delete_results
 		self.verbose = verbose
 
-
-		# ComServerDisp
+		# Dispatach the COM server
 		self.Vissim, _, _, _ = COMServerDispatch(model_name, vissim_working_directory, self.sim_length,\
 												 self.timesteps_per_second, delete_results = self.delete_results, verbose = self.verbose)
 		self.done = False
@@ -54,38 +52,38 @@ class env():
 			self.Vissim.Simulation.RunSingleStep()
 			self.global_counter += 1
 
-		
-		
+		# Deploy the SCUs and the agents
 		tic = time()
-		self._Load_SCUs() # Create a dictionnary of SCUs each scu control a signal controller
+		self._Load_SCUs() # Create a dictionary of SCUs each scu control a signal controller
 		tac = time()
 		print(tac-tic)
 
 		self.action_required = False
 
-	
+	# retrun the state of the environnement as a dictionary
+	def get_state(self):
+		state = {}
+		for idx, scu in self.SCUs.items(): 
+			state[idx] = scu.state
+
+		return state
+		
 	def _Load_SCUs(self):
 		'''
 		_Load_SCUs 
 			provides and create a dictionary of SCUs
 		'''
-		
 		self.SCUs = dict()
 		
-		for idx, sc in enumerate(self.npa.signal_controllers):
+		for idx, signal_controller in enumerate(self.npa.signal_controllers):
 			self.SCUs[idx] = Signal_Control_Unit(\
 						 self.Vissim,\
-						 sc,\
-						 self.Model_dictionnary[idx],\
+						 signal_controller,\
+						 self.Model_dictionary[idx],\
+						 idx,\
 						 Signal_Groups = None
 						)
 		
-		
-
-
-	# does a step in the simulator
-	# INPUT a dictionary of action
-	# return a dictionnary of (state, action, reward, next_state , done) the key will be the SCU's key
 	def step(self, actions):
 		"""
 		Does one step in the simulator. 
@@ -95,13 +93,14 @@ class env():
 		- Compute the state of the intersections that need an action at the next time step
 
 		Input
-		- A dictionnary of actions. Each action is indexed by the number of the corresponding SCU
+		- A dictionary of actions. Each action is indexed by the number of the corresponding SCU
 
 		
 		Return
 		- if an action is required on the all network
-		- a dictionnary of (state, action, reward, next_state , done) the key will be the SCUs' key
+		- a dictionary of (state, action, reward, next_state , done) the key will be the SCUs' key
 		"""
+		global timesteps_per_second
 		self.Vissim.Simulation.RunSingleStep()
 		# increase the update counter by one each step (until reach simulation length)
 		self.global_counter += 1
@@ -110,17 +109,16 @@ class env():
 
 		Sarsd = dict()
 
-
 		# Update the action of all the junction that needded one
-		[scu.action_update(actions[idx]) for idx,scu in self.SCUs.items() if scu.action_required]
+		[scu.action_update(actions[idx]) for idx, scu in enumerate(self.SCUs.items()) if scu.action_required]
 		
-		# performs an udapte on all the SCUs nearly simutaneously 
+		# Udapte all the SCUs nearly simutaneously 
 		[scu.update() for idx,scu in self.SCUs.items()]
 
 		# not a nice way of doing this, 
-		# creating the dictionnary of all state, action, reward, next_state
+		# creating the dictionary of all state, action, reward, next_state
 		# Of the junctions that need a new action for the next time step.
-		[to_dictionnary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]
+		[to_dictionary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]
 
 		if len(Sarsd) > 0 :
 			self.action_required = True
@@ -131,7 +129,7 @@ class env():
 			return self.action_required, None
 
 
-	def step_to_next_action(self. actions):
+	def step_to_next_action(self, actions):
 		"""
 		Does steps until an action is required the simulator. 
 		ie performs the following action
@@ -140,12 +138,11 @@ class env():
 		- Compute the state of the intersections that need an action at the next time step
 
 		Input
-		- A dictionnary of actions. Each action is indexed by the number of the corresponding SCU
+		- A dictionary of actions. Each action is indexed by the number of the corresponding SCU
 
-		
 		Return
 		- if an action is required on the all network
-		- a dictionnary of (state, action, reward, next_state , done) the key will be the SCUs' key
+		- a dictionary of (state, action, reward, next_state , done) the key will be the SCUs' key
 		"""
 
 		while not self.action_required:
@@ -155,25 +152,18 @@ class env():
 
 		return action_required, Sarsd
 
-
-
-	
-
-
-
-
-
 	def reset(self):
 		"""
 		Reset the environment by reloading the map
 		"""
-		
-
+		# Reset the time counter
 		self.global_counter = 0
 
-
+		# Reload the server
 		COMServerReload(self.Vissim, self.model_name, self.vissim_working_directory, self.sim_length, self.timesteps_per_second, self.delete_results)
+		# Update the Network Parser
 		self.npa = NetworkParser(self.Vissim) 
+		# Set simulator configuration
 		self.select_mode()
 
 		# Simulate one step and give the control to COM
@@ -181,12 +171,9 @@ class env():
 			self.Vissim.Simulation.RunSingleStep()
 			self.global_counter += 1
 
-		
-
+		# Redeploy agents
 		self._Load_SCUs()
 		self.done = False
-		
-
 
 	def select_mode(self):
 		"""
@@ -198,8 +185,6 @@ class env():
 		Some metric collection are also needed for the state computation
 
 		"""
-		# 
-
 		# In test mode all the data is stored (The simulation will be slow)
 		if self.mode == 'test' :
 			#This select quickmode and simulation resolution
@@ -313,22 +298,20 @@ class env():
 			self.Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', False)
 			self.Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 99999)
 
-
-
-
-
 # That is not a clean way to do this
-def to_dictionnary(dict,idx,value):
+def to_dictionary(dictionary,idx,value):
 	"""
-	Assign a value to an index in a dictionnary
+	Assign a value to an index in a dictionary
 	"""
-	dict[idx] = value
+	dictionary[idx] = value
 
 def COMServerDispatch(model_name, vissim_working_directory, sim_length, timesteps_per_second, delete_results = True, verbose = True):
+	'''
+	Connecting the COM Server => Open a new Vissim Window:
+	Server should only be dispatched in first run. Otherwise reload model.
+	'''
 	for _ in range(5):
 		try:
-			## Connecting the COM Server => Open a new Vissim Window:
-			# Server should only be dispatched in first run. Otherwise reload model.
 			# Setting Working Directory
 			if verbose:
 				print ('Working Directory set to: ' + vissim_working_directory)
@@ -396,16 +379,16 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, timestep
 			elif _ == 4:
 				raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
 
-
 def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_length, timesteps_per_second, delete_results):
-	## Connecting the COM Server => Open a new Vissim Window:
-	# Server should only be dispatched in first run. Otherwise reload model.
-	# Setting Working Directory
+	'''
+	Connecting the COM Server => Open a new Vissim Window:
+	Server should only be dispatched in first run. Otherwise reload.
+	'''
+	#Try 5 times
 	for _ in range(5):
 		try:
 			## Load the Network:
 			Filename = os.path.join(vissim_working_directory, model_name, (model_name+'.inpx'))
-
 			Vissim.LoadNet(Filename)
 
 			## Setting Simulation End
@@ -415,11 +398,6 @@ def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_len
 				# Delete all previous simulation runs first:
 				for simRun in Vissim.Net.SimulationRuns:
 					Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
-				#print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
-
-			#Pre-fetch objects for stability
-			
-			#print('Reloading complete. Executing new episode...')
 			return()
 		# If loading fails
 		except:
