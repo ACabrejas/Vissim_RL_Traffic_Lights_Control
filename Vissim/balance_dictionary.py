@@ -54,7 +54,7 @@ def balance_dictionary():
          
         },
     # Controller SC02
-    1 : {'compatible_actions' : {   0 : [0, 1, 0, 0, 1, 0, 1, 1],
+    1 : {'default_actions' : {   0 : [0, 1, 0, 0, 1, 0, 1, 1],
                                     1 : [1, 0, 0, 1, 0, 0, 0, 0],
                                     2 : [0, 0, 1, 0, 0, 1, 0, 0]},
 
@@ -77,7 +77,7 @@ def balance_dictionary():
          'reward_type' : 'Queues'
         },
     # Controller SC03
-    2 : {'compatible_actions' : {   0 : [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    2 : {'default_actions' : {   0 : [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                     1 : [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                     2 : [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                     3 : [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
@@ -105,7 +105,7 @@ def balance_dictionary():
          'reward_type' : 'Queues'
         },
     # Controller SC04
-    3 : {'compatible_actions' : {   0 : [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
+    3 : {'default_actions' : {   0 : [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
                                     1 : [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
                                     2 : [0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]},
 
@@ -128,7 +128,7 @@ def balance_dictionary():
          'reward_type' : 'Queues'
         },
     # Controller SC05 
-    4 : {'compatible_actions' : {   0 : [0, 1, 1, 0, 0],
+    4 : {'default_actions' : {   0 : [0, 1, 1, 0, 0],
                                     1 : [1, 1, 0, 0, 0],
                                     2 : [0, 0, 0, 1, 0]},
 
@@ -149,7 +149,7 @@ def balance_dictionary():
          'reward_type' : 'Queues'
         },
     # Controller SC06
-    5 : {'compatible_actions' : {   0 : [1, 0, 1, 0, 1, 0],
+    5 : {'default_actions' : {   0 : [1, 0, 1, 0, 1, 0],
                                     1 : [0, 1, 0, 1, 0, 1]},
 
          'all_actions' :        {   0 : [1, 0, 1, 0, 1, 0],
@@ -169,7 +169,7 @@ def balance_dictionary():
          
         },
     # Controller SC07
-    6 : {'compatible_actions' : {   0 : [0, 1, 0, 1, 1, 1],
+    6 : {'default_actions' : {   0 : [0, 1, 0, 1, 1, 1],
                                     1 : [1, 0, 1, 0, 0, 0]},
 
          'all_actions' :        {   0 : [0, 1, 0, 1, 1, 1],
@@ -188,11 +188,11 @@ def balance_dictionary():
          'reward_type' : 'Queues'
         },
     # Contoller SC08
-    7 : {'compatible_actions' : {   0 : [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+    7 : {'default_actions' : {   0 : [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
                                     1 : [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
                                     2 : [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
 
-         'compatible_actions' : {   0 : [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+         'default_actions' : {   0 : [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
                                     1 : [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
                                     2 : [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                     3 : [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -211,7 +211,7 @@ def balance_dictionary():
          'reward_type' : 'Queues'
         },
     # Controller SC09
-    8 : {'compatible_actions' : {   0 : [1, 0, 1, 0, 0, 0, 0],
+    8 : {'default_actions' : {   0 : [1, 0, 1, 0, 0, 0, 0],
                                     1 : [0, 1, 0, 0, 0, 0, 0]},
 
          'all_actions' :        {   0 : [1, 0, 1, 0, 0, 0, 0],
@@ -230,7 +230,7 @@ def balance_dictionary():
          'reward_type' : 'Queues'
         },
     # Controller SC10
-    9 : {'compatible_actions' : {   0 : [0, 1, 0, 1, 1, 0, 1, 0],
+    9 : {'default_actions' : {   0 : [0, 1, 0, 1, 1, 0, 1, 0],
                                     1 : [1, 0, 1, 0, 0, 1, 0, 1]},
 
          'all_actions' :        {   0 : [0, 1, 0, 1, 1, 0, 1, 0],
@@ -250,7 +250,7 @@ def balance_dictionary():
             
         },
     # Controller SC11
-    10 : {'compatible_actions' : {  0 : [1, 0, 1, 0, 0, 1, 0, 1],
+    10 : {'default_actions' : {  0 : [1, 0, 1, 0, 0, 1, 0, 1],
                                     1 : [0, 1, 0, 1, 1, 0, 1, 0]},
 
          'all_actions' :         {  0 : [1, 0, 1, 0, 0, 1, 0, 1],
@@ -269,7 +269,7 @@ def balance_dictionary():
          'reward_type' : 'Queues'
         },
     # Controller SC12
-    11 : {'compatible_actions' :  { 0 : [1, 0, 1, 0, 0, 1, 0, 1],
+    11 : {'default_actions' :  { 0 : [1, 0, 1, 0, 0, 1, 0, 1],
                                     1 : [0, 1, 0, 1, 1, 0, 1, 0]},
 
          'all_actions' :          { 0 : [1, 0, 1, 0, 0, 1, 0, 1],
@@ -288,7 +288,7 @@ def balance_dictionary():
          'reward_type' : 'Queues'
         },
     # Controller SC13
-    12 : {'compatible_actions' :  { 0 : [1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1],
+    12 : {'default_actions' :  { 0 : [1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1],
                                     1 : [0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1],
                                     2 : [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0],
                                     3 : [0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0]},
@@ -312,7 +312,7 @@ def balance_dictionary():
             
         },
     # Controller SC14 
-    13 : {'compatible_actions' :  { 0 : [1, 0, 0, 1, 0, 0, 1, 0, 0],
+    13 : {'default_actions' :  { 0 : [1, 0, 0, 1, 0, 0, 1, 0, 0],
                                     1 : [0, 0, 1, 1, 0, 1, 0, 0, 0],
                                     2 : [0, 1, 0, 0, 1, 1, 0, 1, 1]},
 
