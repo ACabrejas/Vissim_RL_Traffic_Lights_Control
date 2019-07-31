@@ -31,7 +31,8 @@ class Signal_Control_Unit:
 				 Vissim,\
 				 Signal_Controller_Object,\
 				 Intersection_info,\
-				 Identificator,
+				 Identificator,\
+				 npa,\
 				 Signal_Groups = None,\
 				):
 		#####################################
@@ -126,6 +127,10 @@ class Signal_Control_Unit:
 		"""
 		if self.state_type == 'Queues':
 			state = [get_queue(lane) for lane in self.Vissim_Lanes]
+			state = np.array(state)[np.newaxis,:]
+
+		if self.state_type == "QueuesSig":
+			state = [get_queue(lane) for lane in self.Vissim_Lanes]+[self.next_action_key]
 			state = np.array(state)[np.newaxis,:]
 		
 		return(state)

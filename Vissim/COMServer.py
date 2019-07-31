@@ -105,3 +105,18 @@ def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_len
             elif _ == 4:
                 raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
                 quit()
+
+
+def Stop_Simulation(Vissim , delete_results = True):
+
+     ## Stop the simulation and delete the results
+    Vissim.simulation.Stop()
+    print('tomate')
+
+    if delete_results == True:
+                # Delete all previous simulation runs first:
+                for simRun in Vissim.Net.SimulationRuns:
+                    Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
+                #print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
+
+

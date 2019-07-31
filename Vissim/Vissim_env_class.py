@@ -8,7 +8,7 @@ from time import time
 
 
 # The environment class , 
-class env():
+class environment():
 
 	"""
 	This is an python environnement on top of VISSIM simulation softwar.
@@ -81,6 +81,7 @@ class env():
 						 signal_controller,\
 						 self.Model_dictionary[idx],\
 						 idx,\
+						 self.npa,\
 						 Signal_Groups = None
 						)
 		
@@ -100,7 +101,7 @@ class env():
 		- if an action is required on the all network
 		- a dictionary of (state, action, reward, next_state , done) the key will be the SCUs' key
 		"""
-		global timesteps_per_second
+		#global timesteps_per_second
 		self.Vissim.Simulation.RunSingleStep()
 		# increase the update counter by one each step (until reach simulation length)
 		self.global_counter += 1
@@ -110,7 +111,7 @@ class env():
 		Sarsd = dict()
 
 		# Update the action of all the junction that needded one
-		[scu.action_update(actions[idx]) for idx, scu in enumerate(self.SCUs.items()) if scu.action_required]
+		[scu.action_update(actions[idx]) for idx,scu in self.SCUs.items() if scu.action_required]
 		
 		# Udapte all the SCUs nearly simutaneously 
 		[scu.update() for idx,scu in self.SCUs.items()]
@@ -124,9 +125,10 @@ class env():
 			self.action_required = True
 
 		if len(Sarsd) > 0 :
-			return self.action_required, Sarsd
+			self.action_required = False
+			return True, Sarsd
 		else:
-			return self.action_required, None
+			return False, None
 
 
 	def step_to_next_action(self, actions):
@@ -159,10 +161,13 @@ class env():
 		# Reset the time counter
 		self.global_counter = 0
 
-		# Reload the server
-		COMServerReload(self.Vissim, self.model_name, self.vissim_working_directory, self.sim_length, self.timesteps_per_second, self.delete_results)
+		# Reset the simulation
+		#COMServerReload(self.Vissim, self.model_name, self.vissim_working_directory, self.sim_length, self.timesteps_per_second, self.delete_results)
+		
+		Stop_Simulation(self.Vissim , delete_results = self.delete_results)
+
 		# Update the Network Parser
-		self.npa = NetworkParser(self.Vissim) 
+		#self.npa = NetworkParser(self.Vissim) 
 		# Set simulator configuration
 		self.select_mode()
 
@@ -228,6 +233,7 @@ class env():
 			#This select the simulation resolution
 			self.timesteps_per_second = 10
 			self.Vissim.Simulation.SetAttValue('SimRes', self.timesteps_per_second)
+			self.Vissim.ResumeUpdateGUI()
 			
 			# set the data mesurement
 			self.Vissim.Evaluation.SetAttValue('DataCollCollectData', False)
@@ -406,6 +412,18 @@ def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_len
 			elif _ == 4:
 				raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
 				quit()
+
+def Stop_Simulation(Vissim , delete_results = True):
+
+     ## Stop the simulation and delete the results
+    print('tomate')
+    Vissim.simulation.Stop()
+
+    if delete_results == True:
+                # Delete all previous simulation runs first:
+                for simRun in Vissim.Net.SimulationRuns:
+                    Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
+                #print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
 
 
 
