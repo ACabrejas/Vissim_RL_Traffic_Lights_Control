@@ -1,4 +1,6 @@
 import os
+import tensorflow.keras.backend as K
+import pickle
 
 class RLAgent():
 	"""
@@ -35,6 +37,8 @@ class RLAgent():
 		self.episode_reward = []
 		self.best_reward = -1000
 
+		self.reward_storage = []
+
 
 
 
@@ -55,7 +59,7 @@ class RLAgent():
 
 
 	# Save agents
-	def save_agents(self, vissim_working_directory, model_name, Session_ID, reward_storage):
+	def save_agent(self, vissim_working_directory, model_name, Session_ID):
 
 		# Chech if suitable folder exists
 		folder =  os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID)
@@ -64,9 +68,9 @@ class RLAgent():
 		
 
 		if self.type == 'AC':
-			Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Weights'+'.h5')
-			Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Optimizer'+'.h5')
-			print('Saving architecture, weights, optimizer state for agent-{}'.format(index))
+			Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Weights'+'.h5')
+			Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Optimizer'+'.h5')
+			print('Saving architecture, weights, optimizer state for agent-{}'.format(self.ID))
 
 			symbolic_weights = getattr(self.model.optimizer, 'weights')
 			weight_values = K.batch_get_value(symbolic_weights)
@@ -77,35 +81,35 @@ class RLAgent():
 			self.model.save_weights(Weights_Filename)
 
 		else :
-			Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'.h5')
-			print('Saving architecture, weights and optimizer state for agent-{}'.format(index))
+			Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'.h5')
+			print('Saving architecture, weights and optimizer state for agent-{}'.format(self.ID))
 			self.model.save(Filename)
 
-		Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Memory'+'.p')
+		Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Memory'+'.p')
 		print('Dumping agent-{} memory into pickle file'.format(self.ID))
-		pickle.dump(self..memory, open(Memory_Filename, 'wb'))
-		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Train'+'.p')
+		pickle.dump(self.memory, open(Memory_Filename, 'wb'))
+		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Train'+'.p')
 		print('Dumping Training Results into pickle file.')
-		pickle.dump(reward_storage, open(Training_Progress_Filename, 'wb'))
-		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Loss'+'.p')
+		pickle.dump(self.reward_storage, open(Training_Progress_Filename, 'wb'))
+		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Loss'+'.p')
 		print('Dumping Loss Results into pickle file.')
 		pickle.dump(self.loss, open(Loss_Filename, 'wb'))
 
 
 
 	# Reload agents
-	def load_agents(vissim_working_directory, model_name, Agents, Session_ID, best):
+	def load_agent(self, vissim_working_directory, model_name , Session_ID, best = True):
 		
 		
 		if self.type == 'AC':
 			print('Loading Pre-Trained Agent, Architecture and Memory.')
 			if best:
-				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Weights'+'.h5')
-				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Optimizer'+'.h5')
+				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Weights'+'.h5')
+				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Optimizer'+'.h5')
 
 			else :
-				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Weights'+'.h5')
-				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Optimizer'+'.h5')
+				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Weights'+'.h5')
+				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Optimizer'+'.h5')
 
 			# this is to build the network (to be corrected) 
 			self.test()
@@ -120,58 +124,58 @@ class RLAgent():
 		else :
 			print('Loading Pre-Trained Agent, Architecture, Optimizer and Memory.')
 			if best:
-				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'.h5')
+				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'.h5')
 			else :
-				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'.h5')
+				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'.h5')
 			
 			self.model = load_model(Filename)
 
 		if best:
-			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Memory'+'.p')
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Memory'+'.p')
 		else:
-			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Memory'+'.p')
+			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Memory'+'.p')
 		self.memory = pickle.load(open(Memory_Filename, 'rb'))
-		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Train'+'.p')
-		reward_storage = pickle.load(open(Training_Progress_Filename, 'rb'))
-		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Loss'+'.p')
+		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Train'+'.p')
+		self.reward_storage = pickle.load(open(Training_Progress_Filename, 'rb'))
+		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Loss'+'.p')
 		self.Loss = pickle.load(open(Loss_Filename, 'rb'))
 			
 		print('Items successfully loaded.')
-		return(Agents, reward_storage)
+		
 
-	def best_agent(reward_storage, average_reward, best_agent_weights, best_agent_memory, vissim_working_directory, model_name, Agents, Session_ID):
+	def best_agent(self, vissim_working_directory, model_name, Session_ID):
 
-	# Chech if suitable folder exists
-	folder =  os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID)
-	if not os.path.exists(folder):
-		os.makedirs(folder)
-	if average_reward == np.max(reward_storage):
-		for index, agent in enumerate(Agents):
-			best_agent_memory = agent.memory
-			print('Saving architecture, weights, optimizer state for best agent-{}'.format(index))
-			if agent.type == 'AC' :
-				best_agent_weights = agent.model.get_weights()
-				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Weights'+'.h5')
-				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Optimizer'+'.h5')
-			
-				symbolic_weights = getattr(agent.model.optimizer, 'weights')
-				weight_values = K.batch_get_value(symbolic_weights)
-				with open(Optimizer_Filename, 'wb') as f:
-					pickle.dump(weight_values, f)
+		# Chech if suitable folder exists
+		folder =  os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID)
+		if not os.path.exists(folder):
+			os.makedirs(folder)
+		if self.average_reward >= np.max(self.reward_storage):
+			for self.ID, agent in enumerate(Agents):
+				best_agent_memory = agent.memory
+				print('Saving architecture, weights, optimizer state for best agent-{}'.format(self.ID))
+				if agent.type == 'AC' :
+					best_agent_weights = agent.model.get_weights()
+					Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Weights'+'.h5')
+					Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Optimizer'+'.h5')
+				
+					symbolic_weights = getattr(agent.model.optimizer, 'weights')
+					weight_values = K.batch_get_value(symbolic_weights)
+					with open(Optimizer_Filename, 'wb') as f:
+						pickle.dump(weight_values, f)
 
-				agent.model.save_weights(Weights_Filename)
-			else : 
-				best_agent_weights = agent.model
-				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'.h5')
-				agent.model.save(Filename)
+					agent.model.save_weights(Weights_Filename)
+				else : 
+					best_agent_weights = agent.model
+					Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'.h5')
+					agent.model.save(Filename)
 
-			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(index)+'_Memory'+'.p')
-			pickle.dump(best_agent_memory, open(Memory_Filename, 'wb'))
-			print("New best agent found. Saved in {}".format(Memory_Filename))
-			Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Train'+'.p')
-			print('Dumping Training Results into pickle file.')
-			Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(index)+'_Loss'+'.p')
-			print('Dumping Loss Results into pickle file.')
-			pickle.dump(agent.loss, open(Loss_Filename, 'wb'))
+				Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Memory'+'.p')
+				pickle.dump(best_agent_memory, open(Memory_Filename, 'wb'))
+				print("New best agent found. Saved in {}".format(Memory_Filename))
+				Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Train'+'.p')
+				print('Dumping Training Results into pickle file.')
+				Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Loss'+'.p')
+				print('Dumping Loss Results into pickle file.')
+				pickle.dump(agent.loss, open(Loss_Filename, 'wb'))
 
-	return(best_agent_weights, best_agent_memory)
+		return(best_agent_weights, best_agent_memory)
