@@ -3733,7 +3733,7 @@
 		<areaMeasResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<areaResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<convergence writeFile="false"/>
-		<dataColl collectData="false" fromTime="0" interval="99999" toTime="99999"/>
+		<dataColl collectData="false" fromTime="0" interval="3" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<delays collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
@@ -3759,7 +3759,7 @@
 		<pedTravTmODData fromTime="0" interval="99999" toTime="99999" writeFile="false"/>
 		<pedTravTmRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<pedTravTms collectData="false" fromTime="0" interval="99999" toTime="99999"/>
-		<queues collectData="false" fromTime="0" interval="99999" toTime="99999"/>
+		<queues collectData="true" fromTime="0" interval="3" toTime="99999"/>
 		<scDetRec writeFile="false"/>
 		<ssam writeFile="false"/>
 		<sigChgs writeDatabase="false" writeFile="false"/>
@@ -3767,7 +3767,7 @@
 			<intObjectRef key="40"/>
 		</vehClasses>
 		<vehInpData writeFile="false"/>
-		<vehNetPerf collectData="true" fromTime="0" interval="300" toTime="10800"/>
+		<vehNetPerf collectData="false" fromTime="0" interval="99999" toTime="10800"/>
 		<vehRec filterType="ALL" fromTime="0" inclParkVehs="false" resolution="1" toTime="99999" writeDatabase="false" writeFile="false">
 			<attributes>
 				<attributeSelection attributeID="SIMSEC" decimals="2" format="SECONDS" showUnits="false"/>
@@ -14422,7 +14422,7 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="131 1" localNo="0" name="" no="292" orSG="3 16" pos="0.82274228052686316" sg="3 16" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="132 1" localNo="0" name="" no="293" orSG="3 16" pos="1.7317824490768838" sg="3 16" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="PTV Balance PTV Epics Vision Suite Workflow.ver" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10000" simRes="10" simSpeed="10" startTm="23400" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="PTV Balance PTV Epics Vision Suite Workflow.ver" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3601" simRes="1" simSpeed="10" startTm="23400" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<stopSigns>
 		<stopSign anmFlag="true" lane="10166 1" name="ANM" no="1" pos="0.1"/>
 		<stopSign anmFlag="true" lane="10169 1" name="ANM" no="2" pos="0.1"/>

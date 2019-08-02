@@ -164,20 +164,34 @@ class environment():
 		else:
 			return None
 
+	def Stop_Simulation(self , delete_results = True):
+
+	 ## Stop the simulation and delete the results
+		self.Vissim.simulation.Stop()
+
+		if delete_results == True:
+			# Delete all previous simulation runs first:
+			for simRun in self.Vissim.Net.SimulationRuns:
+				self.Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
+
 	def reset(self):
 		"""
 		Reset the environment by reloading the map
+		End simulation and write results to database file (*.db) while deleting them from VISSIM itself
+		Increase Random Seed
+		Set simulator configuration
+		Simulate one step and give the control to COM
+		Redeploy SCUs
 		"""
 		# Reset the time counter
 		self.global_counter = 0
+	
+		# End simulation and write results to database file (*.db) while deleting them from VISSIM itself
+		self.Stop_Simulation(delete_results = self.delete_results)
 
-		# Reset the simulation
-		COMServerReload(self.Vissim, self.model_name, self.vissim_working_directory, self.sim_length, self.timesteps_per_second, self.delete_results)
-		
-		#Stop_Simulation(self.Vissim , delete_results = self.delete_results)
+		# Increase Random Seed
+		self.Vissim.Simulation.SetAttValue('RandSeed', self.Vissim.Simulation.AttValue('RandSeed')+1)
 
-		# Update the Network Parser
-		#self.npa = NetworkParser(self.Vissim) 
 		# Set simulator configuration
 		self.select_mode()
 
@@ -186,7 +200,7 @@ class environment():
 			self.Vissim.Simulation.RunSingleStep()
 			self.global_counter += 1
 
-		# Redeploy agents
+		# Redeploy SCUs
 		self._Load_SCUs()
 		self.done = False
 

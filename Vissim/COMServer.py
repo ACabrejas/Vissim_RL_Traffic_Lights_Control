@@ -111,7 +111,6 @@ def Stop_Simulation(Vissim , delete_results = True):
 
      ## Stop the simulation and delete the results
     Vissim.simulation.Stop()
-    print('tomate')
 
     if delete_results == True:
                 # Delete all previous simulation runs first:
