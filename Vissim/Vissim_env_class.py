@@ -132,12 +132,7 @@ class environment():
 		- if an action is required on the all network
 		- a dictionary of (state, action, reward, next_state , done) the key will be the SCUs' key
 		"""
-		for i in range(self.timesteps_per_second):
-			self.Vissim.Simulation.RunSingleStep()
-		# increase the update counter by one each step (until reach simulation length)
-		self.global_counter += 1
-		if self.global_counter > (self.sim_length-10):
-			self.done = True
+		
 
 		Sarsd = dict()
 
@@ -150,6 +145,15 @@ class environment():
 		# not a nice way of doing this, 
 		# creating the dictionary of all state, action, reward, next_state
 		# Of the junctions that need a new action for the next time step.
+		
+
+		for i in range(self.timesteps_per_second):
+			self.Vissim.Simulation.RunSingleStep()
+		# increase the update counter by one each step (until reach simulation length)
+		self.global_counter += 1
+		if self.global_counter > (self.sim_length-10):
+			self.done = True
+
 		[to_dictionary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]
 
 		if len(Sarsd) > 0 :

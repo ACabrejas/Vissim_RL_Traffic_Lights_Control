@@ -118,7 +118,13 @@ class Signal_Control_Unit:
 		THIS function actualy change the object. (There should be a better way...). Or we can duplicate
 		the function in case we only want the state, action ,reward, next_state without changing the SCU
 		"""
+
+		#Compute the state for the RL agent to find the next best action
+		self.next_state = self.calculate_state()
+		self.reward = self.calculate_reward()
+
 		sars =  [self.state, self.action_key, self.reward, self.next_state]
+
 		self.state = self.next_state
 		self.action_key = self.next_action_key
 		return(sars)
@@ -299,10 +305,6 @@ class Signal_Control_Unit:
 				# then ask for an action 
 				if self.intermediate_phase is False :
 					self.action_required = True 
-
-					#Compute the state for the RL agent to find the next best agent 
-					self.next_state = self.calculate_state()
-					self.reward = self.calculate_reward()
 						
 				# if during a change
 				# then make the change
