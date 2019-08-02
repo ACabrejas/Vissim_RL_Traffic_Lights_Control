@@ -118,10 +118,10 @@ class DQNAgent:
         else:
             # Architecture for the Neural Net in Deep-Q learning Model (also Double version)
             model = Sequential()
-            model.add(Dense(42, input_dim=self.state_size, activation='relu',kernel_regularizer=regularizers.l2(0.01)))
-            model.add(Dense(42, activation='relu',kernel_regularizer=regularizers.l2(0.01)))
-            model.add(Dense(42, activation='relu',kernel_regularizer=regularizers.l2(0.01)))
-            model.add(Dense(self.action_size, activation='linear',kernel_regularizer=regularizers.l2(0.01)))
+            model.add(Dense(42, input_dim=self.state_size, activation='relu', kernel_regularizer=regularizers.l2(0.01)))
+            model.add(Dense(42, activation='relu', kernel_regularizer=regularizers.l2(0.01)))
+            model.add(Dense(42, activation='relu', kernel_regularizer=regularizers.l2(0.01)))
+            model.add(Dense(self.action_size, activation='linear', kernel_regularizer=regularizers.l2(0.01)))
             
             #model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
             model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate, epsilon =1.5*10**-4))
