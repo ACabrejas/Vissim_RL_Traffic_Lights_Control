@@ -1,5 +1,5 @@
 import numpy as np
-import time as t
+import time as time
 
 class Signal_Control_Unit:
 	"""
@@ -31,8 +31,7 @@ class Signal_Control_Unit:
 				 Vissim,\
 				 Signal_Controller_Object,\
 				 Intersection_info,\
-				 Identificator,\
-				 npa,\
+				 Identificator, npa,
 				 Signal_Groups = None,\
 				):
 		#####################################
@@ -47,16 +46,17 @@ class Signal_Control_Unit:
 		self.state_type = Intersection_info['state_type']
 		self.state_size = Intersection_info['state_size']
 		self.reward_type = Intersection_info['reward_type']
-		self.compatible_actions = Intersection_info['compatible_actions']
+		self.compatible_actions = Intersection_info['default_actions']
+		self.all_actions = Intersection_info['all_actions']
 		# Those are for the moment not Vissim objects, it is the index of object located in the simulator
 		self.Lanes_names = Intersection_info['lane']
 		self.Links_names = Intersection_info['link']
 		# Time of the different stage, and the minimal green time
 		self.time_steps_per_second = Vissim.Simulation.AttValue('SimRes')
-		self.green_time = Intersection_info['green_time'] * self.time_steps_per_second # the green time is in step
-		self.redamber_time = Intersection_info['redamber_time'] * self.time_steps_per_second
-		self.amber_time = Intersection_info['amber_time'] * self.time_steps_per_second
-		self.red_time = Intersection_info['red_time'] * self.time_steps_per_second
+		self.green_time = Intersection_info['green_time'] # the green time is in step
+		self.redamber_time = Intersection_info['redamber_time'] 
+		self.amber_time = Intersection_info['amber_time'] 
+		self.red_time = Intersection_info['red_time']
 
 		# Controlled by com?
 		self.controled_by_com = Intersection_info['controled_by_com']
@@ -64,6 +64,7 @@ class Signal_Control_Unit:
 		#################################
 		# Fetch Objects operated by SCU # 
 		#################################
+
 		# Signal Controller
 		self.signal_controller = Signal_Controller_Object
 		# Signal Groups
@@ -85,6 +86,7 @@ class Signal_Control_Unit:
 		#####################################
 		# Pass Traffic Light Control to COM #
 		#####################################
+
 		# Set the Signal Control to be exclusively controlled by COM
 		if self.controled_by_com:
 			# Set COM Control
@@ -156,7 +158,7 @@ class Signal_Control_Unit:
 		self.next_action_key = action_key
 
 		if green_time is not None:
-			self.green_time = green_time * self.time_steps_per_second
+			self.green_time = green_time 
 
 		self.action_required = False
 		
@@ -308,7 +310,7 @@ class Signal_Control_Unit:
 					self.action_required = False
 					self._color_changer() #Make the change in the Simulator
 		else :
-			pass					
+			pass				
 
 def Amber_to_Redamber(val):
 	"""

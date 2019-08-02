@@ -1,4 +1,4 @@
-def balance_dictionary():
+def balance_dictionary(agent_type):
 #####################################
 ## SCHEMATIC LAYOUT OF THE NETWORK ##
 #####################################
@@ -25,9 +25,8 @@ def balance_dictionary():
 ################################
 ## DICTIONARY FOR THE NETWORK ##
 ################################
-
-	balance_dictionary =\
-	{\
+    balance_dictionary =\
+		{\
     # Controller SC01 
     0 : {'default_actions' : {      0 : [1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0],
                                     1 : [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
@@ -49,12 +48,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [8],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
-         
-         
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC02
-    1 : {'default_actions' : {   0 : [0, 1, 0, 0, 1, 0, 1, 1],
+    1 : {'default_actions' : {      0 : [0, 1, 0, 0, 1, 0, 1, 1],
                                     1 : [1, 0, 0, 1, 0, 0, 0, 0],
                                     2 : [0, 0, 1, 0, 0, 1, 0, 0]},
 
@@ -74,10 +72,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [8],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC03
-    2 : {'default_actions' : {   0 : [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    2 : {'default_actions' : {      0 : [0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                     1 : [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                     2 : [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
                                     3 : [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
@@ -102,10 +101,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [14],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC04
-    3 : {'default_actions' : {   0 : [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
+    3 : {'default_actions' : {      0 : [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
                                     1 : [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0],
                                     2 : [0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]},
 
@@ -125,10 +125,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [8],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC05 
-    4 : {'default_actions' : {   0 : [0, 1, 1, 0, 0],
+    4 : {'default_actions' :    {   0 : [0, 1, 1, 0, 0],
                                     1 : [1, 1, 0, 0, 0],
                                     2 : [0, 0, 0, 1, 0]},
 
@@ -146,10 +147,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [6],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC06
-    5 : {'default_actions' : {   0 : [1, 0, 1, 0, 1, 0],
+    5 : {'default_actions' :    {   0 : [1, 0, 1, 0, 1, 0],
                                     1 : [0, 1, 0, 1, 0, 1]},
 
          'all_actions' :        {   0 : [1, 0, 1, 0, 1, 0],
@@ -165,11 +167,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [3],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
-         
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC07
-    6 : {'default_actions' : {   0 : [0, 1, 0, 1, 1, 1],
+    6 : {'default_actions' :    {   0 : [0, 1, 0, 1, 1, 1],
                                     1 : [1, 0, 1, 0, 0, 0]},
 
          'all_actions' :        {   0 : [0, 1, 0, 1, 1, 1],
@@ -185,14 +187,15 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [6],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Contoller SC08
-    7 : {'default_actions' : {   0 : [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+    7 : {'default_actions' :    {   0 : [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
                                     1 : [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
                                     2 : [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]},
 
-         'default_actions' : {   0 : [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+         'all_actions' :        {   0 : [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
                                     1 : [0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],
                                     2 : [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                                     3 : [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -208,10 +211,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [7],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC09
-    8 : {'default_actions' : {   0 : [1, 0, 1, 0, 0, 0, 0],
+    8 : {'default_actions' :    {   0 : [1, 0, 1, 0, 0, 0, 0],
                                     1 : [0, 1, 0, 0, 0, 0, 0]},
 
          'all_actions' :        {   0 : [1, 0, 1, 0, 0, 0, 0],
@@ -227,10 +231,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [3],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC10
-    9 : {'default_actions' : {   0 : [0, 1, 0, 1, 1, 0, 1, 0],
+    9 : {'default_actions' :    {   0 : [0, 1, 0, 1, 1, 0, 1, 0],
                                     1 : [1, 0, 1, 0, 0, 1, 0, 1]},
 
          'all_actions' :        {   0 : [0, 1, 0, 1, 1, 0, 1, 0],
@@ -246,11 +251,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [4],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
-            
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC11
-    10 : {'default_actions' : {  0 : [1, 0, 1, 0, 0, 1, 0, 1],
+    10 : {'default_actions' :    {  0 : [1, 0, 1, 0, 0, 1, 0, 1],
                                     1 : [0, 1, 0, 1, 1, 0, 1, 0]},
 
          'all_actions' :         {  0 : [1, 0, 1, 0, 0, 1, 0, 1],
@@ -266,10 +271,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [4],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC12
-    11 : {'default_actions' :  { 0 : [1, 0, 1, 0, 0, 1, 0, 1],
+    11 : {'default_actions' :     { 0 : [1, 0, 1, 0, 0, 1, 0, 1],
                                     1 : [0, 1, 0, 1, 1, 0, 1, 0]},
 
          'all_actions' :          { 0 : [1, 0, 1, 0, 0, 1, 0, 1],
@@ -285,10 +291,11 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [4],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         },
     # Controller SC13
-    12 : {'default_actions' :  { 0 : [1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1],
+    12 : {'default_actions' :     { 0 : [1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1],
                                     1 : [0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1],
                                     2 : [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0],
                                     3 : [0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0]},
@@ -308,11 +315,12 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [7],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
             
         },
     # Controller SC14 
-    13 : {'default_actions' :  { 0 : [1, 0, 0, 1, 0, 0, 1, 0, 0],
+    13 : {'default_actions' :     { 0 : [1, 0, 0, 1, 0, 0, 1, 0, 0],
                                     1 : [0, 0, 1, 1, 0, 1, 0, 0, 0],
                                     2 : [0, 1, 0, 0, 1, 1, 0, 1, 1]},
 
@@ -329,7 +337,8 @@ def balance_dictionary():
          'red_time' : 1,
          'state_size' : [6],
          'state_type' : 'Queues',
-         'reward_type' : 'Queues'
+         'reward_type' : 'Queues',
+         'agent_type' : agent_type
         }
 	}
-	return(balance_dictionary)
+    return(balance_dictionary)
