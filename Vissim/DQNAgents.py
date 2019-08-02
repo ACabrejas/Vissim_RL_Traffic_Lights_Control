@@ -81,6 +81,7 @@ class DQNAgent:
         self.loss = []
         self.queues_over_time = [[0,0,0,0]]
         self.accumulated_delay= [0]
+        self.flow_in_intersection = []
         
         if self.PER_activated:
             # If PER_activated spawn BinaryTree and Memory object to store priorities and experiences
@@ -89,8 +90,11 @@ class DQNAgent:
             # Else use the deque structure to only store experiences which will be sampled uniformly
             self.memory = deque(maxlen=memory_size)
    
-    # Agent Neural Network definition
+    
     def _build_model(self):
+        '''
+        This method builds the neural network at the core of the agent
+        '''
         if self.Dueling:
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
             #model = Sequential()
@@ -129,14 +133,23 @@ class DQNAgent:
     
     # Add memory on the right, if over memory limit, pop leftmost item
     def remember(self, state, action, reward, next_state, done):
+        '''
+        This method operate in a different manner depending on whether PER memory is active or not.
+            PER active  : arrange sarsd into an array and store it in the tree.
+            PER inactive: append sarsd into the right of a deque item, if the item is full, pop item on the leftmost position.
+        '''
         if self.PER_activated:
             experience = np.array([state, action, reward, next_state, done])
             self.memory.store(experience)
         else:
             self.memory.append([state, action, reward, next_state, done])
     
-    # Choosing actions
     def choose_action(self, state):
+        '''
+        This method chooses an action using an epsilon-greedy method.
+            Input : State as an array.
+            Output: Action as an integer.
+        '''
         if np.random.rand() <= self.epsilon:
             action = random.randrange(self.action_size)
             #print('Chosen Random Action {}'.format(action+1))
@@ -146,8 +159,12 @@ class DQNAgent:
             #print('Chosen Not-Random Action {}'.format(action+1))
         return action
     
-    # Sample a batch of "batch_size" experiences and perform 1 step of gradient descent on all of them simultaneously
     def learn_batch(self, batch_size, episode):
+        '''
+        Sample a batch of "batch_size" experiences. 
+        Perform 1 step of gradient descent on all of them simultaneously.
+        Update priority weights in the memory tree
+        '''
         state_vector = []
         target_f_vector = []
         absolute_errors = [] 
@@ -204,12 +221,10 @@ class DQNAgent:
             #Update priority
             self.memory.batch_update(tree_idx, absolute_errors)
 
-        # Copy weights every "copy_weights_frequency" episodes
-        #if (episode+1) % self.copy_weights_frequency == 0 and episode != 0:
-        #    self.copy_weights()   
-
-    # Copy weights function
     def copy_weights(self):
+        ''' 
+        This method copies the weights from the model to the target model.
+        '''
         self.target_model.set_weights(self.model.get_weights())
         print("Weights succesfully copied to Target model.")  
 

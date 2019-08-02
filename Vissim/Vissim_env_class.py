@@ -172,9 +172,9 @@ class environment():
 		self.global_counter = 0
 
 		# Reset the simulation
-		#COMServerReload(self.Vissim, self.model_name, self.vissim_working_directory, self.sim_length, self.timesteps_per_second, self.delete_results)
+		COMServerReload(self.Vissim, self.model_name, self.vissim_working_directory, self.sim_length, self.timesteps_per_second, self.delete_results)
 		
-		Stop_Simulation(self.Vissim , delete_results = self.delete_results)
+		#Stop_Simulation(self.Vissim , delete_results = self.delete_results)
 
 		# Update the Network Parser
 		#self.npa = NetworkParser(self.Vissim) 
