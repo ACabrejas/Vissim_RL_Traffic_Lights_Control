@@ -1,5 +1,5 @@
 import numpy as np
-import time as t
+import time as time
 import pickle
 
 class Signal_Control_Unit():
@@ -32,8 +32,7 @@ class Signal_Control_Unit():
 				 Vissim,\
 				 Signal_Controller_Object,\
 				 Intersection_info,\
-				 Identificator,\
-				 npa,\
+				 Identificator, npa,
 				 Signal_Groups = None,\
 				):
 		#####################################
@@ -48,17 +47,17 @@ class Signal_Control_Unit():
 		self.state_type = Intersection_info['state_type']
 		self.state_size = Intersection_info['state_size']
 		self.reward_type = Intersection_info['reward_type']
-		self.compatible_actions = Intersection_info['compatible_actions']
+		self.compatible_actions = Intersection_info['default_actions']
+		self.all_actions = Intersection_info['all_actions']
 		# Those are for the moment not Vissim objects, it is the index of object located in the simulator
 		self.Lanes_names = Intersection_info['lane']
 		self.Links_names = Intersection_info['link']
 		# Time of the different stage, and the minimal green time
 		self.time_steps_per_second = Vissim.Simulation.AttValue('SimRes')
-		self.green_time = Intersection_info['green_time'] * self.time_steps_per_second - 1 #bad and lazy way to corect a bug 
-		#so that the true green time is the one specified in the dictionary	# the green time is in step
-		self.redamber_time = Intersection_info['redamber_time'] * self.time_steps_per_second
-		self.amber_time = Intersection_info['amber_time'] * self.time_steps_per_second
-		self.red_time = Intersection_info['red_time'] * self.time_steps_per_second
+		self.green_time = Intersection_info['green_time'] # the green time is in step
+		self.redamber_time = Intersection_info['redamber_time'] 
+		self.amber_time = Intersection_info['amber_time'] 
+		self.red_time = Intersection_info['red_time']
 
 		# Controlled by com?
 		self.controled_by_com = Intersection_info['controled_by_com']
@@ -66,6 +65,7 @@ class Signal_Control_Unit():
 		#################################
 		# Fetch Objects operated by SCU # 
 		#################################
+
 		# Signal Controller
 		self.signal_controller = Signal_Controller_Object
 		# Signal Groups
@@ -88,6 +88,7 @@ class Signal_Control_Unit():
 		#####################################
 		# Pass Traffic Light Control to COM #
 		#####################################
+
 		# Set the Signal Control to be exclusively controlled by COM
 		if self.controled_by_com:
 			# Set COM Control
@@ -119,7 +120,13 @@ class Signal_Control_Unit():
 		THIS function actualy change the object. (There should be a better way...). Or we can duplicate
 		the function in case we only want the state, action ,reward, next_state without changing the SCU
 		"""
+
+		#Compute the state for the RL agent to find the next best action
+		self.next_state = self.calculate_state()
+		self.reward = self.calculate_reward()
+
 		sars =  [self.state, self.action_key, self.reward, self.next_state]
+
 		self.state = self.next_state
 		self.action_key = self.next_action_key
 		return(sars)
@@ -159,7 +166,7 @@ class Signal_Control_Unit():
 		self.next_action_key = action_key
 
 		if green_time is not None:
-			self.green_time = green_time * self.time_steps_per_second
+			self.green_time = green_time 
 
 		self.action_required = False
 		
@@ -300,10 +307,6 @@ class Signal_Control_Unit():
 				# then ask for an action 
 				if self.intermediate_phase is False :
 					self.action_required = True 
-
-					#Compute the state for the RL agent to find the next best agent action
-					self.next_state = self.calculate_state()
-					self.reward = self.calculate_reward()
 						
 				# if during a change
 				# then make the change
@@ -311,7 +314,7 @@ class Signal_Control_Unit():
 					self.action_required = False
 					self._color_changer() #Make the change in the Simulator
 		else :
-			pass					
+			pass				
 
 def Amber_to_Redamber(val):
 	"""
@@ -338,7 +341,7 @@ def get_queue(lane):
 	-Input lane as a Vissim object
 	"""
 	vehicles_in_lane = lane.Vehs
-	# Collecte the attribute in queue of the vehicle of the lane and sum them
+	# Collecte the attribute in lane of the vehicle of the lane and sum them
 	queue_in_lane = np.sum([vehicle.AttValue('InQueue') for vehicle in vehicles_in_lane])
 	return(queue_in_lane)
 

@@ -15,12 +15,13 @@ class environment():
 	This is an python environnement on top of VISSIM simulation softwar.
 
 	-Load the model
-		- it need the Model info to be defined by hand
+		- It needs the Model info to be defined by hand
 		- Deploy the SCU
 	
 	"""
 	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionary,\
-					 timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
+				 Random_Seed, mode = 'training', delete_results = True, verbose = True):
+					Random_Seed = 42, timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
 
 		# Model parameters
 		self.model_name = model_name
@@ -30,6 +31,7 @@ class environment():
 		# Simulation parameters
 		self.sim_length = sim_length
 		self.global_counter = 0
+		self.action_required = False
 
 		self.mode = mode
 		self.timesteps_per_second = timesteps_per_second
@@ -39,35 +41,34 @@ class environment():
 		self.verbose = verbose
 
 		# Dispatach the COM server
-		self.Vissim, _, _, _ = COMServerDispatch(model_name, vissim_working_directory, self.sim_length,\
-												 self.timesteps_per_second, delete_results = self.delete_results, verbose = self.verbose)
+		self.Vissim, _ = COMServerDispatch(model_name, vissim_working_directory, self.sim_length,\
+											self.timesteps_per_second, delete_results = self.delete_results, verbose = self.verbose)
+
+		# Setting Random Seed
+		self.Vissim.Simulation.SetAttValue('RandSeed', Random_Seed)
+		print ('Random seed set in simulator. Random Seed = '+str(Random_Seed))
+		
 		self.done = False
 
 		# The parser can be a methode of the environment
-		self.npa = NetworkParser(self.Vissim) 
+		print("Deploying Network Parser...")
+		self.npa = NetworkParser(self.Vissim)
+		print("Successful Network Crawl: Identified SignalControllers, Links and Lanes.\n")
 
+		print("Setting Simulation mode to: " + self.mode)
 		self.select_mode()
 
 		# Simulate one step and give the control to COM
 		for _ in range(self.timesteps_per_second):
 			self.Vissim.Simulation.RunSingleStep()
-			self.global_counter += 1
+		self.global_counter += 1
 
 		# Deploy the SCUs and the agents
+		print("Starting Deployments of Signal Control Units...")
 		tic = time()
 		self._Load_SCUs() # Create a dictionary of SCUs each scu control a signal controller
 		tac = time()
-		print(tac-tic)
-
-		self.action_required = False
-
-	# retrun the state of the environnement as a dictionary
-	def get_state(self):
-		state = {}
-		for idx, scu in self.SCUs.items(): 
-			state[idx] = scu.state
-
-		return state
+		print("SCUs successfully deployed. Elapsed time " + str(np.round(tac-tic,2)) + " seconds.\n")
 		
 	def _Load_SCUs(self):
 		'''
@@ -85,51 +86,14 @@ class environment():
 						 self.npa,\
 						 Signal_Groups = None
 						)
-		
-	def step(self, actions):
-		"""
-		Does one step in the simulator. 
-		ie performs the following action
-		- Advance on step time in the simulator (cars moving)
-		- Change the signal group light color controled by com if needed for every intersection 
-		- Compute the state of the intersections that need an action at the next time step
 
-		Input
-		- A dictionary of actions. Each action is indexed by the number of the corresponding SCU
+	# retrun the state of the environnement as a dictionary
+	def get_state(self):
+		state = {}
+		for idx, scu in self.SCUs.items(): 
+			state[idx] = scu.state
 
-		
-		Return
-		- if an action is required on the all network
-		- a dictionary of (state, action, reward, next_state , done) the key will be the SCUs' key
-		"""
-		#global timesteps_per_second
-		self.Vissim.Simulation.RunSingleStep()
-		# increase the update counter by one each step (until reach simulation length)
-		self.global_counter += 1
-		if self.global_counter > (self.sim_length-10) * self.timesteps_per_second:
-			self.done = True
-
-		Sarsd = dict()
-
-		# Update the action of all the junction that needded one
-		[scu.action_update(actions[idx]) for idx,scu in self.SCUs.items() if scu.action_required]
-		
-		# Udapte all the SCUs nearly simutaneously 
-		[scu.update() for idx,scu in self.SCUs.items()]
-
-		# not a nice way of doing this, 
-		# creating the dictionary of all state, action, reward, next_state
-		# Of the junctions that need a new action for the next time step.
-		[to_dictionary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]
-
-		if len(Sarsd) > 0 :
-			self.action_required = True
-
-		if len(Sarsd) > 0 :
-			return True, Sarsd
-		else:
-			return False, None
-
+		return state
 
 	def step_to_next_action(self, actions):
 		"""
@@ -148,27 +112,111 @@ class environment():
 		"""
 
 		while not self.action_required:
-			action_required, Sarsd = self.step(actions)
+			Sarsd = self.step(actions)
+
+		self.action_required = False
+
+		return Sarsd
+	
+	def step(self, actions):
+		"""
+		Does one step in the simulator. 
+		ie performs the following action
+		- Advance on step time in the simulator (cars moving)
+		- Change the signal group light color controled by com if needed for every intersection 
+		- Compute the state of the intersections that need an action at the next time step
+
+		Input
+		- A dictionary of actions. Each action is indexed by the number of the corresponding SCU
+
+		
+		Return
+		- if an action is required on the all network
+		- a dictionary of (state, action, reward, next_state , done) the key will be the SCUs' key
+		"""
+		
+
+		Sarsd = dict()
+
+		# Update the action of all the junction that needded one
+		[scu.action_update(actions[idx]) for idx, scu in self.SCUs.items() if scu.action_required]
+		
+		# Udapte all the SCUs nearly simutaneously 
+		[scu.update() for idx,scu in self.SCUs.items()]
+
+		# not a nice way of doing this, 
+		# creating the dictionary of all state, action, reward, next_state
+		# Of the junctions that need a new action for the next time step.
+		
+
+		for i in range(self.timesteps_per_second):
+			self.Vissim.Simulation.RunSingleStep()
+		# increase the update counter by one each step (until reach simulation length)
+		self.global_counter += 1
+		if self.global_counter > (self.sim_length-10):
+			self.done = True
+
+		[to_dictionary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]
+
+		if len(Sarsd) > 0 :
+			self.action_required = True
+
+		if len(Sarsd) > 0 :
+			return Sarsd
+		else:
+			return None
+	def step_to_next_action(self, actions):
+		"""
+		Does steps until an action is required the simulator. 
+		ie performs the following action
+		- Advance on step time in the simulator (cars moving)
+		- Change the signal group light color controled by com if needed for every intersection 
+		- Compute the state of the intersections that need an action at the next time step
+
+		Input
+		- A dictionary of actions. Each action is indexed by the number of the corresponding SCU
+
+		Return
+		- if an action is required on the all network
+		- a dictionary of (state, action, reward, next_state , done) the key will be the SCUs' key
+		"""
+
+		while not self.action_required:
+			Sarsd = self.step(actions)
 
 
 		self.action_required = False
 
-		return action_required, Sarsd
+		return Sarsd
+
+	def Stop_Simulation(self , delete_results = True):
+
+	 ## Stop the simulation and delete the results
+		self.Vissim.simulation.Stop()
+
+		if delete_results == True:
+			# Delete all previous simulation runs first:
+			for simRun in self.Vissim.Net.SimulationRuns:
+				self.Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
 
 	def reset(self):
 		"""
 		Reset the environment by reloading the map
+		End simulation and write results to database file (*.db) while deleting them from VISSIM itself
+		Increase Random Seed
+		Set simulator configuration
+		Simulate one step and give the control to COM
+		Redeploy SCUs
 		"""
 		# Reset the time counter
 		self.global_counter = 0
+	
+		# End simulation and write results to database file (*.db) while deleting them from VISSIM itself
+		self.Stop_Simulation(delete_results = self.delete_results)
 
-		# Reset the simulation
-		#COMServerReload(self.Vissim, self.model_name, self.vissim_working_directory, self.sim_length, self.timesteps_per_second, self.delete_results)
-		
-		Stop_Simulation(self.Vissim , delete_results = self.delete_results)
+		# Increase Random Seed
+		self.Vissim.Simulation.SetAttValue('RandSeed', self.Vissim.Simulation.AttValue('RandSeed')+1)
 
-		# Update the Network Parser
-		#self.npa = NetworkParser(self.Vissim) 
 		# Set simulator configuration
 		self.select_mode()
 
@@ -177,7 +225,7 @@ class environment():
 			self.Vissim.Simulation.RunSingleStep()
 			self.global_counter += 1
 
-		# Redeploy agents
+		# Redeploy SCUs
 		self._Load_SCUs()
 		self.done = False
 
@@ -359,7 +407,7 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, timestep
 				raise Exception("ERROR: Could not find Model file: {}".format(Filename))
 			
 			if verbose:
-				print ('Load process successful')
+				print ('Model File load process successful.')
 		
 			## Setting Simulation End
 			Vissim.Simulation.SetAttValue('SimPeriod', sim_length)
@@ -375,22 +423,23 @@ def COMServerDispatch(model_name, vissim_working_directory, sim_length, timestep
 				if verbose:
 					print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
 		
-			#Pre-fetch objects for stability
-			Simulation = Vissim.Simulation
-			if verbose:
-				print ('Fetched and containerized Simulation Object')
-			Network = Vissim.Net
+			##Pre-fetch objects for stability
+			#Simulation = Vissim.Simulation
+			#if verbose:
+		#		print ('Fetched and containerized Simulation Object.')
+		#	Network = Vissim.Net
 		
 			if verbose:
 				print ('Fetched and containerized Network Object \n')
 				print ('*******************************************************')
 				print ('*                                                     *')
-				print ('*                 SETUP COMPLETE                      *')
+				print ('*                COM SETUP COMPLETE                   *')
 				print ('*                                                     *')
 				print ('*******************************************************\n')
 			else:
 				print('Server Dispatched.')
-			return(Vissim, Simulation, Network, cache_flag)
+			#return(Vissim, Simulation, Network, cache_flag)
+			return(Vissim, cache_flag)
 		# If loading fails
 		except:
 			if _ != 4:
@@ -425,23 +474,4 @@ def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_len
 			elif _ == 4:
 				raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
 				quit()
-
-def Stop_Simulation(Vissim , delete_results = True):
-
-     ## Stop the simulation and delete the results
-    Vissim.simulation.Stop()
-
-    if delete_results == True:
-        # Delete all previous simulation runs first:
-        for simRun in Vissim.Net.SimulationRuns:
-            Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
-        #print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
-
-
-
-
-
-
-
-
 
