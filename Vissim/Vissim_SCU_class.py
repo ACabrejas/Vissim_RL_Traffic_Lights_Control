@@ -1,7 +1,8 @@
 import numpy as np
 import time as t
+import pickle
 
-class Signal_Control_Unit:
+class Signal_Control_Unit():
 	"""
 	Signal_Control_Unit :
 	Interfaces between a signal controller (which operates the junction) and the agents (which provide the actions to implement).
@@ -53,7 +54,8 @@ class Signal_Control_Unit:
 		self.Links_names = Intersection_info['link']
 		# Time of the different stage, and the minimal green time
 		self.time_steps_per_second = Vissim.Simulation.AttValue('SimRes')
-		self.green_time = Intersection_info['green_time'] * self.time_steps_per_second # the green time is in step
+		self.green_time = Intersection_info['green_time'] * self.time_steps_per_second - 1 #bad and lazy way to corect a bug 
+		#so that the true green time is the one specified in the dictionary	# the green time is in step
 		self.redamber_time = Intersection_info['redamber_time'] * self.time_steps_per_second
 		self.amber_time = Intersection_info['amber_time'] * self.time_steps_per_second
 		self.red_time = Intersection_info['red_time'] * self.time_steps_per_second
@@ -69,6 +71,7 @@ class Signal_Control_Unit:
 		# Signal Groups
 		if Signal_Groups is None :
 			self.signal_groups = npa.signal_groups[self.ID]
+			#self.signal_groups = self.signal_controller.SGs
 		else :
 			self.signal_groups = Signal_Groups
 		self.signal_heads  = npa.signal_heads[self.ID]
@@ -126,12 +129,12 @@ class Signal_Control_Unit:
 		Compute the state of the SCU.
 		"""
 		if self.state_type == 'Queues':
-			state = [get_queue(lane) for lane in self.Vissim_Lanes]
-			state = np.array(state)[np.newaxis,:]
+			self.queue_state  = [get_queue(lane) for lane in self.Vissim_Lanes]
+			state = np.array(self.queue_state)[np.newaxis,:]
 
 		if self.state_type == "QueuesSig":
-			state = [get_queue(lane) for lane in self.Vissim_Lanes]+[self.next_action_key]
-			state = np.array(state)[np.newaxis,:]
+			self.queue_state  = [get_queue(lane) for lane in self.Vissim_Lanes] 
+			state = np.array(self.queue_state+[self.next_action_key])[np.newaxis,:]
 		
 		return(state)
 
@@ -140,7 +143,7 @@ class Signal_Control_Unit:
 		Compute the Reward of the last update cycle for the SCU.
 		'''
 		if self.reward_type == 'Queues':
-			reward = -np.sum(self.state)
+			reward = -np.sum(self.queue_state)
 		return(reward)
  
 	def action_update(self, action_key, green_time = None):
@@ -298,7 +301,7 @@ class Signal_Control_Unit:
 				if self.intermediate_phase is False :
 					self.action_required = True 
 
-					#Compute the state for the RL agent to find the next best agent 
+					#Compute the state for the RL agent to find the next best agent action
 					self.next_state = self.calculate_state()
 					self.reward = self.calculate_reward()
 						
@@ -335,7 +338,7 @@ def get_queue(lane):
 	-Input lane as a Vissim object
 	"""
 	vehicles_in_lane = lane.Vehs
-	# Collecte the attribute in lane of the vehicle of the lane and sum them
+	# Collecte the attribute in queue of the vehicle of the lane and sum them
 	queue_in_lane = np.sum([vehicle.AttValue('InQueue') for vehicle in vehicles_in_lane])
 	return(queue_in_lane)
 

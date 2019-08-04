@@ -3,6 +3,7 @@ from NParser import NetworkParser
 from Vissim_SCU_class import Signal_Control_Unit
 import win32com.client
 import os
+import pickle
 
 from time import time
 
@@ -79,7 +80,7 @@ class environment():
 			self.SCUs[idx] = Signal_Control_Unit(\
 						 self.Vissim,\
 						 signal_controller,\
-						 self.Model_dictionary[idx],\
+						 self.Model_dictionary['junctions'][idx],\
 						 idx,\
 						 self.npa,\
 						 Signal_Groups = None
@@ -125,7 +126,6 @@ class environment():
 			self.action_required = True
 
 		if len(Sarsd) > 0 :
-			self.action_required = False
 			return True, Sarsd
 		else:
 			return False, None
@@ -149,6 +149,7 @@ class environment():
 
 		while not self.action_required:
 			action_required, Sarsd = self.step(actions)
+
 
 		self.action_required = False
 
@@ -179,6 +180,18 @@ class environment():
 		# Redeploy agents
 		self._Load_SCUs()
 		self.done = False
+
+
+	def change_demand(self, level):
+		"""
+		Change the demand and the number of vehicle inputs in the model
+		-input Level is a factor or a string that indicate the a level of demand.
+		Or the number of time of the default demand in the dictionary. 
+
+		"""
+
+		pass 
+
 
 	def select_mode(self):
 		"""
@@ -416,14 +429,13 @@ def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_len
 def Stop_Simulation(Vissim , delete_results = True):
 
      ## Stop the simulation and delete the results
-    print('tomate')
     Vissim.simulation.Stop()
 
     if delete_results == True:
-                # Delete all previous simulation runs first:
-                for simRun in Vissim.Net.SimulationRuns:
-                    Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
-                #print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
+        # Delete all previous simulation runs first:
+        for simRun in Vissim.Net.SimulationRuns:
+            Vissim.Net.SimulationRuns.RemoveSimulationRun(simRun)
+        #print ('Results from Previous Simulations: Deleted. Fresh Start Available.')
 
 
 
