@@ -20,8 +20,8 @@ class environment():
 	
 	"""
 	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionary,\
-				 Random_Seed, mode = 'training', delete_results = True, verbose = True):
-					Random_Seed = 42, timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
+				 Random_Seed = 42, timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
+					
 
 		# Model parameters
 		self.model_name = model_name
