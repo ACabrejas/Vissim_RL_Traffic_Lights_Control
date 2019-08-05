@@ -172,7 +172,7 @@ class DQNAgent:
         if self.PER_activated:
             tree_idx, minibatch, ISWeights_mb = self.memory.sample(batch_size)
         else:
-            idx = np.random.randint(len(self.memory), size=batch_size,dtype=int)
+            idx = np.random.randint(len(self.memory), size=batch_size, dtype=int)
             minibatch = np.array(self.memory)[idx]
         
         

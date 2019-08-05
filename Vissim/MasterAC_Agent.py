@@ -39,12 +39,13 @@ class MasterAC_Agent():
 		self.horizon = horizon
 		self.n_sample = n_sample
 
-		self.Agents = []
+		self.Agents = {}
 
 		for idx, info in Model_dictionnary['junctions'].items():
 				acts = info['default_actions']
-				Agent = ACAgent(info['state_size'], len(acts), idx, self.n_step_size, self.gamma, self.alpha, self.entropy, self.value)
-				self.Agents.append(Agent)
+				if info['controled_by_com'] :
+					Agents['idx'] = ACAgent(info['state_size'], len(acts), idx, self.n_step_size, self.gamma, self.alpha, self.entropy, self.value)
+				
 
 	def train(self, number_of_steps):
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
