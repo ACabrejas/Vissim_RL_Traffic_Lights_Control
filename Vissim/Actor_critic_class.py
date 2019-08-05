@@ -10,6 +10,9 @@ from tensorflow.keras.activations import relu
 from General_agent import RLAgent
 
 
+import datetime
+
+
 ###
 #leaky relu
 lrelu = lambda x : relu(x, alpha =0.01)
@@ -111,6 +114,10 @@ class ACAgent(RLAgent):
 		super().__init__(ID)
 
 
+		self.log_dir="logs\\fit\\" + 'Agent {}_'.format(self.ID)  + datetime.datetime.now().strftime("%Y%m%d-%H%M%S") 
+		self.tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=self.log_dir, histogram_freq=1)
+
+
 		print("Deploying instance of Actor_Critic Agent(s) !!! TENSORFLOW 2 IS NEEDED !!! ")
 		# agent type flag 
 		self.type = 'AC'
@@ -145,6 +152,7 @@ class ACAgent(RLAgent):
 		self.episode_memory = []
 		self.episode_reward = []
 		self.n_step_size = n_step_size
+		self.loss = []
 
 		self.test()
 
@@ -282,8 +290,12 @@ class ACAgent(RLAgent):
 
 		# performs a full training step on the collected batch
 		# note: no need to mess around with gradients, Keras API handles it
-		losses = self.model.train_on_batch(states, [acts_and_advs, returns])
 
+		#losses = self.model.train_on_batch(states, [acts_and_advs, returns])
+
+		self.model.fit(states, [acts_and_advs, returns], epochs=1, verbose=2, batch_size = self.n_step_size, callbacks=[self.tensorboard_callback])
+
+		self.loss.append(self.model.history.history['loss'])
 	#def save_agent(self)
 
 

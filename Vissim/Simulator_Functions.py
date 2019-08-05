@@ -488,7 +488,7 @@ def prepopulate_memory(Agents, Vissim, state_type, reward_type, state_size, memo
 						agent.reward   = calculate_reward(Vissim, reward_type)
 						# Commit previous State, previous Action, Reward generated and current State to memory
 						agent.remember(agent.state, agent.action, agent.reward, agent.newstate)
-						memory.append((agent.state, agent.action, agent.reward, agent.newstate))
+						memory.append([agent.state, agent.action, agent.reward, agent.newstate])
 						# Compute the new Action and store it in the agent
 						agent.newaction = agent.choose_action(agent.newstate)
 						

@@ -1,5 +1,6 @@
 import os
 import tensorflow.keras.backend as K
+from tensorflow.keras.models import load_model
 import pickle
 
 class RLAgent():
@@ -101,9 +102,8 @@ class RLAgent():
 	# Reload agents
 	def load_agent(self, vissim_working_directory, model_name , Session_ID, best = True):
 		
-		
+		print('Loading Pre-Trained Agent {}, Architecture, Optimizer and Memory.'.format(self.ID))
 		if self.type == 'AC':
-			print('Loading Pre-Trained Agent, Architecture and Memory.')
 			if best:
 				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Weights'+'.h5')
 				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Optimizer'+'.h5')
@@ -123,7 +123,6 @@ class RLAgent():
 			
 		
 		else :
-			print('Loading Pre-Trained Agent, Architecture, Optimizer and Memory.')
 			if best:
 				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'.h5')
 			else :

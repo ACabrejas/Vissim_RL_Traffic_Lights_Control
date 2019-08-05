@@ -1,6 +1,7 @@
 
 from Actor_Critic_Class import ACAgent
 from Vissim_env_class import environment
+import os
 
 class MasterAC_Agent():
 	"""
@@ -44,7 +45,7 @@ class MasterAC_Agent():
 		for idx, info in Model_dictionnary['junctions'].items():
 				acts = info['default_actions']
 				if info['controled_by_com'] :
-					Agents['idx'] = ACAgent(info['state_size'], len(acts), idx, self.n_step_size, self.gamma, self.alpha, self.entropy, self.value)
+					self.Agents[idx] = ACAgent(info['state_size'], len(acts), idx, self.n_step_size, self.gamma, self.alpha, self.entropy, self.value)
 				
 
 	def train(self, number_of_steps):
@@ -95,19 +96,19 @@ class MasterAC_Agent():
 							
 				actions = {}
 				for idx, s in start_state.items():
-					actions[idx] = Agents[idx].choose_action(s)
+					actions[idx] = self.Agents[idx].choose_action(s)
 
 	# Do a run test and save all the metrics
 	def test(self):
 		pass
 
 	def save(self):
-		for idx, agent in enumerate(self.Agents):
+		for idx, agent in self.Agents.items():
 			agent.save_agent(self.vissim_working_directory, self.model_name, self.Session_ID)
 
 
 	def load(self, best = True):
-		for idx, agent in enumerate(self.Agents):
+		for idx, agent in self.Agents.items():
 			agent.load_agent(self.vissim_working_directory, self.model_name , self.Session_ID, best = best)
 
 

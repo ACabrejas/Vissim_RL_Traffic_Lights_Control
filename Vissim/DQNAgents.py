@@ -3,6 +3,8 @@ import numpy as np
 import random
 import PER
 
+from General_agent import RLAgent
+
 import tensorflow as tf
 import tensorflow.keras.layers as kl
 
@@ -29,9 +31,9 @@ lrelu = lambda x : relu(x, alpha =0.01)
 ## Deep Q Learning Agent (Use DoubleDQN flag to swap to DDQN)
 ######################################################################################
 
-class DQNAgent:
+class DQNAgent(RLAgent):
     def __init__(self, state_size, action_size, ID, memory_size, gamma, epsilon, alpha, copy_weights_frequency, PER_activated, DoubleDQN, Dueling):
-        
+        super().__init__(ID)
         # Agent Junction ID and Controller ID
         self.signal_id = ID
 
@@ -99,15 +101,16 @@ class DQNAgent:
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
             #model = Sequential()
             input_layer = Input(shape = self.state_size )
-            conv1 = kl.Conv2D(32, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv1')(input_layer)
-            conv2 = kl.Conv2D(64, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv2')(conv1)
-            conv3 = kl.Conv2D(64, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv3')(conv2)
-            flatten = Flatten()(conv3)
-            dense1 = Dense(128, activation= lrelu, kernel_regularizer=regularizers.l2(0.001))(flatten)
+            # conv1 = kl.Conv2D(32, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv1')(input_layer)
+            # conv2 = kl.Conv2D(64, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv2')(conv1)
+            # conv3 = kl.Conv2D(64, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv3')(conv2)
+            # flatten = Flatten()(conv3)
+            dense1 = Dense(128, activation= 'relu', kernel_regularizer=regularizers.l2(0.001))(input_layer)
+            dense2 = Dense(42, activation= 'relu', kernel_regularizer=regularizers.l2(0.001))(dense1)
             
-            fc1 = Dense(48)(dense1)
+            fc1 = Dense(48)(dense2)
             dueling_actions = Dense(self.action_size,kernel_regularizer=regularizers.l2(0.001))(fc1)
-            fc2 = Dense(48)(dense1)
+            fc2 = Dense(48)(dense2)
             dueling_values = Dense(1,kernel_regularizer=regularizers.l2(0.001))(fc2)
 
             def dueling_operator(duel_input):
@@ -213,7 +216,7 @@ class DQNAgent:
         
         
         #self.model.fit(state_matrix, target_f_matrix, epochs=1, verbose=0)
-        self.model.fit(state, target_f, epochs=1, verbose=2, batch_size=batch_size)
+        self.model.fit(state, target_f, epochs=1, verbose=2, batch_size = batch_size)
         
         self.loss.append(self.model.history.history['loss'])
 
