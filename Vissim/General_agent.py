@@ -2,6 +2,7 @@ import os
 import tensorflow.keras.backend as K
 from tensorflow.keras.models import load_model
 import pickle
+import numpy as np
 
 class RLAgent():
 	"""
@@ -153,7 +154,7 @@ class RLAgent():
 			
 			best_agent_memory = self.memory
 			print('Saving architecture, weights, optimizer state for best agent-{}'.format(self.ID))
-			if agent.type == 'AC' :
+			if self.type == 'AC' :
 				best_agent_weights = self.model.get_weights()
 				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Weights'+'.h5')
 				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Optimizer'+'.h5')
@@ -176,6 +177,6 @@ class RLAgent():
 			print('Dumping Training Results into pickle file.')
 			Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Loss'+'.p')
 			print('Dumping Loss Results into pickle file.')
-			pickle.dump(agent.loss, open(Loss_Filename, 'wb'))
+			pickle.dump(self.loss, open(Loss_Filename, 'wb'))
 
-		return(best_agent_weights, best_agent_memory)
+		#return(best_agent_weights, best_agent_memory)

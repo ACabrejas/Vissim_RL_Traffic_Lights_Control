@@ -14,7 +14,7 @@ class MasterDQN_Agent():
 
 	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionnary, \
 				gamma, alpha, agent_type, memory_size, PER_activated, batch_size, copy_weights_frequency, epsilon_sequence, \
-				timesteps_per_second = 1, verbose = True):
+				Random_Seed = 42, timesteps_per_second = 1, verbose = True):
 
 		# Model information
 		self.Model_dictionnary = Model_dictionnary
@@ -34,6 +34,8 @@ class MasterDQN_Agent():
 		self.batch_size = batch_size
 		self.copy_weights_frequency = copy_weights_frequency
 		self.epsilon_sequence = epsilon_sequence
+		self.number_of_episode = 0
+		self.Random_Seed = Random_Seed 
 
 
 
@@ -50,46 +52,77 @@ class MasterDQN_Agent():
 				if info['controled_by_com'] :
 					self.Agents[idx] = DQNAgent(info['state_size'], len(acts),\
 						         idx, memory_size, gamma, self.epsilon_sequence[0], self.alpha, self.copy_weights_frequency, self.PER_activated,\
-						         DoubleDQN = True if agent_type == ("DDQN" or "DuelingDDQN") else False,\
-						         Dueling = False if agent_type == ("DQN" or "DDQN") else True) 
+						         DoubleDQN = True if agent_type == "DDQN" or agent_type == "DuelingDDQN" else False,\
+						         Dueling = False if agent_type == "DQN" or agent_type == "DDQN" else True) 
 				
 
-	def train(self, number_of_steps):
+	def train(self, number_of_episode):
+
+		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
+
+		for idx, agent in self.Agents.items():
+			agent.reset()
 
 		start_state = self.env.get_state()
-		actions = {}
-		for idx, s in start_state.items():
-					actions[idx] = int(self.Agents[idx].choose_action(s))
 
-		for i in range(number_of_steps):
-			SARSDs = self.env.step_to_next_action(actions)
+		while self.number_of_episode < number_of_episode:
+			actions = {}
+			for idx, s in start_state.items():
+				actions[idx] = self.Agents[idx].choose_action(s)
 
-			actions = dict()
-			for idx , sarsd in SARSDs.items():
-				s,a,r,ns,d = sarsd
-				
-				#print(sarsd)
-				self.Agents[idx].remember(s,a,r,ns,d)
+			while True:
+				SARSDs = self.env.step_to_next_action(actions)
 
-				# in order to find the next action you need to evaluate the "next_state" because it is the current state of the simulator
-				actions[idx] = int(self.Agents[idx].choose_action(ns))
-				
-				
-			# For the saving , monitoring of the agent 
-			if self.env.done :
-				self.env.reset()
-				
-				for idx, agent in self.Agents.items():
-					agent.learn_batch(self.batch_size, 1)
-					#agent.advance
+				actions = dict()
+				for idx , sarsd in SARSDs.items():
+					s,a,r,ns,d = sarsd
+					
+					#print(sarsd)
+					self.Agents[idx].remember(s,a,r,ns,d)
+
+					# in order to find the next action you need to evaluate the "next_state" because it is the current state of the simulator
+					actions[idx] = int(self.Agents[idx].choose_action(ns))
+					
+					
+				# For the saving , monitoring of the agent 
+				if self.env.done :
+					self.env.reset()
+					self.Random_Seed += 1
+					self.number_of_episode += 1
+					print('Episode {} is finished'.format(self.number_of_episode)) 
+					
+					for idx, agent in self.Agents.items():
+						agent.average_reward = np.mean(agent.episode_reward)
+						agent.reward_storage.append(agent.average_reward)
+						print("Average Reward for Agent {} this episode : {}".format(idx, round(agent.average_reward,2)))
+						agent.best_agent(self.vissim_working_directory, self.model_name, self.Session_ID)
+						agent.learn_batch(self.batch_size, 1)
+
+						if self.number_of_episode%self.copy_weights_frequency == 0:
+							agent.copy_weights()
+						agent.reset()
+
+					# Decrease the exploration rate
+					self.advance_schedule()
+					break
 
 
-				
-				actions = {}
-				for idx, s in start_state.items():
-					actions[idx] = self.Agents[idx].choose_action(s)
+
+	def advance_schedule(self):
+		"""
+		Fonction to reduce the exploration rate according to exploratioin schedule
+		"""
+		if self.number_of_episode > len(self.epsilon_sequence):
+			print("Exploration rate is already the lowest according to schedule")
+		else:
+			new_epsilon = self.epsilon_sequence[self.number_of_episode]
+			print("Reducing exploration for all agents to {}".format(round(new_epsilon,4)))
+			for idx, agent in self.Agents.items():
+						agent.epsilon =  new_epsilon
+					
+
 
 	# Do a run test and save all the metrics
 	def test(self):
@@ -238,7 +271,7 @@ def update_priority_weights(agent, memory_size):
 	else:
 		# Fixed Q-Target
 		target = reward + agent.gamma * np.max(agent.target_model.predict(next_state),axis=1).reshape(len(state),1)
-		print(target.shape)
+		#print(target.shape)
 
 	target_f = agent.model.predict(state)
 	absolute_errors = np.abs(target_f[np.arange(len(target_f)),action].reshape(len(state),1)-target)

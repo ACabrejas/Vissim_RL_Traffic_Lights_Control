@@ -58,6 +58,8 @@ class DQNAgent(RLAgent):
         self.target_model = self._build_model()
         self.target_model.set_weights(self.model.get_weights())
 
+        self.model.summary()
+
         # Architecture Debug Messages
         if self.DoubleDQN:
             if self.Dueling:
@@ -80,7 +82,11 @@ class DQNAgent(RLAgent):
         # Metrics Storage Initialization
         self.episode_reward = []
         self.episode_memory = []
+        self.reward_storage = []
         self.loss = []
+
+
+        # Metrics for the testing
         self.queues_over_time = [[0,0,0,0]]
         self.accumulated_delay= [0]
         self.flow_in_intersection = []
@@ -101,12 +107,12 @@ class DQNAgent(RLAgent):
             # Architecture for the Neural Net in the Dueling Deep Q-Learning Model
             #model = Sequential()
             input_layer = Input(shape = self.state_size )
-            # conv1 = kl.Conv2D(32, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv1')(input_layer)
-            # conv2 = kl.Conv2D(64, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv2')(conv1)
-            # conv3 = kl.Conv2D(64, (3, 3), activation= lrelu, padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv3')(conv2)
+            # conv1 = kl.Conv2D(32, (3, 3), activation= 'relu', padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv1')(input_layer)
+            # conv2 = kl.Conv2D(64, (3, 3), activation= 'relu', padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv2')(conv1)
+            # conv3 = kl.Conv2D(64, (3, 3), activation= 'relu', padding='same', kernel_regularizer=regularizers.l2(0.001), name = 'value_conv3')(conv2)
             # flatten = Flatten()(conv3)
-            dense1 = Dense(128, activation= 'relu', kernel_regularizer=regularizers.l2(0.001))(input_layer)
-            dense2 = Dense(42, activation= 'relu', kernel_regularizer=regularizers.l2(0.001))(dense1)
+            dense1 = Dense(48, activation= 'relu', kernel_regularizer=regularizers.l2(0.001))(input_layer)
+            dense2 = Dense(48, activation= 'relu', kernel_regularizer=regularizers.l2(0.001))(dense1)
             
             fc1 = Dense(48)(dense2)
             dueling_actions = Dense(self.action_size,kernel_regularizer=regularizers.l2(0.001))(fc1)
@@ -144,8 +150,19 @@ class DQNAgent(RLAgent):
         if self.PER_activated:
             experience = np.array([state, action, reward, next_state, done])
             self.memory.store(experience)
+
+            self.episode_memory.append([state, action, reward, next_state, done])
+            self.episode_reward.append(reward)
         else:
             self.memory.append([state, action, reward, next_state, done])
+
+            self.episode_memory.append([state, action, reward, next_state, done])
+            self.episode_reward.append(reward)
+
+    def reset(self):
+        self.episode_memory = []
+        self.episode_reward = []
+
     
     def choose_action(self, state):
         '''
@@ -229,7 +246,7 @@ class DQNAgent(RLAgent):
         This method copies the weights from the model to the target model.
         '''
         self.target_model.set_weights(self.model.get_weights())
-        print("Weights succesfully copied to Target model.")  
+        print("Weights succesfully copied to Target model for Agent {}.".format(self.ID))  
 
 
 
