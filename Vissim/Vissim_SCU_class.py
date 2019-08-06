@@ -85,6 +85,17 @@ class Signal_Control_Unit():
 			for lane in Vissim.Net.Links.ItemByKey(link).Lanes:
 				self.Vissim_Lanes.append(lane)
 
+		
+		# Node of this intersection (could be in the network Parser)
+		self.Node = Vissim.Net.Nodes.ItemByKey(self.ID+1) #To be corrected Vissim object count object begin at 1
+
+		# Transform the movements into a python list (hacky technique to be because the list[-1] doesnt work with Vissim list)
+		movements = list(self.Node.Movements)
+
+		self.junction_movement = movements[-1] #The last one is the movement of the whole intersection
+		self.lanes_movement = movements[1:]  # The other movement are the lane movement
+
+
 		#####################################
 		# Pass Traffic Light Control to COM #
 		#####################################
@@ -136,14 +147,24 @@ class Signal_Control_Unit():
 		Compute the state of the SCU.
 		"""
 		if self.state_type == 'Queues':
-			self.queue_state  = [get_queue(lane) for lane in self.Vissim_Lanes]
+			self.queue_state  =\
+			[0. if movement.AttValue('QLen(Current, Last)') is None else movement.AttValue('QLen(Current, Last)') for movement in self.lanes_movement]
 			state = np.array(self.queue_state)[np.newaxis,:]
 
 		if self.state_type == "QueuesSig":
-			self.queue_state  = [get_queue(lane) for lane in self.Vissim_Lanes] 
+			self.queue_state  =\
+			[0. if movement.AttValue('QLen(Current, Last)') is None else movement.AttValue('QLen(Current, Last)') for movement in self.lanes_movement]
 			state = np.array(self.queue_state+[self.next_action_key])[np.newaxis,:]
 		
 		return(state)
+
+	def calculate_queues(self):
+		"""
+		Only conpute the queues at this intersection
+
+		"""
+		queues =  [0. if movement.AttValue('QLen(Current, Last)') is None else movement.AttValue('QLen(Current, Last)') for movement in self.lanes_movement]
+		return queues  
 
 	def calculate_reward(self):
 		'''
@@ -152,6 +173,10 @@ class Signal_Control_Unit():
 		if self.reward_type == 'Queues':
 			reward = -np.sum(self.queue_state)
 		return(reward)
+
+	def calculate_delay(self):
+		delay_this_timestep = 0 if self.junction_movement.AttValue('VehDelay(Current, Last, All)') is None else self.junction_movement.AttValue('VehDelay(Current, Last, All)')
+		return delay_this_timestep
  
 	def action_update(self, action_key, green_time = None):
 		"""

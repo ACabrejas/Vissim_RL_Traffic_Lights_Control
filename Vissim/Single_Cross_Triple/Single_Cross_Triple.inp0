@@ -1088,7 +1088,7 @@
 		<managedLanes writeFile="false"/>
 		<mesoEvaluationConfig collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<nodeRawData fromTime="0" toTime="99999" writeDatabase="false" writeFile="false"/>
-		<nodeResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
+		<nodeResults collectData="true" fromTime="0" interval="3" toTime="99999"/>
 		<odPairs collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<ptWaitingTimes writeFile="false"/>
 		<pedGridCell cellSize="1" collectData="false" collectOnlyLastInterval="false" densThresh="0" experDensThresh="0" fromTime="0" interval="99999" rangeOfInfluence="1" speedThresh="0" toTime="99999" velVarThresh="0"/>
@@ -2149,10 +2149,10 @@
 		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="Node" no="1" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
 			<geometry>
 				<points>
-					<point x="259.85461650687176" y="-20.181392018994334"/>
-					<point x="300.08681403166486" y="-19.757895202943878"/>
-					<point x="300.36914524236516" y="20.050805505798763"/>
-					<point x="259.85461650687176" y="20.050805505798763"/>
+					<point x="56.918141858106765" y="-190.59596733997608"/>
+					<point x="517.94083718627155" y="-208.08734331448642"/>
+					<point x="508.20465228629007" y="198.39837625973561"/>
+					<point x="66.134077697075327" y="213.38381946614794"/>
 				</points>
 			</geometry>
 		</node>
@@ -2322,20 +2322,20 @@
 		</reducedSpeedArea>
 	</reducedSpeedAreas>
 	<signalControllers>
-		<signalController active="true" cycTm="100" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="1" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Triple.sig" supplyFile3="" type="FIXEDTIME">
+		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="1" offset="0" progFile="#exe#vissig_controller.dll" progNo="1" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Triple.sig" supplyFile3="" type="FIXEDTIME">
 			<sgs>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="A" no="1" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="B" no="2" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="C" no="3" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="D" no="4" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="E" no="5" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="F" no="6" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="G" no="7" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="H" no="8" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="I" no="9" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="J" no="10" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="K" no="11" redAmber="2" type="NORMAL"/>
-				<signalGroup amber="0" greenFlsh="0" minGreen="0" minRed="0" name="L" no="12" redAmber="2" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="A" no="1" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="B" no="2" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="C" no="3" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="D" no="4" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="E" no="5" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="F" no="6" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="G" no="7" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="H" no="8" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="I" no="9" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="J" no="10" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="K" no="11" redAmber="1" type="NORMAL"/>
+				<signalGroup amber="3" greenFlsh="0" minGreen="5" minRed="1" name="L" no="12" redAmber="1" type="NORMAL"/>
 			</sgs>
 			<sigTmsTabConfig>
 				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="1 1" title="" varNo="1" wttFilename="vissim"/>
@@ -2370,7 +2370,7 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="1 11" pos="253" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="1 12" pos="253" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10000" simRes="10" simSpeed="3" startTm="0" useAllCores="true" useMaxSimSpeed="false" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3600" simRes="10" simSpeed="3" startTm="0" useAllCores="true" useMaxSimSpeed="false" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
@@ -2478,22 +2478,22 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="false" link="1" name="WE" no="1">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="1000"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="1000"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="1000"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="1000"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>

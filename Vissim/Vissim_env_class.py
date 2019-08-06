@@ -89,11 +89,45 @@ class environment():
 
 	# retrun the state of the environnement as a dictionary
 	def get_state(self):
+		"""
+		Get the state of the environment
+
+		"""
 		state = {}
 		for idx, scu in self.SCUs.items(): 
 			state[idx] = scu.state
 
 		return state
+
+	def get_queues(self):
+		"""
+		Get the queues of each junction of the environement
+		"""
+		queues = {}
+		for idx, scu in self.SCUs.items(): 
+			queues[idx] = scu.calculate_queues()
+		return queues
+
+	def get_delays(self):
+		"""
+		Get the delay of each junction of the environement
+		"""
+
+		delays = {}
+		for idx, scu in self.SCUs.items(): 
+			delays[idx] = scu.calculate_delay()
+		return delays
+
+
+	def get_delay_timestep(self):
+		"""
+		Get the delay of all the cars in the network
+
+		Get the delay of each junctions
+		"""
+
+		delay_this_timestep = self.Vissim.Net.VehicleNetworkPerformanceMeasurement.AttValue('DelayTot(Current, Last, All)')
+		return (0 if delay_this_timestep is None else delay_this_timestep)
 
 	def step_to_next_action(self, actions):
 		"""
@@ -158,13 +192,11 @@ class environment():
 
 		[to_dictionary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]
 
-		if len(Sarsd) > 0 :
+		if len(Sarsd) > 0 or self.done :
 			self.action_required = True
-
-		if len(Sarsd) > 0 :
-			return Sarsd
-		else:
-			return None
+		
+		return Sarsd # return the empty dictionary is no action is required
+		 
 	def step_to_next_action(self, actions):
 		"""
 		Does steps until an action is required the simulator. 
@@ -349,12 +381,12 @@ class environment():
 			self.Vissim.Evaluation.SetAttValue('LinkResInterval', 99999)
 			
 			# set the data mesurement for each node
-			self.Vissim.Evaluation.SetAttValue('NodeResCollectData', False)
-			self.Vissim.Evaluation.SetAttValue('NodeResInterval', 99999)
+			self.Vissim.Evaluation.SetAttValue('NodeResCollectData', True)
+			self.Vissim.Evaluation.SetAttValue('NodeResInterval', 3)
 			
 			
 			# set the queues mesurement 
-			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', True)
+			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', False)
 			self.Vissim.Evaluation.SetAttValue('QueuesInterval', 3)
 			
 			# set the vehicles perf mesurement 

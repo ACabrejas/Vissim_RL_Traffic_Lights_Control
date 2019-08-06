@@ -40,8 +40,10 @@ class MasterDQN_Agent():
 
 
 
-		# For saving Put here all relevent information
+		# For saving put here all relevent information and saving parameters
 		self.Session_ID = "DQN" 
+		self.save_every = 50
+
 		
 
 
@@ -57,7 +59,11 @@ class MasterDQN_Agent():
 				
 
 	def train(self, number_of_episode):
+		"""
+		Function to train the agents
+		input the number of episode of training
 
+		"""
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
 			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
@@ -100,6 +106,9 @@ class MasterDQN_Agent():
 						agent.best_agent(self.vissim_working_directory, self.model_name, self.Session_ID)
 						agent.learn_batch(self.batch_size, 1)
 
+					if self.number_of_episode%self.save_every == 0 :
+						self.save()
+
 						if self.number_of_episode%self.copy_weights_frequency == 0:
 							agent.copy_weights()
 						agent.reset()
@@ -108,11 +117,83 @@ class MasterDQN_Agent():
 					self.advance_schedule()
 					break
 
+		self.env = None
+
+	# Do a run test and save all the metrics
+	def test(self):
+
+		"""
+		Function to test our agents on one episode with all the metrics : queues over time, delay
+		Average reward of the agents.
+		"""
+
+		self.env = None
+		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'test', delete_results = True, verbose = True)
+
+
+		#Initialisation of the metrics
+		Episode_Queues = {} # 
+		Cumulative_Episode_Delays = {} # Delay at each junction
+		Cumulative_Totale_network_delay = [0]
+
+		queues = self.env.get_queues()
+		for idx, junction_queues in queues.items():
+				Episode_Queues[idx] = [junction_queues]
+
+		delays = self.env.get_delays()
+		for idx, junction_delay in delays.items():
+			Cumulative_Episode_Delays[idx] = [junction_delay]
+
+
+		for idx, agent in self.Agents.items():
+			agent.reset()
+			agent.epsilon = 0 #Set the exploration rate to 0
+
+		start_state = self.env.get_state()
+
+		actions = {}
+
+		# Initialisation
+		for idx, s in start_state.items():
+				actions[idx] = self.Agents[idx].choose_action(s)
+				
+
+
+		while not self.env.done :
+
+			SARSDs = self.env.step(actions)
+
+			# At each steps get the metrics store
+			queues = self.env.get_queues()
+			for idx, junction_queues in queues.items():
+				Episode_Queues[idx].append(junction_queues)
+
+			delays = self.env.get_delays()
+			for idx, junction_delay in delays.items():
+				Cumulative_Episode_Delays[idx].append(Cumulative_Episode_Delays[idx][-1]+junction_delay)
+
+			Cumulative_Totale_network_delay.append(Cumulative_Totale_network_delay[-1]+self.env.get_delay_timestep())
+
+
+			if self.env.action_required:
+
+				actions = dict()
+				for idx , sarsd in SARSDs.items():
+					s,a,r,ns,d = sarsd
+					
+					self.Agents[idx].remember(s,a,r,ns,d)
+					# in order to find the next action you need to evaluate the "next_state" because it is the current state of the simulator
+					actions[idx] = int(self.Agents[idx].choose_action(ns))
+
+
+		self.env = None
+		return(Episode_Queues, Cumulative_Episode_Delays, Cumulative_Totale_network_delay)
 
 
 	def advance_schedule(self):
 		"""
-		Fonction to reduce the exploration rate according to exploratioin schedule
+		Fonction to reduce the exploration rate according to exploration schedule
 		"""
 		if self.number_of_episode > len(self.epsilon_sequence):
 			print("Exploration rate is already the lowest according to schedule")
@@ -124,9 +205,7 @@ class MasterDQN_Agent():
 					
 
 
-	# Do a run test and save all the metrics
-	def test(self):
-		pass
+	
 
 	def prepopulate_memory(self):
 
@@ -242,7 +321,7 @@ class MasterDQN_Agent():
 
 	def save(self):
 		for idx, agent in self.Agents.items():
-			agent.save_agent(self.vissim_working_directory, self.model_name, self.Session_ID)
+			agent.save_agent(self.vissim_working_directory, self.model_name, self.Session_ID )
 
 
 	def load(self, best = True):
