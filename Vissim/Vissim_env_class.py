@@ -341,12 +341,12 @@ class environment():
 			self.Vissim.Evaluation.SetAttValue('LinkResInterval', 99999)
 			
 			# set the data mesurement for each node
-			self.Vissim.Evaluation.SetAttValue('NodeResCollectData', False)
-			self.Vissim.Evaluation.SetAttValue('NodeResInterval', 99999)
+			self.Vissim.Evaluation.SetAttValue('NodeResCollectData', True)
+			self.Vissim.Evaluation.SetAttValue('NodeResInterval', 3)
 			
 			
 			# set the queues mesurement 
-			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', True)
+			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', False)
 			self.Vissim.Evaluation.SetAttValue('QueuesInterval', 3)
 			
 			# set the vehicles perf mesurement 

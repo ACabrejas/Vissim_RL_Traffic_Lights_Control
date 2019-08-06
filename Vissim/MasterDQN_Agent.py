@@ -190,6 +190,74 @@ class MasterDQN_Agent():
 		self.env = None
 		return(Episode_Queues, Cumulative_Episode_Delays, Cumulative_Totale_network_delay)
 
+	def demo(self):
+		"""
+		Function to make a demo of our agents 
+		"""
+
+		self.env = None
+		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'demo', delete_results = True, verbose = True)
+
+
+		#Initialisation of the metrics
+		Episode_Queues = {} # 
+		Cumulative_Episode_Delays = {} # Delay at each junction
+		Cumulative_Totale_network_delay = [0]
+
+		queues = self.env.get_queues()
+		for idx, junction_queues in queues.items():
+				Episode_Queues[idx] = [junction_queues]
+
+		delays = self.env.get_delays()
+		for idx, junction_delay in delays.items():
+			Cumulative_Episode_Delays[idx] = [junction_delay]
+
+
+		for idx, agent in self.Agents.items():
+			agent.reset()
+			agent.epsilon = 0 #Set the exploration rate to 0
+
+		start_state = self.env.get_state()
+
+		actions = {}
+
+		# Initialisation
+		for idx, s in start_state.items():
+				actions[idx] = self.Agents[idx].choose_action(s)
+				
+
+
+		while not self.env.done :
+
+			SARSDs = self.env.step(actions)
+
+			# At each steps get the metrics store
+			queues = self.env.get_queues()
+			for idx, junction_queues in queues.items():
+				Episode_Queues[idx].append(junction_queues)
+
+			delays = self.env.get_delays()
+			for idx, junction_delay in delays.items():
+				Cumulative_Episode_Delays[idx].append(Cumulative_Episode_Delays[idx][-1]+junction_delay)
+
+			Cumulative_Totale_network_delay.append(Cumulative_Totale_network_delay[-1]+self.env.get_delay_timestep())
+
+
+			if self.env.action_required:
+
+				actions = dict()
+				for idx , sarsd in SARSDs.items():
+					s,a,r,ns,d = sarsd
+					
+					self.Agents[idx].remember(s,a,r,ns,d)
+					# in order to find the next action you need to evaluate the "next_state" because it is the current state of the simulator
+					actions[idx] = int(self.Agents[idx].choose_action(ns))
+
+
+		self.env = None
+		return(Episode_Queues, Cumulative_Episode_Delays, Cumulative_Totale_network_delay)
+
 
 	def advance_schedule(self):
 		"""
