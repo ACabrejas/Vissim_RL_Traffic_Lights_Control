@@ -167,7 +167,7 @@ class MasterDQN_Agent():
 				agents_memory[idx] = []
 
 			# 10000 is a random number to have a simulation speed quick enough
-			self.env = environment(self.model_name, self.vissim_working_directory, 10000, self.Model_dictionnary,\
+			self.env = environment(self.model_name, self.vissim_working_directory, 3600, self.Model_dictionnary,\
 				timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
 
 			memory_full = False
