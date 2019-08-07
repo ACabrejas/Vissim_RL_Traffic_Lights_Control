@@ -14,7 +14,7 @@ class MasterDQN_Agent():
 
 	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionnary, \
 				gamma, alpha, agent_type, memory_size, PER_activated, batch_size, copy_weights_frequency, epsilon_sequence, \
-				Random_Seed = 42, timesteps_per_second = 1, verbose = True):
+				Random_Seed = 42, timesteps_per_second = 1, Session_ID = 'DQN', verbose = True):
 
 		# Model information
 		self.Model_dictionnary = Model_dictionnary
@@ -41,7 +41,7 @@ class MasterDQN_Agent():
 
 
 		# For saving put here all relevent information and saving parameters
-		self.Session_ID = "DQN" 
+		self.Session_ID = Session_ID
 		self.save_every = 50
 
 		
@@ -187,6 +187,8 @@ class MasterDQN_Agent():
 					actions[idx] = int(self.Agents[idx].choose_action(ns))
 
 
+		# Stop the simulation without erasing the database
+		self.env.Stop_Simulation(delete_results = False)
 		self.env = None
 		return(Episode_Queues, Cumulative_Episode_Delays, Cumulative_Totale_network_delay)
 
@@ -198,20 +200,6 @@ class MasterDQN_Agent():
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
 			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'demo', delete_results = True, verbose = True)
-
-
-		#Initialisation of the metrics
-		Episode_Queues = {} # 
-		Cumulative_Episode_Delays = {} # Delay at each junction
-		Cumulative_Totale_network_delay = [0]
-
-		queues = self.env.get_queues()
-		for idx, junction_queues in queues.items():
-				Episode_Queues[idx] = [junction_queues]
-
-		delays = self.env.get_delays()
-		for idx, junction_delay in delays.items():
-			Cumulative_Episode_Delays[idx] = [junction_delay]
 
 
 		for idx, agent in self.Agents.items():
@@ -232,16 +220,6 @@ class MasterDQN_Agent():
 
 			SARSDs = self.env.step(actions)
 
-			# At each steps get the metrics store
-			queues = self.env.get_queues()
-			for idx, junction_queues in queues.items():
-				Episode_Queues[idx].append(junction_queues)
-
-			delays = self.env.get_delays()
-			for idx, junction_delay in delays.items():
-				Cumulative_Episode_Delays[idx].append(Cumulative_Episode_Delays[idx][-1]+junction_delay)
-
-			Cumulative_Totale_network_delay.append(Cumulative_Totale_network_delay[-1]+self.env.get_delay_timestep())
 
 
 			if self.env.action_required:
@@ -249,14 +227,11 @@ class MasterDQN_Agent():
 				actions = dict()
 				for idx , sarsd in SARSDs.items():
 					s,a,r,ns,d = sarsd
-					
-					self.Agents[idx].remember(s,a,r,ns,d)
 					# in order to find the next action you need to evaluate the "next_state" because it is the current state of the simulator
 					actions[idx] = int(self.Agents[idx].choose_action(ns))
 
 
 		self.env = None
-		return(Episode_Queues, Cumulative_Episode_Delays, Cumulative_Totale_network_delay)
 
 
 	def advance_schedule(self):
