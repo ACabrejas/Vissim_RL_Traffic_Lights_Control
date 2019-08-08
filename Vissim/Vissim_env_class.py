@@ -95,7 +95,8 @@ class environment():
 		"""
 		state = {}
 		for idx, scu in self.SCUs.items(): 
-			state[idx] = scu.state
+			if scu.controled_by_com :
+				state[idx] = scu.state
 
 		return state
 

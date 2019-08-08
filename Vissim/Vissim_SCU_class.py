@@ -111,7 +111,12 @@ class Signal_Control_Unit():
 			self.action_key = 0
 			self.next_action_key = 0
 			# Initiate Action on the SCU
-			self.action_update(self.action_key)   
+			self.action_update(self.action_key)  
+
+			# Initialize state and reward variables
+			self.state = self.calculate_state()
+			self.next_state = None
+			self.reward = self.calculate_reward() 
 			# "stage" tracks the stage particularly when in intermediate phase.
 			# Stages appear in order: "Amber" -> "Red" -> "RedAmber" -> "Green"
 			# It is used to change the light of the signal group in _color_changer
@@ -119,10 +124,6 @@ class Signal_Control_Unit():
 		else :
 			self.action_required = False
 			
-		# Initialize state and reward variables
-		self.state = self.calculate_state()
-		self.next_state = None
-		self.reward = self.calculate_reward()  
 	   
 	def sars(self):
 		"""

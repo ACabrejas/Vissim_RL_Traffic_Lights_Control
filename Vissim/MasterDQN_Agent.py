@@ -34,10 +34,10 @@ class MasterDQN_Agent():
 		self.batch_size = batch_size
 		self.copy_weights_frequency = copy_weights_frequency
 		self.epsilon_sequence = epsilon_sequence
-		self.number_of_episode = 0
+		
 		self.Random_Seed = Random_Seed 
-
-
+		self.number_of_episode = 0
+		
 
 
 		# For saving put here all relevent information and saving parameters
@@ -112,7 +112,7 @@ class MasterDQN_Agent():
 						agent.reset()
 
 					if self.number_of_episode%self.save_every == 0 :
-						self.save(self.episode)
+						self.save(self.number_of_episode)
 
 					
 
