@@ -65,17 +65,17 @@ class Model2(tf.keras.Model):
 
 		#self.core1 = kl.Dense(60, activation='relu')
 		
-		self.value1 = kl.Dense(64, activation='relu', name='value1') #64
-		self.value2 = kl.Dense(64, activation='relu', name='value2')
-		self.value3 = kl.Dense(42, activation='relu', name='value3')
+		self.value1 = kl.Dense(48, activation='relu', name='value1') #64
+		self.value2 = kl.Dense(48, activation='relu', name='value2')
+		self.value3 = kl.Dense(48, activation='relu', name='value3')
 
 		self.value = kl.Dense(1, name='value')
 		# logits are unnormalized log probabilities
 
 
-		self.logits1 = kl.Dense(42, activation='relu', name='policy_logits1')
-		self.logits2 = kl.Dense(42, activation='relu', name='policy_logits2')
-		self.logits3 = kl.Dense(42, activation='relu', name='policy_logits3')
+		self.logits1 = kl.Dense(48, activation='relu', name='policy_logits1')
+		self.logits2 = kl.Dense(48, activation='relu', name='policy_logits2')
+		self.logits3 = kl.Dense(48, activation='relu', name='policy_logits3')
 
 		self.logits = kl.Dense(num_actions, name='policy_logits')
 

@@ -270,6 +270,9 @@ class environment():
 
 		"""
 
+		#Vissim.Net.VehicleInputs.ItemByKey(vehicle_input)\
+		#.SetAttValue('Volume(1)', demand_list[int(time_t/demand_change_timesteps)%len(demand_list)][1])  
+
 		pass 
 
 

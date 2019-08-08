@@ -106,12 +106,17 @@ class MasterDQN_Agent():
 						agent.best_agent(self.vissim_working_directory, self.model_name, self.Session_ID)
 						agent.learn_batch(self.batch_size, 1)
 
-					if self.number_of_episode%self.save_every == 0 :
-						self.save()
-
 						if self.number_of_episode%self.copy_weights_frequency == 0:
 							agent.copy_weights()
+
 						agent.reset()
+
+					if self.number_of_episode%self.save_every == 0 :
+						self.save(self.episode)
+
+					
+
+					
 
 					# Decrease the exploration rate
 					self.advance_schedule()
@@ -230,7 +235,7 @@ class MasterDQN_Agent():
 					# in order to find the next action you need to evaluate the "next_state" because it is the current state of the simulator
 					actions[idx] = int(self.Agents[idx].choose_action(ns))
 
-
+		self.env.Stop_Simulation(delete_results = False)
 		self.env = None
 
 
@@ -362,16 +367,21 @@ class MasterDQN_Agent():
 
 
 
-	def save(self):
+	def save(self , episode):
+		"""
+
+		"""
 		for idx, agent in self.Agents.items():
-			agent.save_agent(self.vissim_working_directory, self.model_name, self.Session_ID )
+			agent.save_agent(self.vissim_working_directory, self.model_name, self.Session_ID, episode)
 
 
-	def load(self, best = True):
+	def load(self, episode, best = True):
+		"""
+
+		"""
 		for idx, agent in self.Agents.items():
-			agent.load_agent(self.vissim_working_directory, self.model_name , self.Session_ID, best = best)
-
-
+			agent.load_agent(self.vissim_working_directory, self.model_name , self.Session_ID, episode, best = best)
+		self.number_of_episode = episode
 
 
 def update_priority_weights(agent, memory_size):
