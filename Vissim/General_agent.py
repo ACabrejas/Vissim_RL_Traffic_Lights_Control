@@ -159,7 +159,7 @@ class RLAgent():
 				Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Weights'+'.h5')
 				Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Optimizer'+'.h5')
 			
-				symbolic_weights = getattr(agent.model.optimizer, 'weights')
+				symbolic_weights = getattr(self.model.optimizer, 'weights')
 				weight_values = K.batch_get_value(symbolic_weights)
 				with open(Optimizer_Filename, 'wb') as f:
 					pickle.dump(weight_values, f)

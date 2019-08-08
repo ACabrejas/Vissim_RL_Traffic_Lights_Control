@@ -166,7 +166,7 @@ class ACAgent(RLAgent):
 	# Flush the memory for the next episode 
 	def reset(self):
 		self.episode_memory = []
-		self.memory = []
+		self.episode_reward = []
 
 	# Update the Junction IDs for the agent
 	def update_IDS(self, ID, npa):
@@ -293,7 +293,7 @@ class ACAgent(RLAgent):
 
 		#losses = self.model.train_on_batch(states, [acts_and_advs, returns])
 
-		self.model.fit(states, [acts_and_advs, returns], epochs=1, verbose = 2, batch_size = self.n_step_size) #callbacks=[self.tensorboard_callback])
+		self.model.fit(states, [acts_and_advs, returns], epochs=1, verbose = 0, batch_size = self.n_step_size) #callbacks=[self.tensorboard_callback])
 
 		self.loss.append(self.model.history.history['loss'])
 	#def save_agent(self)
