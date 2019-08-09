@@ -76,6 +76,7 @@ class Model2(tf.keras.Model):
 		self.logits1 = kl.Dense(48, activation='relu', name='policy_logits1')
 		self.logits2 = kl.Dense(48, activation='relu', name='policy_logits2')
 		self.logits3 = kl.Dense(48, activation='relu', name='policy_logits3')
+		#self.logits4 = kl.Dense(48, activation='relu', name='policy_logits4')
 
 		self.logits = kl.Dense(num_actions, name='policy_logits')
 
@@ -92,6 +93,7 @@ class Model2(tf.keras.Model):
 		hidden_logs = self.logits1(x)
 		hidden_logs = self.logits2(hidden_logs)
 		hidden_logs = self.logits3(hidden_logs)
+		#hidden_logs = self.logits4(hidden_logs)
 
 		hidden_vals = self.value1(x)
 		hidden_vals = self.value2(hidden_vals)

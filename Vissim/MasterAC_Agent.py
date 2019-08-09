@@ -91,6 +91,7 @@ class MasterAC_Agent():
 					self.env.reset()
 					self.Random_Seed += 1
 					self.number_of_episode += 1
+					print('Episode {} is finished'.format(self.number_of_episode)) 
 
 					
 					# if (i+1)%reduce_entropy_every == 0:
