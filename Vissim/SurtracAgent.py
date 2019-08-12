@@ -194,11 +194,11 @@ class SurtracAgent():
 
         #small hack to make it work when there is no vehicle
         if len(C[0])==0:
-            t=6
+            t = 6
             self.actiontime = round(t)
             return(1)
         elif len(C[1])==0:
-            t=6
+            t = 6
             self.actiontime = round(t)
             return(0)
 
@@ -232,12 +232,12 @@ class SurtracAgent():
 
         #Finding the clearance time of the first cluster
         #print(d,S)
-        s=S[0]
+        s = S[0]
         key = [[0,0],s]
-        key[0][s]=1
-        key[0]=tuple(key[0])
-        key=tuple(key)
-        t=state_manager.state_group[key][0][0]
+        key[0][s] = 1
+        key[0] = tuple(key[0])
+        key = tuple(key)
+        t = state_manager.state_group[key][0][0]
 
         #print(t)
         #print(S[0])

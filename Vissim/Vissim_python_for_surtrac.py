@@ -35,7 +35,7 @@ class Vehicle():
         self.lane = VISSIM_Vehicle.AttValue('Lane')
         self.signal_group = signalgroupdict[self.lane]
         self.inqueue = VISSIM_Vehicle.AttValue('InQueue')
-        self.distfromhead=Signal_Positions[self.lane]-self.pos
+        self.distfromhead = Signal_Positions[self.lane]-self.pos
 
         # Will have to change those estimation by reading Sharma and al 2007 and Mirchandani 2001
         if  self.inqueue:
@@ -48,8 +48,14 @@ class Vehicle():
 
 
 
-# Creating a Cluster class with arrival, departure and duration
+
 class Cluster():
+    """
+    # Creating a Cluster class with arrival, departure and duration
+
+    """
+
+
     def __init__(self,list_of_vehicles):
         # SFR is the saturation flow rate, it is the maximum number of vehicles by second the lane can serve.
         # This have to be estimated
@@ -74,17 +80,23 @@ class Cluster():
         # This have to be estimated
         self.sult = 3
 
-# A function to merge two cluster not used here but can actually be usefull later.
-# It can also be included as a class method
+
 def merge(cluster1,cluster2):
+    """
+    # A function to merge two cluster not used here but can actually be usefull later.
+    # It can also be included as a class method
+    """
     return Cluster(cluster1.list_of_vehicles+cluster2.list_of_vehicles)
 
 
-# This is the clustering process for our two route network.
-# Input : -The parameters of the clustering
-#         -The Vissim object are aready imported
-# Output : - The clustering : A tuple countaining lists of clusters ordered by their time arrival.
+
 def Clustering(Vissim,delta=2,rounding=0.1):
+    """
+    # This is the clustering process for our two route network.
+    # Input : -The parameters of the clustering
+    #         -The Vissim object are aready imported
+    # Output : - The clustering : A tuple countaining lists of clusters ordered by their time arrival.
+    """   
     All_Vehicles=Vissim.Net.Vehicles.GetAll()
 
 

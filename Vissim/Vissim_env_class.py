@@ -12,7 +12,7 @@ from time import time
 class environment():
 
 	"""
-	This is an python environnement on top of VISSIM simulation softwar.
+	This is an python environnement on top of VISSIM simulation software.
 
 	-Load the model
 		- It needs the Model info to be defined by hand
@@ -27,6 +27,7 @@ class environment():
 		self.model_name = model_name
 		self.vissim_working_directory = vissim_working_directory
 		self.Model_dictionary = Model_dictionary
+		self.vehicle_demand = self.Model_dictionary['demand']
 
 		# Simulation parameters
 		self.sim_length = sim_length
@@ -53,7 +54,8 @@ class environment():
 		# The parser can be a methode of the environment
 		print("Deploying Network Parser...")
 		self.npa = NetworkParser(self.Vissim)
-		print("Successful Network Crawl: Identified SignalControllers, Links and Lanes.\n")
+		self.Vehicle_Inputs = list(self.Vissim.Net.VehicleInputs)
+		print("Successful Network Crawl: Identified SignalControllers, Links and Lanes, Inputs.\n")
 
 		print("Setting Simulation mode to: " + self.mode)
 		self.select_mode()
@@ -130,30 +132,8 @@ class environment():
 		delay_this_timestep = self.Vissim.Net.VehicleNetworkPerformanceMeasurement.AttValue('DelayTot(Current, Last, All)')
 		return (0 if delay_this_timestep is None else delay_this_timestep)
 
-	def step_to_next_action(self, actions):
-		"""
-		Does steps until an action is required the simulator. 
-		ie performs the following action
-		- Advance on step time in the simulator (cars moving)
-		- Change the signal group light color controled by com if needed for every intersection 
-		- Compute the state of the intersections that need an action at the next time step
-
-		Input
-		- A dictionary of actions. Each action is indexed by the number of the corresponding SCU
-
-		Return
-		- if an action is required on the all network
-		- a dictionary of (state, action, reward, next_state , done) the key will be the SCUs' key
-		"""
-
-		while not self.action_required:
-			Sarsd = self.step(actions)
-
-		self.action_required = False
-
-		return Sarsd
 	
-	def step(self, actions):
+	def step(self, actions, green_time = None):
 		"""
 		Does one step in the simulator. 
 		ie performs the following action
@@ -174,7 +154,7 @@ class environment():
 		Sarsd = dict()
 
 		# Update the action of all the junction that needded one
-		[scu.action_update(actions[idx]) for idx, scu in self.SCUs.items() if scu.action_required]
+		[scu.action_update(actions[idx] , green_time = green_time ) for idx, scu in self.SCUs.items() if scu.action_required]
 		
 		# Udapte all the SCUs nearly simutaneously 
 		[scu.update() for idx,scu in self.SCUs.items()]
@@ -222,6 +202,62 @@ class environment():
 
 		return Sarsd
 
+	def test(self):
+		"""
+		Testing function for external system controle. Have to set the environment to test mode
+		-Mova (Have PC Mova set up and all the scu's controle by com set to false)
+
+		Compute and return the queues over time
+		"""
+
+		# Counter to change the demande during test
+		demand_counter = 0
+		self.change_demand(self.vehicle_demand[demand_counter])
+
+		#Initialisation of the metrics
+		Episode_Queues = {} # 
+		Cumulative_Episode_Delays = {} # Delay at each junction
+		Cumulative_Totale_network_delay = [0]
+
+		queues = self.get_queues()
+		for idx, junction_queues in queues.items():
+				Episode_Queues[idx] = [junction_queues]
+
+		delays = self.get_delays()
+		for idx, junction_delay in delays.items():
+			Cumulative_Episode_Delays[idx] = [junction_delay]
+
+
+		for idx, agent in self.Agents.items():
+			agent.reset()
+			agent.epsilon = 0 #Set the exploration rate to 0
+
+		actions = {}
+
+		while not self.done :
+
+			SARSDs = self.step(actions)
+
+			# At each steps get the metrics store
+			queues = self.get_queues()
+			for idx, junction_queues in queues.items():
+				Episode_Queues[idx].append(junction_queues)
+
+			delays = self.get_delays()
+			for idx, junction_delay in delays.items():
+				Cumulative_Episode_Delays[idx].append(Cumulative_Episode_Delays[idx][-1]+junction_delay)
+
+			Cumulative_Totale_network_delay.append(Cumulative_Totale_network_delay[-1]+self.get_delay_timestep())
+
+		if self.global_counter% 360 == 0:
+				demand_counter += 1
+				self.change_demand(self.vehicle_demand[demand_counter])
+
+		# Stop the simulation without erasing the database
+		self.Stop_Simulation(delete_results = False)
+		
+		return(Episode_Queues, Cumulative_Episode_Delays, Cumulative_Totale_network_delay)
+
 	def Stop_Simulation(self , delete_results = True):
 
 	 ## Stop the simulation and delete the results
@@ -263,16 +299,18 @@ class environment():
 		self.done = False
 
 
-	def change_demand(self, level):
+	# This function has to be changed into something more flexible
+	def change_demand(self, demand_list):
 		"""
 		Change the demand and the number of vehicle inputs in the model
 		-input Level is a factor or a string that indicate the a level of demand.
 		Or the number of time of the default demand in the dictionary. 
 
 		"""
+		for idx, V_input in enumerate(self.Vehicle_Inputs):
+			V_input.SetAttValue('Volume(1)', demand_list[idx])
 
-		#Vissim.Net.VehicleInputs.ItemByKey(vehicle_input)\
-		#.SetAttValue('Volume(1)', demand_list[int(time_t/demand_change_timesteps)%len(demand_list)][1])  
+		
 
 		pass 
 
