@@ -178,6 +178,10 @@ class Signal_Control_Unit():
 	def calculate_delay(self):
 		delay_this_timestep = 0 if self.junction_movement.AttValue('VehDelay(Current, Last, All)') is None else self.junction_movement.AttValue('VehDelay(Current, Last, All)')
 		return delay_this_timestep
+
+	def calculate_stop_delay(self):
+		delay_this_timestep = 0 if self.junction_movement.AttValue('StopDelay(Current, Last, All)') is None else self.junction_movement.AttValue('StopDelay(Current, Last, All)')
+		return delay_this_timestep
  
 	def action_update(self, action_key, green_time = None):
 		"""

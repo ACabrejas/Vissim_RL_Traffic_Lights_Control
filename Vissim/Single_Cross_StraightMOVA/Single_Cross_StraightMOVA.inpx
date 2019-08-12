@@ -1904,10 +1904,10 @@
 		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="Node" no="1" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
 			<geometry>
 				<points>
-					<point x="259.85461650687176" y="-20.181392018994334"/>
-					<point x="300.08681403166486" y="-19.757895202943878"/>
-					<point x="300.36914524236516" y="20.050805505798763"/>
-					<point x="259.85461650687176" y="20.050805505798763"/>
+					<point x="17.926966459110758" y="-263.88082579717394"/>
+					<point x="543.91021113019576" y="-258.34416006380098"/>
+					<point x="547.60748978783579" y="262.97213066751937"/>
+					<point x="17.926966459110758" y="262.97213066751937"/>
 				</points>
 			</geometry>
 		</node>

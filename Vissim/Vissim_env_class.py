@@ -121,6 +121,16 @@ class environment():
 			delays[idx] = scu.calculate_delay()
 		return delays
 
+	def get_stop_delays(self):
+		"""
+		Get the delay of each junction of the environement
+		"""
+
+		delays = {}
+		for idx, scu in self.SCUs.items(): 
+			delays[idx] = scu.calculate_stop_delay()
+		return delays
+
 
 	def get_delay_timestep(self):
 		"""
@@ -131,6 +141,16 @@ class environment():
 
 		delay_this_timestep = self.Vissim.Net.VehicleNetworkPerformanceMeasurement.AttValue('DelayTot(Current, Last, All)')
 		return (0 if delay_this_timestep is None else delay_this_timestep)
+
+	def get_stop_delay_timestep(self):
+		"""
+		Get the delay of all the cars in the network
+
+		Get the delay of each junctions
+		"""
+
+		stop_delay_this_timestep = self.Vissim.Net.VehicleNetworkPerformanceMeasurement.AttValue('DelayStopTot(Current, Last, All)')
+		return (0 if stop_delay_this_timestep is None else stop_delay_this_timestep)
 
 	
 	def step(self, actions, green_time = None):
@@ -217,7 +237,10 @@ class environment():
 		#Initialisation of the metrics
 		Episode_Queues = {} # 
 		Cumulative_Episode_Delays = {} # Delay at each junction
+		Cumulative_Episode_stop_Delays = {} # Delay at each junction
+
 		Cumulative_Totale_network_delay = [0]
+		Cumulative_Totale_network_stop_delay = [0]
 
 		queues = self.get_queues()
 		for idx, junction_queues in queues.items():
@@ -225,13 +248,13 @@ class environment():
 
 		delays = self.get_delays()
 		for idx, junction_delay in delays.items():
-			Cumulative_Episode_Delays[idx] = [junction_delay]
+			Cumulative_Episode_stop_Delays[idx] = [junction_delay]
 
+		stop_delays = self.get_stop_delays()
+		for idx, junction_stop_delay in stop_delays.items():
+			Cumulative_Episode_Delays[idx] = [junction_stop_delay]
 
-		for idx, agent in self.Agents.items():
-			agent.reset()
-			agent.epsilon = 0 #Set the exploration rate to 0
-
+		
 		actions = {}
 
 		while not self.done :
@@ -247,16 +270,21 @@ class environment():
 			for idx, junction_delay in delays.items():
 				Cumulative_Episode_Delays[idx].append(Cumulative_Episode_Delays[idx][-1]+junction_delay)
 
-			Cumulative_Totale_network_delay.append(Cumulative_Totale_network_delay[-1]+self.get_delay_timestep())
+			stop_delays = self.get_stop_delays()
+			for idx, junction_stop_delay in stop_delays.items():
+				Cumulative_Episode_stop_Delays[idx].append(Cumulative_Episode_stop_Delays[idx][-1]+junction_stop_delay)
 
-		if self.global_counter% 360 == 0:
-				demand_counter += 1
-				self.change_demand(self.vehicle_demand[demand_counter])
+			Cumulative_Totale_network_delay.append(Cumulative_Totale_network_delay[-1]+self.get_delay_timestep())
+			Cumulative_Totale_network_stop_delay.append(Cumulative_Totale_network_stop_delay[-1]+self.get_stop_delay_timestep())
+
+			if self.global_counter% 360 == 0:
+					demand_counter += 1
+					self.change_demand(self.vehicle_demand[demand_counter])
 
 		# Stop the simulation without erasing the database
 		self.Stop_Simulation(delete_results = False)
 		
-		return(Episode_Queues, Cumulative_Episode_Delays, Cumulative_Totale_network_delay)
+		return(Episode_Queues, Cumulative_Episode_Delays,Cumulative_Episode_stop_Delays, Cumulative_Totale_network_delay,Cumulative_Totale_network_stop_delay)
 
 	def Stop_Simulation(self , delete_results = True):
 
