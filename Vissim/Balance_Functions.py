@@ -2,7 +2,9 @@ def balance_dictionary(agent_type):
 #####################################
 ## SCHEMATIC LAYOUT OF THE NETWORK ##
 #####################################
-
+#
+# THE NUMBERS SHOWING ARE THE INTERSECTION IDS
+#
 #                       |              |
 #                       |              |
 #                  ---- 10------------ 8 ----
