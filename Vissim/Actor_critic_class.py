@@ -155,6 +155,7 @@ class ACAgent(RLAgent):
 		self.episode_reward = []
 		self.n_step_size = n_step_size
 		self.loss = []
+		self.losses = 0
 
 		self.test()
 
@@ -293,11 +294,11 @@ class ACAgent(RLAgent):
 		# performs a full training step on the collected batch
 		# note: no need to mess around with gradients, Keras API handles it
 
-		#losses = self.model.train_on_batch(states, [acts_and_advs, returns])
+		self.losses = self.model.train_on_batch(states, [acts_and_advs, returns])
 
-		self.model.fit(states, [acts_and_advs, returns], epochs=1, verbose = 0, batch_size = self.n_step_size) #callbacks=[self.tensorboard_callback])
+		#self.model.fit(states, [acts_and_advs, returns], epochs=1, verbose = 0, batch_size = self.n_step_size) #callbacks=[self.tensorboard_callback])
 
-		self.loss.append(self.model.history.history['loss'])
+		#self.loss.append(self.model.history.history['loss'])
 	#def save_agent(self)
 
 

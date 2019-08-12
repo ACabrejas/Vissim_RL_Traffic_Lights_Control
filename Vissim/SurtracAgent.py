@@ -158,11 +158,7 @@ class SurtracAgent():
         # Potential actions (compatible phases) and transitions
         self.update_counter = 1
         self.actiontime = 1                         # Timesteps until next update it is the green time given by the surtrac algorithm
-        self.compatible_actions = [[0,1,0,1],[1,0,1,0]]         # Potential actions (compatible phases), 1 means green
-
-        # Internal State Traffic Control Variables
-        self.intermediate_phase = False                         # Boolean indicating an ongoing green-red or red-green transition
-        self.transition_vector = []                             # Vector that will store the transitions between updates
+        
 
         # Initial Setup of S, A, R, S_
         self.state = None
