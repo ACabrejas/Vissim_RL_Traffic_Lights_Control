@@ -188,7 +188,7 @@ class environment():
 			self.Vissim.Simulation.RunSingleStep()
 		# increase the update counter by one each step (until reach simulation length)
 		self.global_counter += 1
-		if self.global_counter > (self.sim_length-10):
+		if self.global_counter > (self.sim_length-3):
 			self.done = True
 
 		[to_dictionary(Sarsd,idx,scu.sars()+[self.done]) for idx,scu in self.SCUs.items() if scu.action_required ]

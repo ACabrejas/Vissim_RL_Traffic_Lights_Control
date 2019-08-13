@@ -2175,10 +2175,10 @@
 		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="Node" no="1" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
 			<geometry>
 				<points>
-					<point x="259.85461650687176" y="-20.181392018994334"/>
-					<point x="300.08681403166486" y="-19.757895202943878"/>
-					<point x="300.36914524236516" y="20.050805505798763"/>
-					<point x="259.85461650687176" y="20.050805505798763"/>
+					<point x="24.974258474038038" y="-250.68105999092376"/>
+					<point x="525.67815372575046" y="-245.41049267249124"/>
+					<point x="529.19136334730763" y="249.95206396295185"/>
+					<point x="24.974258474038038" y="249.95206396295185"/>
 				</points>
 			</geometry>
 		</node>
@@ -2525,22 +2525,22 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="false" link="1" name="WE" no="1">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>
