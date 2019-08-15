@@ -209,7 +209,9 @@ class DQNAgent(RLAgent):
         else:
             # Fixed Q-Target
             target = reward + self.gamma * np.max(self.target_model.predict(next_state),axis=1).reshape(batch_size,1)
-            print(target.shape)
+            #print(target.shape)
+
+            
             # No fixed targets version
             # target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,self.state_size))))    
         

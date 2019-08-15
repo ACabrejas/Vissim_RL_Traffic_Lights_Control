@@ -114,10 +114,6 @@ class MasterDQN_Agent():
 					if self.number_of_episode%self.save_every == 0 :
 						self.save(self.number_of_episode)
 
-					
-
-					
-
 					# Decrease the exploration rate
 					self.advance_schedule()
 					break
@@ -265,13 +261,10 @@ class MasterDQN_Agent():
 			print("Exploration rate is already the lowest according to schedule")
 		else:
 			new_epsilon = self.epsilon_sequence[self.number_of_episode]
-			print("Reducing exploration for all agents to {}".format(round(new_epsilon,4)))
+			print("Reducing exploration for all agents to {}".format(round(new_epsilon,4)) + "\n")
 			for idx, agent in self.Agents.items():
 						agent.epsilon =  new_epsilon
 					
-
-
-	
 
 	def prepopulate_memory(self):
 
@@ -382,8 +375,6 @@ class MasterDQN_Agent():
 					pickle.dump(agents_memory[idx], open(PER_prepopulation_filename, 'wb'))
 	         
 			
-
-
 
 	def save(self , episode):
 		"""
