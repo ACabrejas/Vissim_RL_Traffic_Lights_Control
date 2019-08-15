@@ -130,14 +130,17 @@ class DQNAgent(RLAgent):
             return(model)
         else:
             # Architecture for the Neural Net in Deep-Q learning Model (also Double version)
-            model = Sequential()
-            model.add(Dense(42, input_dim=self.state_size, activation='relu', kernel_regularizer=regularizers.l2(0.01)))
-            model.add(Dense(42, activation='relu', kernel_regularizer=regularizers.l2(0.01)))
-            model.add(Dense(42, activation='relu', kernel_regularizer=regularizers.l2(0.01)))
-            model.add(Dense(self.action_size, activation='linear', kernel_regularizer=regularizers.l2(0.01)))
+            input_layer = Input(shape = self.state_size )
+            dense1 = Dense(48, activation= 'relu', kernel_regularizer=regularizers.l2(0.001))(input_layer)
+            dense2 = Dense(48, activation= 'relu', kernel_regularizer=regularizers.l2(0.001))(dense1)
+            dense3 = Dense(48, activation= 'relu', kernel_regularizer=regularizers.l2(0.001))(dense2)
+            dense4 = Dense(self.action_size, activation='linear', kernel_regularizer=regularizers.l2(0.01))(dense3)
+
+            model = Model(inputs=[input_layer], outputs=[dense4])
+            
             
             #model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
-            model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate, epsilon =1.5*10**-4))
+            model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
             return model
     
     # Add memory on the right, if over memory limit, pop leftmost item
