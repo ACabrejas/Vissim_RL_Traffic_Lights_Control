@@ -35,7 +35,7 @@ class RLAgent():
 
 
 		# for the training
-		self.Loss = []
+		self.loss = []
 		self.episode_memory = []
 		self.episode_reward = []
 		self.best_reward = -1000
@@ -139,7 +139,7 @@ class RLAgent():
 		Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Episode'+ str(episode) +'Agent'+str(self.ID)+'_Train'+'.p')
 		self.reward_storage = pickle.load(open(Training_Progress_Filename, 'rb'))
 		Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Episode'+ str(episode) +'Agent'+str(self.ID)+'_Loss'+'.p')
-		self.Loss = pickle.load(open(Loss_Filename, 'rb'))
+		self.loss = pickle.load(open(Loss_Filename, 'rb'))
 			
 		print('Items successfully loaded.')
 		
@@ -177,6 +177,6 @@ class RLAgent():
 			print('Dumping Training Results into pickle file.')
 			Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Loss'+'.p')
 			print('Dumping Loss Results into pickle file.')
-			pickle.dump(self.Loss, open(Loss_Filename, 'wb'))
+			pickle.dump(self.loss, open(Loss_Filename, 'wb'))
 
 		#return(best_agent_weights, best_agent_memory)

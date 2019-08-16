@@ -66,16 +66,16 @@ class Model2(tf.keras.Model):
 		#self.core1 = kl.Dense(60, activation='relu')
 		
 		self.value1 = kl.Dense(48, activation='relu', name='value1') #64
-		self.value2 = kl.Dense(48, activation='relu', name='value2')
-		self.value3 = kl.Dense(48, activation='relu', name='value3')
+		self.value2 = kl.Dense(24, activation='relu', name='value2')
+		#self.value3 = kl.Dense(48, activation='relu', name='value3')
 
 		self.value = kl.Dense(1, name='value')
 		# logits are unnormalized log probabilities
 
 
 		self.logits1 = kl.Dense(48, activation='relu', name='policy_logits1')
-		self.logits2 = kl.Dense(48, activation='relu', name='policy_logits2')
-		self.logits3 = kl.Dense(48, activation='relu', name='policy_logits3')
+		self.logits2 = kl.Dense(24, activation='relu', name='policy_logits2')
+		#self.logits3 = kl.Dense(48, activation='relu', name='policy_logits3')
 		#self.logits4 = kl.Dense(48, activation='relu', name='policy_logits4')
 
 		self.logits = kl.Dense(num_actions, name='policy_logits')
@@ -92,12 +92,12 @@ class Model2(tf.keras.Model):
 		# separate hidden layers from the core
 		hidden_logs = self.logits1(x)
 		hidden_logs = self.logits2(hidden_logs)
-		hidden_logs = self.logits3(hidden_logs)
+		#hidden_logs = self.logits3(hidden_logs)
 		#hidden_logs = self.logits4(hidden_logs)
 
 		hidden_vals = self.value1(x)
 		hidden_vals = self.value2(hidden_vals)
-		hidden_vals = self.value3(hidden_vals)
+		#hidden_vals = self.value3(hidden_vals)
 
 		return self.logits(hidden_logs), self.value(hidden_vals)
 

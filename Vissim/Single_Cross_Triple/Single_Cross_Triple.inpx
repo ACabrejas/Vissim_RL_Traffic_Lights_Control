@@ -1078,17 +1078,17 @@
 		<areaMeasResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<areaResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<convergence writeFile="false"/>
-		<dataColl collectData="false" fromTime="0" interval="3" toTime="99999"/>
+		<dataColl collectData="true" fromTime="0" interval="1" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
-		<delays collectData="false" fromTime="0" interval="99999" toTime="99999"/>
+		<delays collectData="true" fromTime="0" interval="1" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
 		<greenTimeDistribution fromTime="0" toTime="99999" writeFile="false"/>
-		<linkResults collectData="false" fromTime="0" interval="99999" perLane="false" toTime="99999"/>
+		<linkResults collectData="true" fromTime="0" interval="1" perLane="false" toTime="99999"/>
 		<lnChgs filterType="ALL" fromTime="0" toTime="99999" writeFile="false"/>
 		<managedLanes writeFile="false"/>
 		<mesoEvaluationConfig collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<nodeRawData fromTime="0" toTime="99999" writeDatabase="false" writeFile="false"/>
-		<nodeResults collectData="true" fromTime="0" interval="3" toTime="99999"/>
+		<nodeResults collectData="true" fromTime="0" interval="1" toTime="99999"/>
 		<odPairs collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<ptWaitingTimes writeFile="false"/>
 		<pedGridCell cellSize="1" collectData="false" collectOnlyLastInterval="false" densThresh="0" experDensThresh="0" fromTime="0" interval="99999" rangeOfInfluence="1" speedThresh="0" toTime="99999" velVarThresh="0"/>
@@ -1104,12 +1104,12 @@
 		<pedTravTmODData fromTime="0" interval="99999" toTime="99999" writeFile="false"/>
 		<pedTravTmRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<pedTravTms collectData="false" fromTime="0" interval="99999" toTime="99999"/>
-		<queues collectData="false" fromTime="0" interval="3" toTime="99999"/>
+		<queues collectData="true" fromTime="0" interval="1" toTime="99999"/>
 		<scDetRec writeFile="false"/>
 		<ssam writeFile="false"/>
 		<sigChgs writeDatabase="false" writeFile="false"/>
 		<vehInpData writeFile="false"/>
-		<vehNetPerf collectData="false" fromTime="0" interval="99999" toTime="99999"/>
+		<vehNetPerf collectData="true" fromTime="0" interval="1" toTime="99999"/>
 		<vehRec filterType="ALL" fromTime="0" inclParkVehs="false" resolution="1" toTime="99999" writeDatabase="false" writeFile="false">
 			<attributes>
 				<attributeSelection attributeID="SIMSEC" decimals="2" format="SECONDS" showUnits="false"/>
@@ -1121,7 +1121,7 @@
 			</attributes>
 		</vehRec>
 		<vehTravTmRawData fromTime="0" toTime="99999" writeDatabase="false" writeFile="false"/>
-		<vehTravTms aggrBySect="DESTINATION" collectData="false" fromTime="0" interval="99999" toTime="99999"/>
+		<vehTravTms aggrBySect="DESTINATION" collectData="true" fromTime="0" interval="1" toTime="99999"/>
 	</evaluation>
 	<levels>
 		<level name="Base" no="1" zCoord="0"/>
@@ -2370,7 +2370,7 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 2" localNo="0" name="" no="11" orSG="1 11" pos="253" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="7 1" localNo="0" name="" no="12" orSG="1 12" pos="253" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="100" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3601" simRes="1" simSpeed="3" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="100" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3601" simRes="10" simSpeed="3" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
