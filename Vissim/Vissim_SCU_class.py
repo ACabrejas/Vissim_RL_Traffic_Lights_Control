@@ -89,11 +89,16 @@ class Signal_Control_Unit():
 		# Node of this intersection (could be in the network Parser)
 		self.Node = Vissim.Net.Nodes.ItemByKey(self.ID+1) #To be corrected Vissim object count object begin at 1
 
+
+		#Have athe numbers of queues counter in the dictionnary for later for one intersection case do this:!
+		self.queues_counters  = list(Vissim.Net.QueueCounters)
+
+
 		# Transform the movements into a python list (hacky technique to be because the list[-1] doesnt work with Vissim list)
 		movements = list(self.Node.Movements)
 
 		self.junction_movement = movements[-1] #The last one is the movement of the whole intersection
-		self.lanes_movement = movements[1:]  # The other movement are the lane movement
+		self.lanes_movement = movements[:-1]  # The other movement are the lane movement
 
 
 		#####################################
@@ -148,13 +153,25 @@ class Signal_Control_Unit():
 		Compute the state of the SCU.
 		"""
 		if self.state_type == 'Queues':
-			self.queue_state  =\
-			[0. if movement.AttValue('QLen(Current, Last)') is None else movement.AttValue('QLen(Current, Last)') for movement in self.lanes_movement]
+			#self.queue_state  =\
+			#[0. if movement.AttValue('QLen(Current, Last)') is None else movement.AttValue('QLen(Current, Last)') for movement in self.lanes_movement]
+
+			#self.queue_state  =\
+			#[0. if queue.AttValue('QLen(Current, Last)') is None else queue.AttValue('QLen(Current, Last)') for queue in self.queues_counters]
+
+			self.queue_state  = [get_queue(lane) for lane in self.Vissim_Lanes]
+
 			state = np.array(self.queue_state)[np.newaxis,:]
 
 		if self.state_type == "QueuesSig":
-			self.queue_state  =\
-			[0. if movement.AttValue('QLen(Current, Last)') is None else movement.AttValue('QLen(Current, Last)') for movement in self.lanes_movement]
+			#self.queue_state  =\
+			#[0. if movement.AttValue('QLen(Current, Last)') is None else movement.AttValue('QLen(Current, Last)') for movement in self.lanes_movement]
+
+			#self.queue_state  =\
+			#[0. if queue.AttValue('QLen(Current, Last)') is None else queue.AttValue('QLen(Current, Last)') for queue in self.queues_counters]
+
+			self.queue_state  = [get_queue(lane) for lane in self.Vissim_Lanes]
+
 			state = np.array(self.queue_state+[self.next_action_key])[np.newaxis,:]
 		
 		return(state)
@@ -164,7 +181,7 @@ class Signal_Control_Unit():
 		Only conpute the queues at this intersection
 
 		"""
-		queues =  [0. if movement.AttValue('QLen(Current, Last)') is None else movement.AttValue('QLen(Current, Last)') for movement in self.lanes_movement]
+		queues = [get_queue(lane) for lane in self.Vissim_Lanes]
 		return queues  
 
 	def calculate_reward(self):

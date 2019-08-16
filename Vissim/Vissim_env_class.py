@@ -456,7 +456,7 @@ class environment():
 			
 			
 			# set the queues mesurement 
-			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', True)
 			self.Vissim.Evaluation.SetAttValue('QueuesInterval', 3)
 			
 			# set the vehicles perf mesurement 

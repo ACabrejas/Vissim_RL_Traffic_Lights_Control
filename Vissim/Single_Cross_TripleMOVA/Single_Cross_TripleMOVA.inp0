@@ -2175,10 +2175,10 @@
 		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="Node" no="1" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
 			<geometry>
 				<points>
-					<point x="259.85461650687176" y="-20.181392018994334"/>
-					<point x="300.08681403166486" y="-19.757895202943878"/>
-					<point x="300.36914524236516" y="20.050805505798763"/>
-					<point x="259.85461650687176" y="20.050805505798763"/>
+					<point x="258.200220136974" y="-22.248498801845315"/>
+					<point x="302.33194202059832" y="-21.783954360965637"/>
+					<point x="302.64344673777919" y="22.138210761172139"/>
+					<point x="258.200220136974" y="22.138210761172139"/>
 				</points>
 			</geometry>
 		</node>
@@ -2292,10 +2292,18 @@
 		</powerDistribution>
 	</powerDistributions>
 	<queueCounters>
-		<queueCounter link="1" name="West" no="1" pos="255.07176592142849"/>
-		<queueCounter link="3" name="South" no="2" pos="259.64286362090792"/>
-		<queueCounter link="5" name="East" no="3" pos="256.41765836615122"/>
-		<queueCounter link="7" name="North" no="4" pos="254.79815377517255"/>
+		<queueCounter link="10008" name="West" no="1" pos="1.2129939768621139"/>
+		<queueCounter link="10000" name="" no="2" pos="1.0268357765266991"/>
+		<queueCounter link="10007" name="" no="3" pos="1.7620178319688706"/>
+		<queueCounter link="10009" name="South" no="4" pos="0.18817372737892007"/>
+		<queueCounter link="10001" name="" no="5" pos="0.92819251899648969"/>
+		<queueCounter link="10004" name="" no="6" pos="1.1248083133751532"/>
+		<queueCounter link="10010" name="East" no="7" pos="0.36110480221371416"/>
+		<queueCounter link="10002" name="" no="8" pos="0.56589184226495892"/>
+		<queueCounter link="10005" name="" no="9" pos="1.573885479063013"/>
+		<queueCounter link="10011" name="North" no="10" pos="1.1352622757291473"/>
+		<queueCounter link="10003" name="" no="11" pos="0.53143732790934572"/>
+		<queueCounter link="10006" name="" no="12" pos="1.2462134672882168"/>
 	</queueCounters>
 	<reducedSpeedAreas>
 		<reducedSpeedArea anmFlag="false" lane="10007 1" length="6.2413565216109976" name="" no="1" pos="7.3966066898286655" timeFrom="0" timeTo="99999">
@@ -2525,22 +2533,22 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="false" link="1" name="WE" no="1">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="100"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>

@@ -42,7 +42,7 @@ class MasterDQN_Agent():
 
 		# For saving put here all relevent information and saving parameters
 		self.Session_ID = Session_ID
-		self.save_every = 50
+		self.save_every = 20
 
 		
 
@@ -390,6 +390,7 @@ class MasterDQN_Agent():
 		"""
 		for idx, agent in self.Agents.items():
 			agent.load_agent(self.vissim_working_directory, self.model_name , self.Session_ID, episode, best = best)
+			agent.epsilon = epsilon_sequence[episode]
 		self.number_of_episode = episode
 
 
