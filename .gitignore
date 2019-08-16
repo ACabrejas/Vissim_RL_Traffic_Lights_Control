@@ -263,3 +263,4 @@ Networks/cross_straight_random/cross_straight_random_20000.trips.xml
 Networks/cross_straight_random/cross_straight_random.trips.xml
 Networks/cross_straight_random/cross_straight_random.trips.xml
 Networks/cross_straight_random/cross_straight_random.trips.xml
+*.pyc
