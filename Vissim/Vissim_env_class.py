@@ -172,6 +172,7 @@ class environment():
 		
 
 		Sarsd = dict()
+		self.action_required = False # By default no action are needed
 
 		# Update the action of all the junction that needded one
 		[scu.action_update(actions[idx] , green_time = green_time ) for idx, scu in self.SCUs.items() if scu.action_required]
@@ -416,7 +417,7 @@ class environment():
 			
 			
 			# set the queues mesurement 
-			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', True)
 			self.Vissim.Evaluation.SetAttValue('QueuesInterval', 3)
 			
 			# set the vehicles perf mesurement 
