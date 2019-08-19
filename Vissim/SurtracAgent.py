@@ -136,8 +136,8 @@ def algorithm5(state_manager,s,X):
 
 
 class SurtracAgent():
-    def __init__(self, state_size, action_size, ID, state_type, npa,\
-                  Vissim, delta =2 , rounding=0.1 ):
+    def __init__(self, ID,\
+                   delta =2 , rounding=0.1 ):
 
         print("Deploying Surtrac Agent")
 
@@ -146,57 +146,32 @@ class SurtracAgent():
         self.delta = delta
         self.rounding = rounding
 
-        # Agent Junction ID and Controller ID
-        self.signal_id = ID
-        self.signal_controller = npa.signal_controllers[self.signal_id]
-        self.signal_groups = npa.signal_groups[self.signal_id]
-
-        # Number of states, action space and memory
-        self.state_size = state_size
-        self.action_size = action_size
-
         # Potential actions (compatible phases) and transitions
-        self.update_counter = 1
         self.actiontime = 1                         # Timesteps until next update it is the green time given by the surtrac algorithm
         
 
-        # Initial Setup of S, A, R, S_
-        self.state = None
-        self.newstate = None
+        
         self.action = 0
-        self.newaction = 0
-        self.reward = 0
-
-
-        # Metrics Storage Initialization
-        self.episode_reward = []
-        self.loss = []
-        self.queues_over_time = [[0,0,0,0]]
-        self.accumulated_delay= [0]
-
-    def update_IDS(self, ID, npa):
-        self.signal_id = ID
-        self.signal_controller = npa.signal_controllers[self.signal_id]
-        self.signal_groups = npa.signal_groups[self.signal_id]
-
-
-        # Input : -Clusters ie 2 lists of clusters (one for each road)
-        #       : -ic the index of the current green phase (the start)
-        #       : -greedymode, this class has 2 modes, one that keep all the schedule that are not dominated (non-greedy mode)
-        #       : one that keep only one schedule the one that has the less delay at each stage
-
-        # Output : the optimal schedule, the one with the less total delay.
+        
     def choose_action(self,C,greedy=False):
+        """
+         Input : -Clusters ie 2 lists of clusters (one for each road)
+               : -ic the index of the current green phase (the start)
+               : -greedymode, this class has 2 modes, one that keep all the schedule that are not dominated (non-greedy mode)
+               : one that keep only one schedule the one that has the less delay at each stage
+
+         Output : the optimal schedule, the one with the less total delay.
+        """
 
         #small hack to make it work when there is no vehicle
         if len(C[0])==0:
             t = 6
             self.actiontime = round(t)
-            return(1)
+            return(1, self.actiontime)
         elif len(C[1])==0:
             t = 6
             self.actiontime = round(t)
-            return(0)
+            return(0, self.actiontime)
 
         #initialize the state manager with the current action
         state_manager=State_manager(C,self.action,greedymode=greedy)
@@ -239,6 +214,6 @@ class SurtracAgent():
         #print(S[0])
         self.actiontime = round(t)
         # This is the schedule with the smallest total delay
-        return(S[0])
+        return(S[0], self.actiontime)
 
 

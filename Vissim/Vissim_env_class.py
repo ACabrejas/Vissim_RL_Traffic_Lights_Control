@@ -171,7 +171,10 @@ class environment():
 		"""
 		
 
+		
 		Sarsd = dict()
+		self.action_required = False # If the dictionary is empty no action is required
+
 
 		# Update the action of all the junction that needded one
 		[scu.action_update(actions[idx] , green_time = green_time ) for idx, scu in self.SCUs.items() if scu.action_required]
