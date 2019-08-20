@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="603" vissimVersion="11.00 - 08 [77763]">
+<network version="603" vissimVersion="11.00 - 09 [78629]">
 	<anmDefaults colorDistr="1" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="" panmRoutesFilename="" pedestrianVehicleType="510" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -234,6 +234,7 @@
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="18" link2="10018" mesoCritGap="3.5" minGapBlockDef="3" no="83" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10012" link2="10027" mesoCritGap="3.5" minGapBlockDef="3" no="84" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10018" link2="10027" mesoCritGap="3.5" minGapBlockDef="3" no="85" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
+		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="18" link2="10027" mesoCritGap="3.5" minGapBlockDef="3" no="86" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 	</conflictAreas>
 	<dataCollectionMeasurements>
 		<dataCollectionMeasurement name="West" no="1"/>
@@ -253,7 +254,7 @@
 		<dataCollectionPoint lane="14 1" name="" no="9" pos="248.57989629285225"/>
 		<dataCollectionPoint lane="20 1" name="" no="10" pos="249.49808794235324"/>
 		<dataCollectionPoint lane="19 1" name="" no="11" pos="249.33896147896871"/>
-		<dataCollectionPoint lane="10027 1" name="" no="12" pos="1.6981608507418358"/>
+		<dataCollectionPoint lane="18 1" name="" no="12" pos="248.85718811678504"/>
 	</dataCollectionPoints>
 	<delayMeasurements>
 		<delayMeasurement name="" no="1">
@@ -1647,10 +1648,10 @@
 			<toLinkEndPt lane="8 2" pos="1.033216063271432"/>
 		</link>
 		<link assumSpeedOncom="60" consVehInDynPot="false" costPerKm="0" desSpeedFact="1" direction="ALL" displayType="1" emergStopDist="5" gradient="0" hasOvtLn="false" isPedArea="false" linkBehavType="1" linkEvalAct="true" linkEvalSegLen="10" lnChgDist="200" lnChgDistIsPerLn="false" lnChgEvalAct="true" lookAheadDistOvt="500" mesoFollowUpGap="0" mesoSpeed="50" mesoSpeedModel="VEHICLEBASED" name="" netPerfEvalAct="true" no="10018" ovtOnlyPT="false" ovtSpeedFact="1.3" showClsfValues="true" showLinkBar="true" showVeh="true" surch1="0" surch2="0" thickness="0" vehDynPotG="3" vehRecAct="true">
-			<fromLinkEndPt lane="18 1" pos="248.57604371979579"/>
+			<fromLinkEndPt lane="18 1" pos="250.44399761435639"/>
 			<geometry>
 				<linkPolyPts>
-					<linkPolyPoint x="269.40166535556438" y="21.870420476128089" zOffset="0"/>
+					<linkPolyPoint x="269.40088681661831" y="20.002466743809947" zOffset="0"/>
 					<linkPolyPoint x="270.93657900965354" y="-22.399320746786238" zOffset="0"/>
 				</linkPolyPts>
 			</geometry>
@@ -1797,11 +1798,10 @@
 			<toLinkEndPt lane="8 1" pos="1.4201206976772469"/>
 		</link>
 		<link assumSpeedOncom="60" consVehInDynPot="false" costPerKm="0" desSpeedFact="1" direction="ALL" displayType="1" emergStopDist="5" gradient="0" hasOvtLn="false" isPedArea="false" linkBehavType="1" linkEvalAct="true" linkEvalSegLen="10" lnChgDist="200" lnChgDistIsPerLn="false" lnChgEvalAct="true" lookAheadDistOvt="500" mesoFollowUpGap="0" mesoSpeed="50" mesoSpeedModel="VEHICLEBASED" name="" netPerfEvalAct="true" no="10027" ovtOnlyPT="false" ovtSpeedFact="1.3" showClsfValues="true" showLinkBar="true" showVeh="true" surch1="0" surch2="0" thickness="0" vehDynPotG="3" vehRecAct="true">
-			<fromLinkEndPt lane="18 1" pos="247.909278393264"/>
+			<fromLinkEndPt lane="18 1" pos="250.406955442439"/>
 			<geometry>
 				<linkPolyPts>
-					<linkPolyPoint x="269.401943254701" y="22.537185744747489" zOffset="0"/>
-					<linkPolyPoint x="268.99060883440171" y="19.587728090344161" zOffset="0"/>
+					<linkPolyPoint x="269.40090225531492" y="20.039508912510001" zOffset="0"/>
 					<linkPolyPoint x="267.84558707126314" y="16.599076432626966" zOffset="0"/>
 					<linkPolyPoint x="266.09679378529808" y="13.827854393701012" zOffset="0"/>
 					<linkPolyPoint x="263.87414479651954" y="11.5306855956714" zOffset="0"/>
@@ -2627,7 +2627,7 @@
 		<queueCounter link="12" name="" no="9" pos="249.22041811324777"/>
 		<queueCounter link="20" name="" no="10" pos="248.93048577109064"/>
 		<queueCounter link="19" name="" no="11" pos="249.3075316981552"/>
-		<queueCounter link="18" name="" no="12" pos="248.88397212751534"/>
+		<queueCounter link="18" name="" no="12" pos="248.85713315242336"/>
 	</queueCounters>
 	<reducedSpeedAreas>
 		<reducedSpeedArea anmFlag="false" lane="10023 1" length="25" name="" no="1" pos="10" timeFrom="0" timeTo="99999"/>
@@ -2682,9 +2682,9 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="12 1" localNo="0" name="" no="9" orSG="1 9" pos="249" sg="1 9" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="20 1" localNo="0" name="" no="10" orSG="1 10" pos="249" sg="1 10" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="19 1" localNo="0" name="" no="11" orSG="1 11" pos="249.36770742605739" sg="1 11" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="18 1" localNo="0" name="" no="12" orSG="1 12" pos="248.97201795300413" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="18 1" localNo="0" name="" no="12" pos="248.72688609882724" sg="1 12" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3600" simRes="1" simSpeed="3" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3600" simRes="10" simSpeed="3" startTm="0" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
