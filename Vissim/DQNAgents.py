@@ -215,17 +215,7 @@ class DQNAgent(RLAgent):
             # No fixed targets version
             # target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,self.state_size))))    
         
-            
-        # There should be a way to vectorize this
-        #for state, action, reward, next_state in minibatch:
-        #    if self.DoubleDQN:
-        #        next_action = np.argmax(self.model.predict(np.reshape(next_state,(1,self.state_size))), axis=1)
-        #        target = reward + self.gamma * self.target_model.predict(np.reshape(next_state,(1,self.state_size)))[0][next_action][0]
-        #    else:
-                # Fixed Q-Target
-        #        target = reward + self.gamma * np.max(self.target_model.predict(np.reshape(next_state,(1,self.state_size))))
-                # No fixed targets version
-                # target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,self.state_size))))
+
 
         # This section incorporates the reward into the prediction and calculates the absolute error between old and new
         target_f = self.model.predict(state)
