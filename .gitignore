@@ -11,6 +11,9 @@ tools/
 ## PYTHON INTERMEDIATE FILES
 *.pyc
 
+## Database created by PTV Vissim
+*.db
+
 ## OUTPUT FILES FOR MAY AND LOUISE
 *.json
 
