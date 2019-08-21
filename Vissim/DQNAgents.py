@@ -212,17 +212,10 @@ class DQNAgent(RLAgent):
             #print(target.shape)
 
             
-            # No fixed targets version
-            # target = reward + self.gamma * np.max(self.model.predict(np.reshape(next_state,(1,self.state_size))))    
-        
-
-
         # This section incorporates the reward into the prediction and calculates the absolute error between old and new
         target_f = self.model.predict(state)
         
         absolute_errors = np.abs(target_f[np.arange(batch_size),action].reshape(batch_size,1)-target)
-        
-        #absolute_errors.append(abs(target_f[0][action] - target))
         
         target_f[np.arange(batch_size),action] = target.reshape(batch_size)
         

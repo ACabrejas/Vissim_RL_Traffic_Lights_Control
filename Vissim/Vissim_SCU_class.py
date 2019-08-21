@@ -346,11 +346,8 @@ class Signal_Control_Unit():
 		it then computes the state. 
 		OR until a transition has to be made :
 		- Updates the stage of the controllers
-		- Change the light in the simulato
+		- Change the light in the simulator
 		
-		(writen so multiple controllers can be updated in parallel)
-		(Computational Overhead should be lower than before)
-	
 		"""
 		# If being controlled by COM
 		if self.controled_by_com :

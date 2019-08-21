@@ -115,11 +115,6 @@ class ACAgent(RLAgent):
 	def __init__(self, state_size, action_size, ID, n_step_size, gamma, alpha, entropy, value):
 		super().__init__(ID)
 
-
-		# self.log_dir="logs\\fit\\" + 'Agent {}_'.format(self.ID)  + datetime.datetime.now().strftime("%Y%m%d-%H%M%S") 
-		# self.tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=self.log_dir, histogram_freq=1)
-
-
 		print("Deploying instance of Actor_Critic Agent(s) !!! TENSORFLOW 2 IS NEEDED !!! ")
 		# agent type flag 
 		self.type = 'AC'
@@ -298,7 +293,222 @@ class ACAgent(RLAgent):
 
 		#self.model.fit(states, [acts_and_advs, returns], epochs=1, verbose = 0, batch_size = self.n_step_size) #callbacks=[self.tensorboard_callback])
 
-		#self.loss.append(self.model.history.history['loss'])
-	#def save_agent(self)
+		
 
 
+
+
+
+
+# Some model that I tried and showed not very bad results
+
+class Modelconv(tf.keras.Model):
+	"""docstring for Modelconv"""
+	
+	def __init__(self, num_actions):
+		super().__init__('mlp_policy')
+
+		#self.core1 = kl.Conv2D(32, (3, 3), activation=lrelu, padding='same' , name = 'core_conv1')
+		#self.core2 = kl.Conv2D(32, (3, 3), activation=lrelu, padding='same' , name = 'core_conv2')
+		#self.core3 = kl.Conv2D(32, (3, 3), activation=lrelu, padding='same' , name = 'core_conv3')
+
+		self.valueconv1 = kl.Conv2D(64, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'value_conv1')
+		self.valueconv2 = kl.Conv2D(32, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'value_conv2')
+		self.valueconv3 = kl.Conv2D(16, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'value_conv3')
+		self.value1 = kl.Dense(32, activation=lrelu, name='value1')
+		self.value2 = kl.Dense(16, activation=lrelu, name='value2')
+		self.value = kl.Dense(1, name='value_last')
+
+		self.flat1 = kl.Flatten(name = 'value_flat') 
+		# logits are unnormalized log probabilities
+
+
+		self.logitsconv1 = kl.Conv2D(32, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'policy_conv1')
+		self.logitsconv2 = kl.Conv2D(32, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'policy_conv2')
+		self.logitsconv3 = kl.Conv2D(16, (3, 4), activation=lrelu, strides = (1,2), padding = "same", name = 'policy_conv3')
+		self.logits1 = kl.Dense(32, activation=lrelu, name='policy_logits2')
+		self.logits2 = kl.Dense(16, activation=lrelu, name='policy_logits3')
+		self.logits = kl.Dense(num_actions, name='policy_last')
+
+		self.flat2 = kl.Flatten(name = 'policy_flat')
+
+		self.dist = ProbabilityDistribution()
+
+	def call(self, inputs):
+		# inputs is a numpy array, convert to Tensor
+		x = tf.convert_to_tensor(inputs, dtype=tf.float32)
+
+		# This it the core of the model
+		#x = self.flat1(self.core3(self.core2(self.core1(x))))
+		
+		# separate hidden layers from the core
+		hidden_logs = self.logitsconv1(x)
+		hidden_logs = self.logitsconv2(hidden_logs)
+		hidden_logs = self.logitsconv3(hidden_logs)
+		hidden_logs = self.flat1(hidden_logs)
+		hidden_logs = self.logits1(hidden_logs)
+		hidden_logs = self.logits2(hidden_logs)
+
+		hidden_vals = self.valueconv1(x)
+		hidden_vals = self.valueconv2(hidden_vals)
+		hidden_vals = self.valueconv3(hidden_vals)
+		hidden_vals = self.flat2(hidden_vals)
+		hidden_vals = self.value1(hidden_vals)
+		hidden_vals = self.value2(hidden_vals)
+
+		return self.logits(hidden_logs), self.value(hidden_vals)
+
+	def action_value(self, obs):
+		# executes call() under the hood
+		logits, value = self.predict(obs)
+		action = self.dist.predict(logits)
+		# a simpler option, will become clear later why we don't use it
+		# action = tf.random.categorical(logits, 1)
+		return action , value
+		
+
+class Modelconvsave2(tf.keras.Model):
+	"""docstring for Modelconv"""
+	
+	def __init__(self, num_actions):
+		super().__init__('mlp_policy')
+
+		#self.core1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same' , name = 'core_conv1')
+		#self.core2 = kl.Conv2D(16, (3, 3), activation='relu', padding='same' , name = 'core_conv'2)
+
+		self.valueconv1 = kl.Conv2D(32, (3, 3), activation=lrelu, padding='same', name = 'value_conv1')
+		self.valueconv2 = kl.Conv2D(32, (3, 3), activation=lrelu, padding='same', name = 'value_conv2')
+		self.value1 = kl.Dense(16, activation=lrelu, name='value1')
+		self.value2 = kl.Dense(16, activation=lrelu, name='value2')
+		self.value = kl.Dense(1, name='value_last')
+
+		self.flat1 = kl.Flatten(name = 'value_flat') 
+		# logits are unnormalized log probabilities
+
+
+		self.logitsconv1 = kl.Conv2D(32, (3, 3), activation=lrelu, padding='same', name = 'policy_conv1')
+		self.logitsconv2 = kl.Conv2D(16, (3, 3), activation=lrelu, padding='same', name = 'policy_conv2')
+		self.logits1 = kl.Dense(16, activation=lrelu, name='policy_logits2')
+		self.logits2 = kl.Dense(8, activation=lrelu, name='policy_logits3')
+		self.logits = kl.Dense(num_actions, name='policy_last')
+
+		self.flat2 = kl.Flatten(name = 'policy_flat')
+
+		self.dist = ProbabilityDistribution()
+
+	def call(self, inputs):
+		# inputs is a numpy array, convert to Tensor
+		x = tf.convert_to_tensor(inputs, dtype=tf.float32)
+
+		# This it the core of the model
+		# x = self.core1(x)
+		
+		# separate hidden layers from the core
+		hidden_logs = self.logitsconv1(x)
+		hidden_logs = self.logitsconv2(hidden_logs)
+		hidden_logs = self.flat1(hidden_logs)
+		hidden_logs = self.logits1(hidden_logs)
+		hidden_logs = self.logits2(hidden_logs)
+
+		hidden_vals = self.valueconv1(x)
+		hidden_vals = self.valueconv2(hidden_vals)
+		hidden_vals = self.flat2(hidden_vals)
+		hidden_vals = self.value1(hidden_vals)
+		hidden_vals = self.value2(hidden_vals)
+
+		return self.logits(hidden_logs), self.value(hidden_vals)
+
+	def action_value(self, obs):
+		# executes call() under the hood
+		logits, value = self.predict(obs)
+		action = self.dist.predict(logits)
+		# a simpler option, will become clear later why we don't use it
+		# action = tf.random.categorical(logits, 1)
+		return action , value
+
+class Modelconvsave1(tf.keras.Model):
+	"""docstring for Modelconv"""
+	
+	def __init__(self, num_actions):
+		super().__init__('mlp_policy')
+
+		#self.core1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same' , name = 'core_conv1')
+		#self.core2 = kl.Conv2D(16, (3, 3), activation='relu', padding='same' , name = 'core_conv'2)
+
+		self.value1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same', name = 'value_conv1')
+		self.value2 = kl.Dense(16, activation='relu', name='value2')
+		self.value3 = kl.Dense(16, activation='relu', name='value3')
+		self.value = kl.Dense(1, name='value_last')
+
+		self.flat1 = kl.Flatten(name = 'value_flat') 
+		# logits are unnormalized log probabilities
+
+
+		self.logits1 = kl.Conv2D(32, (3, 3), activation='relu', padding='same', name = 'policy_conv1')
+		self.logits2 = kl.Dense(16, activation='relu', name='policy_logits2')
+		self.logits3 = kl.Dense(8, activation='relu', name='policy_logits3')
+		self.logits = kl.Dense(num_actions, name='policy_last')
+
+		self.flat2 = kl.Flatten(name = 'policy_flat')
+
+		self.dist = ProbabilityDistribution()
+
+	def call(self, inputs):
+		# inputs is a numpy array, convert to Tensor
+		x = tf.convert_to_tensor(inputs, dtype=tf.float32)
+
+		# This it the core of the model
+		# x = self.core1(x)
+		
+		# separate hidden layers from the core
+		hidden_logs = self.logits1(x)
+		hidden_logs = self.flat1(hidden_logs)
+		hidden_logs = self.logits2(hidden_logs)
+		hidden_logs = self.logits3(hidden_logs)
+
+		hidden_vals = self.value1(x)
+		hidden_vals = self.flat2(hidden_vals)
+		hidden_vals = self.value2(hidden_vals)
+		hidden_vals = self.value3(hidden_vals)
+
+		return self.logits(hidden_logs), self.value(hidden_vals)
+
+	def action_value(self, obs):
+		# executes call() under the hood
+		logits, value = self.predict(obs)
+		action = self.dist.predict(logits)
+		# a simpler option, will become clear later why we don't use it
+		# action = tf.random.categorical(logits, 1)
+		return action , value
+
+# An working model training with entropy = 0.00001 en nstep = 32 and learn every step lr = 0.000065 gamma = 0.99 
+class Modelsave1(tf.keras.Model):
+	def __init__(self, num_actions):
+		super().__init__('mlp_policy')
+
+		# no tf.get_variable(), just simple Keras API
+		self.hidden1 = kl.Dense(42, activation='relu')
+		self.hidden2 = kl.Dense(42, activation='relu')
+		self.value = kl.Dense(1, name='value')
+		# logits are unnormalized log probabilities
+		self.logits = kl.Dense(num_actions, name='policy_logits')
+		self.dist = ProbabilityDistribution()
+
+	def call(self, inputs):
+		# inputs is a numpy array, convert to Tensor
+		x = tf.convert_to_tensor(inputs, dtype=tf.float32)
+
+		# This it the core of the model
+	   
+		# separate hidden layers from the core
+		hidden_logs = self.hidden1(x)
+		hidden_vals = self.hidden2(x)
+		return self.logits(hidden_logs), self.value(hidden_vals)
+
+	def action_value(self, obs):
+		# executes call() under the hood
+		logits, value = self.predict(obs)
+		action = self.dist.predict(logits)
+		# a simpler option, will become clear later why we don't use it
+		# action = tf.random.categorical(logits, 1)
+		return action , value
