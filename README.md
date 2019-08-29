@@ -7,19 +7,19 @@ The controller architecture works in the following way:
  ![Controller Architecture](./md_pics/Interface2.pdf)
 
 
-There are currently 3 maps:
+There are currently 5 maps:
  - Cross Single Straight (2 phases) - Focus on asymmetric demand. Can be run using programs or phases. No turning.
  ![Single Cross Straight map](./md_pics/Single_straight_cross.PNG)
 
  - Cross Single Triple (4 phases) - Focus on single intersection complex control. Only the first 4 phases in the diagram below.
- - Cross Single Triple (8 phases) - Same with more complexity on the actions side.
+ - Cross Single Triple (8 phases) - Same with more complexity on the actions side. Focus on complex control.
  ![Cross Single Triple map](./md_pics/Single_cross_triple.PNG)
  ![Phases in 8 actions setup](./md_pics/Triple_phase.PNG)
  
- - Five Intersection (8 phases) - Combination of 5 complex intersections in cross, s.t. the incoming cars to the middle intersection have at least gone through one of the outer ones.
+ - Five Intersection (8 phases) - Combination of 5 complex intersections in cross, s.t. the incoming cars to the middle intersection have at least gone through one of the outer ones. Focus on platoons and test for communications between controllers.
  ![Five Intersection map](./md_pics/Five_intersection.PNG)
  
- - Balance (14 intersections) - Currently training.
+ - Balance (14 intersections) - Currently training. Focus on real world networks and beating commercial implementations.
   ![Balance Network map](./md_pics/Balance.PNG)
 
  Several agents can be deployed:
