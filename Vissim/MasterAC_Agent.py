@@ -54,11 +54,11 @@ class MasterAC_Agent():
 					self.Agents[idx] = ACAgent(info['state_size'], len(acts), idx, self.n_step_size, self.gamma, self.alpha, self.entropy, self.value)
 				
 
-	def train(self, number_of_episode):
+	def train(self, number_of_episode, vissim=False):
 
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True, vissim=vissim)
 
 		for idx, agent in self.Agents.items():
 			agent.reset()
@@ -126,7 +126,7 @@ class MasterAC_Agent():
 
 	# Those methode could be in a general MAster agents				
 	# Do a run test and save all the metrics
-	def test(self):
+	def test(self, vissim=False):
 
 		"""
 		Function to test our agents on one episode with all the metrics : queues over time, delay
@@ -135,7 +135,7 @@ class MasterAC_Agent():
 
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'test', delete_results = True, verbose = True)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'test', delete_results = True, verbose = True, vissim = vissim)
 
 
 		# Counter to change the demande during test
@@ -219,14 +219,14 @@ class MasterAC_Agent():
 		return(Episode_Queues, Cumulative_Episode_Delays,Cumulative_Episode_stop_Delays, Cumulative_Totale_network_delay,Cumulative_Totale_network_stop_delay)
 
 
-	def demo(self):
+	def demo(selfvissim=False):
 		"""
 		Function to make a demo of our agents 
 		"""
 
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'demo', delete_results = True, verbose = True)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'demo', delete_results = True, verbose = True, vissim=vissim)
 
 
 		for idx, agent in self.Agents.items():

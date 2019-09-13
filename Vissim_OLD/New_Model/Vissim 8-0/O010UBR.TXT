@@ -1,0 +1,11 @@
+FAST Versie 03.00.00
+FAST: error reading path from registry. Searched for value 'SettingsPath' here: Software\Royal HaskoningDHV\FAST\CCOL\Deventer\
+FAST: removing file /rec/O010/1.fast
+FAST: Time offset real<>sim = -1:2:52
+FAST: Printing plan failed!
+FAST: Directory tried: /print/O010/O010.fast
+TI 16:30:00
+DA 16-06-2016
+FAST: Printing plan failed!
+FAST: Directory tried: /print/O010/O010.fast
+Start commft O005 (appl)

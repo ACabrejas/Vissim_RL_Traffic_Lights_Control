@@ -20,7 +20,7 @@ class environment():
 	
 	"""
 	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionary,\
-				 Random_Seed = 42, timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True):
+				 Random_Seed = 42, timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True, vissim = False):
 					
 
 		# Model parameters
@@ -42,8 +42,11 @@ class environment():
 		self.verbose = verbose
 
 		# Dispatach the COM server
-		self.Vissim, _ = COMServerDispatch(model_name, vissim_working_directory, self.sim_length,\
+		if not vissim :
+			self.Vissim, _ = COMServerDispatch(model_name, vissim_working_directory, self.sim_length,\
 											self.timesteps_per_second, delete_results = self.delete_results, verbose = self.verbose)
+		else :
+			self.Vissim = vissim
 
 		# Setting Random Seed
 		self.Vissim.Simulation.SetAttValue('RandSeed', Random_Seed)

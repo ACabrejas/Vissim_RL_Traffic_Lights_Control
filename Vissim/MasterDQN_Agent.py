@@ -58,7 +58,7 @@ class MasterDQN_Agent():
 						         Dueling = False if agent_type == "DQN" or agent_type == "DDQN" else True) 
 				
 
-	def train(self, number_of_episode):
+	def train(self, number_of_episode, vissim=False):
 		"""
 		Function to train the agents
 		input the number of episode of training
@@ -66,7 +66,7 @@ class MasterDQN_Agent():
 		"""
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True, vissim=vissim)
 
 		for idx, agent in self.Agents.items():
 			agent.reset()
@@ -121,7 +121,7 @@ class MasterDQN_Agent():
 		self.env = None
 
 	# Do a run test and save all the metrics
-	def test(self):
+	def test(self,vissim=False):
 
 		"""
 		Function to test our agents on one episode with all the metrics : queues over time, delay
@@ -130,7 +130,7 @@ class MasterDQN_Agent():
 
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'test', delete_results = True, verbose = True)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'test', delete_results = True, verbose = True. vissim=vissim)
 
 		# Counter to change the demande during test
 		demand_counter = 0
@@ -211,14 +211,14 @@ class MasterDQN_Agent():
 		self.env = None
 		return(Episode_Queues, Cumulative_Episode_Delays,Cumulative_Episode_stop_Delays, Cumulative_Totale_network_delay,Cumulative_Totale_network_stop_delay)
 
-	def demo(self):
+	def demo(self,vissim=False):
 		"""
 		Function to make a demo of our agents 
 		"""
 
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'demo', delete_results = True, verbose = True)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'demo', delete_results = True, verbose = True, vissim=vissim)
 
 
 		for idx, agent in self.Agents.items():

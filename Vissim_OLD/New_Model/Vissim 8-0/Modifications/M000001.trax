@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<network version="300" vissimVersion="8.00 - 11 [60383]">
+	<dynamicAssignment>
+		<modified chkEdgOnReadingCostFile="true" chkEdgOnReadingPathFile="true" costFile="#data#holterweg_ochtend.bew" createArchiveFiles="true" pathsForZeroVols="true" searchAltPaths="true" storeCosts="false">
+			<dynAssignDemands>
+				<overwritten>
+					<dynAssignDemand matrixFile="#data#Avondspits.fma" vehComp="6"/>
+				</overwritten>
+			</dynAssignDemands>
+		</modified>
+	</dynamicAssignment>
+	<links>
+		<modified>
+			<link no="10039">
+				<geometry>
+					<modified>
+						<points3D>
+							<overwritten>
+								<point3D x="577.07486984982791" y="-131.99960298565932" zOffset="0"/>
+								<point3D x="574.11654739789606" y="-131.89283341768225" zOffset="0"/>
+								<point3D x="571.15445641541316" y="-131.82620976096939" zOffset="0"/>
+								<point3D x="568.19049139425306" y="-131.77943451933763" zOffset="0"/>
+								<point3D x="565.22654682628945" y="-131.73221019660392" zOffset="0"/>
+								<point3D x="562.26451720339594" y="-131.66423929658527" zOffset="0"/>
+								<point3D x="559.30629701744647" y="-131.5552243230986" zOffset="0"/>
+								<point3D x="556.35378076031498" y="-131.38486777996087" zOffset="0"/>
+								<point3D x="553.40886292387484" y="-131.132872170989" zOffset="0"/>
+								<point3D x="550.473438" y="-130.77894" zOffset="0"/>
+							</overwritten>
+						</points3D>
+					</modified>
+				</geometry>
+				<lanes>
+					<overwritten>
+						<lane/>
+						<lane/>
+					</overwritten>
+				</lanes>
+			</link>
+		</modified>
+		<deleted>
+			<link no="10183"/>
+		</deleted>
+	</links>
+	<signalHeads>
+		<modified>
+			<signalHead no="75" sg="60 6005"/>
+		</modified>
+	</signalHeads>
+	<simulation>
+		<modified startTm="59400"/>
+	</simulation>
+</network>

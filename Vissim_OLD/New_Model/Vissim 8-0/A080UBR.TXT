@@ -1,0 +1,40 @@
+**** warning PL1: fc24 - fc45 conflicting txb-txd specification
+**** warning PL1: fc28 - fc45 conflicting txb-txd specification
+**** warning PL1: fc33 - fc45 conflicting txb-txd specification
+**** warning PL5: fc24 - fc45 conflicting txb-txd specification
+**** warning PL5: fc33 - fc45 conflicting txb-txd specification
+**** warning PL6: fc24 - fc45 conflicting txb-txd specification
+**** warning PL6: fc28 - fc45 conflicting txb-txd specification
+**** warning PL6: fc33 - fc45 conflicting txb-txd specification
+**** warning PL7: fc24 - fc45 conflicting txb-txd specification
+**** warning PL7: fc28 - fc45 conflicting txb-txd specification
+**** warning PL7: fc33 - fc45 conflicting txb-txd specification
+**** warning PL8: fc24 - fc45 conflicting txb-txd specification
+**** warning PL8: fc28 - fc45 conflicting txb-txd specification
+**** warning PL8: fc33 - fc45 conflicting txb-txd specification
+**** warning PL9: fc24 - fc45 conflicting txb-txd specification
+**** warning PL9: fc28 - fc45 conflicting txb-txd specification
+**** warning PL9: fc33 - fc45 conflicting txb-txd specification
+**** warning PL11: fc24 - fc45 conflicting txb-txd specification
+**** warning PL11: fc28 - fc45 conflicting txb-txd specification
+**** warning PL11: fc33 - fc45 conflicting txb-txd specification
+**** warning PL12: fc24 - fc45 conflicting txb-txd specification
+**** warning PL12: fc28 - fc45 conflicting txb-txd specification
+**** warning PL12: fc33 - fc45 conflicting txb-txd specification
+FAST Versie 03.00.00
+FAST: error reading path from registry. Searched for value 'SettingsPath' here: Software\Royal HaskoningDHV\FAST\CCOL\Deventer\
+FAST: removing file /rec/A080/1.fast
+FAST: Time offset real<>sim = -1:3:3
+FAST: Printing plan failed!
+FAST: Directory tried: /print/A080/A080.fast
+TI 16:30:00
+DA 16-06-2016
+FAST: Printing plan failed!
+FAST: Directory tried: /print/A080/A080.fast
+Start file d951
+Einde file d951
+Start file d941
+Einde file d941
+Start file d951
+Einde file d951
+Start file d951
