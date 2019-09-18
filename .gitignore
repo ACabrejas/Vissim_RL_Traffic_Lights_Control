@@ -16,8 +16,9 @@ Vissim/.ipynb_checkpoints/
 
 ## Database created by PTV Vissim
 *.db
-1.db
+**.db
 *.old
+**.old
 
 ## OUTPUT FILES FOR MAY AND LOUISE
 *.json
