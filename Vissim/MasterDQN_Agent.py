@@ -58,7 +58,7 @@ class MasterDQN_Agent():
 						         Dueling = False if agent_type == "DQN" or agent_type == "DDQN" else True) 
 				
 
-	def train(self, number_of_episode, vissim=False):
+	def train(self, number_of_episode):
 		"""
 		Function to train the agents
 		input the number of episode of training
@@ -66,7 +66,7 @@ class MasterDQN_Agent():
 		"""
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True, vissim=vissim)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
 
 		for idx, agent in self.Agents.items():
 			agent.reset()
@@ -97,12 +97,12 @@ class MasterDQN_Agent():
 					self.env.reset()
 					self.Random_Seed += 1
 					self.number_of_episode += 1
-					print('Episode {} is finished'.format(self.number_of_episode)) 
+					print('Episode {}: Finished running.'.format(self.number_of_episode)) 
 					
 					for idx, agent in self.Agents.items():
 						agent.average_reward = np.mean(agent.episode_reward)
 						agent.reward_storage.append(agent.average_reward)
-						print("Average Reward for Agent {} this episode : {}".format(idx, round(agent.average_reward,2)))
+						print("Agent {}, Average Reward: {}".format(idx, round(agent.average_reward,2)))
 						agent.best_agent(self.vissim_working_directory, self.model_name, self.Session_ID)
 						agent.learn_batch(self.batch_size, 1)
 
@@ -116,12 +116,16 @@ class MasterDQN_Agent():
 
 					# Decrease the exploration rate
 					self.advance_schedule()
+
+					if self.number_of_episode != number_of_episode + 1:
+						print('Episode {}: Starting computation.'.format(self.number_of_episode+1)) 
+
 					break
 
 		self.env = None
 
 	# Do a run test and save all the metrics
-	def test(self,vissim=False):
+	def test(self):
 
 		"""
 		Function to test our agents on one episode with all the metrics : queues over time, delay
@@ -130,7 +134,7 @@ class MasterDQN_Agent():
 
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'test', delete_results = True, verbose = True. vissim=vissim)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'test', delete_results = True, verbose = True)
 
 		# Counter to change the demande during test
 		demand_counter = 0
@@ -211,14 +215,14 @@ class MasterDQN_Agent():
 		self.env = None
 		return(Episode_Queues, Cumulative_Episode_Delays,Cumulative_Episode_stop_Delays, Cumulative_Totale_network_delay,Cumulative_Totale_network_stop_delay)
 
-	def demo(self,vissim=False):
+	def demo(self):
 		"""
 		Function to make a demo of our agents 
 		"""
 
 		self.env = None
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'demo', delete_results = True, verbose = True, vissim=vissim)
+			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'demo', delete_results = True, verbose = True)
 
 
 		for idx, agent in self.Agents.items():
@@ -298,7 +302,7 @@ class MasterDQN_Agent():
 			return
 
 		else :
-
+			print("Experience file not found. Generating now...+p' ")
 			# keep the count of the number of transition in each agent memory
 			agents_memory = {}
 			for idx, agent in self.Agents.items():
@@ -384,7 +388,7 @@ class MasterDQN_Agent():
 			agent.save_agent(self.vissim_working_directory, self.model_name, self.Session_ID, episode)
 
 
-	def load(self, episode, best = True):
+	def load(self, episode, best):
 		"""
 
 		"""
@@ -401,8 +405,6 @@ def update_priority_weights(agent, memory_size):
 	
 	state, action, reward, next_state = \
 	np.concatenate(minibatch[:,0], axis=0 ), minibatch[:,1].astype('int32') ,minibatch[:,2].reshape(len(minibatch),1), np.concatenate( minibatch[:,3] , axis=0 )
-	
-	
 		
 	if agent.DoubleDQN:
 		next_action = np.argmax(agent.model.predict(next_state), axis=1)

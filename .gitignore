@@ -4,6 +4,9 @@ data/
 DQN_Test/
 tests_tools/
 tools/
+.ipynb_checkpoints/
+Vissim/.ipynb_checkpoints/
+
 
 ## VISSIM ERROR FILES
 *.err

@@ -150,6 +150,7 @@ class RLAgent():
 		folder =  os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID)
 		if not os.path.exists(folder):
 			os.makedirs(folder)
+
 		if self.average_reward >= np.max(self.reward_storage):
 			
 			best_agent_memory = self.memory
@@ -172,11 +173,11 @@ class RLAgent():
 
 			Memory_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'BestAgent'+str(self.ID)+'_Memory'+'.p')
 			pickle.dump(best_agent_memory, open(Memory_Filename, 'wb'))
-			print("New best agent found. Saved in {}".format(Memory_Filename))
+			#print("New best agent found. Saved in {}".format(Memory_Filename))
 			Training_Progress_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Train'+'.p')
-			print('Dumping Training Results into pickle file.')
+			#print('Dumping Training Results into pickle file.')
 			Loss_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", Session_ID,'Agent'+str(self.ID)+'_Loss'+'.p')
-			print('Dumping Loss Results into pickle file.')
+			#print('Dumping Loss Results into pickle file.')
 			pickle.dump(self.loss, open(Loss_Filename, 'wb'))
 
 		#return(best_agent_weights, best_agent_memory)

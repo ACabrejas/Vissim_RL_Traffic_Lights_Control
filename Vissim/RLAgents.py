@@ -183,6 +183,9 @@ class DQNAgent:
     
     
     
+
+    ### LEARN BATCH SUPERSEDED BY VERSION IN RLAgents.
+
     # Sample a batch of "batch_size" experiences and perform 1 step of gradient descent on all of them simultaneously
     def learn_batch(self, batch_size, episode):
         state_vector = []
