@@ -13,6 +13,8 @@ tools/
 
 ## Database created by PTV Vissim
 *.db
+1.db
+*.old
 
 ## OUTPUT FILES FOR MAY AND LOUISE
 *.json
