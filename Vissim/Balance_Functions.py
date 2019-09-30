@@ -52,6 +52,8 @@ def balance_dictionary(agent_type):
 			 'state_size' : [8],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             # Counterclockwise, starting by Inner, West.
+             'queues_counter_ID' : [1, 2, 3, 11, 4, 5, 6, 10],
 			 'agent_type' : agent_type
 			},
 		# Controller SC02
@@ -76,6 +78,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [8],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [13, 14, 15, 16, 9, 8, 7, 12],
 			 'agent_type' : agent_type
 			},
 		# Controller SC03
@@ -105,6 +108,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [14],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [48, 49, 50, 51, 52, 53, 54, 41, 42, 43, 44, 45, 46 ,47],
 			 'agent_type' : agent_type
 			},
 		# Controller SC04
@@ -129,6 +133,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [8],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [59, 60, 61, 62, 55, 56, 57, 58],
 			 'agent_type' : agent_type
 			},
 		# Controller SC05 
@@ -151,6 +156,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [6],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [66, 67, 68, 63, 64, 65],
 			 'agent_type' : agent_type
 			},
 		# Controller SC06
@@ -171,6 +177,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [3],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [27, 25, 26],
 			 'agent_type' : agent_type
 			},
 		# Controller SC07
@@ -191,6 +198,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [6],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [79, 80, 81, 76, 77, 78],
 			 'agent_type' : agent_type
 			},
 		# Contoller SC08
@@ -215,6 +223,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [7],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [86, 87, 88, 82, 83, 84, 85],
 			 'agent_type' : agent_type
 			},
 		# Controller SC09
@@ -235,6 +244,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [3],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [29, 30, 28],
 			 'agent_type' : agent_type
 			},
 		# Controller SC10
@@ -255,6 +265,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [4],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [33, 34, 31, 32],
 			 'agent_type' : agent_type
 			},
 		# Controller SC11
@@ -275,6 +286,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [4],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [19, 20, 17, 18],
 			 'agent_type' : agent_type
 			},
 		# Controller SC12
@@ -295,6 +307,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [4],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [24, 21, 22, 23],
 			 'agent_type' : agent_type
 			},
 		# Controller SC13
@@ -308,7 +321,7 @@ def balance_dictionary(agent_type):
 										2 : [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0],
 										3 : [0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0]},
 
-			 'link' : [27, 22, 25, 77],
+			 'link' : [27, 22, 25, 77, 69, 70, 71],
 			 'lane' : ['27-1', '22-1', '22-2', '22-3', '25-1', '77-1', '77-2'],
 			 
 			 'controled_by_com' : True,
@@ -319,6 +332,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [7],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [72, 73, 74, 75, 69, 70, 71],
 			 'agent_type' : agent_type
 				
 			},
@@ -341,6 +355,7 @@ def balance_dictionary(agent_type):
 			 'state_size' : [6],
 			 'state_type' : 'Queues',
 			 'reward_type' : 'Queues',
+             'queues_counter_ID' : [38, 39, 40, 35, 36, 37],
 			 'agent_type' : agent_type
 			}
 		},

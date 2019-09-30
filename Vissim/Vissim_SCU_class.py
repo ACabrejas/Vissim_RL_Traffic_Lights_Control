@@ -68,9 +68,8 @@ class Signal_Control_Unit():
 
 		# Queue counters for this intersection, dictionnary has to countain the queue counters ID
 		self.queues_counter_ID = Intersection_info['queues_counter_ID']
-
+		# Put the simulation objects in Vissim in a list
 		self.queues_counters = [ Vissim.Net.QueueCounters.ItemByKey(i) for i in self.queues_counter_ID]
-
 
 		# Signal Controller
 		self.signal_controller = Signal_Controller_Object
@@ -80,7 +79,7 @@ class Signal_Control_Unit():
 			#self.signal_groups = self.signal_controller.SGs
 		else :
 			self.signal_groups = Signal_Groups
-		self.signal_heads  = npa.signal_heads[self.ID]
+		#self.signal_heads  = npa.signal_heads[self.ID]
 		# Links operated
 		self.Vissim_Links = []
 		for link in self.Links_names:
@@ -94,9 +93,6 @@ class Signal_Control_Unit():
 		
 		# Node of this intersection (could be in the network Parser)
 		self.Node = Vissim.Net.Nodes.ItemByKey(self.ID+1) #To be corrected Vissim object count object begin at 1
-
-
-		
 
 
 		# Transform the movements into a python list (hacky technique to be because the list[-1] doesnt work with Vissim list)

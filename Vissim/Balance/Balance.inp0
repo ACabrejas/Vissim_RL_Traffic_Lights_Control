@@ -990,7 +990,6 @@
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10142" link2="10239" mesoCritGap="3.5" minGapBlockDef="3" no="1233" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10145" link2="10239" mesoCritGap="3.5" minGapBlockDef="3" no="1234" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10237" link2="10239" mesoCritGap="3.5" minGapBlockDef="3" no="1235" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
-		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10238" link2="10239" mesoCritGap="3.5" minGapBlockDef="3" no="1236" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="203" link2="10240" mesoCritGap="3.5" minGapBlockDef="3" no="1237" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="204" link2="10240" mesoCritGap="3.5" minGapBlockDef="3" no="1238" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="212" link2="10240" mesoCritGap="3.5" minGapBlockDef="3" no="1239" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
@@ -1121,6 +1120,7 @@
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="166" link2="10258" mesoCritGap="3.5" minGapBlockDef="3" no="1378" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10088" link2="10258" mesoCritGap="3.5" minGapBlockDef="3" no="1379" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10251" link2="10258" mesoCritGap="3.5" minGapBlockDef="3" no="1380" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
+		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10146" link2="10238" mesoCritGap="3.5" minGapBlockDef="3" no="1381" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 	</conflictAreas>
 	<desAccelerationFunctions>
 		<desAccelerationFunction name="Car" no="1">
@@ -2401,7 +2401,7 @@
 		<convergence writeFile="false"/>
 		<dataColl collectData="false" fromTime="0" interval="3" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
-		<delays collectData="false" fromTime="0" interval="3" toTime="99999"/>
+		<delays collectData="true" fromTime="0" interval="3" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
 		<greenTimeDistribution fromTime="0" toTime="99999" writeFile="false"/>
 		<linkResults collectData="false" fromTime="0" interval="99999" perLane="false" toTime="99999"/>
@@ -2409,7 +2409,7 @@
 		<managedLanes writeFile="false"/>
 		<mesoEvaluationConfig collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<nodeRawData fromTime="0" toTime="99999" writeDatabase="false" writeFile="false"/>
-		<nodeResults collectData="false" fromTime="0" interval="3" toTime="99999"/>
+		<nodeResults collectData="true" fromTime="0" interval="3" toTime="99999"/>
 		<odPairs collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<ptWaitingTimes writeFile="false"/>
 		<pedGridCell cellSize="1" collectData="false" collectOnlyLastInterval="false" densThresh="0" experDensThresh="0" fromTime="0" interval="99999" rangeOfInfluence="1" speedThresh="0" toTime="99999" velVarThresh="0"/>
@@ -2425,7 +2425,7 @@
 		<pedTravTmODData fromTime="0" interval="99999" toTime="99999" writeFile="false"/>
 		<pedTravTmRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<pedTravTms collectData="false" fromTime="0" interval="99999" toTime="99999"/>
-		<queues collectData="false" fromTime="0" interval="3" toTime="99999"/>
+		<queues collectData="true" fromTime="0" interval="3" toTime="99999"/>
 		<scDetRec writeFile="false"/>
 		<ssam writeFile="false"/>
 		<sigChgs writeDatabase="false" writeFile="false"/>
@@ -10103,16 +10103,16 @@
 			<geometry>
 				<linkPolyPts>
 					<linkPolyPoint x="393.67694759708769" y="-320.80954391270205" zOffset="0"/>
-					<linkPolyPoint x="392.48565873648465" y="-315.9912266289179" zOffset="0"/>
-					<linkPolyPoint x="390.76607502266404" y="-311.30877749666155" zOffset="0"/>
-					<linkPolyPoint x="388.85625217106832" y="-306.67347591153197" zOffset="0"/>
-					<linkPolyPoint x="387.06350260476296" y="-301.90435194652412" zOffset="0"/>
+					<linkPolyPoint x="391.92640267354182" y="-315.97314350327974" zOffset="0"/>
+					<linkPolyPoint x="389.02160675527421" y="-311.54738534860297" zOffset="0"/>
+					<linkPolyPoint x="385.91704105196698" y="-307.17113675050211" zOffset="0"/>
+					<linkPolyPoint x="383.56718677330241" y="-302.48326501080788" zOffset="0"/>
 				</linkPolyPts>
 			</geometry>
 			<lanes>
 				<lane/>
 			</lanes>
-			<toLinkEndPt lane="76 1" pos="0.82469657802543683"/>
+			<toLinkEndPt lane="76 2" pos="1.4505866397261014"/>
 		</link>
 		<link assumSpeedOncom="60" consVehInDynPot="false" costPerKm="0" desSpeedFact="1" direction="ALL" displayType="1" emergStopDist="5" gradient="0" hasOvtLn="false" isPedArea="false" linkBehavType="1" linkEvalAct="true" linkEvalSegLen="10" lnChgDist="200" lnChgDistIsPerLn="false" lnChgEvalAct="true" lookAheadDistOvt="500" mesoFollowUpGap="0" mesoSpeed="50" mesoSpeedModel="VEHICLEBASED" name="" netPerfEvalAct="true" no="10239" ovtOnlyPT="false" ovtSpeedFact="1.3" showClsfValues="true" showLinkBar="true" showVeh="true" surch1="0" surch2="0" thickness="0" vehDynPotG="3" vehRecAct="true">
 			<fromLinkEndPt lane="267 1" pos="202.47011925293282"/>
@@ -11503,7 +11503,7 @@
 				<linkSegment fromPos="0" internalToPos="0.71455122040586627" link="26"/>
 				<linkSegment fromPos="334.96131231312478" internalToPos="-1" link="27"/>
 				<linkSegment fromPos="0" internalToPos="1.3377122455324308" link="28"/>
-				<linkSegment fromPos="0" internalToPos="1.0197861377056163" link="76"/>
+				<linkSegment fromPos="0" internalToPos="2.4505866397261014" link="76"/>
 				<linkSegment fromPos="11.287656757703211" internalToPos="-1" link="201"/>
 				<linkSegment fromPos="0" internalToPos="0.28768285048559228" link="202"/>
 				<linkSegment fromPos="0" internalToPos="15.636657792157227" link="203"/>

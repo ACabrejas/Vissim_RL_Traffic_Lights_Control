@@ -10,7 +10,6 @@ from time import time
 
 # The environment class , 
 class environment():
-
 	"""
 	This is an python environnement on top of VISSIM simulation software.
 
@@ -27,7 +26,7 @@ class environment():
 		self.model_name = model_name
 		self.vissim_working_directory = vissim_working_directory
 		self.Model_dictionary = Model_dictionary
-		self.vehicle_demand = self.Model_dictionary['demand']
+		self.vehicle_demand = self.Model_dictionary['demand']['default']
 
 		# Simulation parameters
 		self.sim_length = sim_length
@@ -58,7 +57,7 @@ class environment():
 		print("Deploying Network Parser...")
 		self.npa = NetworkParser(self.Vissim)
 		self.Vehicle_Inputs = list(self.Vissim.Net.VehicleInputs)
-		print("Successful Network Crawl: Identified SignalControllers, Links and Lanes, Inputs.\n")
+		print("Successful Network Crawl: Identified SignalControllers, Links, Lanes and Vehicle Inputs.\n")
 
 		print("Setting Simulation mode to: " + self.mode)
 		self.select_mode()
