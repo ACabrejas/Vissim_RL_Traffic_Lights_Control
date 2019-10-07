@@ -105,7 +105,8 @@ class MasterDQN_Agent():
 						agent.reward_storage.append(agent.average_reward)
 						print("Agent {}, Average Reward: {}".format(idx, round(agent.average_reward,2)))
 						agent.best_agent(self.vissim_working_directory, self.model_name, self.Session_ID)
-						agent.learn_batch(self.batch_size, 1)
+						for i in range(5):
+							agent.learn_batch(self.batch_size, 1)
 
 						if self.number_of_episode%self.copy_weights_frequency == 0:
 							agent.copy_weights()
