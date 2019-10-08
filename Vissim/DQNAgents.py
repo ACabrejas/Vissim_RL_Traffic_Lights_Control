@@ -199,7 +199,6 @@ class DQNAgent(RLAgent):
         state, action, reward, next_state = np.concatenate(minibatch[:,0], axis=0 ), minibatch[:,1].astype('int32') ,minibatch[:,2].reshape(batch_size,1), np.concatenate( minibatch[:,3] , axis=0 )
         
         
-        
         if self.DoubleDQN:
             next_action = np.argmax(self.model.predict(next_state), axis=1)
             target = reward + self.gamma * self.target_model.predict(next_state)[np.arange(batch_size),next_action].reshape(batch_size,1)
@@ -216,7 +215,7 @@ class DQNAgent(RLAgent):
         
         self.model.fit(state, target_f, epochs=1, verbose=2, batch_size = batch_size)
         
-        self.loss.append(self.model.history.history['loss'])
+        self.loss.append(self.model.history.history['loss'][0])
 
         if self.PER_activated:
             #Update priority

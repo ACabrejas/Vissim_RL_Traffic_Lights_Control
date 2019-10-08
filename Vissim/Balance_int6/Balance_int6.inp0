@@ -2664,7 +2664,7 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="151 1" localNo="11" name="" no="206" pos="1.5" sg="6 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="152 1" localNo="12" name="" no="207" pos="1.5" sg="6 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="PTV Balance PTV Epics Vision Suite Workflow.ver" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3601" simRes="1" simSpeed="10" startTm="23400" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="PTV Balance PTV Epics Vision Suite Workflow.ver" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="9001" simRes="1" simSpeed="10" startTm="23400" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
