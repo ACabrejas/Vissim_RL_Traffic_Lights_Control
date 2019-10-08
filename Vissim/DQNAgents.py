@@ -206,8 +206,6 @@ class DQNAgent(RLAgent):
         else:
             # Fixed Q-Target
             target = reward + self.gamma * np.max(self.target_model.predict(next_state),axis=1).reshape(batch_size,1)
-            #print(target.shape)
-
             
         # This section incorporates the reward into the prediction and calculates the absolute error between old and new
         target_f = self.model.predict(state)
@@ -216,8 +214,6 @@ class DQNAgent(RLAgent):
         
         target_f[np.arange(batch_size),action] = target.reshape(batch_size)
         
-        
-        #self.model.fit(state_matrix, target_f_matrix, epochs=1, verbose=0)
         self.model.fit(state, target_f, epochs=1, verbose=2, batch_size = batch_size)
         
         self.loss.append(self.model.history.history['loss'])

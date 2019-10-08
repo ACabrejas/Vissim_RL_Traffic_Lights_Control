@@ -33,7 +33,8 @@ class Signal_Control_Unit():
 				 Signal_Controller_Object,\
 				 Intersection_info,\
 				 Identificator, npa,
-				 Signal_Groups = None,\
+				 Vissim_ID,\
+				 Signal_Groups = None\
 				):
 		#####################################
 		# Set basic information for the SCU # 
@@ -41,6 +42,7 @@ class Signal_Control_Unit():
 
 		# ID so it can be matched with "env.SCUs[ID]"
 		self.ID = Identificator
+		self.Vissim_ID = Vissim_ID
 
 		## Read information from "Intersection Info" dictionary. These will be names and values.
 		## Objects as such are imported in the section below.
@@ -92,7 +94,8 @@ class Signal_Control_Unit():
 
 		
 		# Node of this intersection (could be in the network Parser)
-		self.Node = Vissim.Net.Nodes.ItemByKey(self.ID+1) #To be corrected Vissim object count object begin at 1
+		#self.Node = Vissim.Net.Nodes.ItemByKey(1)
+		self.Node = Vissim.Net.Nodes.ItemByKey(self.Vissim_ID+1) #To be corrected Vissim object count object begin at 1
 
 
 		# Transform the movements into a python list (hacky technique to be because the list[-1] doesnt work with Vissim list)

@@ -55,7 +55,7 @@ class environment():
 
 		# The parser can be a methode of the environment
 		print("Deploying Network Parser...")
-		self.npa = NetworkParser(self.Vissim)
+		self.npa = NetworkParser(self.Vissim, Model_dictionary)
 		self.Vehicle_Inputs = list(self.Vissim.Net.VehicleInputs)
 		print("Successful Network Crawl: Identified SignalControllers, Links, Lanes and Vehicle Inputs.\n")
 
@@ -80,15 +80,23 @@ class environment():
 			provides and create a dictionary of SCUs
 		'''
 		self.SCUs = dict()
-		
+		# Version without using a network dictionary. 
+		# Here signal controllers are directly inherited from the model
+		# This prevents an error below where the node is created with an enumerate idx rather than its intersection ID
+		#
+		# This solution doesnt work well.
+		# Right one needs to create the partial dictionaries directly without hacking the key in the top cells of notebook
+		controller_ids_in_vissim = list(self.Model_dictionary["junctions"].keys())
 		for idx, signal_controller in enumerate(self.npa.signal_controllers):
+			current_vissim_id = controller_ids_in_vissim[idx]
 			self.SCUs[idx] = Signal_Control_Unit(\
 						 self.Vissim,\
 						 signal_controller,\
-						 self.Model_dictionary['junctions'][idx],\
+						 self.Model_dictionary["junctions"][current_vissim_id],\
 						 idx,\
 						 self.npa,\
-						 Signal_Groups = None
+						 current_vissim_id,\
+						 Signal_Groups = None\
 						)
 
 	# retrun the state of the environnement as a dictionary

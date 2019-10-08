@@ -13,8 +13,8 @@ class MasterDQN_Agent():
 	"""
 
 	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionnary, \
-				gamma, alpha, agent_type, memory_size, PER_activated, batch_size, copy_weights_frequency, epsilon_sequence, \
-				Random_Seed = 42, timesteps_per_second = 1, Session_ID = 'DQN', verbose = True):
+				gamma, alpha, agent_type, memory_size, PER_activated, batch_size, learning_iterations, copy_weights_frequency, epsilon_sequence, \
+				Random_Seed, timesteps_per_second, Session_ID, verbose = True):
 
 		# Model information
 		self.Model_dictionnary = Model_dictionnary
@@ -23,8 +23,6 @@ class MasterDQN_Agent():
 		self.vissim_working_directory = vissim_working_directory
 		self.timesteps_per_second = timesteps_per_second
 
-
-
 		# Agent hyperparameters
 		self.gamma = gamma
 		self.alpha = alpha
@@ -32,6 +30,7 @@ class MasterDQN_Agent():
 		self.memory_size = memory_size
 		self.PER_activated = PER_activated
 		self.batch_size = batch_size
+		self.learning_iterations = learning_iterations
 		self.copy_weights_frequency = copy_weights_frequency
 		self.epsilon_sequence = epsilon_sequence
 		
@@ -49,14 +48,16 @@ class MasterDQN_Agent():
 
 		self.Agents = {}
 
+		current_Agent = 0
 		for idx, info in Model_dictionnary['junctions'].items():
-				acts = info['default_actions']
-				if info['controled_by_com'] :
-					print("INTERSECTION " + str(idx)+": SETTING UP AGENT")
-					self.Agents[idx] = DQNAgent(info['state_size'], len(acts),\
-						         idx, memory_size, gamma, self.epsilon_sequence[0], self.alpha, self.copy_weights_frequency, self.PER_activated,\
-						         DoubleDQN = True if agent_type == "DDQN" or agent_type == "DuelingDDQN" else False,\
-						         Dueling = False if agent_type == "DQN" or agent_type == "DDQN" else True) 
+			acts = info['default_actions']
+			if info['controled_by_com'] :
+				print("INTERSECTION " + str(idx)+": SETTING UP AGENT")
+				self.Agents[current_Agent] = DQNAgent(info['state_size'], len(acts),\
+					         idx, memory_size, gamma, self.epsilon_sequence[0], self.alpha, self.copy_weights_frequency, self.PER_activated,\
+					         DoubleDQN = True if agent_type == "DDQN" or agent_type == "DuelingDDQN" else False,\
+					         Dueling = False if agent_type == "DQN" or agent_type == "DDQN" else True) 
+			current_Agent+=1
 				
 
 	def train(self, number_of_episode):
@@ -104,8 +105,8 @@ class MasterDQN_Agent():
 						agent.average_reward = np.mean(agent.episode_reward)
 						agent.reward_storage.append(agent.average_reward)
 						print("Agent {}, Average Reward: {}".format(idx, round(agent.average_reward,2)))
-						agent.best_agent(self.vissim_working_directory, self.model_name, self.Session_ID)
-						for i in range(5):
+						agent.best_agent(self.vissim_working_directory, self.model_name, self.agent_type, self.Session_ID)
+						for i in range(self.learning_iterations):
 							agent.learn_batch(self.batch_size, 1)
 
 						if self.number_of_episode%self.copy_weights_frequency == 0:
@@ -307,14 +308,14 @@ class MasterDQN_Agent():
 			return
 
 		else :
-			print("Experience file not found. Generating now...+p' ")
+			print("Experience file not found. Generating now...")
 			# keep the count of the number of transition in each agent memory
 			agents_memory = {}
 			for idx, agent in self.Agents.items():
 				agents_memory[idx] = []
 
 			# 10000 is a random number to have a simulation speed quick enough
-			self.env = environment(self.model_name, self.vissim_working_directory, 3600, self.Model_dictionnary,\
+			self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
 				timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
 
 			memory_full = False
@@ -324,7 +325,7 @@ class MasterDQN_Agent():
 			start_state = self.env.get_state()
 			actions = {}
 			for idx, s in start_state.items():
-						actions[idx] = int(self.Agents[idx].choose_action(s))
+				actions[idx] = int(self.Agents[idx].choose_action(s))
 
 			while not memory_full :
 				SARSDs = self.env.step_to_next_action(actions)
@@ -387,18 +388,18 @@ class MasterDQN_Agent():
 
 	def save(self , episode):
 		"""
-
+		Initiaties the saving procedure, calling a method from RLAgents.py that will directly modify the agent object.
 		"""
 		for idx, agent in self.Agents.items():
-			agent.save_agent(self.vissim_working_directory, self.model_name, self.Session_ID, episode)
+			agent.save_agent(self.vissim_working_directory, self.model_name, self.agent_type, self.Session_ID, episode)
 
 
 	def load(self, episode, best):
 		"""
-
+		Initiaties the loading procedure, calling a method from RLAgents.py that will directly modify the agent object.
 		"""
 		for idx, agent in self.Agents.items():
-			agent.load_agent(self.vissim_working_directory, self.model_name , self.Session_ID, episode, best = best)
+			agent.load_agent(self.vissim_working_directory, self.model_name , self.agent_type, self.Session_ID, episode, best = best)
 			agent.epsilon = self.epsilon_sequence[episode]
 		self.number_of_episode = episode
 
