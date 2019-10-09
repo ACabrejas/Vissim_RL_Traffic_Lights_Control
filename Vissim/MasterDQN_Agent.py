@@ -279,7 +279,7 @@ class MasterDQN_Agent():
 	def prepopulate_memory(self):
 
 		# Chech if suitable folder exists
-		prepopulation_directory =  os.path.join(self.vissim_working_directory, self.model_name, "Agents_Results", agent_type, self.Session_ID)
+		prepopulation_directory =  os.path.join(self.vissim_working_directory, self.model_name, "Agents_Results", self.agent_type, self.Session_ID)
 		if not os.path.exists(prepopulation_directory):
 			os.makedirs(prepopulation_directory)
 		# Chech if suitable file exists
