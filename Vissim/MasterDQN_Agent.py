@@ -210,10 +210,10 @@ class MasterDQN_Agent():
 					# in order to find the next action you need to evaluate the "next_state" because it is the current state of the simulator
 					actions[idx] = int(self.Agents[idx].choose_action(ns))
 
-			if self.env.global_counter% 360 == 0:
-				demand_counter += 1
-				## ATTENTION: CHANGE DEMAND DEACTIVATED
-				#self.env.change_demand(self.env.vehicle_demand[demand_counter])
+			## ATTENTION: CHANGE DEMAND DEACTIVATED
+			#if self.env.global_counter% 360 == 0:
+			#	demand_counter += 1
+			#	self.env.change_demand(self.env.vehicle_demand[demand_counter])
 
 
 		# Stop the simulation without erasing the database
@@ -279,7 +279,7 @@ class MasterDQN_Agent():
 	def prepopulate_memory(self):
 
 		# Chech if suitable folder exists
-		prepopulation_directory =  os.path.join(self.vissim_working_directory, self.model_name, "Agents_Results", self.Session_ID)
+		prepopulation_directory =  os.path.join(self.vissim_working_directory, self.model_name, "Agents_Results", agent_type, self.Session_ID)
 		if not os.path.exists(prepopulation_directory):
 			os.makedirs(prepopulation_directory)
 		# Chech if suitable file exists
