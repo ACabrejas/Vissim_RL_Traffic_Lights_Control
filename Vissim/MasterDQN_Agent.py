@@ -243,13 +243,9 @@ class MasterDQN_Agent():
 		for idx, s in start_state.items():
 				actions[idx] = self.Agents[idx].choose_action(s)
 				
-
-
 		while not self.env.done :
 
 			SARSDs = self.env.step(actions)
-
-
 
 			if self.env.action_required:
 
