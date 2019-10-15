@@ -177,7 +177,7 @@ class MasterDQN_Agent():
 
 		# Initialisation
 		for idx, s in start_state.items():
-				actions[idx] = self.Agents[idx].choose_action(s)
+			actions[idx] = self.Agents[idx].choose_action(s)
 
 		# Simulation
 		while not self.env.done :

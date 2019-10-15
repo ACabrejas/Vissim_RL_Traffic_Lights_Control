@@ -228,7 +228,6 @@ class environment():
 		while not self.action_required:
 			Sarsd = self.step(actions)
 
-
 		self.action_required = False
 
 		return Sarsd
@@ -438,7 +437,7 @@ class environment():
 			self.Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', False)
 			self.Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 99999)
 			
-		# In demo mode we only use the queue counter and the delay counter for the moment    
+		# In training mode we only use the queue counter and the delay counter for the moment    
 		elif self.mode == 'training' :
 
 			#This select quickmode and simulation resolution
@@ -448,6 +447,45 @@ class environment():
 			self.Vissim.Simulation.SetAttValue('SimRes', self.timesteps_per_second)
 			self.Vissim.SuspendUpdateGUI()  
 
+
+			# set the data mesurement
+			self.Vissim.Evaluation.SetAttValue('DataCollCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('DataCollInterval', 3)
+			
+			# set the delay mesurement
+			self.Vissim.Evaluation.SetAttValue('DelaysCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('DelaysInterval', 99999)
+			
+			# set the data mesurement for each link
+			self.Vissim.Evaluation.SetAttValue('LinkResCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('LinkResInterval', 99999)
+			
+			# set the data mesurement for each node
+			self.Vissim.Evaluation.SetAttValue('NodeResCollectData', True)
+			self.Vissim.Evaluation.SetAttValue('NodeResInterval', 3)
+			
+			
+			# set the queues mesurement 
+			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', True)
+			self.Vissim.Evaluation.SetAttValue('QueuesInterval', 3)
+			
+			# set the vehicles perf mesurement 
+			self.Vissim.Evaluation.SetAttValue('VehNetPerfCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 99999)
+			
+			# set the vehicles travel time mesurement 
+			self.Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 99999)
+
+		# In debug mode we only use the queue counter and the delay counter for the moment    
+		elif self.mode == 'debug' :
+
+			#This select quickmode and simulation resolution
+			self.timesteps_per_second = 1
+			self.Vissim.Simulation.SetAttValue('UseMaxSimSpeed', False)
+			self.Vissim.Graphics.CurrentNetworkWindow.SetAttValue("QuickMode",0)
+			self.Vissim.Simulation.SetAttValue('SimRes', self.timesteps_per_second)
+			self.Vissim.ResumeUpdateGUI()
 
 			# set the data mesurement
 			self.Vissim.Evaluation.SetAttValue('DataCollCollectData', False)

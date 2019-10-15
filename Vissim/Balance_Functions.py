@@ -137,9 +137,13 @@ def balance_dictionary(agent_type):
 			 'agent_type' : agent_type
 			},
 		# Controller SC05 
-		4 : {'default_actions' :    {   0 : [0, 1, 1, 0, 0],
-										1 : [1, 1, 0, 0, 0],
-										2 : [0, 0, 0, 1, 0]},
+		4 : {'default_actions' :    {   #0 : [0, 1, 1, 0, 1],
+										#1 : [1, 1, 0, 0, 0],
+										#2 : [0, 0, 0, 1, 0]},
+
+                                        0 : [0, 1, 1, 0, 1],
+                                        1 : [1, 1, 0, 0, 0],
+                                        2 : [0, 0, 0, 1, 0]},
 
 			 'all_actions' :        {   0 : [0, 1, 1, 0, 0],
 										1 : [1, 1, 0, 0, 0],
