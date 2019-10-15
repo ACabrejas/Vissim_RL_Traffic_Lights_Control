@@ -31,7 +31,7 @@ def balance_dictionary(agent_type):
 		{\
 		# Controller SC01 
 	   'junctions' : \
-		{0 : {'default_actions' : {      0 : [1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0], # SR from sides
+		{0 : {'default_actions' : {      0 : [1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0], # StraightRight from sides
 										1 : [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],  # Turn Left sides
 										2 : [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0]}, # North + South
 			 
