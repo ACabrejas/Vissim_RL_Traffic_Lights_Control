@@ -117,10 +117,13 @@ class Signal_Control_Unit():
 			# Set initial time to update SCUs
 			self.update_counter = 1
 			# Set initial action and next action 
+
+			#### MAKE SURE THIS IS CORRECTLY IMPLEMENTED
 			self.action_key = 0
 			self.next_action_key = 0
 			# Initiate Action on the SCU
-			self.action_update(self.action_key)  
+			self.action_update(self.action_key)
+			self.force_safe_colors(self.compatible_actions[self.action_key])  
 
 			# Initialize state and reward variables
 			self.state = self.calculate_state()
@@ -132,7 +135,24 @@ class Signal_Control_Unit():
 			self.stage = "Green"
 		else :
 			self.action_required = False
-			
+	
+	def force_safe_colors(self, target_colors):
+		'''
+		Only to be used in "Not intermediate phases".
+		This means all lights should be either GREEN OR RED and no changes can be happening.
+		This function ensures the correct initial configuration of colors.
+		It forces all Signal Groups in the Signal Controller to be set to the action taken as input.
+		'''
+		for idx, value in enumerate(target_colors):
+			if value == 1:
+				self.signal_groups[idx].SetAttValue("SigState", "GREEN")
+				print("Set Forced Green in SG{}".format(idx))
+			elif value == 0:
+				self.signal_groups[idx].SetAttValue("SigState", "RED")
+				print("Set Forced Red in SG{}".format(idx))
+			else:
+				raise ValueError("Unexpected value found in Target Colors in \"force_safe_colors\" method in the SCU class.")
+
 	   
 	def sars(self):
 		"""
@@ -239,6 +259,10 @@ class Signal_Control_Unit():
 				current_colors =  self.compatible_actions[self.action_key]
 				next_colors = self.compatible_actions[self.next_action_key]
 
+				# This is a security option to make sure the colors are changed.
+				# However it will negatively impact on the network performance.
+				#self.force_safe_colors(current_colors)  
+
 				# This is the transition vector. It is the difference between the actions:
 				# -1 The group was GREEN and need to be turn red
 				# 0 The group was GREEN and stays GREEN or the group was RED and stays red, 
@@ -319,6 +343,11 @@ class Signal_Control_Unit():
 				#  the end of the stage
 				self.stage = "Green"
 				self.intermediate_phase = False
+
+				### HERE AGAIN  NEW COLORS###
+				# This is a security option to make sure the colors are changed.
+				# However it will negatively impact on the network performance.
+				#self.force_safe_colors(next_colors)
 				pass	
 
 	def action_update(self, action_key, green_time = None):
