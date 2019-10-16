@@ -372,7 +372,7 @@ class environment():
 		# In test mode all the data is stored (The simulation will be slow)
 		if self.mode == 'test' :
 			#This select quickmode and simulation resolution
-			self.timesteps_per_second = 10
+			self.timesteps_per_second = 1
 			self.Vissim.Simulation.SetAttValue('UseMaxSimSpeed', True)
 			self.Vissim.Graphics.CurrentNetworkWindow.SetAttValue("QuickMode", 1)
 			self.Vissim.Simulation.SetAttValue('SimRes', self.timesteps_per_second)

@@ -291,15 +291,17 @@ class MasterDQN_Agent():
 		# If it does, process it into the memory
 		if prepopulation_exists:
 			if self.PER_activated:
-				print("Previous Experience Found: Loading into agents")
+				print("Previous Experience: Found. Loading into agents")
 				for idx, agent in self.Agents.items():
 					PER_prepopulation_filename = os.path.join(prepopulation_directory, 'Agent'+ str(idx) + '_PERPre_'+ str(self.memory_size) +'.p')
 					memory = pickle.load(open(PER_prepopulation_filename, 'rb'))
+					print("Previous Experience: Successfully loaded file from:")			
+					print(PER_prepopulation_filename)
 					for s,a,r,s,d in memory:
 						agent.remember(s,a,r,s,d)
 					# FCalculate importance sampling weights
 					update_priority_weights(agent, self.memory_size)
-					# No simulation ran
+
 			else:
 				for idx, agent in self.Agents.items():
 					PER_prepopulation_filename =  os.path.join(prepopulation_directory, 'Agent'+ str(idx) + '_Pre_'+ str(self.memory_size) +'.p')

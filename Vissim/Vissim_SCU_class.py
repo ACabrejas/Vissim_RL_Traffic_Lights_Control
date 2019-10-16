@@ -146,10 +146,10 @@ class Signal_Control_Unit():
 		for idx, value in enumerate(target_colors):
 			if value == 1:
 				self.signal_groups[idx].SetAttValue("SigState", "GREEN")
-				print("Set Forced Green in SG{}".format(idx))
+				#print("Set Forced Green in SG{}".format(idx))
 			elif value == 0:
 				self.signal_groups[idx].SetAttValue("SigState", "RED")
-				print("Set Forced Red in SG{}".format(idx))
+				#print("Set Forced Red in SG{}".format(idx))
 			else:
 				raise ValueError("Unexpected value found in Target Colors in \"force_safe_colors\" method in the SCU class.")
 
