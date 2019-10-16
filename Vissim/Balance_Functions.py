@@ -38,8 +38,8 @@ def balance_dictionary(agent_type):
 			 'all_actions' : {          0 : [1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0],
 										1 : [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
 										2 : [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
-										3 : [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],  # StraightRightLeft from East
-										4 : [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]}, # StraightRightLeft from West
+										3 : [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # StraightRightLeft from East
+										4 : [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0]}, # StraightRightLeft from West
 			 
 			 'link' : [2, 40, 7, 38],
 			 'lane' : ['2-1', '2-2', '2-3', '40-1', '7-1', '7-2', '7-3', '38-1'],

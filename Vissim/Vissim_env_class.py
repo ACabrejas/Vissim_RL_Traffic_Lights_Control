@@ -18,7 +18,7 @@ class environment():
 		- Deploy the SCU
 	
 	"""
-	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionary,\
+	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionary, actions_set, \
 				 Random_Seed, timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True, vissim = False):
 					
 
@@ -26,6 +26,7 @@ class environment():
 		self.model_name = model_name
 		self.vissim_working_directory = vissim_working_directory
 		self.Model_dictionary = Model_dictionary
+		self.actions_set =  actions_set
 		self.vehicle_demand = self.Model_dictionary['demand']['default']
 
 		# Simulation parameters
@@ -93,6 +94,7 @@ class environment():
 						 self.Vissim,\
 						 signal_controller,\
 						 self.Model_dictionary["junctions"][current_vissim_id],\
+						 self.actions_set,\
 						 idx,\
 						 self.npa,\
 						 current_vissim_id,\
@@ -328,7 +330,9 @@ class environment():
 		self.Stop_Simulation(delete_results = self.delete_results)
 
 		# Increase Random Seed
-		self.Vissim.Simulation.SetAttValue('RandSeed', self.Vissim.Simulation.AttValue('RandSeed')+1)
+		new_random_seed = self.Vissim.Simulation.AttValue('RandSeed')+1
+		self.Vissim.Simulation.SetAttValue('RandSeed', new_random_seed)
+		print("Random Seed Set to {}".format(new_random_seed))
 
 		# Set simulator configuration
 		self.select_mode()

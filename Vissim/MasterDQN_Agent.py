@@ -12,7 +12,7 @@ class MasterDQN_Agent():
 
 	"""
 
-	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionnary, \
+	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionnary, actions_set,\
 				gamma, alpha, agent_type, memory_size, PER_activated, batch_size, learning_iterations, copy_weights_frequency, epsilon_sequence, \
 				Random_Seed, timesteps_per_second, Session_ID, verbose = True):
 
@@ -20,6 +20,7 @@ class MasterDQN_Agent():
 		self.Model_dictionnary = Model_dictionnary
 		self.model_name = model_name
 		self.sim_length = sim_length
+		self.actions_set = actions_set
 		self.vissim_working_directory = vissim_working_directory
 		self.timesteps_per_second = timesteps_per_second
 
@@ -47,7 +48,7 @@ class MasterDQN_Agent():
 
 		current_Agent = 0
 		for idx, info in Model_dictionnary['junctions'].items():
-			acts = info['default_actions']
+			acts = info[actions_set]
 			if info['controled_by_com'] :
 				print("INTERSECTION " + str(idx)+": SETTING UP AGENT")
 				self.Agents[current_Agent] = DQNAgent(info['state_size'], len(acts),\
@@ -64,8 +65,8 @@ class MasterDQN_Agent():
 
 		"""
 		self.env = None
-		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
+		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary, self.actions_set, \
+			self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
 
 		# Reset lists for episode reward and episode memory
 		for idx, agent in self.Agents.items():
@@ -139,7 +140,7 @@ class MasterDQN_Agent():
 		"""
 
 		self.env = None
-		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
+		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary, self.actions_set, \
 			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'test', delete_results = True, verbose = True)
 
 		# Counter to change the demande during test
@@ -230,7 +231,7 @@ class MasterDQN_Agent():
 		"""
 
 		self.env = None
-		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
+		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary, self.actions_set, \
 			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'demo', delete_results = True, verbose = True)
 
 
@@ -316,8 +317,8 @@ class MasterDQN_Agent():
 				agents_memory[idx] = []
 
 			# 10000 is a random number to have a simulation speed quick enough
-			self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-				timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
+			self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,  self.actions_set, \
+				self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
 
 			memory_full = False
 			# Time counter

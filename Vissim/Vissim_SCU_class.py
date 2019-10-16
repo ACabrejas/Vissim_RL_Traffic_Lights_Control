@@ -32,7 +32,9 @@ class Signal_Control_Unit():
 				 Vissim,\
 				 Signal_Controller_Object,\
 				 Intersection_info,\
-				 Identificator, npa,
+				 actions_set,\
+				 Identificator,\
+				 npa,\
 				 Vissim_ID,\
 				 Signal_Groups = None\
 				):
@@ -63,7 +65,14 @@ class Signal_Control_Unit():
 
 		# Controlled by com?
 		self.controled_by_com = Intersection_info['controled_by_com']
-		
+
+		# Default actions or all available actions?
+		if actions_set == "default_actions":
+			self.compatible_actions = Intersection_info['default_actions']
+		elif actions_set == "all_actions":
+			self.compatible_actions = Intersection_info['all_actions']
+		else:
+			raise ValueError("Unknown actions set name. Should be \"default_actions\" or \" all_actions\"")
 		#################################
 		# Fetch Objects operated by SCU # 
 		#################################
