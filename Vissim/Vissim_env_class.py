@@ -19,7 +19,7 @@ class environment():
 	
 	"""
 	def __init__(self, model_name, vissim_working_directory, sim_length, Model_dictionary,\
-				 Random_Seed = 42, timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True, vissim = False):
+				 Random_Seed, timesteps_per_second = 1, mode = 'training', delete_results = True, verbose = True, vissim = False):
 					
 
 		# Model parameters
@@ -179,15 +179,21 @@ class environment():
 		- if an action is required on the all network
 		- a dictionary of (state, action, reward, next_state , done) the key will be the SCUs' key
 		"""
-		
-
 		Sarsd = dict()
 		self.action_required = False # By default no action are needed
 
 		# Update the action of all the junction that needded one
+		# This function evaluates which SCUs require an action via whether SCUs[idx].action_required is TRUE.
+		# Once started, it sets intermediate_phase to TRUE, and adds 1 to the update_counter so intermediate_phase is evaluated in SCU.update()
+		# Set  next_acton_key to action_key
+		# Increase green time and set_action_required to False.
 		[scu.action_update(actions[idx] , green_time = green_time ) for idx, scu in self.SCUs.items() if scu.action_required]
 		
-		# Udapte all the SCUs nearly simutaneously 
+		# Udapte all the SCUs nearly simutaneously
+		# This functions reduces the update counter of SCUs by 1 each time it is called.
+		# Once the counter reaches zero, two things can happen:
+		# 1 - If we aren't making a phase change, set action_required to TRUE (request action)
+		# 2 - If we are in the middle of a phase change, set action_required to FALSE and change color to finish transition
 		[scu.update() for idx,scu in self.SCUs.items()]
 
 		# not a nice way of doing this, 

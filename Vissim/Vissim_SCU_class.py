@@ -205,23 +205,6 @@ class Signal_Control_Unit():
 	def calculate_stop_delay(self):
 		delay_this_timestep = 0 if self.junction_movement.AttValue('StopDelay(Current, Last, All)') is None else self.junction_movement.AttValue('StopDelay(Current, Last, All)')
 		return delay_this_timestep
- 
-	def action_update(self, action_key, green_time = None):
-		"""
-		action_update :
-		Initiates a new action.
-			Inputs:
-			-- id of action
-			-- green_time, if specified by agent (in seconds)
-		"""
-		self.intermediate_phase = True # initate intermediate_phase
-		self.update_counter = 1 # set update counter zero (will get reset at self.update())
-		self.next_action_key = action_key
-
-		if green_time is not None:
-			self.green_time = green_time 
-
-		self.action_required = False
 		
 	# This function can be improved to make it truly parallel	        
 	def _color_changer(self):
@@ -337,6 +320,23 @@ class Signal_Control_Unit():
 				self.stage = "Green"
 				self.intermediate_phase = False
 				pass	
+
+	def action_update(self, action_key, green_time = None):
+		"""
+		action_update :
+		Initiates a new action.
+			Inputs:
+			-- id of action
+			-- green_time, if specified by agent (in seconds)
+		"""
+		self.intermediate_phase = True # initate intermediate_phase
+		self.update_counter = 1 # set update counter zero (will get reset at self.update())
+		self.next_action_key = action_key
+
+		if green_time is not None:
+			self.green_time = green_time 
+
+		self.action_required = False
 	   
 	def update(self):
 		"""

@@ -34,18 +34,15 @@ class MasterDQN_Agent():
 		self.copy_weights_frequency = copy_weights_frequency
 		self.epsilon_sequence = epsilon_sequence
 		
+		# Simulation Parameters
 		self.Random_Seed = Random_Seed 
 		self.number_of_episode = 0
-		
-
 
 		# For saving put here all relevent information and saving parameters
 		self.Session_ID = Session_ID
 		self.save_every = 20
 
-		
-
-
+		# Spawn one individual agent per junction
 		self.Agents = {}
 
 		current_Agent = 0
@@ -70,16 +67,22 @@ class MasterDQN_Agent():
 		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
 			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True)
 
+		# Reset lists for episode reward and episode memory
 		for idx, agent in self.Agents.items():
 			agent.reset()
 
+		# Get initial State
 		start_state = self.env.get_state()
 
+		# Episodic training loop
 		while self.number_of_episode < number_of_episode:
+
+			# Create dictionary for chosen actions for each agent and fill it
 			actions = {}
 			for idx, s in start_state.items():
 				actions[idx] = self.Agents[idx].choose_action(s)
 
+			# Simulation Loop, Run until end of simulation
 			while True:
 				SARSDs = self.env.step_to_next_action(actions)
 

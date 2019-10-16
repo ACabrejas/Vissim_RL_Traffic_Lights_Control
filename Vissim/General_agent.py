@@ -36,7 +36,7 @@ class RLAgent():
 		self.loss = []
 		self.episode_memory = []
 		self.episode_reward = []
-		self.best_reward = -1000
+		self.best_reward = -10000000
 
 		self.reward_storage = []
 
