@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="603" vissimVersion="11.00 - 11 [80246]">
+<network version="603" vissimVersion="11.00 - 09 [78629]">
 	<anmDefaults colorDistr="1" crosswalkBehaviorType="1004" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="PTV Balance PTV Epics Vision Suite Workflow.panm" panmRoutesFilename="PTV Balance PTV Epics Vision Suite Workflow.panmRoutes" pedestrianVehicleType="1005" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -11317,6 +11317,40 @@
 				<linkSegment fromPos="0" internalToPos="10.448452675612923" link="10250"/>
 			</linkSegs>
 		</node>
+		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="" no="8" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
+			<linkSegs>
+				<linkSegment fromPos="0" internalToPos="0.10377202734285698" link="14"/>
+				<linkSegment fromPos="105.97549547660775" internalToPos="-1" link="66"/>
+				<linkSegment fromPos="6.1945543886704231" internalToPos="10.646615940353614" link="157"/>
+				<linkSegment fromPos="0.40195691139222028" internalToPos="4.8078828312348394" link="158"/>
+				<linkSegment fromPos="12.318962876852765" internalToPos="-1" link="159"/>
+				<linkSegment fromPos="0" internalToPos="1.507765295450497" link="160"/>
+				<linkSegment fromPos="0" internalToPos="14.820238127541757" link="161"/>
+				<linkSegment fromPos="1.6165783346436058" internalToPos="-1" link="162"/>
+				<linkSegment fromPos="12.23518539548558" internalToPos="-1" link="165"/>
+				<linkSegment fromPos="0" internalToPos="0.90314866818392237" link="166"/>
+				<linkSegment fromPos="0" internalToPos="14.722683324329125" link="167"/>
+				<linkSegment fromPos="1.7180811338365243" internalToPos="-1" link="168"/>
+				<linkSegment fromPos="3.4496434590514649" internalToPos="-1" link="274"/>
+				<linkSegment fromPos="4.1263189866188119" internalToPos="-1" link="275"/>
+				<linkSegment fromPos="4.2271813818237982" internalToPos="-1" link="276"/>
+				<linkSegment fromPos="2.9821911956781038" internalToPos="-1" link="277"/>
+				<linkSegment fromPos="3.2482781718012657" internalToPos="-1" link="278"/>
+				<linkSegment fromPos="2.9346362344472698" internalToPos="-1" link="279"/>
+				<linkSegment fromPos="0" internalToPos="14.713697762130693" link="10053"/>
+				<linkSegment fromPos="0" internalToPos="33.350932879818913" link="10088"/>
+				<linkSegment fromPos="0" internalToPos="10.031315753046755" link="10090"/>
+				<linkSegment fromPos="0" internalToPos="18.984505509872225" link="10092"/>
+				<linkSegment fromPos="0" internalToPos="12.731871503813217" link="10093"/>
+				<linkSegment fromPos="12.907754624346747" internalToPos="-1" link="10093"/>
+				<linkSegment fromPos="0" internalToPos="17.494397749599756" link="10094"/>
+				<linkSegment fromPos="0" internalToPos="27.377592899215511" link="10095"/>
+				<linkSegment fromPos="0" internalToPos="14.064347326306113" link="10242"/>
+				<linkSegment fromPos="0" internalToPos="26.824877374675278" link="10251"/>
+				<linkSegment fromPos="0" internalToPos="8.5843052906936901" link="10255"/>
+				<linkSegment fromPos="0" internalToPos="24.23470303401476" link="10256"/>
+			</linkSegs>
+		</node>
 		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="" no="9" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
 			<linkSegs>
 				<linkSegment fromPos="0" internalToPos="0.26900253577102434" link="43"/>
@@ -11504,7 +11538,7 @@
 		<occupancyDistribution mean="1" name="Single Occupancy" no="1" stdDev="0" type="NORMAL"/>
 	</occupancyDistributions>
 	<ptLines>
-		<ptLine anmid="Bus_1;Bus_1_NS;&lt;;1;1" color="ffbe0000" desSpeedDistr="1050" destLink="20" destPos="645.13927976381149" entTmOffset="0" entryLink="15" name="Bus_1;Bus_1_NS;&lt;;1;1" no="1" sendTele="false" slackTmFrac="1" teleLine="0" teleManDir="0" telePrio="0" teleRout="0" teleVehLen="0" vehType="300">
+		<ptLine anmid="Bus_1;Bus_1_NS;&lt;;1;1" color="ffbe0000" desSpeedDistr="1050" destLink="20" destPos="634.59352066538122" entTmOffset="0" entryLink="15" name="Bus_1;Bus_1_NS;&lt;;1;1" no="1" sendTele="false" slackTmFrac="1" teleLine="0" teleManDir="0" telePrio="0" teleRout="0" teleVehLen="0" vehType="300">
 			<depTimes>
 				<departureTime dep="0" occup="0" teleCour="0"/>
 				<departureTime dep="600" occup="0" teleCour="0"/>
@@ -11526,30 +11560,26 @@
 				<departureTime dep="10200" occup="0" teleCour="0"/>
 			</depTimes>
 			<lineStops>
-				<ptLineStop active="true" alightL="true" alightPerc="0" alightR="true" boardL="true" boardR="true" depOffset="0" doorClosDel="3" doorLockDurBefDep="1" dwellTmDef="DISTRIBUTION" dwellTmDistr="40" lateBoard="true" ptStop="5" skipPoss="false" useMinDwellTm="false"/>
 				<ptLineStop active="true" alightL="true" alightPerc="0" alightR="true" boardL="true" boardR="true" depOffset="90" doorClosDel="3" doorLockDurBefDep="1" dwellTmDef="DISTRIBUTION" dwellTmDistr="50" lateBoard="true" ptStop="1" skipPoss="false" useMinDwellTm="false"/>
 			</lineStops>
 			<linkSeq>
-				<intObjectRef key="10175"/>
-				<intObjectRef key="225"/>
-				<intObjectRef key="10176"/>
-				<intObjectRef key="15"/>
 				<intObjectRef key="10005"/>
 				<intObjectRef key="16"/>
-				<intObjectRef key="10091"/>
-				<intObjectRef key="278"/>
+				<intObjectRef key="10096"/>
+				<intObjectRef key="279"/>
+				<intObjectRef key="10242"/>
 				<intObjectRef key="19"/>
-				<intObjectRef key="10248"/>
-				<intObjectRef key="272"/>
-				<intObjectRef key="10249"/>
+				<intObjectRef key="10084"/>
+				<intObjectRef key="273"/>
+				<intObjectRef key="10250"/>
 				<intObjectRef key="93"/>
 				<intObjectRef key="10015"/>
 				<intObjectRef key="94"/>
 				<intObjectRef key="10016"/>
 				<intObjectRef key="95"/>
-				<intObjectRef key="10055"/>
-				<intObjectRef key="248"/>
-				<intObjectRef key="10214"/>
+				<intObjectRef key="10048"/>
+				<intObjectRef key="247"/>
+				<intObjectRef key="10213"/>
 				<intObjectRef key="96"/>
 				<intObjectRef key="10017"/>
 				<intObjectRef key="97"/>
@@ -13402,12 +13432,8 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="38 1" localNo="9" name="" no="9" pos="519.96841884018534" sg="1 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="46 1" localNo="5" name="" no="19" pos="223.29517750094587" sg="2 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="48 1" localNo="13" name="" no="27" pos="303.69922557009704" sg="2 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="10066 1" localNo="1" name="" no="47" pos="0.1" sg="4 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="10056 1" localNo="2" name="" no="48" pos="0.1" sg="4 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="10063 1" localNo="3" name="" no="49" pos="0.1" sg="4 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="10059 1" localNo="8" name="" no="54" pos="0.1" sg="4 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="10065 1" localNo="9" name="" no="55" pos="0.1" sg="4 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="10062 1" localNo="10" name="" no="56" pos="0.1" sg="4 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="36 1" localNo="3" name="" no="49" pos="181.13608790289072" sg="4 6" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="34 1" localNo="10" name="" no="56" pos="435.62954828549289" sg="4 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="24 1" localNo="7" name="" no="67" pos="326.37839569828259" sg="5 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="23 1" localNo="2" name="" no="70" pos="321.37552767326838" sg="6 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="true" complRate="1" dischRecAct="false" isBlockSig="false" lane="35 1" localNo="4" name="" no="72" pos="181.99904098995668" sg="6 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
@@ -13603,7 +13629,7 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="253 1" localNo="0" name="" no="324" pos="136.86867271531418" sg="3 8" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="254 1" localNo="0" name="" no="325" pos="207.42540169646125" sg="4 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="255 1" localNo="0" name="" no="326" pos="207.34594324125482" sg="4 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="256 1" localNo="0" name="" no="327" pos="207.26243555168813" sg="4 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="256 1" localNo="0" name="" no="327" pos="207.13899061438005" sg="4 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="259 1" localNo="0" name="" no="328" pos="185.42147414164222" sg="4 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="258 1" localNo="0" name="" no="329" pos="185.42457937979157" sg="4 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="257 1" localNo="0" name="" no="330" pos="185.47891625536951" sg="4 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>

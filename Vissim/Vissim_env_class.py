@@ -88,6 +88,7 @@ class environment():
 		# This solution doesnt work well.
 		# Right one needs to create the partial dictionaries directly without hacking the key in the top cells of notebook
 		controller_ids_in_vissim = list(self.Model_dictionary["junctions"].keys())
+
 		for idx, signal_controller in enumerate(self.npa.signal_controllers):
 			current_vissim_id = controller_ids_in_vissim[idx]
 			self.SCUs[idx] = Signal_Control_Unit(\

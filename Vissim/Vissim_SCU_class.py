@@ -67,12 +67,8 @@ class Signal_Control_Unit():
 		self.controled_by_com = Intersection_info['controled_by_com']
 
 		# Default actions or all available actions?
-		if actions_set == "default_actions":
-			self.compatible_actions = Intersection_info['default_actions']
-		elif actions_set == "all_actions":
-			self.compatible_actions = Intersection_info['all_actions']
-		else:
-			raise ValueError("Unknown actions set name. Should be \"default_actions\" or \" all_actions\"")
+		self.compatible_actions = Intersection_info[actions_set]
+	
 		#################################
 		# Fetch Objects operated by SCU # 
 		#################################
@@ -100,12 +96,9 @@ class Signal_Control_Unit():
 		for link in self.Links_names:
 			for lane in Vissim.Net.Links.ItemByKey(link).Lanes:
 				self.Vissim_Lanes.append(lane)
-
-		
+	
 		# Node of this intersection (could be in the network Parser)
-		#self.Node = Vissim.Net.Nodes.ItemByKey(1)
 		self.Node = Vissim.Net.Nodes.ItemByKey(self.Vissim_ID+1) #To be corrected Vissim object count object begin at 1
-
 
 		# Transform the movements into a python list (hacky technique to be because the list[-1] doesnt work with Vissim list)
 		movements = list(self.Node.Movements)

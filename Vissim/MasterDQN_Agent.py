@@ -3,6 +3,7 @@ from Vissim_env_class import environment
 import os 
 import pickle
 import numpy as np
+from time import time
 
 
 
@@ -402,6 +403,38 @@ class MasterDQN_Agent():
 		"""
 		for idx, agent in self.Agents.items():
 			agent.load_agent(self.vissim_working_directory, self.model_name , self.agent_type, self.Session_ID, episode, best = best)
+			agent.epsilon = self.epsilon_sequence[episode]
+		self.number_of_episode = episode
+
+	def save_integrated(self , episode):
+		"""
+		Initiaties the saving procedure, calling a method from RLAgents.py that will directly modify the agent object.
+		"""
+		for idx, agent in self.Agents.items():
+			agent.save_integrated_agent(self.vissim_working_directory, self.model_name, self.agent_type, self.Session_ID, episode)
+
+	def load_isolated(self, episode, best):
+		"""
+		Initiaties the loading procedure, calling a method from RLAgents.py that will directly modify the agent object.
+		"""
+		print("Loading Agents....")
+		tic = time()
+
+		for idx, agent in self.Agents.items():
+			agent.load_isolated_agent(self.vissim_working_directory, self.model_name , self.agent_type, self.Session_ID, episode, best = best)
+			agent.epsilon = self.epsilon_sequence[episode]
+		self.number_of_episode = episode
+
+		tac = time()
+		print("All Agents successfully loaded. Elapsed time " + str(np.round(tac-tic,2)) + " seconds.\n")
+			
+	
+	def load_integrated(self, episode, best):
+		"""
+		Initiaties the loading procedure, calling a method from RLAgents.py that will directly modify the agent object.
+		"""
+		for idx, agent in self.Agents.items():
+			agent.load_integrated_agent(self.vissim_working_directory, self.model_name , self.agent_type, self.Session_ID, episode, best = best)
 			agent.epsilon = self.epsilon_sequence[episode]
 		self.number_of_episode = episode
 
