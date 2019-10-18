@@ -2384,9 +2384,9 @@
 		<areaMeasResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<areaResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<convergence writeFile="false"/>
-		<dataColl collectData="false" fromTime="0" interval="3" toTime="99999"/>
+		<dataColl collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
-		<delays collectData="true" fromTime="0" interval="3" toTime="99999"/>
+		<delays collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
 		<greenTimeDistribution fromTime="0" toTime="99999" writeFile="false"/>
 		<linkResults collectData="false" fromTime="0" interval="99999" perLane="false" toTime="99999"/>
@@ -13630,16 +13630,16 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="254 1" localNo="0" name="" no="325" pos="207.42540169646125" sg="4 4" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="255 1" localNo="0" name="" no="326" pos="207.34594324125482" sg="4 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="256 1" localNo="0" name="" no="327" pos="207.13899061438005" sg="4 5" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="259 1" localNo="0" name="" no="328" pos="185.42147414164222" sg="4 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="259 1" localNo="0" name="" no="328" pos="185.42147414164222" sg="4 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="258 1" localNo="0" name="" no="329" pos="185.42457937979157" sg="4 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
-		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="257 1" localNo="0" name="" no="330" pos="185.47891625536951" sg="4 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
+		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="257 1" localNo="0" name="" no="330" pos="185.47891625536951" sg="4 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="260 1" localNo="0" name="" no="331" pos="198.00511265265743" sg="5 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="261 1" localNo="0" name="" no="332" pos="197.78699212490301" sg="5 3" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="262 1" localNo="0" name="" no="333" pos="313.66925803908521" sg="5 1" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="263 1" localNo="0" name="" no="334" pos="313.5986449569981" sg="5 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="264 1" localNo="0" name="" no="335" pos="313.5709773124683" sg="5 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="PTV Balance PTV Epics Vision Suite Workflow.ver" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="3601" simRes="1" simSpeed="10" startTm="23400" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="PTV Balance PTV Epics Vision Suite Workflow.ver" numCores="1" numRuns="1" randSeed="44" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="9001" simRes="10" simSpeed="10" startTm="23400" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<stopSigns>
 		<stopSign anmFlag="true" lane="10166 1" name="ANM" no="1" pos="0.1"/>
 		<stopSign anmFlag="true" lane="10169 1" name="ANM" no="2" pos="0.1"/>
