@@ -275,3 +275,4 @@ Networks/cross_straight_random/cross_straight_random.trips.xml
 *.pyc
 *.db
 Vissim/Balance/Balance.results/1.db
+Vissim/Balance_integrated/Balance_integrated.results/1.db-journal
