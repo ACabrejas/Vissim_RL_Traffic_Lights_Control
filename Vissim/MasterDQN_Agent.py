@@ -260,7 +260,7 @@ class MasterDQN_Agent():
 					# in order to find the next action you need to evaluate the "next_state" because it is the current state of the simulator
 					actions[idx] = int(self.Agents[idx].choose_action(ns))
 
-		self.env.Stop_Simulation(delete_results = False)
+		self.env.Stop_Simulation(delete_results = True)
 		self.env = None
 
 

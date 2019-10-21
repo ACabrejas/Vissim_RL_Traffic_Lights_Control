@@ -164,12 +164,6 @@ class RLAgent():
 	# Save agents
 	def save_integrated_agent(self, vissim_working_directory, model_name, agent_type, Session_ID, episode):
 
-		# Chech if suitable folder exists
-		folder =  os.path.join(vissim_working_directory, model_name, "Agents_Results", agent_type, Session_ID)
-		if not os.path.exists(folder):
-			os.makedirs(folder)
-		
-
 		if self.type == 'AC':
 			Weights_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", agent_type, Session_ID,"Agent{}".format(self.ID),'Episode'+ str(episode) +'Agent'+str(self.ID)+'_Weights'+'.h5')
 			Optimizer_Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", agent_type, Session_ID,"Agent{}".format(self.ID),'Episode'+ str(episode) +'Agent'+str(self.ID)+'_Optimizer'+'.h5')
@@ -184,7 +178,10 @@ class RLAgent():
 			self.model.save_weights(Weights_Filename)
 
 		else :
-			Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", agent_type, Session_ID,"Agent{}".format(self.ID),'Episode'+ str(episode) +'Agent'+str(self.ID)+'.h5')
+			folder =  os.path.join(vissim_working_directory, model_name, "Agents_Results", agent_type, Session_ID, "Agent{}".format(self.ID))
+			if not os.path.exists(folder):
+				os.makedirs(folder)
+			Filename = os.path.join(folder,'Episode'+ str(episode) +'Agent'+str(self.ID)+'.h5')
 			print('Saving architecture, weights and optimizer state for agent-{}'.format(self.ID))
 			self.model.save(Filename)
 
