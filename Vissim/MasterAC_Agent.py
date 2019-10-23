@@ -57,8 +57,17 @@ class MasterAC_Agent():
 	def train(self, number_of_episode, vissim=False):
 
 		self.env = None
-		self.env = environment(self.model_name, self.vissim_working_directory, self.sim_length, self.Model_dictionnary,\
-			Random_Seed = self.Random_Seed, timesteps_per_second = self.timesteps_per_second, mode = 'training', delete_results = True, verbose = True, vissim=vissim)
+		self.env = environment(self.model_name, 
+                               self.vissim_working_directory, 
+                               self.sim_length, 
+                               self.Model_dictionnary,
+                               actions_set = 'default_actions',
+                               Random_Seed = self.Random_Seed, 
+                               timesteps_per_second = self.timesteps_per_second, 
+                               mode = 'training', 
+                               delete_results = True, 
+                               verbose = True, 
+                               vissim=vissim)
 
 		for idx, agent in self.Agents.items():
 			agent.reset()
@@ -111,7 +120,7 @@ class MasterAC_Agent():
 						agent.reward_storage.append(agent.average_reward)
 						print("Average Reward for Agent {} this episode : {}".format(idx, round(agent.average_reward,2)))
 						agent.loss.append(agent.losses[2])
-						agent.best_agent(self.vissim_working_directory, self.model_name, self.Session_ID)
+						agent.best_agent(self.vissim_working_directory, self.model_name, self.Session_ID, self.Session_ID)
 						agent.reset()
 
 

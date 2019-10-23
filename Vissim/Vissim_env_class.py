@@ -308,7 +308,7 @@ class environment():
 	def Stop_Simulation(self , delete_results = True):
 
 	 ## Stop the simulation and delete the results
-		self.Vissim.simulation.Stop()
+		self.Vissim.Simulation.Stop()
 
 		if delete_results == True:
 			# Delete all previous simulation runs first:
