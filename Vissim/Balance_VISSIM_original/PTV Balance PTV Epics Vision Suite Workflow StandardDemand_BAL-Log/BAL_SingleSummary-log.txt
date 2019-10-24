@@ -1,28 +1,28 @@
 -----------------------------------------------------
-	Summary of PTV Balance optimization run for 07:10:01 (recorded at 07:10:01 26.07.2018)
+	Summary of PTV Balance optimization run for 09:25:01 (recorded at 09:25:01 26.07.2018)
 
 	--- Optimization ---
-	Performance Index before optimization:	115033.17286629964655730873
-	Performance Index after optimization:	88120.36152592678263317794
-	Delay-Delta before/after:	-21455.78 (-25.33%)
-	Stops-Delta before/after:	-84.53 (-21.88%)
+	Performance Index before optimization:	579.36470605348029039305
+	Performance Index after optimization:	364.21098065200453675061
+	Delay-Delta before/after:	-200.38 (-43.17%)
+	Stops-Delta before/after:	-0.13 (-15.48%)
 	Total number of PI calculations:	25102
 	Optimization algorithm: Genetic Algorithm
 	Population size: 100
-	Ideal cycle time: 115
+	Ideal cycle time: 51
 	Master weights: Delay = 1.00, Stops = 1.00, Queue = 1.00
 
 	--- Signal control ---
 	Optimized controllers (14) [ctrID/Prg|CycleTime|Saturation]: 
-	4/1|90|0.91	33/1|90|0.69	2/1|90|0.68	3/1|90|0.63
-	6/1|90|0.51	17/1|90|0.49	5/1|90|0.40	16/1|90|0.36
-	10/1|90|0.35	9/1|90|0.35	15/1|90|0.33	12/1|90|0.21
-	8/1|90|0.20	13/1|90|0.18	
+	15/1|90|0.16	33/1|90|0.14	3/1|90|0.13	2/1|90|0.13
+	16/1|90|0.12	12/1|90|0.11	13/1|90|0.10	5/1|90|0.06
+	17/1|90|0.05	4/1|90|0.04	6/1|90|0.04	9/1|90|0.03
+	10/1|90|0.01	8/1|90|0.01	
 	All controllers were optimized!
 
 	Number of car signals total:	66
-	Number of car signals with offset optimization:	43
-	Number of car signals without offset optimization:	23
+	Number of car signals with offset optimization:	0
+	Number of car signals without offset optimization:	66
 
 	--- Input data ---
 	Number of detectors total:	88
@@ -30,21 +30,21 @@
 
 	--- Traffic state ---
 	Most saturated signals [ctrID/signal|sat|Q]: 
-	4/sg2l|1.07|192	4/sg3l|0.95|228	4/sg3sr|0.88|1332	4/sg4l|0.87|156
-	4/sg2sr|0.85|744	6/sg3|0.83|258	33/sg2|0.82|378	2/sg2|0.75|216
-	3/sg2|0.71|240	4/sg4sr|0.70|540	
+	3/sg2|0.17|128	33/sg2|0.17|102	15/sg4|0.17|156	13/sg2|0.17|116
+	2/sg4|0.16|99	17/sg3|0.16|48	15/sg3|0.15|115	33/sg3l|0.14|45
+	16/sg3|0.13|107	2/sg1l|0.13|44	
 
 	Least saturated signals [ctrID/signal|sat|Q]: 
-	5/sg1l|0.00|0	16/sg1|0.03|18	10/sg2l|0.05|4	10/sg4l|0.05|6
-	2/sg3l|0.06|6	5/sg4|0.07|12	13/sg1|0.08|48	8/sg1|0.12|144
-	8/sg2|0.12|36	5/sg3l|0.12|12	
+	4/sg1l|0.00|0	5/sg1l|0.00|0	9/sg2|0.00|12	10/sg2sr|0.00|11
+	9/sg4|0.00|12	10/sg4sr|0.01|13	17/sg4sr|0.01|11	8/sg3|0.01|5
+	5/sg4|0.01|2	13/sg1|0.01|6	
 
 	--- OD estimation ---
 	9 signals with biggest GEH-value between model and detectors [ctrID/signal|GEH|modelFlow|detFlow]: 
-	4/sg1l|8.14|1|36	17/sg2|6.90|849|660	4/sg4sr|4.44|441|540
-	33/sg3sr|3.36|1281|1404	2/sg3sr|3.26|1387|1512	2/sg1sr|3.25|962|864
-	9/sg2|3.02|846|936	6/sg1sr|2.91|952|1044	10/sg2sr|2.72|814|894
+	4/sg4sr|0.90|7|10	9/sg4|0.43|14|12	17/sg2|0.18|13|12
+	13/sg1|0.12|6|6	17/sg4sr|0.10|12|11	10/sg2sr|0.06|11|11
+	10/sg1|0.04|5|6	4/sg2sr|0.02|7|7	9/sg2|0.02|12|12
 	
-	Average deviation [veh/h]: 36.83
+	Average deviation [veh/h]: 34.01
 
-	Overall cars in the network:	424
+	Overall cars in the network:	17
