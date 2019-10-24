@@ -152,24 +152,24 @@ class MasterDQN_Agent():
 		#self.env.change_demand(self.env.vehicle_demand[demand_counter])
 
 		#Initialisation of the metrics
-		Episode_Queues = {} # 
-		Cumulative_Episode_Delays = {} # Delay at each junction
-		Cumulative_Episode_stop_Delays = {} # Delay at each junction
+		self.Episode_Queues = {} # 
+		self.Cumulative_Episode_Delays = {} # Delay at each junction
+		self.Cumulative_Episode_stop_Delays = {} # Delay at each junction
 
-		Cumulative_Totale_network_delay = [0]
-		Cumulative_Totale_network_stop_delay = [0]
+		self.Cumulative_Totale_network_delay = [0]
+		self.Cumulative_Totale_network_stop_delay = [0]
 
 		queues = self.env.get_queues()
 		for idx, junction_queues in queues.items():
-				Episode_Queues[idx] = [junction_queues]
+				self.Episode_Queues[idx] = [junction_queues]
 
 		delays = self.env.get_delays()
 		for idx, junction_delay in delays.items():
-			Cumulative_Episode_Delays[idx] = [junction_delay]
+			self.Cumulative_Episode_Delays[idx] = [junction_delay]
 
 		stop_delays = self.env.get_stop_delays()
 		for idx, junction_stop_delay in stop_delays.items():
-			Cumulative_Episode_stop_Delays[idx] = [junction_stop_delay]
+			self.Cumulative_Episode_stop_Delays[idx] = [junction_stop_delay]
 
 
 		for idx, agent in self.Agents.items():
@@ -191,18 +191,18 @@ class MasterDQN_Agent():
 			# Read the queues and store them
 			queues = self.env.get_queues()
 			for idx, junction_queues in queues.items():
-				Episode_Queues[idx].append(junction_queues)
+				self.Episode_Queues[idx].append(junction_queues)
 			# Do the same with the global delays
 			delays = self.env.get_delays()
 			for idx, junction_delay in delays.items():
-				Cumulative_Episode_Delays[idx].append(Cumulative_Episode_Delays[idx][-1]+junction_delay)
+				self.Cumulative_Episode_Delays[idx].append(Cumulative_Episode_Delays[idx][-1]+junction_delay)
 			# And again with the stop delay
 			stop_delays = self.env.get_stop_delays()
 			for idx, junction_stop_delay in stop_delays.items():
-				Cumulative_Episode_stop_Delays[idx].append(Cumulative_Episode_stop_Delays[idx][-1]+junction_stop_delay)
+				self.Cumulative_Episode_stop_Delays[idx].append(Cumulative_Episode_stop_Delays[idx][-1]+junction_stop_delay)
 
-			Cumulative_Totale_network_delay.append(Cumulative_Totale_network_delay[-1]+self.env.get_delay_timestep())
-			Cumulative_Totale_network_stop_delay.append(Cumulative_Totale_network_stop_delay[-1]+self.env.get_stop_delay_timestep())
+			self.Cumulative_Totale_network_delay.append(Cumulative_Totale_network_delay[-1]+self.env.get_delay_timestep())
+			self.Cumulative_Totale_network_stop_delay.append(Cumulative_Totale_network_stop_delay[-1]+self.env.get_stop_delay_timestep())
 
 			# Whenever an action is required
 			if self.env.action_required:
@@ -222,9 +222,8 @@ class MasterDQN_Agent():
 
 
 		# Stop the simulation without erasing the database
-		self.env.Stop_Simulation(delete_results = False)
+		self.env.Stop_Simulation(delete_results = True)
 		self.env = None
-		return(Episode_Queues, Cumulative_Episode_Delays,Cumulative_Episode_stop_Delays, Cumulative_Totale_network_delay,Cumulative_Totale_network_stop_delay)
 
 	def demo(self):
 		"""
