@@ -7,7 +7,6 @@ import pickle
 from time import time
 
 
-
 # The environment class , 
 class environment():
 	"""
@@ -417,7 +416,8 @@ class environment():
 			#This select the simulation resolution
 			self.timesteps_per_second = 10
 			self.Vissim.Simulation.SetAttValue('SimRes', self.timesteps_per_second)
-			self.Vissim.ResumeUpdateGUI()
+			self.Vissim.ResumeUpdateGUI(True)
+			self.Vissim.Graphics.CurrentNetworkWindow.SetAttValue("QuickMode",0) 
 			
 			# set the data mesurement
 			self.Vissim.Evaluation.SetAttValue('DataCollCollectData', False)
@@ -527,66 +527,12 @@ class environment():
 			self.Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', False)
 			self.Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 99999)
 
-
-
-
-def toList(NestedTuple):
-    return list(map(toList, NestedTuple)) if isinstance(NestedTuple, (list, tuple)) else NestedTuple
-
-
 # That is not a clean way to do this
 def to_dictionary(dictionary,idx,value):
 	"""
 	Assign a value to an index in a dictionary
 	"""
 	dictionary[idx] = value
-
-class NetworkParser:
-    
-    ######################################################################################################################
-    ## Nested data structure:
-    ## 
-    ## Signal Controllers = signal_controllers[signal_controller_ids]
-    ## Signal Groups      = signal_groups     [signal_controller_ids] [signal_group_id]
-    ## Signal Heads       = signal_heads      [signal_controller_ids] [signal_heads_id]
-    ## Lanes              = lanes             [signal_controller_ids] [signal_heads_id] [lane_id]
-    ##
-    ######################################################################################################################
-    ##
-    ## Accessing attributes:
-    ##
-    ## AttValue('AttName(X,Y,bla)')
-    ##
-    ## X = Simulation Number.      Values: 1,2,3.. 'Current' [single case], Avg, StdDev, Min, Max [over several sims]
-    ## Y = Time Interval Number    Values: 1,2,3, 'Current', 'Last', Avg, StdDev, Min, Max, Total
-    ## All = All vehicle classes   Values: 10, 20, All
-    ######################################################################################################################
-
-    def __init__(self, Vissim, Network_dictionary):
-        ## Get all SignalControllers
-        self.signal_controllers     = toList(Vissim.Net.SignalControllers.GetAll())
-        self.signal_controllers_ids = [idx for idx in Network_dictionary['junctions'].keys()] #Vissim count starts at 1
-
-        ## Create SignalGroupContainers and unpack the SignalGroups into a list by SignalController
-        self.signal_groups = [[] for _ in self.signal_controllers_ids]
-        for SC_idx, SC_in_vissim in enumerate(self.signal_controllers_ids):
-            for SG in range(1,self.signal_controllers[SC_idx].SGs.Count+1):
-                self.signal_groups[SC_idx].append(self.signal_controllers[SC_idx].SGs.ItemByKey(SG))
-                
-        ## Create SignalHeadsCollection and unpack the SignalHeads into a list by SignalController
-        self.signal_heads = [[] for _ in self.signal_controllers_ids]
-        for SC_idx, SC_in_vissim in enumerate(self.signal_controllers_ids):
-            for SG in range(self.signal_controllers[SC_idx].SGs.Count):
-                self.signal_heads[SC_idx].append(toList(self.signal_groups[SC_idx][SG].SigHeads.GetAll())[0])
-                
-        self.signal_lanes = [[] for _ in self.signal_controllers_ids]
-        for SC_idx, SC_in_vissim in enumerate(self.signal_controllers_ids):
-            for SH in range(len(self.signal_heads[SC_idx])):
-                self.signal_lanes[SC_idx].append(self.signal_heads[SC_idx][SH].AttValue('Lane'))
-
-    def update(self, Vissim, Network_dictionary):
-        self.__init__(Vissim, Network_dictionary)
-
 
 def COMServerDispatch(model_name, vissim_working_directory, sim_length, timesteps_per_second, delete_results = True, verbose = True):
 	'''
@@ -691,44 +637,93 @@ def COMServerReload(Vissim, model_name, vissim_working_directory, simulation_len
 				raise Exception("Failed 5th loading attempt. Please restart program. TERMINATING NOW.")
 				quit()
 
-def Load_Vissim(End_of_simulation = 10000,\
-                Quick_Mode = 1,\
+def Load_Vissim(End_of_simulation = 10000,
+                Quick_Mode = 1,
                 Path_to_network = 'C:\\Users\\Public\\Documents\\PTV Vision\\PTV Vissim 11\\Examples Training\\COM\\Basic Commands\\',\
-                inpx_Filename = 'COM Basic Commands.inpx',\
+                inpx_Filename = 'COM Basic Commands.inpx',
                 layx_Filename = 'COM Basic Commands.layx',
-                attempts = 1\
-               ):
-    if attempts == 1: 
-        Vissim = None
-        # Load Vissim
-        Vissim = win32com.client.gencache.EnsureDispatch("Vissim.Vissim")
-        # Load file
-        inpx_Filename                = os.path.join(Path_to_network, inpx_Filename)
-        flag_read_additionally  = False # you can read network(elements) additionally, in this case set "flag_read_additionally" to true
-        Vissim.LoadNet(inpx_Filename, flag_read_additionally)
-        # Load a Layout:
-        layx_Filename = os.path.join(Path_to_network, layx_Filename)
-        Vissim.LoadLayout(layx_Filename)
-        # Configure non-GUI for training
-        Vissim.Simulation.SetAttValue('UseMaxSimSpeed', True)
-        Vissim.Simulation.AttValue('UseAllCores')
-        Vissim.Graphics.CurrentNetworkWindow.SetAttValue("QuickMode",Quick_Mode)
-        # Set a long simulation time
-        Vissim.Simulation.SetAttValue('SimPeriod', End_of_simulation)
-        return Vissim
-    else:
-        for _ in range(attempts):
-            try:
-                vissim \
-                = \
-                Load_Vissim(
-                Path_to_network = 'C:\\Users\\nwalton\\OneDrive - The Alan Turing Institute\\Documents\\MLforFlowOptimisation\\Vissim\\Single_Cross_Straight',\
-                inpx_Filename = 'Single_Cross_Straight.inpx',\
-                layx_Filename = 'Single_Cross_Straight.layx',\
-                attempts = 1
-                )
-                print("Success")
-                return vissim
-                break
-            except:
-                print("Fail")
+                attempts = 5):
+        
+        if attempts == 1:
+                Vissim = None
+                # Load Vissim
+                Vissim = win32com.client.gencache.EnsureDispatch("Vissim.Vissim")
+                # Load file
+                inpx_Filename                = os.path.join(Path_to_network, inpx_Filename)
+                flag_read_additionally  = False # you can read network(elements) additionally, in this case set "flag_read_additionally" to true
+                Vissim.LoadNet(inpx_Filename, flag_read_additionally)
+                # Load a Layout:
+                layx_Filename = os.path.join(Path_to_network, layx_Filename)
+                Vissim.LoadLayout(layx_Filename)
+                # Configure non-GUI for training
+                Vissim.Simulation.SetAttValue('UseMaxSimSpeed', True)
+                Vissim.Simulation.AttValue('UseAllCores')
+                Vissim.Graphics.CurrentNetworkWindow.SetAttValue("QuickMode",Quick_Mode)
+                # Set a long simulation time
+                Vissim.Simulation.SetAttValue('SimPeriod', End_of_simulation)
+                return Vissim
+        else:
+                for _ in range(attempts):
+                        try :
+                                vissim = Load_Vissim(End_of_simulation,
+                                                Quick_Mode,
+                                                Path_to_network,
+                                                inpx_Filename,
+                                                layx_Filename,
+                                                attempts=1)
+                                print('success')
+                                return vissim
+                                break
+                        except :
+                                print('fail')
+
+# Function to convert a nested tuple to a nested list
+def toList(NestedTuple):
+    return list(map(toList, NestedTuple)) if isinstance(NestedTuple, (list, tuple)) else NestedTuple
+
+## Network Parser (Crawler) class definition
+class NetworkParser:
+    
+    ######################################################################################################################
+    ## Nested data structure:
+    ## 
+    ## Signal Controllers = signal_controllers[signal_controller_ids]
+    ## Signal Groups      = signal_groups     [signal_controller_ids] [signal_group_id]
+    ## Signal Heads       = signal_heads      [signal_controller_ids] [signal_heads_id]
+    ## Lanes              = lanes             [signal_controller_ids] [signal_heads_id] [lane_id]
+    ##
+    ######################################################################################################################
+    ##
+    ## Accessing attributes:
+    ##
+    ## AttValue('AttName(X,Y,bla)')
+    ##
+    ## X = Simulation Number.      Values: 1,2,3.. 'Current' [single case], Avg, StdDev, Min, Max [over several sims]
+    ## Y = Time Interval Number    Values: 1,2,3, 'Current', 'Last', Avg, StdDev, Min, Max, Total
+    ## All = All vehicle classes   Values: 10, 20, All
+    ######################################################################################################################
+
+    def __init__(self, Vissim, Network_dictionary):
+        ## Get all SignalControllers
+        self.signal_controllers     = toList(Vissim.Net.SignalControllers.GetAll())
+        self.signal_controllers_ids = [idx for idx in Network_dictionary['junctions'].keys()] #Vissim count starts at 1
+
+        ## Create SignalGroupContainers and unpack the SignalGroups into a list by SignalController
+        self.signal_groups = [[] for _ in self.signal_controllers_ids]
+        for SC_idx, SC_in_vissim in enumerate(self.signal_controllers_ids):
+            for SG in range(1,self.signal_controllers[SC_idx].SGs.Count+1):
+                self.signal_groups[SC_idx].append(self.signal_controllers[SC_idx].SGs.ItemByKey(SG))
+                
+        ## Create SignalHeadsCollection and unpack the SignalHeads into a list by SignalController
+        self.signal_heads = [[] for _ in self.signal_controllers_ids]
+        for SC_idx, SC_in_vissim in enumerate(self.signal_controllers_ids):
+            for SG in range(self.signal_controllers[SC_idx].SGs.Count):
+                self.signal_heads[SC_idx].append(toList(self.signal_groups[SC_idx][SG].SigHeads.GetAll())[0])
+                
+        self.signal_lanes = [[] for _ in self.signal_controllers_ids]
+        for SC_idx, SC_in_vissim in enumerate(self.signal_controllers_ids):
+            for SH in range(len(self.signal_heads[SC_idx])):
+                self.signal_lanes[SC_idx].append(self.signal_heads[SC_idx][SH].AttValue('Lane'))
+
+    def update(self, Vissim, Network_dictionary):
+        self.__init__(Vissim, Network_dictionary)
