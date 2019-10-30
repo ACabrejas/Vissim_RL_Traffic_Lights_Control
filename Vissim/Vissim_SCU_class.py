@@ -224,7 +224,10 @@ class Signal_Control_Unit():
 			reward = -np.sum(queues_incentive)
 		elif self.reward_type == "Delay":
 			delay = self.VehNetPerformance.AttValue('DelayTot(Current, Last, All)')
-			reward = -delay
+			if delay is None:
+				reward = 0
+			else:
+				reward = -delay
 		return(reward)
 
 	def calculate_delay(self):
