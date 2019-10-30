@@ -107,7 +107,7 @@ class RLAgent():
 				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", agent_type, Session_ID,'BestAgent'+str(self.ID)+'.h5')
 			else :
 				Filename = os.path.join(vissim_working_directory, model_name, "Agents_Results", agent_type, Session_ID,'Episode'+ str(episode) +'Agent'+str(self.ID)+'.h5')
-			
+			print(Filename)
 			self.model = load_model(Filename)
 
 		if best:
