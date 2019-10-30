@@ -100,7 +100,7 @@ class Signal_Control_Unit():
 		# Node of this intersection (could be in the network Parser)
 		self.Node = Vissim.Net.Nodes.ItemByKey(self.Vissim_ID+1) #To be corrected Vissim object count object begin at 1
 		# Vehicle Network Performance Measurement Object
-		self.VehNetPerformance = env.Vissim.Net.VehicleNetworkPerformanceMeasurement
+		self.VehNetPerformance = Vissim.Net.VehicleNetworkPerformanceMeasurement
 		# Transform the movements into a python list (hacky technique to be because the list[-1] doesnt work with Vissim list)
 		movements = list(self.Node.Movements)
 
