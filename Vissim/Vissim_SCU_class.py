@@ -99,7 +99,8 @@ class Signal_Control_Unit():
 	
 		# Node of this intersection (could be in the network Parser)
 		self.Node = Vissim.Net.Nodes.ItemByKey(self.Vissim_ID+1) #To be corrected Vissim object count object begin at 1
-
+		# Vehicle Network Performance Measurement Object
+		self.VehNetPerformance = env.Vissim.Net.VehicleNetworkPerformanceMeasurement
 		# Transform the movements into a python list (hacky technique to be because the list[-1] doesnt work with Vissim list)
 		movements = list(self.Node.Movements)
 
@@ -222,7 +223,8 @@ class Signal_Control_Unit():
 			queues_incentive = [-50. if queue == 0. else queue for queue in self.queue_state]
 			reward = -np.sum(queues_incentive)
 		elif self.reward_type == "Delay":
-			reward = calculate_delay(self)
+			delay = self.VehNetPerformance.AttValue('DelayTot(Current, Last, All)')
+			reward = -delay
 		return(reward)
 
 	def calculate_delay(self):

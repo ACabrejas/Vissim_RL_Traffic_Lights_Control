@@ -63,8 +63,9 @@ class environment():
 		print("Setting Simulation mode to: " + self.mode)
 		self.select_mode()
 
-		# Simulate one step and give the control to COM
-		for _ in range(self.timesteps_per_second):
+		# Simulate three steps and give the control to COM
+		# The reason to simulate 3 steps is to synchronize decisions and data logging
+		for _ in range(3*self.timesteps_per_second):
 			self.Vissim.Simulation.RunSingleStep()
 		self.global_counter += 1
 
@@ -474,15 +475,14 @@ class environment():
 			# set the data mesurement for each node
 			self.Vissim.Evaluation.SetAttValue('NodeResCollectData', True)
 			self.Vissim.Evaluation.SetAttValue('NodeResInterval', 3)
-			
-			
+				
 			# set the queues mesurement 
 			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', True)
 			self.Vissim.Evaluation.SetAttValue('QueuesInterval', 3)
 			
 			# set the vehicles perf mesurement 
-			self.Vissim.Evaluation.SetAttValue('VehNetPerfCollectData', False)
-			self.Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 99999)
+			self.Vissim.Evaluation.SetAttValue('VehNetPerfCollectData', True)
+			self.Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 3)
 			
 			# set the vehicles travel time mesurement 
 			self.Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', False)
@@ -514,14 +514,13 @@ class environment():
 			self.Vissim.Evaluation.SetAttValue('NodeResCollectData', True)
 			self.Vissim.Evaluation.SetAttValue('NodeResInterval', 3)
 			
-			
 			# set the queues mesurement 
 			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', True)
 			self.Vissim.Evaluation.SetAttValue('QueuesInterval', 3)
 			
 			# set the vehicles perf mesurement 
-			self.Vissim.Evaluation.SetAttValue('VehNetPerfCollectData', False)
-			self.Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 99999)
+			self.Vissim.Evaluation.SetAttValue('VehNetPerfCollectData', True)
+			self.Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 3)
 			
 			# set the vehicles travel time mesurement 
 			self.Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', False)
