@@ -278,3 +278,5 @@ Vissim/Balance/Balance.results/1.db
 Vissim/Balance_integrated/Balance_integrated.results/1.db-journal
 *.pyc
 *.pyc
+Vissim/Balance_int14/Balance_int14.results/1.db-journal
+*.db-journal
