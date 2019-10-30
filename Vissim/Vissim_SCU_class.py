@@ -221,6 +221,8 @@ class Signal_Control_Unit():
 		elif self.reward_type == 'Queues_with_incentive':
 			queues_incentive = [-50. if queue == 0. else queue for queue in self.queue_state]
 			reward = -np.sum(queues_incentive)
+		elif self.reward_type == "Delay":
+			reward = calculate_delay(self)
 		return(reward)
 
 	def calculate_delay(self):
