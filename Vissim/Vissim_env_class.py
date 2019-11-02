@@ -385,32 +385,32 @@ class environment():
 			self.Vissim.SuspendUpdateGUI()  
 			
 			# set the data mesurement
-			self.Vissim.Evaluation.SetAttValue('DataCollCollectData', True)
-			self.Vissim.Evaluation.SetAttValue('DataCollInterval', 1)
+			self.Vissim.Evaluation.SetAttValue('DataCollCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('DataCollInterval', 3)
 			
 			# set the delay mesurement
-			self.Vissim.Evaluation.SetAttValue('DelaysCollectData', True)
-			self.Vissim.Evaluation.SetAttValue('DelaysInterval', 1)
+			self.Vissim.Evaluation.SetAttValue('DelaysCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('DelaysInterval', 99999)
 			
 			# set the data mesurement for each link
-			self.Vissim.Evaluation.SetAttValue('LinkResCollectData', True)
-			self.Vissim.Evaluation.SetAttValue('LinkResInterval', 1)
+			self.Vissim.Evaluation.SetAttValue('LinkResCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('LinkResInterval', 99999)
 			
 			# set the data mesurement for each node
 			self.Vissim.Evaluation.SetAttValue('NodeResCollectData', True)
-			self.Vissim.Evaluation.SetAttValue('NodeResInterval', 1)
+			self.Vissim.Evaluation.SetAttValue('NodeResInterval', 3)
 			
 			# set the queues mesurement 
 			self.Vissim.Evaluation.SetAttValue('QueuesCollectData', True)
-			self.Vissim.Evaluation.SetAttValue('QueuesInterval', 1)
+			self.Vissim.Evaluation.SetAttValue('QueuesInterval', 3)
 			
 			# set the vehicles perf mesurement 
 			self.Vissim.Evaluation.SetAttValue('VehNetPerfCollectData', True)
-			self.Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 1)
+			self.Vissim.Evaluation.SetAttValue('VehNetPerfInterval', 3)
 			
 			# set the vehicles travel time mesurement 
-			self.Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', True)
-			self.Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 1)
+			self.Vissim.Evaluation.SetAttValue('VehTravTmsCollectData', False)
+			self.Vissim.Evaluation.SetAttValue('VehTravTmsInterval', 99999)
 			
 		# In demo mode we only use the queue counter for the moment
 		elif self.mode == 'demo' :

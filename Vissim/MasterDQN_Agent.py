@@ -75,7 +75,7 @@ class MasterDQN_Agent():
 
 		# Get initial State
 		start_state = self.env.get_state()
-
+		print("start")
 		# Episodic training loop
 		while self.number_of_episode < number_of_episode:
 
@@ -195,14 +195,14 @@ class MasterDQN_Agent():
 			# Do the same with the global delays
 			delays = self.env.get_delays()
 			for idx, junction_delay in delays.items():
-				self.Cumulative_Episode_Delays[idx].append(Cumulative_Episode_Delays[idx][-1]+junction_delay)
+				self.Cumulative_Episode_Delays[idx].append(self.Cumulative_Episode_Delays[idx][-1]+junction_delay)
 			# And again with the stop delay
 			stop_delays = self.env.get_stop_delays()
 			for idx, junction_stop_delay in stop_delays.items():
-				self.Cumulative_Episode_stop_Delays[idx].append(Cumulative_Episode_stop_Delays[idx][-1]+junction_stop_delay)
+				self.Cumulative_Episode_stop_Delays[idx].append(self.Cumulative_Episode_stop_Delays[idx][-1]+junction_stop_delay)
 
-			self.Cumulative_Totale_network_delay.append(Cumulative_Totale_network_delay[-1]+self.env.get_delay_timestep())
-			self.Cumulative_Totale_network_stop_delay.append(Cumulative_Totale_network_stop_delay[-1]+self.env.get_stop_delay_timestep())
+			self.Cumulative_Totale_network_delay.append(self.Cumulative_Totale_network_delay[-1]+self.env.get_delay_timestep())
+			self.Cumulative_Totale_network_stop_delay.append(self.Cumulative_Totale_network_stop_delay[-1]+self.env.get_stop_delay_timestep())
 
 			# Whenever an action is required
 			if self.env.action_required:
