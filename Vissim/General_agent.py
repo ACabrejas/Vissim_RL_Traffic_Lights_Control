@@ -200,11 +200,9 @@ class RLAgent():
 	# Reload individually trained agents jointly into balance
 	def load_isolated_agent(self, vissim_working_directory, model_name, agent_type, Session_ID, episode, best = True):
 		
-		# Junctions 1,2,4 and 11,12 train together, so they need same loading ID when loading fresh
-		if self.ID == 1:
-			load_id = 0
-		elif self.ID == 3:
-			load_id = 0
+		# Junctions 2,4 and 11,12 train together, so they need same loading ID when loading fresh
+		if self.ID == 3:
+			load_id = 1
 		elif self.ID == 11:
 			load_id = 10
 		else:
