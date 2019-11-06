@@ -186,21 +186,15 @@ class Signal_Control_Unit():
 			self.queue_state  =\
 			[0. if queue.AttValue('QLen(Current, Last)') is None else queue.AttValue('QLen(Current, Last)') for queue in self.queues_counters]
 
-			#self.queue_state  = [get_queue(lane) for lane in self.Vissim_Lanes]
-
 			state = np.array(self.queue_state)[np.newaxis,:]
 
 		if self.state_type == "QueuesSig":
-			#self.queue_state  =\
-			#[0. if movement.AttValue('QLen(Current, Last)') is None else movement.AttValue('QLen(Current, Last)') for movement in self.lanes_movement]
-
-			#self.queue_state  = [get_queue(lane) for lane in self.Vissim_Lanes]
 
 			self.queue_state  =\
 			[0. if queue.AttValue('QLen(Current, Last)') is None else queue.AttValue('QLen(Current, Last)') for queue in self.queues_counters]
 
 			state = np.array(self.queue_state+[self.next_action_key])[np.newaxis,:]
-		
+	
 		return(state)
 
 	def calculate_queues(self):
@@ -220,7 +214,7 @@ class Signal_Control_Unit():
 		if self.reward_type == 'Queues':
 			reward = -np.sum(self.queue_state)
 		elif self.reward_type == 'Queues_with_incentive':
-			queues_incentive = [-50. if queue == 0. else queue for queue in self.queue_state]
+			queues_incentive = [-10. if queue == 0. else queue for queue in self.queue_state]
 			reward = -np.sum(queues_incentive)
 		elif self.reward_type == "Delay":
 			delay = self.VehNetPerformance.AttValue('DelayTot(Current, Last, All)')
@@ -228,6 +222,9 @@ class Signal_Control_Unit():
 				reward = 0
 			else:
 				reward = -delay
+		elif self.reward_type == "Queues_squared":
+			queues_squared = [queue ** 2 for queue in self.queue_state]
+			reward = -np.sum(queues_squared)
 		return(reward)
 
 	def calculate_delay(self):
