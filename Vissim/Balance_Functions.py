@@ -51,7 +51,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [8],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              # Counterclockwise, starting by Inner, West.
              'queues_counter_ID' : [1, 2, 3, 11, 4, 5, 6, 10],
 			 'agent_type' : agent_type
@@ -77,7 +77,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [8],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [13, 14, 15, 16, 9, 8, 7, 12],
 			 'agent_type' : agent_type
 			},
@@ -107,7 +107,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [14],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [48, 49, 50, 51, 52, 53, 54, 41, 42, 43, 44, 45, 46 ,47],
 			 'agent_type' : agent_type
 			},
@@ -132,7 +132,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [8],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [59, 60, 61, 62, 55, 56, 57, 58],
 			 'agent_type' : agent_type
 			},
@@ -159,7 +159,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [6],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [66, 67, 68, 63, 64, 65],
 			 'agent_type' : agent_type
 			},
@@ -180,7 +180,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [3],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [27, 25, 26],
 			 'agent_type' : agent_type
 			},
@@ -201,7 +201,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [6],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [79, 80, 81, 76, 77, 78],
 			 'agent_type' : agent_type
 			},
@@ -226,7 +226,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [7],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [86, 87, 88, 82, 83, 84, 85],
 			 'agent_type' : agent_type
 			},
@@ -247,7 +247,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [3],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [29, 30, 28],
 			 'agent_type' : agent_type
 			},
@@ -268,7 +268,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [4],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [33, 34, 31, 32],
 			 'agent_type' : agent_type
 			},
@@ -289,7 +289,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [4],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [19, 20, 17, 18],
 			 'agent_type' : agent_type
 			},
@@ -310,7 +310,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [4],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [24, 21, 22, 23],
 			 'agent_type' : agent_type
 			},
@@ -335,7 +335,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [7],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [72, 73, 74, 75, 69, 70, 71],
 			 'agent_type' : agent_type
 				
@@ -358,7 +358,7 @@ def balance_dictionary(agent_type):
 			 'red_time' : 0,
 			 'state_size' : [6],
 			 'state_type' : 'Queues',
-			 'reward_type' : 'Queues_squared',
+			 'reward_type' : 'Queues',
              'queues_counter_ID' : [38, 39, 40, 35, 36, 37],
 			 'agent_type' : agent_type
 			}
