@@ -1140,7 +1140,7 @@
 		<convergence writeFile="false"/>
 		<dataColl collectData="false" fromTime="0" interval="3" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
-		<delays collectData="true" fromTime="0" interval="3" toTime="99999"/>
+		<delays collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
 		<greenTimeDistribution fromTime="0" toTime="99999" writeFile="false"/>
 		<linkResults collectData="false" fromTime="0" interval="99999" perLane="false" toTime="99999"/>
@@ -3152,11 +3152,6 @@
 				<linkSegment fromPos="0" internalToPos="34.347677066803165" link="10219"/>
 				<linkSegment fromPos="0" internalToPos="33.097648898808544" link="10220"/>
 				<linkSegment fromPos="0" internalToPos="32.685556246578614" link="10221"/>
-			</linkSegs>
-		</node>
-		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="" no="14" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
-			<linkSegs>
-				<linkSegment fromPos="39.771030997336624" internalToPos="39.787843065810272" link="71"/>
 			</linkSegs>
 		</node>
 	</nodes>
