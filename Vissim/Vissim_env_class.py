@@ -416,7 +416,7 @@ class environment():
 		elif self.mode == 'demo' :
 
 			#This select the simulation resolution
-			self.timesteps_per_second = 10
+			self.timesteps_per_second = 1
 			self.Vissim.Simulation.SetAttValue('SimRes', self.timesteps_per_second)
 			self.Vissim.ResumeUpdateGUI()
 			

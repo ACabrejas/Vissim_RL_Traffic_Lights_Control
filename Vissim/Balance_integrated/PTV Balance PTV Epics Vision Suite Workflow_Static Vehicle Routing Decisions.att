@@ -1,0 +1,51 @@
+$VISION
+* File:		C:\Users\acabrejasegea\OneDrive - The Alan Turing Institute\Desktop\ATI\0_TMF\MLforFlowOptimisation\Vissim\Balance_VISSIM_original\PTV Balance PTV Epics Vision Suite Workflow.inpx
+* Comment:	PTV Balance PTV Epics Vision Suite Workflow.ver
+* Date:		26/11/2019 13:12:38
+* PTV Vissim:	11.00 [09]
+* 
+* Table: Static Vehicle Routing Decisions
+* 
+* NO: No, Number (Unique number of the static routing desicion)
+* NAME: Name, Name (Name of static vehicle routing desicion)
+* LINK: Link, Link (Number of the link or connector where the start cross section of the vehicle routing decision is located)
+* POS: Pos, Position (Position inside the link/connector) [m]
+* ALLVEHTYPES: AllVehTypes, All vehicle types (If the option is selected, all vehicle types follow the vehicle routing decision.)
+* VEHCLASSES: VehClasses, Vehicle classes (Vehicle classes for which the vehicle routing desicion is valid.  Only active if the option „All vehicle types“ is not selected.)
+* ROUTECHOICEMETH: RouteChoiceMeth, Route choice method (Route choice method for static vehicle routes)
+* 
+* No; Name; Link; Pos; AllVehTypes; VehClasses; RouteChoiceMeth
+*
+$VEHICLEROUTINGDECISIONSTATIC:NO;NAME;LINK;POS;ALLVEHTYPES;VEHCLASSES;ROUTECHOICEMETH
+1;ANM zone 1;58;0.100;0;110;Static
+2;ANM zone 2;15;0.100;0;110;Static
+3;ANM zone 3;66;0.100;0;110;Static
+4;ANM zone 4;64;0.100;0;110;Static
+5;ANM zone 5;34;0.100;0;110;Static
+6;ANM zone 6;12;0.100;0;110;Static
+7;ANM zone 7;21;0.100;0;110;Static
+8;ANM zone 8;50;0.100;0;110;Static
+9;ANM zone 9;42;0.100;0;110;Static
+10;ANM zone 10;32;0.100;0;110;Static
+11;ANM zone 11;1;0.100;0;110;Static
+12;ANM zone 12;38;0.100;0;110;Static
+13;ANM zone 13;62;0.100;0;110;Static
+14;ANM zone 14;60;0.100;0;110;Static
+15;ANM zone 15;75;0.100;0;110;Static
+16;ANM zone 16;81;0.100;0;110;Static
+17;ANM zone 2;15;0.100;0;130;Static
+18;ANM zone 7;21;0.100;0;130;Static
+19;ANM zone 11;1;0.100;0;130;Static
+20;ANM zone 15;75;0.100;0;130;Static
+21;ANM zone 16;81;0.100;0;130;Static
+22;ANM zone 1;58;0.100;0;120;Static
+23;ANM zone 2;15;0.100;0;120;Static
+24;ANM zone 6;12;0.100;0;120;Static
+25;ANM zone 7;21;0.100;0;120;Static
+26;ANM zone 8;50;0.100;0;120;Static
+27;ANM zone 9;42;0.100;0;120;Static
+28;ANM zone 10;32;0.100;0;120;Static
+29;ANM zone 11;1;0.100;0;120;Static
+30;ANM zone 12;38;0.100;0;120;Static
+31;ANM zone 16;81;0.100;0;120;Static
+
