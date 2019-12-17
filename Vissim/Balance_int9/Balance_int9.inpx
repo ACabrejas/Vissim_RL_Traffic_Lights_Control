@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="603" vissimVersion="11.00 - 11 [80246]">
+<network version="603" vissimVersion="11.00 - 09 [78629]">
 	<anmDefaults colorDistr="1" crosswalkBehaviorType="1004" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="PTV Balance PTV Epics Vision Suite Workflow.panm" panmRoutesFilename="PTV Balance PTV Epics Vision Suite Workflow.panmRoutes" pedestrianVehicleType="1005" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -3029,31 +3029,31 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="true" link="62" name="ANM" no="13">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="13" volType="STOCHASTIC" volume="48.299999999999983"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="786" volType="STOCHASTIC" volume="82.109999999999971"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="787" volType="STOCHASTIC" volume="82.109999999999971"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="788" volType="STOCHASTIC" volume="48.299999999999983"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="789" volType="STOCHASTIC" volume="48.299999999999983"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="13" volType="STOCHASTIC" volume="46"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="786" volType="STOCHASTIC" volume="77"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="787" volType="STOCHASTIC" volume="73"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="788" volType="STOCHASTIC" volume="52"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="789" volType="STOCHASTIC" volume="55"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="45" name="" no="14">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="8" volType="STOCHASTIC" volume="197.8"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="766" volType="STOCHASTIC" volume="335.28"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="767" volType="STOCHASTIC" volume="335.28"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="768" volType="STOCHASTIC" volume="197.8"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="769" volType="STOCHASTIC" volume="197.8"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="8" volType="STOCHASTIC" volume="224"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="766" volType="STOCHASTIC" volume="388"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="767" volType="STOCHASTIC" volume="402"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="768" volType="STOCHASTIC" volume="250"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="769" volType="STOCHASTIC" volume="235"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 9000000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 10800000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="44" name="" no="15">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="125.35"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="738" volType="STOCHASTIC" volume="214.07"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="739" volType="STOCHASTIC" volume="214.07"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="740" volType="STOCHASTIC" volume="125.35"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="6" volType="STOCHASTIC" volume="125.35"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="151"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="738" volType="STOCHASTIC" volume="281"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="739" volType="STOCHASTIC" volume="274"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="740" volType="STOCHASTIC" volume="174"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="6" volType="STOCHASTIC" volume="167"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 9000000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 10800000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 			</timeIntVehVols>
