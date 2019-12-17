@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="603" vissimVersion="11.00 - 11 [80246]">
+<network version="603" vissimVersion="11.00 - 09 [78629]">
 	<anmDefaults colorDistr="1" crosswalkBehaviorType="1004" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="PTV Balance PTV Epics Vision Suite Workflow.panm" panmRoutesFilename="PTV Balance PTV Epics Vision Suite Workflow.panmRoutes" pedestrianVehicleType="1005" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -1301,7 +1301,7 @@
 		<link assumSpeedOncom="60" consVehInDynPot="false" costPerKm="0" desSpeedFact="1" direction="ALL" displayType="1" emergStopDist="5" gradient="0" hasOvtLn="false" isPedArea="false" level="1" linkBehavType="1" linkEvalAct="true" linkEvalSegLen="10" lnChgDist="200" lnChgDistIsPerLn="false" lnChgEvalAct="true" lookAheadDistOvt="500" mesoFollowUpGap="0" mesoSpeed="50" mesoSpeedModel="VEHICLEBASED" name="" netPerfEvalAct="true" no="77" ovtOnlyPT="false" ovtSpeedFact="1.3" showClsfValues="true" showLinkBar="true" showVeh="true" surch1="0" surch2="0" thickness="0" vehDynPotG="3" vehRecAct="true">
 			<geometry>
 				<linkPolyPts>
-					<linkPolyPoint x="307.60094297955482" y="-95.964290755721038" zOffset="0"/>
+					<linkPolyPoint x="272.95828443810024" y="-39.463764325015347" zOffset="0"/>
 					<linkPolyPoint x="335.645" y="-172.938" zOffset="0"/>
 					<linkPolyPoint x="334.645" y="-178.609" zOffset="0"/>
 					<linkPolyPoint x="334.645" y="-178.642" zOffset="0"/>
@@ -1552,7 +1552,7 @@
 			<toLinkEndPt lane="20 1" pos="0.001"/>
 		</link>
 		<link assumSpeedOncom="60" consVehInDynPot="false" costPerKm="0" desSpeedFact="1" direction="ALL" displayType="1" emergStopDist="5" gradient="0" hasOvtLn="false" isPedArea="false" linkBehavType="1" linkEvalAct="true" linkEvalSegLen="10" lnChgDist="200" lnChgDistIsPerLn="false" lnChgEvalAct="true" lookAheadDistOvt="500" mesoFollowUpGap="0" mesoSpeed="50" mesoSpeedModel="VEHICLEBASED" name="" netPerfEvalAct="true" no="10138" ovtOnlyPT="false" ovtSpeedFact="1.3" showClsfValues="true" showLinkBar="true" showVeh="true" surch1="0" surch2="0" thickness="0" vehDynPotG="3" vehRecAct="true">
-			<fromLinkEndPt lane="77 2" pos="130.88644128650634"/>
+			<fromLinkEndPt lane="77 2" pos="196.42502367642743"/>
 			<geometry>
 				<linkPolyPts>
 					<linkPolyPoint x="349.41981047578838" y="-219.25293600582265" zOffset="0"/>
@@ -1624,7 +1624,7 @@
 			<toLinkEndPt lane="28 1" pos="0.001"/>
 		</link>
 		<link assumSpeedOncom="60" consVehInDynPot="false" costPerKm="0" desSpeedFact="1" direction="ALL" displayType="1" emergStopDist="5" gradient="0" hasOvtLn="false" isPedArea="false" linkBehavType="1" linkEvalAct="true" linkEvalSegLen="10" lnChgDist="200" lnChgDistIsPerLn="false" lnChgEvalAct="true" lookAheadDistOvt="500" mesoFollowUpGap="0" mesoSpeed="50" mesoSpeedModel="VEHICLEBASED" name="" netPerfEvalAct="true" no="10143" ovtOnlyPT="false" ovtSpeedFact="1.3" showClsfValues="true" showLinkBar="true" showVeh="true" surch1="0" surch2="0" thickness="0" vehDynPotG="3" vehRecAct="true">
-			<fromLinkEndPt lane="77 1" pos="131.58753621498172"/>
+			<fromLinkEndPt lane="77 1" pos="197.12611860490281"/>
 			<geometry>
 				<linkPolyPts>
 					<linkPolyPoint x="346.29425935697537" y="-220.97233286938209" zOffset="0"/>
@@ -2522,8 +2522,8 @@
 		<pavementMarking anmFlag="true" arrowDir="LEFT,RIGHT,STRAIGHT" lane="27 1" length="5" name="" no="33" pos="542.8207272055339" rndDir="" type="ARROW"/>
 		<pavementMarking anmFlag="true" arrowDir="LEFT,RIGHT" lane="76 1" length="5" name="" no="73" pos="132.65800721215041" rndDir="" type="ARROW"/>
 		<pavementMarking anmFlag="true" arrowDir="LEFT" lane="76 2" length="5" name="" no="74" pos="132.65800721215041" rndDir="" type="ARROW"/>
-		<pavementMarking anmFlag="true" arrowDir="RIGHT,STRAIGHT" lane="77 1" length="5" name="" no="75" pos="90.939969795398255" rndDir="" type="ARROW"/>
-		<pavementMarking anmFlag="true" arrowDir="STRAIGHT" lane="77 2" length="5" name="" no="76" pos="91.162309446378913" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="true" arrowDir="RIGHT,STRAIGHT" lane="77 1" length="5" name="" no="75" pos="156.47855218531936" rndDir="" type="ARROW"/>
+		<pavementMarking anmFlag="true" arrowDir="STRAIGHT" lane="77 2" length="5" name="" no="76" pos="156.7008918363" rndDir="" type="ARROW"/>
 	</pavementMarkings>
 	<pedestrianClasses>
 		<pedestrianClass color="ff000000" name="Man, Woman" no="10" usePedTypeColor="true">
@@ -3365,47 +3365,88 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="true" link="21" name="ANM" no="7">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="7" volType="STOCHASTIC" volume="604.49999999999989"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="762" volType="STOCHASTIC" volume="1027.7719999999997"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="763" volType="STOCHASTIC" volume="1027.7719999999997"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="764" volType="STOCHASTIC" volume="604.49999999999989"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="765" volType="STOCHASTIC" volume="604.49999999999989"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="7" volType="STOCHASTIC" volume="598"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="762" volType="STOCHASTIC" volume="966"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="763" volType="STOCHASTIC" volume="1020"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="764" volType="STOCHASTIC" volume="584"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="765" volType="STOCHASTIC" volume="590"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="77" name="" no="8">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="2" volType="STOCHASTIC" volume="504.45"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="742" volType="STOCHASTIC" volume="855.732"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="743" volType="STOCHASTIC" volume="855.732"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="744" volType="STOCHASTIC" volume="504.45"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="745" volType="STOCHASTIC" volume="504.45"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="2" volType="STOCHASTIC" volume="489"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="742" volType="STOCHASTIC" volume="850"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="743" volType="STOCHASTIC" volume="922"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="744" volType="STOCHASTIC" volume="618"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="745" volType="STOCHASTIC" volume="596"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 9000000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 10800000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="27" name="" no="9">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="10" volType="STOCHASTIC" volume="164.45"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="774" volType="STOCHASTIC" volume="278.584"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="775" volType="STOCHASTIC" volume="278.584"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="776" volType="STOCHASTIC" volume="164.45"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="777" volType="STOCHASTIC" volume="164.45"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="10" volType="STOCHASTIC" volume="148"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="774" volType="STOCHASTIC" volume="257"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="775" volType="STOCHASTIC" volume="286"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="776" volType="STOCHASTIC" volume="193"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="777" volType="STOCHASTIC" volume="171"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 9000000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 10800000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="25" name="" no="10">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="10" volType="STOCHASTIC" volume="164.45"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="774" volType="STOCHASTIC" volume="278.584"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="775" volType="STOCHASTIC" volume="278.584"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="776" volType="STOCHASTIC" volume="164.45"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="777" volType="STOCHASTIC" volume="164.45"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="10" volType="STOCHASTIC" volume="92"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="774" volType="STOCHASTIC" volume="134"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="775" volType="STOCHASTIC" volume="133"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="776" volType="STOCHASTIC" volume="95"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="777" volType="STOCHASTIC" volume="91"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 9000000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 				<timeIntervalVehVolume cont="false" timeInt="1 10800000" vehComp="1" volType="STOCHASTIC" volume="0"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>
+	<vehicleRoutingDecisionsStatic>
+		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="21" name="" no="1" pos="33.407488948532851" routeChoiceMeth="STATIC">
+			<vehRoutSta>
+				<vehicleRouteStatic destLink="265" destPos="60.212016983047036" formula="" name="" no="1" relFlow="2 0:2, 2 1800000:8, 2 3600000:8, 2 5400000:2, 2 7200000:3, 2 9000000:3, 2 10800000:3">
+					<linkSeq>
+						<intObjectRef key="10007"/>
+						<intObjectRef key="22"/>
+						<intObjectRef key="10144"/>
+					</linkSeq>
+				</vehicleRouteStatic>
+				<vehicleRouteStatic destLink="266" destPos="58.140490739033396" formula="" name="" no="2" relFlow="2 0:176, 2 1800000:277, 2 3600000:284, 2 5400000:173, 2 7200000:172, 2 9000000:172, 2 10800000:172">
+					<linkSeq>
+						<intObjectRef key="10007"/>
+						<intObjectRef key="22"/>
+						<intObjectRef key="10141"/>
+					</linkSeq>
+				</vehicleRouteStatic>
+				<vehicleRouteStatic destLink="267" destPos="56.986961799942748" formula="" name="" no="3" relFlow="2 0:119, 2 1800000:198, 2 3600000:216, 2 5400000:122, 2 7200000:121, 2 9000000:121, 2 10800000:121">
+					<linkSeq>
+						<intObjectRef key="10007"/>
+						<intObjectRef key="22"/>
+						<intObjectRef key="10139"/>
+					</linkSeq>
+				</vehicleRouteStatic>
+			</vehRoutSta>
+		</vehicleRoutingDecisionStatic>
+		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="77" name="" no="2" pos="1.9143591170061627" routeChoiceMeth="STATIC">
+			<vehRoutSta>
+				<vehicleRouteStatic destLink="268" destPos="48.03600599182289" formula="" name="" no="1" relFlow="2 0:109, 2 1800000:203, 2 3600000:216, 2 5400000:134, 2 7200000:126, 2 9000000:126, 2 10800000:126">
+					<linkSeq>
+						<intObjectRef key="10138"/>
+					</linkSeq>
+				</vehicleRouteStatic>
+				<vehicleRouteStatic destLink="269" destPos="46.815049115813316" formula="" name="" no="2" relFlow="2 0:135, 2 1800000:223, 2 3600000:244, 2 5400000:176, 2 7200000:173, 2 9000000:173, 2 10800000:173">
+					<linkSeq>
+						<intObjectRef key="10143"/>
+					</linkSeq>
+				</vehicleRouteStatic>
+			</vehRoutSta>
+		</vehicleRoutingDecisionStatic>
+	</vehicleRoutingDecisionsStatic>
 	<vehicleTypes>
 		<vehicleType alightTm="0" anmFlag="true" boardTm="0" capExact="false" capacity="999" category="BUS" clearTm="0" colorDistr1="1" desAccelFunc="3" desDecelFunc="3" distCoeffPerMeter="0" doorClosDur="2" dwellTmIsAdd="true" equip="" extDriver="false" extDriverDLLFile="" extDriverParFile="" extEmissionDLLFile="" linkCostCoeff="1" maxAccelFunc="3" maxDecelFunc="3" model2D3DDistr="30" name="PtDefault" no="1" occupDistr="1" travTmCoeff="1">
 			<parkLotSelPars>
