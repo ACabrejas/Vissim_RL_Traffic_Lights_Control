@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="603" vissimVersion="11.00 - 09 [78629]">
+<network version="603" vissimVersion="11.00 - 11 [80246]">
 	<anmDefaults colorDistr="1" crosswalkBehaviorType="1004" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="PTV Balance PTV Epics Vision Suite Workflow.panm" panmRoutesFilename="PTV Balance PTV Epics Vision Suite Workflow.panmRoutes" pedestrianVehicleType="1005" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -1118,7 +1118,7 @@
 		<areaMeasResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<areaResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<convergence writeFile="false"/>
-		<dataColl collectData="false" fromTime="0" interval="99999" toTime="99999"/>
+		<dataColl collectData="false" fromTime="0" interval="3" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<delays collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
@@ -1159,7 +1159,7 @@
 			<intObjectRef key="80"/>
 		</vehClasses>
 		<vehInpData writeFile="false"/>
-		<vehNetPerf collectData="false" fromTime="0" interval="99999" toTime="10800"/>
+		<vehNetPerf collectData="true" fromTime="0" interval="3" toTime="10800"/>
 		<vehRec filterType="ALL" fromTime="0" inclParkVehs="false" resolution="1" toTime="99999" writeDatabase="false" writeFile="false">
 			<attributes>
 				<attributeSelection attributeID="SIMSEC" decimals="2" format="SECONDS" showUnits="false"/>
@@ -2379,7 +2379,7 @@
 		<refPointNet x="0" y="0"/>
 	</netPara>
 	<nodes>
-		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="" no="2" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
+		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="" no="4" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
 			<linkSegs>
 				<linkSegment fromPos="1.7709203190542786" internalToPos="-1" link="5"/>
 				<linkSegment fromPos="8.4261332389291503" internalToPos="-1" link="46"/>
@@ -2522,14 +2522,14 @@
 		</powerDistribution>
 	</powerDistributions>
 	<queueCounters>
-		<queueCounter link="237" name="" no="7" pos="110.70788671251442"/>
-		<queueCounter link="236" name="" no="8" pos="110.62988263488556"/>
-		<queueCounter link="70" name="" no="9" pos="110.61970820335833"/>
-		<queueCounter link="46" name="" no="12" pos="222.94806671826984"/>
-		<queueCounter link="5" name="" no="13" pos="365.56335865257614"/>
-		<queueCounter link="234" name="" no="14" pos="365.60279576752333"/>
-		<queueCounter link="235" name="" no="15" pos="365.51192491331278"/>
-		<queueCounter link="48" name="" no="16" pos="303.93680633296776"/>
+		<queueCounter link="5" name="" no="55" pos="365.56335865257614"/>
+		<queueCounter link="234" name="" no="56" pos="365.60279576752333"/>
+		<queueCounter link="235" name="" no="57" pos="365.51192491331278"/>
+		<queueCounter link="48" name="" no="58" pos="303.93680633296776"/>
+		<queueCounter link="237" name="" no="59" pos="110.70788671251442"/>
+		<queueCounter link="236" name="" no="60" pos="110.62988263488556"/>
+		<queueCounter link="70" name="" no="61" pos="110.61970820335833"/>
+		<queueCounter link="46" name="" no="62" pos="222.94806671826984"/>
 	</queueCounters>
 	<reducedSpeedAreas>
 		<reducedSpeedArea anmFlag="true" lane="10038 1" length="2" name="" no="13" pos="8.1639491898810128" timeFrom="0" timeTo="99999">
@@ -2634,7 +2634,7 @@
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="236 1" localNo="0" name="" no="304" pos="110.70830153457894" sg="2 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 		<signalHead allPedTypes="true" allVehTypes="true" anmFlag="false" complRate="1" dischRecAct="false" isBlockSig="false" lane="237 1" localNo="0" name="" no="305" pos="110.62978295910246" sg="2 2" slowDownDist="3" type="CIRCULAR" vAmberBlock="0"/>
 	</signalHeads>
-	<simulation comment="PTV Balance PTV Epics Vision Suite Workflow.ver" numCores="1" numRuns="1" randSeed="42" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10801" simRes="10" simSpeed="10" startTm="23400" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
+	<simulation comment="PTV Balance PTV Epics Vision Suite Workflow.ver" numCores="1" numRuns="1" randSeed="100" randSeedIncr="1" retroSync="false" simMode="MICRO" simPeriod="10801" simRes="1" simSpeed="10" startTm="23400" useAllCores="true" useMaxSimSpeed="true" volumeIncrDynAssign="0"/>
 	<timeDistributions>
 		<timeDistribution mean="0.5" name="0.5 s" no="1" stdDev="0" type="NORMAL"/>
 		<timeDistribution mean="0.9" name="0.9 s" no="2" stdDev="0" type="NORMAL"/>
