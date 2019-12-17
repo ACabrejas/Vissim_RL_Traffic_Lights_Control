@@ -3259,55 +3259,55 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="false" link="4" name="" no="1">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="11" volType="STOCHASTIC" volume="971.8"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="778" volType="STOCHASTIC" volume="1651.078"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="779" volType="STOCHASTIC" volume="1651.078"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="780" volType="STOCHASTIC" volume="971.8"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="781" volType="STOCHASTIC" volume="971.8"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="11" volType="STOCHASTIC" volume="753"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="778" volType="STOCHASTIC" volume="1090"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="779" volType="STOCHASTIC" volume="1106"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="780" volType="STOCHASTIC" volume="968"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="781" volType="STOCHASTIC" volume="968"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="48" name="" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="8" volType="STOCHASTIC" volume="197.8"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="766" volType="STOCHASTIC" volume="335.28"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="767" volType="STOCHASTIC" volume="335.28"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="768" volType="STOCHASTIC" volume="197.8"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="769" volType="STOCHASTIC" volume="197.8"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="8" volType="STOCHASTIC" volume="2"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="766" volType="STOCHASTIC" volume="3"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="767" volType="STOCHASTIC" volume="3"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="768" volType="STOCHASTIC" volume="2"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="769" volType="STOCHASTIC" volume="1"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="69" name="" no="3">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="6" volType="STOCHASTIC" volume="654.35"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="758" volType="STOCHASTIC" volume="1110.436"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="759" volType="STOCHASTIC" volume="1110.436"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="760" volType="STOCHASTIC" volume="654.35"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="761" volType="STOCHASTIC" volume="654.35"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="6" volType="STOCHASTIC" volume="553"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="758" volType="STOCHASTIC" volume="964"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="759" volType="STOCHASTIC" volume="1010"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="760" volType="STOCHASTIC" volume="585"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="761" volType="STOCHASTIC" volume="577"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="46" name="" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="125.35"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="738" volType="STOCHASTIC" volume="214.07"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="739" volType="STOCHASTIC" volume="214.07"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="740" volType="STOCHASTIC" volume="125.35"/>
-				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="6" volType="STOCHASTIC" volume="125.35"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="37"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="738" volType="STOCHASTIC" volume="64"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="739" volType="STOCHASTIC" volume="65"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 5400000" vehComp="740" volType="STOCHASTIC" volume="39"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 7200000" vehComp="6" volType="STOCHASTIC" volume="34"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>
 	<vehicleRoutingDecisionsStatic>
 		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="4" name="" no="1" pos="50.693160304577148" routeChoiceMeth="STATIC">
 			<vehRoutSta>
-				<vehicleRouteStatic destLink="5" destPos="47.693115045834688" formula="" name="" no="1" relFlow="2 0:5, 2 1800000:7, 2 3600000:8, 2 5400000:4, 2 7200000:5, 2 9000000:2">
+				<vehicleRouteStatic destLink="5" destPos="47.693115045834688" formula="" name="" no="1" relFlow="2 0:7, 2 1800000:14, 2 3600000:13, 2 5400000:10, 2 7200000:9">
 					<linkSeq>
 						<intObjectRef key="10001"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="234" destPos="46.894333526721113" formula="" name="" no="2" relFlow="2 0:315, 2 1800000:434, 2 3600000:430, 2 5400000:434, 2 7200000:430, 2 9000000:141">
+				<vehicleRouteStatic destLink="234" destPos="46.894333526721113" formula="" name="" no="2" relFlow="2 0:284, 2 1800000:406, 2 3600000:425, 2 5400000:387, 2 7200000:383, 2 9000000:132, 2 10800000:132">
 					<linkSeq>
 						<intObjectRef key="10033"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="235" destPos="47.237608536176509" formula="" name="" no="3" relFlow="2 0:134, 2 1800000:180, 2 3600000:183, 2 5400000:168, 2 7200000:169, 2 9000000:38">
+				<vehicleRouteStatic destLink="235" destPos="47.237608536176509" formula="" name="" no="3" relFlow="2 0:79, 2 1800000:125, 2 3600000:114, 2 5400000:91, 2 7200000:91, 2 9000000:18, 2 10800000:18">
 					<linkSeq>
 						<intObjectRef key="10036"/>
 					</linkSeq>
@@ -3321,17 +3321,17 @@
 		</vehicleRoutingDecisionStatic>
 		<vehicleRoutingDecisionStatic allVehTypes="true" anmFlag="false" combineStaRoutDec="false" link="69" name="" no="3" pos="18.00822933131424" routeChoiceMeth="STATIC">
 			<vehRoutSta>
-				<vehicleRouteStatic destLink="70" destPos="63.995914469280834" formula="" name="" no="1" relFlow="2 0:13, 2 1800000:22, 2 3600000:27, 2 5400000:20, 2 7200000:14">
+				<vehicleRouteStatic destLink="70" destPos="63.995914469280834" formula="" name="" no="1" relFlow="2 0:0, 2 7200000:0, 2 9000000:0">
 					<linkSeq>
 						<intObjectRef key="10037"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="236" destPos="66.250857571265854" formula="" name="" no="2" relFlow="2 0:217, 2 1800000:345, 2 3600000:367, 2 5400000:262, 2 7200000:227, 2 9000000:19">
+				<vehicleRouteStatic destLink="236" destPos="66.250857571265854" formula="" name="" no="2" relFlow="2 0:202, 2 1800000:360, 2 3600000:375, 2 5400000:218, 2 7200000:216, 2 9000000:8">
 					<linkSeq>
 						<intObjectRef key="10196"/>
 					</linkSeq>
 				</vehicleRouteStatic>
-				<vehicleRouteStatic destLink="237" destPos="71.871044699778352" formula="" name="" no="3" relFlow="2 0:105, 2 1800000:180, 2 3600000:190, 2 5400000:121, 2 7200000:113, 2 9000000:10">
+				<vehicleRouteStatic destLink="237" destPos="71.871044699778352" formula="" name="" no="3" relFlow="2 0:71, 2 1800000:119, 2 3600000:131, 2 5400000:76, 2 7200000:74, 2 9000000:4">
 					<linkSeq>
 						<intObjectRef key="10009"/>
 					</linkSeq>
