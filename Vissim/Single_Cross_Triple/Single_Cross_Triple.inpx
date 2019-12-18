@@ -234,7 +234,6 @@
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="18" link2="10018" mesoCritGap="3.5" minGapBlockDef="3" no="83" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10012" link2="10027" mesoCritGap="3.5" minGapBlockDef="3" no="84" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="10018" link2="10027" mesoCritGap="3.5" minGapBlockDef="3" no="85" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
-		<conflictArea addStopDist="0" anticipRout="0" avoidBlockMajor="true" avoidBlockMinor="1" conflTypDetmAuto="true" conflTypMan="CROSSING" frontGapDef="0.5" link1="18" link2="10027" mesoCritGap="3.5" minGapBlockDef="3" no="86" obsAdjLns="false" rearGapDef="0.5" safDistFactDef="1.5" status="PASSIVE" visibLink1="100" visibLink2="100"/>
 	</conflictAreas>
 	<dataCollectionMeasurements>
 		<dataCollectionMeasurement name="West" no="1"/>
@@ -2699,6 +2698,12 @@
 		<timeIntervalSet no="VEHICLEINPUT">
 			<timeInts>
 				<timeInterval start="0"/>
+				<timeInterval start="600"/>
+				<timeInterval start="1200"/>
+				<timeInterval start="1800"/>
+				<timeInterval start="2400"/>
+				<timeInterval start="3000"/>
+				<timeInterval start="3600"/>
 			</timeInts>
 		</timeIntervalSet>
 		<timeIntervalSet no="VEHICLEROUTESTATIC">
@@ -2792,22 +2797,46 @@
 	<vehicleInputs>
 		<vehicleInput anmFlag="false" link="1" name="WE" no="1">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="300"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 600000" vehComp="1" volType="STOCHASTIC" volume="1200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1200000" vehComp="1" volType="STOCHASTIC" volume="1500"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="1" volType="STOCHASTIC" volume="1000"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 2400000" vehComp="1" volType="STOCHASTIC" volume="300"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3000000" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="1" volType="STOCHASTIC" volume="800"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="300"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 600000" vehComp="1" volType="STOCHASTIC" volume="600"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1200000" vehComp="1" volType="STOCHASTIC" volume="400"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 2400000" vehComp="1" volType="STOCHASTIC" volume="1500"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3000000" vehComp="1" volType="STOCHASTIC" volume="1000"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="1" volType="STOCHASTIC" volume="800"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="300"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="800"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 600000" vehComp="1" volType="STOCHASTIC" volume="1200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1200000" vehComp="1" volType="STOCHASTIC" volume="1200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="1" volType="STOCHASTIC" volume="1000"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 2400000" vehComp="1" volType="STOCHASTIC" volume="500"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3000000" vehComp="1" volType="STOCHASTIC" volume="400"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="1" volType="STOCHASTIC" volume="800"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="300"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 600000" vehComp="1" volType="STOCHASTIC" volume="400"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1200000" vehComp="1" volType="STOCHASTIC" volume="600"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 1800000" vehComp="1" volType="STOCHASTIC" volume="1000"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 2400000" vehComp="1" volType="STOCHASTIC" volume="1200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3000000" vehComp="1" volType="STOCHASTIC" volume="1200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 3600000" vehComp="1" volType="STOCHASTIC" volume="800"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>
