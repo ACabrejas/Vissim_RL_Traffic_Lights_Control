@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="603" vissimVersion="11.00 - 08 [77763]">
+<network version="603" vissimVersion="11.00 - 09 [78629]">
 	<anmDefaults colorDistr="1" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="" panmRoutesFilename="" pedestrianVehicleType="510" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -1008,14 +1008,14 @@
 		<routGuid1 interval="999999" offset="0" strategy="NEWROUTETODESTINATIONPARKINGLOT"/>
 		<routGuid2 interval="999999" offset="0" strategy="NEWROUTETODESTINATIONPARKINGLOT"/>
 	</dynamicAssignment>
-	<evaluation autoCreateResultColumns="true" databaseConnection="" evalOutDir="#data#" keepPrevResults="KEEPNONE" listAutoExportType="FILE" nodesDelaySegmentStart="100" queueBeginSpeed="20" queueConsiderAdjacentLanes="true" queueEndSpeed="30" queueMaxHeadway="20" queueMaxLength="999">
+	<evaluation autoCreateResultColumns="true" databaseConnection="" evalOutDir="#data#" keepPrevResults="KEEPALL" listAutoExportType="DATABASE" nodesDelaySegmentStart="100" queueBeginSpeed="20" queueConsiderAdjacentLanes="true" queueEndSpeed="30" queueMaxHeadway="20" queueMaxLength="999">
 		<areaMeasRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<areaMeasResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<areaResults collectData="false" fromTime="0" interval="99999" toTime="99999"/>
 		<convergence writeFile="false"/>
 		<dataColl collectData="false" fromTime="0" interval="1" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
-		<delays collectData="false" fromTime="0" interval="1" toTime="99999"/>
+		<delays collectData="true" fromTime="0" interval="1" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
 		<greenTimeDistribution fromTime="0" toTime="99999" writeFile="false"/>
 		<linkResults collectData="false" fromTime="0" interval="1" perLane="false" toTime="99999"/>
@@ -1039,7 +1039,7 @@
 		<pedTravTmODData fromTime="0" interval="99999" toTime="99999" writeFile="false"/>
 		<pedTravTmRawData fromTime="0" toTime="99999" writeFile="false"/>
 		<pedTravTms collectData="false" fromTime="0" interval="99999" toTime="99999"/>
-		<queues collectData="false" fromTime="0" interval="1" toTime="99999"/>
+		<queues collectData="true" fromTime="0" interval="1" toTime="99999"/>
 		<scDetRec writeFile="false"/>
 		<ssam writeFile="false"/>
 		<sigChgs writeDatabase="false" writeFile="false"/>

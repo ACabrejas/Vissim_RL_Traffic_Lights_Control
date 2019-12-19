@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MOVAVISSIMDATA xmlns="urn:MOVAVISSIMFILE" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:MOVAVISSIMFILE MOVAVISSIMDATA.xsd">
+  <connection>
+    <simulator_name>VISSIM</simulator_name>
+    <VISSIM_modelname>
+    </VISSIM_modelname>
+    <VISSIM_version>11.00 - 09 [78629]</VISSIM_version>
+    <simulator_location>true</simulator_location>
+    <address>127.0.0.1</address>
+    <port>2525</port>
+    <timeout>2000</timeout>
+    <retries>2</retries>
+  </connection>
+  <simulator_data>
+    <vissim_input_file>C:\Users\nwalton\OneDrive - The Alan Turing Institute\Documents\MLforFlowOptimisation\NSW_9_Cross_Experiment\Single_Cross_TripleMOVA\Single_Cross_TripleMova.inpx</vissim_input_file>
+    <simulation_start_time>00:00:00</simulation_start_time>
+    <junction>
+      <name>1</name>
+      <ctrltype>extern_pcmova</ctrltype>
+      <mova_dataset>C:\Users\nwalton\OneDrive - The Alan Turing Institute\Documents\MLforFlowOptimisation\NSW_9_Cross_Experiment\Single_Cross_TripleMOVA\Single_Cross_Triple2.mxds</mova_dataset>
+      <simulator_id>1</simulator_id>
+      <detector>
+        <vissim_number>1</vissim_number>
+        <description>1 - link 11 - lane 1</description>
+        <mova_number>1</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>2</vissim_number>
+        <description>2 - link 11 - lane 1</description>
+        <mova_number>2</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>3</vissim_number>
+        <description>3 - link 10 - lane 1</description>
+        <mova_number>3</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>4</vissim_number>
+        <description>4 - link 10 - lane 1</description>
+        <mova_number>4</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>5</vissim_number>
+        <description>5 - link 9 - lane 1</description>
+        <mova_number>5</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>6</vissim_number>
+        <description>6 - link 9 - lane 1</description>
+        <mova_number>6</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>7</vissim_number>
+        <description>7 - link 15 - lane 1</description>
+        <mova_number>7</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>8</vissim_number>
+        <description>8 - link 15 - lane 1</description>
+        <mova_number>8</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>9</vissim_number>
+        <description>9 - link 16 - lane 1</description>
+        <mova_number>9</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>10</vissim_number>
+        <description>10 - link 16 - lane 1</description>
+        <mova_number>10</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>11</vissim_number>
+        <description>11 - link 17 - lane 1</description>
+        <mova_number>11</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>12</vissim_number>
+        <description>12 - link 17 - lane 1</description>
+        <mova_number>12</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>13</vissim_number>
+        <description>13 - link 14 - lane 1</description>
+        <mova_number>13</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>14</vissim_number>
+        <description>14 - link 14 - lane 1</description>
+        <mova_number>14</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>15</vissim_number>
+        <description>15 - link 13 - lane 1</description>
+        <mova_number>15</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>16</vissim_number>
+        <description>16 - link 13 - lane 1</description>
+        <mova_number>16</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>17</vissim_number>
+        <description>17 - link 12 - lane 1</description>
+        <mova_number>17</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>18</vissim_number>
+        <description>18 - link 12 - lane 1</description>
+        <mova_number>18</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>19</vissim_number>
+        <description>19 - link 20 - lane 1</description>
+        <mova_number>19</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>20</vissim_number>
+        <description>20 - link 20 - lane 1</description>
+        <mova_number>20</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>21</vissim_number>
+        <description>21 - link 19 - lane 1</description>
+        <mova_number>21</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>22</vissim_number>
+        <description>22 - link 19 - lane 1</description>
+        <mova_number>22</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>23</vissim_number>
+        <description>23 - link 18 - lane 1</description>
+        <mova_number>23</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <detector>
+        <vissim_number>24</vissim_number>
+        <description>24 - link 18 - lane 1</description>
+        <mova_number>24</mova_number>
+        <mova_type>1</mova_type>
+      </detector>
+      <signal_phase number="1">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="2">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="3">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="4">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="5">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="6">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="7">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="8">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="9">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="10">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="11">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_phase number="12">
+        <phase_type>1</phase_type>
+        <minimum_green>7</minimum_green>
+      </signal_phase>
+      <signal_stage number="1">
+        <FT_green>7</FT_green>
+        <phases_in_stage>1,2,3</phases_in_stage>
+      </signal_stage>
+      <signal_stage number="2">
+        <FT_green>7</FT_green>
+        <phases_in_stage>4,5,6</phases_in_stage>
+      </signal_stage>
+      <signal_stage number="3">
+        <FT_green>7</FT_green>
+        <phases_in_stage>7,8,9</phases_in_stage>
+      </signal_stage>
+      <signal_stage number="4">
+        <FT_green>7</FT_green>
+        <phases_in_stage>10,11,12</phases_in_stage>
+      </signal_stage>
+      <signal_stage number="5">
+        <FT_green>7</FT_green>
+        <phases_in_stage>2,3,8,9</phases_in_stage>
+      </signal_stage>
+      <signal_stage number="6">
+        <FT_green>7</FT_green>
+        <phases_in_stage>5,6,11,12</phases_in_stage>
+      </signal_stage>
+      <signal_stage number="7">
+        <FT_green>7</FT_green>
+        <phases_in_stage>1,7</phases_in_stage>
+      </signal_stage>
+      <signal_stage number="8">
+        <FT_green>7</FT_green>
+        <phases_in_stage>4,10</phases_in_stage>
+      </signal_stage>
+      <phase_delays />
+      <phase_intergreens>
+        <phase_intergreen from_phase="1" to_phase="10">5</phase_intergreen>
+        <phase_intergreen from_phase="1" to_phase="11">5</phase_intergreen>
+        <phase_intergreen from_phase="1" to_phase="12">5</phase_intergreen>
+        <phase_intergreen from_phase="1" to_phase="4">5</phase_intergreen>
+        <phase_intergreen from_phase="1" to_phase="5">5</phase_intergreen>
+        <phase_intergreen from_phase="1" to_phase="6">5</phase_intergreen>
+        <phase_intergreen from_phase="1" to_phase="8">5</phase_intergreen>
+        <phase_intergreen from_phase="1" to_phase="9">5</phase_intergreen>
+        <phase_intergreen from_phase="10" to_phase="1">5</phase_intergreen>
+        <phase_intergreen from_phase="10" to_phase="2">5</phase_intergreen>
+        <phase_intergreen from_phase="10" to_phase="3">5</phase_intergreen>
+        <phase_intergreen from_phase="10" to_phase="5">5</phase_intergreen>
+        <phase_intergreen from_phase="10" to_phase="6">5</phase_intergreen>
+        <phase_intergreen from_phase="10" to_phase="7">5</phase_intergreen>
+        <phase_intergreen from_phase="10" to_phase="8">5</phase_intergreen>
+        <phase_intergreen from_phase="10" to_phase="9">5</phase_intergreen>
+        <phase_intergreen from_phase="11" to_phase="1">5</phase_intergreen>
+        <phase_intergreen from_phase="11" to_phase="2">5</phase_intergreen>
+        <phase_intergreen from_phase="11" to_phase="3">5</phase_intergreen>
+        <phase_intergreen from_phase="11" to_phase="4">5</phase_intergreen>
+        <phase_intergreen from_phase="11" to_phase="7">5</phase_intergreen>
+        <phase_intergreen from_phase="11" to_phase="8">5</phase_intergreen>
+        <phase_intergreen from_phase="11" to_phase="9">5</phase_intergreen>
+        <phase_intergreen from_phase="12" to_phase="1">5</phase_intergreen>
+        <phase_intergreen from_phase="12" to_phase="2">5</phase_intergreen>
+        <phase_intergreen from_phase="12" to_phase="3">5</phase_intergreen>
+        <phase_intergreen from_phase="12" to_phase="4">5</phase_intergreen>
+        <phase_intergreen from_phase="12" to_phase="7">5</phase_intergreen>
+        <phase_intergreen from_phase="12" to_phase="8">5</phase_intergreen>
+        <phase_intergreen from_phase="12" to_phase="9">5</phase_intergreen>
+        <phase_intergreen from_phase="2" to_phase="10">5</phase_intergreen>
+        <phase_intergreen from_phase="2" to_phase="11">5</phase_intergreen>
+        <phase_intergreen from_phase="2" to_phase="12">5</phase_intergreen>
+        <phase_intergreen from_phase="2" to_phase="4">5</phase_intergreen>
+        <phase_intergreen from_phase="2" to_phase="5">5</phase_intergreen>
+        <phase_intergreen from_phase="2" to_phase="6">5</phase_intergreen>
+        <phase_intergreen from_phase="2" to_phase="7">5</phase_intergreen>
+        <phase_intergreen from_phase="3" to_phase="10">5</phase_intergreen>
+        <phase_intergreen from_phase="3" to_phase="11">5</phase_intergreen>
+        <phase_intergreen from_phase="3" to_phase="12">5</phase_intergreen>
+        <phase_intergreen from_phase="3" to_phase="4">5</phase_intergreen>
+        <phase_intergreen from_phase="3" to_phase="5">5</phase_intergreen>
+        <phase_intergreen from_phase="3" to_phase="6">5</phase_intergreen>
+        <phase_intergreen from_phase="3" to_phase="7">5</phase_intergreen>
+        <phase_intergreen from_phase="4" to_phase="1">5</phase_intergreen>
+        <phase_intergreen from_phase="4" to_phase="11">5</phase_intergreen>
+        <phase_intergreen from_phase="4" to_phase="12">5</phase_intergreen>
+        <phase_intergreen from_phase="4" to_phase="2">5</phase_intergreen>
+        <phase_intergreen from_phase="4" to_phase="3">5</phase_intergreen>
+        <phase_intergreen from_phase="4" to_phase="7">5</phase_intergreen>
+        <phase_intergreen from_phase="4" to_phase="8">5</phase_intergreen>
+        <phase_intergreen from_phase="4" to_phase="9">5</phase_intergreen>
+        <phase_intergreen from_phase="5" to_phase="1">5</phase_intergreen>
+        <phase_intergreen from_phase="5" to_phase="10">5</phase_intergreen>
+        <phase_intergreen from_phase="5" to_phase="2">5</phase_intergreen>
+        <phase_intergreen from_phase="5" to_phase="3">5</phase_intergreen>
+        <phase_intergreen from_phase="5" to_phase="7">5</phase_intergreen>
+        <phase_intergreen from_phase="5" to_phase="8">5</phase_intergreen>
+        <phase_intergreen from_phase="5" to_phase="9">5</phase_intergreen>
+        <phase_intergreen from_phase="6" to_phase="1">5</phase_intergreen>
+        <phase_intergreen from_phase="6" to_phase="10">5</phase_intergreen>
+        <phase_intergreen from_phase="6" to_phase="2">5</phase_intergreen>
+        <phase_intergreen from_phase="6" to_phase="3">5</phase_intergreen>
+        <phase_intergreen from_phase="6" to_phase="7">5</phase_intergreen>
+        <phase_intergreen from_phase="6" to_phase="8">5</phase_intergreen>
+        <phase_intergreen from_phase="6" to_phase="9">5</phase_intergreen>
+        <phase_intergreen from_phase="7" to_phase="10">5</phase_intergreen>
+        <phase_intergreen from_phase="7" to_phase="11">5</phase_intergreen>
+        <phase_intergreen from_phase="7" to_phase="12">5</phase_intergreen>
+        <phase_intergreen from_phase="7" to_phase="2">5</phase_intergreen>
+        <phase_intergreen from_phase="7" to_phase="3">5</phase_intergreen>
+        <phase_intergreen from_phase="7" to_phase="4">5</phase_intergreen>
+        <phase_intergreen from_phase="7" to_phase="5">5</phase_intergreen>
+        <phase_intergreen from_phase="7" to_phase="6">5</phase_intergreen>
+        <phase_intergreen from_phase="8" to_phase="1">5</phase_intergreen>
+        <phase_intergreen from_phase="8" to_phase="10">5</phase_intergreen>
+        <phase_intergreen from_phase="8" to_phase="11">5</phase_intergreen>
+        <phase_intergreen from_phase="8" to_phase="12">5</phase_intergreen>
+        <phase_intergreen from_phase="8" to_phase="4">5</phase_intergreen>
+        <phase_intergreen from_phase="8" to_phase="5">5</phase_intergreen>
+        <phase_intergreen from_phase="8" to_phase="6">5</phase_intergreen>
+        <phase_intergreen from_phase="9" to_phase="1">5</phase_intergreen>
+        <phase_intergreen from_phase="9" to_phase="10">5</phase_intergreen>
+        <phase_intergreen from_phase="9" to_phase="11">5</phase_intergreen>
+        <phase_intergreen from_phase="9" to_phase="12">5</phase_intergreen>
+        <phase_intergreen from_phase="9" to_phase="4">5</phase_intergreen>
+        <phase_intergreen from_phase="9" to_phase="5">5</phase_intergreen>
+        <phase_intergreen from_phase="9" to_phase="6">5</phase_intergreen>
+      </phase_intergreens>
+      <phase_confirms />
+    </junction>
+    <stage_links />
+    <phase_links />
+    <queue_detectors />
+  </simulator_data>
+</MOVAVISSIMDATA>

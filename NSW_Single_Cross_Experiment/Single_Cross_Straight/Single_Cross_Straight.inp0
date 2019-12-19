@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<network version="603" vissimVersion="11.00 - 08 [77763]">
+<network version="603" vissimVersion="11.00 - 09 [78629]">
 	<anmDefaults colorDistr="1" crosswalkDisplayType="1" hgvPowerDistr="2" hgvWeightDistr="2" level="1" linkDisplayType="1" panmFilename="" panmRoutesFilename="" pedestrianVehicleType="510" zoneConnectorDisplayType="1">
 		<anmDefaultDrivingBehavior>
 			<anmDefaultDrivingBehavior anmDrivBehavDefType="NONE" drivBehav="1"/>
@@ -1015,7 +1015,7 @@
 		<convergence writeFile="false"/>
 		<dataColl collectData="false" fromTime="0" interval="1" toTime="99999"/>
 		<dataCollRawData fromTime="0" toTime="99999" writeFile="false"/>
-		<delays collectData="false" fromTime="0" interval="1" toTime="99999"/>
+		<delays collectData="true" fromTime="0" interval="1" toTime="99999"/>
 		<dischRec fromTime="0" toTime="99999" writeFile="false"/>
 		<greenTimeDistribution fromTime="0" toTime="99999" writeFile="false"/>
 		<linkResults collectData="false" fromTime="0" interval="1" perLane="false" toTime="99999"/>
@@ -1894,10 +1894,10 @@
 		<node anmConnNodeNo="0" anmConnZoneNo="0" anmZoneNo="0" hasUserDefOrient="false" name="Node" no="1" showClsfValues="true" showTurnValVisual="true" turnValVisualSize="70" useForDynAssign="true" useForEval="true" useForMeso="false">
 			<geometry>
 				<points>
-					<point x="60.24293041410408" y="-223.51091456366214"/>
-					<point x="520.93469926855732" y="-221.51657790195452"/>
-					<point x="520.93469926855732" y="221.22616099713025"/>
-					<point x="58.248593752396459" y="220.2289926662765"/>
+					<point x="22.242985904617512" y="-257.91584592662252"/>
+					<point x="540.87806588563308" y="-255.67067242019783"/>
+					<point x="540.87806588563308" y="259.92660776870974"/>
+					<point x="19.920650171384434" y="258.80385471760826"/>
 				</points>
 			</geometry>
 		</node>
@@ -2140,7 +2140,7 @@
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="3" name="SN" no="2">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="5" name="EW" no="3">
@@ -2150,7 +2150,7 @@
 		</vehicleInput>
 		<vehicleInput anmFlag="false" link="7" name="NS" no="4">
 			<timeIntVehVols>
-				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="200"/>
+				<timeIntervalVehVolume cont="false" timeInt="1 0" vehComp="1" volType="STOCHASTIC" volume="400"/>
 			</timeIntVehVols>
 		</vehicleInput>
 	</vehicleInputs>
