@@ -1,5 +1,9 @@
 # MLforFlowOptimisation
-
+This code is mostly for development of tasks related to my PhD and as a quick way of sharing functions.
+The code is experimental and buggy, and only a mad person would try running the whole thing.
+Interesting pieces in Vissim Folder:
+- DQNAgents 
+- Environment and SignalControlUnit interfaces with simulator.
 
 ## How to run
 Open Jupyter Notebook. Currently in the middle of some major code rearrangement, so everything needs to be run from Env_Ray.ipynb in the Vissim folder.
