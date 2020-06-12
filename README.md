@@ -1,5 +1,5 @@
 # MLforFlowOptimisation
-This code is mostly for development of tasks related to my PhD allowing quick experimentation in a modular manner, and as a way of sharing functions and tests with colleagues.
+This code is mostly for internal version control of tasks related to my PhD allowing quick experimentation in a modular manner, and as a way of sharing functions and tests with colleagues.
 The code is experimental and buggy, and only a mad person would try running the whole thing.
 Interesting pieces in Vissim Folder:
 - DQN Agents (Target Networks, Duelling, DoubleDQN, Prioritised Experience Replay, etc.)
