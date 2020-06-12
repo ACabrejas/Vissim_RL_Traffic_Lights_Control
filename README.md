@@ -1,5 +1,5 @@
 # MLforFlowOptimisation
-This code is mostly for development of tasks related to my PhD and as a quick way of sharing functions.
+This code is mostly for development of tasks related to my PhD and as a quick way of sharing functions and tests with colleagues.
 The code is experimental and buggy, and only a mad person would try running the whole thing.
 Interesting pieces in Vissim Folder:
 - DQNAgents 
