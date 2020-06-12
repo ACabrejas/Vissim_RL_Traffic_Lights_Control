@@ -2,7 +2,7 @@
 
 
 ## How to run
-Open Jupyter Notebook. Currently in the middle of some major code rearrangement, so everything needs to be run from Env_Ray.ipynb.
+Open Jupyter Notebook. Currently in the middle of some major code rearrangement, so everything needs to be run from Env_Ray.ipynb in the Vissim folder.
 The controller architecture works in the following way:
  ![Controller Architecture](./md_pics/Interface2.pdf)
 
