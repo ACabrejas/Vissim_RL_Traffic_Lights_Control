@@ -27,7 +27,7 @@ class environment():
 		self.vissim_working_directory = vissim_working_directory
 		self.Model_dictionary = Model_dictionary
 		self.actions_set =  actions_set
-		self.vehicle_demand = self.Model_dictionary['demand']['default']
+		self.vehicle_demand = self.Model_dictionary['demand']
 
 		# Simulation parameters
 		self.sim_length = sim_length
