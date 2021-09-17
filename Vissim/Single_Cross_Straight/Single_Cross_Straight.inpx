@@ -2011,10 +2011,10 @@
 		<signalController active="true" cycTm="0" cycTmIsVar="true" debug="false" guiFile="#exe#vissig_gui.dll" name="" no="3" offset="0" progFile="#exe#vissig_controller.dll" progNo="4" scDetRecLabelDet="PORTNUMBER" scDetRecLabelSG="NUMBER" scDetRecShortNam="false" sigTmsTabAutoConfig="true" sigTmsTabLabelDet="PORTNUMBER" sigTmsTabLabelSG="NUMBER" supplyFile1="#exe#vissig.config" supplyFile2="#data#Single_Cross_Straight1_24s.sig" supplyFile3="" type="FIXEDTIME">
 			<rampMeterPara metEvalInt="60" metRateQDisp="0.25" occupDes="0.25" occupQDispAct="0.5" occupQDispDeact="0.1" regPara="0.019444444444444441"/>
 			<sgs>
-				<signalGroup actuationType="UNDEFINED" amber="3" callDetPortNo="0" chkOutDetPortNo="0" clearTm="0" greenFlsh="0" maxGreen="0" minGreen="5" minRed="1" name="South" no="1" redAmber="1" type="NORMAL"/>
-				<signalGroup actuationType="UNDEFINED" amber="3" callDetPortNo="0" chkOutDetPortNo="0" clearTm="0" greenFlsh="0" maxGreen="0" minGreen="5" minRed="1" name="West" no="2" redAmber="1" type="NORMAL"/>
-				<signalGroup actuationType="UNDEFINED" amber="3" callDetPortNo="0" chkOutDetPortNo="0" clearTm="0" greenFlsh="0" maxGreen="0" minGreen="5" minRed="1" name="North" no="3" redAmber="1" type="NORMAL"/>
-				<signalGroup actuationType="UNDEFINED" amber="3" callDetPortNo="0" chkOutDetPortNo="0" clearTm="0" greenFlsh="0" maxGreen="0" minGreen="5" minRed="1" name="East" no="4" redAmber="1" type="NORMAL"/>
+				<signalGroup actuationType="UNDEFINED" amber="3" callDetPortNo="0" chkOutDetPortNo="0" clearTm="0" greenFlsh="0" maxGreen="0" minGreen="5" minRed="1" name="South" no="1" redAmber="0" type="NORMAL"/>
+				<signalGroup actuationType="UNDEFINED" amber="3" callDetPortNo="0" chkOutDetPortNo="0" clearTm="0" greenFlsh="0" maxGreen="0" minGreen="5" minRed="1" name="West" no="2" redAmber="0" type="NORMAL"/>
+				<signalGroup actuationType="UNDEFINED" amber="3" callDetPortNo="0" chkOutDetPortNo="0" clearTm="0" greenFlsh="0" maxGreen="0" minGreen="5" minRed="1" name="North" no="3" redAmber="0" type="NORMAL"/>
+				<signalGroup actuationType="UNDEFINED" amber="3" callDetPortNo="0" chkOutDetPortNo="0" clearTm="0" greenFlsh="0" maxGreen="0" minGreen="5" minRed="1" name="East" no="4" redAmber="0" type="NORMAL"/>
 			</sgs>
 			<sigTmsTabConfig>
 				<signalOutputConfigurationElement configName="SIGGRP" detPort="0" sg="3 1" title="" varNo="1" wttFilename=""/>

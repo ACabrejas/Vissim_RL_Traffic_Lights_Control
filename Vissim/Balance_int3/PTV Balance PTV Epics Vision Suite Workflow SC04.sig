@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sc version="201801" id="4" name="SC04" frequency="1" steps="0" defaultIntergreenMatrix="1" EPICSTimeHorizon="100000" EPICSLogLevel="2" interstagesUsingMinDurations="false" checkSum="3363009040">
+<sc version="202001" id="3" name="SC04" frequency="1" steps="0" defaultIntergreenMatrix="1" EPICSTimeHorizon="100000" EPICSLogLevel="2" interstagesUsingMinDurations="false" checkSum="1636080880">
   <signaldisplays>
     <display id="1" name="Red" state="RED">
       <patterns>
@@ -47,7 +47,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
       <EPICSTrafficDemands>
-        <EPICSITDemand numberLanes="1" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" active="true">
+        <EPICSITDemand numberLanes="1" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" adaptTimeRequirement="true" active="true">
           <occupancyDetectors />
           <subtractionDetectors />
           <ITDetectionPoints>
@@ -68,7 +68,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
       <EPICSTrafficDemands>
-        <EPICSITDemand numberLanes="2" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" active="true">
+        <EPICSITDemand numberLanes="2" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" adaptTimeRequirement="true" active="true">
           <occupancyDetectors />
           <subtractionDetectors />
           <ITDetectionPoints>
@@ -90,7 +90,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
       <EPICSTrafficDemands>
-        <EPICSITDemand numberLanes="1" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" active="true">
+        <EPICSITDemand numberLanes="1" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" adaptTimeRequirement="true" active="true">
           <occupancyDetectors />
           <subtractionDetectors />
           <ITDetectionPoints>
@@ -111,7 +111,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
       <EPICSTrafficDemands>
-        <EPICSITDemand numberLanes="3" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" active="true">
+        <EPICSITDemand numberLanes="3" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" adaptTimeRequirement="true" active="true">
           <occupancyDetectors />
           <subtractionDetectors />
           <ITDetectionPoints>
@@ -139,7 +139,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
       <EPICSTrafficDemands>
-        <EPICSITDemand numberLanes="1" maximumSpeed="50" weight="2" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" active="true">
+        <EPICSITDemand numberLanes="1" maximumSpeed="50" weight="2" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" adaptTimeRequirement="true" active="true">
           <occupancyDetectors />
           <subtractionDetectors />
           <ITDetectionPoints>
@@ -160,7 +160,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
       <EPICSTrafficDemands>
-        <EPICSITDemand numberLanes="2" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" active="true">
+        <EPICSITDemand numberLanes="2" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" adaptTimeRequirement="true" active="true">
           <occupancyDetectors />
           <subtractionDetectors />
           <ITDetectionPoints>
@@ -182,7 +182,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
       <EPICSTrafficDemands>
-        <EPICSITDemand numberLanes="1" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" active="true">
+        <EPICSITDemand numberLanes="1" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" adaptTimeRequirement="true" active="true">
           <occupancyDetectors />
           <subtractionDetectors />
           <ITDetectionPoints>
@@ -203,7 +203,7 @@
         <defaultDuration display="4" duration="3000" />
       </defaultDurations>
       <EPICSTrafficDemands>
-        <EPICSITDemand numberLanes="3" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" active="true">
+        <EPICSITDemand numberLanes="3" maximumSpeed="50" weight="1" timeRequirement="2000" helpSignalGroup="0" competingSignalGroup="0" useFlowProfiles="false" adaptTimeRequirement="true" active="true">
           <occupancyDetectors />
           <subtractionDetectors />
           <ITDetectionPoints>
@@ -1672,7 +1672,7 @@
     </interstageProg>
   </interstageProgs>
   <stageProgs>
-    <stageProg id="1" cycletime="90000" switchpoint="0" offset="5000" intergreens="1" fitness="0.000000" vehicleCount="0" weightBalance="5" weightStops="0" factorMaxRedPuT="-1.000000" balanceFixedTimeControl="false" name="Stage 1, Stage 2, Stage 3, Stage 4">
+    <stageProg id="1" cycletime="90000" switchpoint="0" offset="5000" intergreens="1" fitness="-1.000000" vehicleCount="0" weightBalance="5" weightStops="0" factorMaxRedPuT="-1.000000" balanceFixedTimeControl="false" name="Stage 1, Stage 2, Stage 3, Stage 4">
       <interstages>
         <interstage display="1" begin="0" />
         <interstage display="5" begin="13000" />
@@ -1698,22 +1698,22 @@
         <EPICSStageParameter stageId="4" earliestStart="0" latestEnd="90000" minimumLength="0" maximumLength="125000" preferredStart="38000" preferredEnd="49000" costPreferred="0" costNonPreferred="20" notes="" />
       </EPICSStageParameters>
       <sgs>
-        <sg sg_id="1" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="2" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="25000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="3" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="4" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="5" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="2.000000" balWeightQueue="20.000000" balWeightStops="100.000000" notes="" />
-        <sg sg_id="6" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="26000" balMaxGreen="90000" balWeightDelay="1.500000" balWeightQueue="15.000000" balWeightStops="75.000000" notes="" />
-        <sg sg_id="7" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="8" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="9" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="10" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="11" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="12" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="13" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="14" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="15" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="16" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="1" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="2" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="25000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="3" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="4" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="5" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="2.000000" balWeightQueue="20.000000" balWeightStops="100.000000" notes="" />
+        <sg sg_id="6" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="26000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.500000" balWeightQueue="15.000000" balWeightStops="75.000000" notes="" />
+        <sg sg_id="7" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="8" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="9" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="10" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="11" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="12" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="13" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="14" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="15" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="16" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
       </sgs>
     </stageProg>
     <stageProg id="2" cycletime="90000" switchpoint="0" offset="5000" intergreens="1" fitness="0.000000" vehicleCount="0" weightBalance="3" weightStops="0" factorMaxRedPuT="-1.000000" balanceFixedTimeControl="true" name="Stage 1, Stage 2, Stage 3, Stage 4">
@@ -1742,22 +1742,22 @@
         <EPICSStageParameter stageId="4" earliestStart="0" latestEnd="90000" minimumLength="0" maximumLength="125000" preferredStart="38000" preferredEnd="49000" costPreferred="0" costNonPreferred="5" notes="" />
       </EPICSStageParameters>
       <sgs>
-        <sg sg_id="1" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="2" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="25000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="3" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="4" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="5" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="2.000000" balWeightQueue="20.000000" balWeightStops="100.000000" notes="" />
-        <sg sg_id="6" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="26000" balMaxGreen="90000" balWeightDelay="1.500000" balWeightQueue="15.000000" balWeightStops="75.000000" notes="" />
-        <sg sg_id="7" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="8" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="9" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="10" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="11" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="12" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="13" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="14" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="15" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
-        <sg sg_id="16" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="1" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="2" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="25000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="3" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="4" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="5" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="2.000000" balWeightQueue="20.000000" balWeightStops="100.000000" notes="" />
+        <sg sg_id="6" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="26000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.500000" balWeightQueue="15.000000" balWeightStops="75.000000" notes="" />
+        <sg sg_id="7" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="8" cyclical="true" epicsMinRed="0" epicsMaxRed="90000" balMinGreen="5000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="9" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="10" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="11" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="12" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="13" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="9000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="14" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="8000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="15" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="33000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
+        <sg sg_id="16" cyclical="true" epicsMinRed="0" epicsMaxRed="0" balMinGreen="32000" balOrigGreen="-1" balMaxGreen="90000" balWeightDelay="1.000000" balWeightQueue="10.000000" balWeightStops="50.000000" notes="" />
       </sgs>
     </stageProg>
   </stageProgs>
